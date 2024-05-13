@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block extrascripts %} 
+{% block extrascripts %}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {% endblock %}
@@ -52,8 +52,8 @@
 {% endif %}
 
 <h4>Modelling Framework:</h4>
-<p>{% for framework in object.framework.all %} 
-        {{framework}}{% if not forloop.last %}; {% endif %} 
+<p>{% for framework in object.framework.all %}
+        {{framework}}{% if not forloop.last %}; {% endif %}
     {% endfor %} </p>
 
 <div class="wrapper">
@@ -75,7 +75,7 @@
 
 <div class="wrapper">
     {% if object.codeURL %}
-        <a href="{{ object.codeURL }}">    
+        <a href="{{ object.codeURL }}">
         <div id="externalrepo">
         Code Repository
         </div>
@@ -83,7 +83,7 @@
     {% endif %}
 
     {% if object.dataURL %}
-    <a href="{{ object.dataURL }}">    
+    <a href="{{ object.dataURL }}">
     <div id="externalrepo">
         Data Repository
         </div>
@@ -93,6 +93,6 @@
 </div>
 {% endif %}
 
-<a href="{% url 'edit_model' pk=object.id %}"><button class="btn">Edit</button></a> 
+<a href="{% url 'edit_model' pk=object.id %}"><button class="btn">Edit</button></a>
 
 {% endblock %}

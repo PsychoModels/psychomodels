@@ -57,13 +57,13 @@
         <td><a href="{{ object.id }}/">{{ object.model_name }}</a></td>
         <td>{{ object.publication.authors.first }} {% if object.publication.authors.count > 1 %}et al.{% endif %}</td>
         <td>{{ object.language }}</td>
-        <td>{% for framework in object.framework.all %} 
-                {{framework}}{% if not forloop.last %}; {% endif %} 
+        <td>{% for framework in object.framework.all %}
+                {{framework}}{% if not forloop.last %}; {% endif %}
             {% endfor%}</td>
-        <td> 
+        <td>
             {% if object.modelvariables.all|length < 6 %}
-                {% for var in object.modelvariables.all %} 
-                    {{var}}{% if not forloop.last %}; {% endif %} 
+                {% for var in object.modelvariables.all %}
+                    {{var}}{% if not forloop.last %}; {% endif %}
                 {% endfor %}
             {% else %}
                 {% for var in object.modelvariables.all|slice:":5" %}

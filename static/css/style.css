@@ -207,7 +207,7 @@ font-weight: bold;}
 .main-header{
   display: flex;
   overflow: hidden;
-  background-color: linear-gradient(rgba(255,255,255,.4) 0%, rgba(165,165,165,.4) 82%, rgba(115,115,115,.6) 100%); 
+  background-color: linear-gradient(rgba(255,255,255,.4) 0%, rgba(165,165,165,.4) 82%, rgba(115,115,115,.6) 100%);
   background-image: url("../img/background.png");
   background-size: cover;
   background-position: center;
@@ -236,7 +236,7 @@ font-weight: bold;}
     font-size: 64px;
     margin: 30px;
   }
-  
+
 .center p {
   font-size: 16px;
 }
@@ -253,7 +253,7 @@ font-weight: bold;}
 
 .center li{
   border: 3px solid #333;
-  border-radius: 8px;	
+  border-radius: 8px;
   background-color: rgba(51, 51, 51, .6);
   padding: 10px;
 }
@@ -334,4 +334,3 @@ font-weight: bold;}
   border-color: #faebcc;
   color: #8a6d3b;
 }
-

@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "markdownx",
-    "django_filters"
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -85,8 +85,8 @@ WSGI_APPLICATION = "psychomodels.wsgi.application"
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "True") == "True"
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "psychomodels",
         "USER": "postgres",
         "PASSWORD": "postgres",

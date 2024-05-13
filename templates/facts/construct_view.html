@@ -3,7 +3,7 @@
 {% block title %}{{ construct.name }}{% endblock %}
 
 {% block content %}
-    {% if construct.description %} 
+    {% if construct.description %}
     <p>{{ construct.description }}</p>
     {% endif %}
 
@@ -13,4 +13,4 @@
         <li><a href="{% url 'phenomenon_view' phenomenon.id %}">{{ phenomenon.name }}</a></li>
         {% endfor %}
 
-{% endblock %} 
+{% endblock %}

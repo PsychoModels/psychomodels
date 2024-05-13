@@ -4,5 +4,3 @@ $(document).ready(function() {
         $('.message').addClass('fade-out');
     }, 3000);
 });
-
-

@@ -6,7 +6,7 @@
 {% block content %}
     <p>{{object.short}}</p>
     {% if object.pattern %}
-    <p>Patterns: {% for pattern in object.pattern.all %} 
+    <p>Patterns: {% for pattern in object.pattern.all %}
         {{pattern}}{% if not forloop.last %}; {% endif %} {% endfor %} </p>
     {% endif %}
 <hr>
@@ -22,4 +22,4 @@
         <p>No supporting evidence available</p>
     {% endif %}
 
-{% endblock %} 
+{% endblock %}

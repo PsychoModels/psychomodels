@@ -22,7 +22,7 @@
 </div>
 
 {% endblock %}
- 
+
 {% block content %}
 
 <p>Explore the various phenomena</p>
@@ -53,8 +53,8 @@
     <tr>
         <td><a href="{{ object.id }}/">{{ object.name }}</a></td>
         <td>{{ object.short }}</td>
-        <td>{% for f in object.field.all %} 
-            {{f}}{% if not forloop.last %}; {% endif %} 
+        <td>{% for f in object.field.all %}
+            {{f}}{% if not forloop.last %}; {% endif %}
         {% endfor%}</td>
 
     {% empty %}
