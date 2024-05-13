@@ -26,7 +26,6 @@ urlpatterns = [
     path("account/", include("django.contrib.auth.urls")),
     path("markdownx/", include("markdownx.urls")),
     path("models/", include("models.urls"), name="psychomodels"),
-    path("facts/", include("facts.urls"), name="psychofacts"),
 ]
 
 if settings.DEBUG:
