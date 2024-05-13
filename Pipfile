@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+asgiref = "*"
+django-filter = "*"
+django-markdownx = "*"
+markdown = "*"
+pillow = "*"
+psycopg = "*"
+psycopg2-binary = "*"
+sqlparse = "*"
+typing-extensions = "*"
+whitenoise = "*"
+django = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
