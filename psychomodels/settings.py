@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import sys
-import dj_database_url
 
 from django.core.management.utils import get_random_secret_key
 
@@ -37,7 +36,6 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split("
 
 INSTALLED_APPS = [
     "models.apps.ModelsConfig",
-    "facts.apps.FactsConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -45,8 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
-    "django_filters",
     "markdownx",
+    "django_filters"
 ]
 
 MIDDLEWARE = [
@@ -78,19 +76,6 @@ TEMPLATES = [
     },
 ]
 
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
-    },
-    "mediafiles": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-        "LOCATION": os.path.join(BASE_DIR, "media"),
-    },
-}
-
 WSGI_APPLICATION = "psychomodels.wsgi.application"
 
 
@@ -99,20 +84,16 @@ WSGI_APPLICATION = "psychomodels.wsgi.application"
 
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "True") == "True"
 
-if DEVELOPMENT_MODE is True:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        "NAME": "psychomodels",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
-elif len(sys.argv) > 0 and sys.argv[1] != "collectstatic":
-    if os.getenv("DATABASE_URL", None) is None:
-        raise Exception("DATABASE_URL environment variable not defined")
-    DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
-    }
-
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -151,15 +132,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
-
-# Media files (uploaded by users)
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

@@ -1,3 +1,13 @@
-db.sqlite3
+# Caches and logs
+*.log
+logs/
+*.sqlite3
+
+# Virtual environment
+venv/
+
+# Compiled Python files
 *.pyc
-staticfiles/
+
+# Python bytecode cache
+__pycache__/
