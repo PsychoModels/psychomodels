@@ -11,3 +11,7 @@ This project uses pipenv to manage dependencies. See https://pipenv.pypa.io/en/l
 pipenv install "PACKAGE_NAME"
 pipenv install --dev "DEV_PACKAGE_NAME"
 ```
+
+Linting
+
+This project uses [Black]((https://github.com/psf/black)) for linting and formatting.

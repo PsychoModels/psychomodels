@@ -17,6 +17,8 @@ whitenoise = "*"
 django = "*"
 
 [dev-packages]
+black = "*"
+pycodestyle = "*"
 
 [requires]
 python_version = "3.12"
