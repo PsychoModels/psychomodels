@@ -11,3 +11,5 @@ venv/
 
 # Python bytecode cache
 __pycache__/
+
+.env

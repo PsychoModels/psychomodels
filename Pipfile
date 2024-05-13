@@ -15,6 +15,7 @@ sqlparse = "*"
 typing-extensions = "*"
 whitenoise = "*"
 django = "*"
+python-dotenv = "*"
 
 [dev-packages]
 black = "*"
