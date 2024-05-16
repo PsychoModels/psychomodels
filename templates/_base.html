@@ -1,5 +1,5 @@
-{% load compress %}
 {% load static %}
+{% load django_vite %}
 
 <!DOCTYPE html>
 <head>
@@ -10,14 +10,10 @@
 
     <link rel="shortcut icon" type="image/icon" href="{% static '/img/favicon.ico' %}">
 
-    {% compress css %}
-        <link rel="stylesheet" href="{% static 'src/output.css' %}">
-    {% endcompress %}
-
-    <script type="text/javascript" src="{% static '/js/scripts.js' %}"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="{% static 'src/css/output.css' %}">
+    {% vite_asset 'static/src/ts/main.ts' %}
     {% block extrascripts %}{% endblock %}
+    {% vite_hmr_client %}
 </head>
 
 <body>

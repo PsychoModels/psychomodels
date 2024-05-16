@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "966942630c26b473b31a01e7d6ef94c7b1514a28e46cda35d58f3ac57119efab"
+            "sha256": "7b9b4437ac82c563d058feee6476185d09804f57cb98f3e047abc64bef3d7049"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -58,6 +58,14 @@
             ],
             "index": "pypi",
             "version": "==4.0.7"
+        },
+        "django-vite": {
+            "hashes": [
+                "sha256:043ab5068b4c66eb33cb26c5215a6dfe275d3c4de15d59b0b7b97b4567912fb0",
+                "sha256:e4088e0c79b7c9cf013ebb2ae0117a8fa57646337a40e90209ba916d65f359d3"
+            ],
+            "index": "pypi",
+            "version": "==3.0.4"
         },
         "markdown": {
             "hashes": [

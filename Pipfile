@@ -22,6 +22,7 @@ django-allauth = "*"
 black = "*"
 pycodestyle = "*"
 django-browser-reload = "*"
+django-vite = "*"
 
 [requires]
 python_version = "3.12"
