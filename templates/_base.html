@@ -1,0 +1,69 @@
+{% load compress %}
+{% load static %}
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <html lang="en"></html>
+
+    <link rel="shortcut icon" type="image/icon" href="{% static '/img/favicon.ico' %}">
+
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'src/output.css' %}">
+    {% endcompress %}
+
+    <script type="text/javascript" src="{% static '/js/scripts.js' %}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    {% block extrascripts %}{% endblock %}
+</head>
+
+<body>
+{#{% block navigationbar %}#}
+{#    <nav class="navbar nav-models">#}
+{#        <div class="navbar-icon">#}
+{#            <a href="{% url 'models_index' %}"><img src="{% static '/img/pm_logo_white.svg' %}" alt="Icon"></a>#}
+{#        </div>#}
+{#        <h3><a href="{% url 'models_index' %}"><b>Psycho</b><em>Models</em></a></h3>#}
+{#        <ul>#}
+{#            <li><a href="{% url 'models_about' %}">About</a></li>#}
+{#            <li><a href="{% url 'models_overview' %}">Explore the models</a></li>#}
+{#            <li><a href="{% url 'model_submission' %}">Submit a new model</a></li>#}
+{#            <li><a href="{% url 'contact_page' %}">Contact</a></li>#}
+{#        </ul>#}
+{#    </nav>#}
+{#{% endblock %}#}
+
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block site %}
+    <div class="container mx-auto mt-4">
+
+        <h1>{% block title %}Psychomodels{% endblock %}</h1>
+
+        {% block content %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer">
+        <p>&copy; 2023 <a href="{% url 'contact_page' %}">PsychoModels</a>. All rights reserved.</p>
+    </footer>
+{% endblock %}
+
+</body>
+</html>
