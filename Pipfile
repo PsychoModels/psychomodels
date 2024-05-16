@@ -16,6 +16,7 @@ typing-extensions = "*"
 whitenoise = "*"
 django = "*"
 python-dotenv = "*"
+django-allauth = "*"
 
 [dev-packages]
 black = "*"

@@ -22,7 +22,7 @@ class Author(models.Model):
     # role = models.CharField(max_length=200)
 
     user = models.OneToOneField(
-        "auth.User", on_delete=models.SET_NULL, null=True, blank=True
+        "members.User", on_delete=models.SET_NULL, null=True, blank=True
     )
 
     def __str__(self):
@@ -123,14 +123,14 @@ class Measurementinstrument(models.Model):
 
 class Psychmodel(models.Model):
     submitting_user = models.ForeignKey(
-        "auth.User",
+        "members.User",
         on_delete=models.DO_NOTHING,
         null=True,
         related_name="submitting_user",
     )
     # co_authors = models.ManyToManyField("auth.User", related_name="co_authors")
     reviewer = models.ForeignKey(
-        "auth.User",
+        "members.User",
         on_delete=models.DO_NOTHING,
         null=True,
         related_name="reviewer",

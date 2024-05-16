@@ -14,7 +14,4 @@ urlpatterns = [
     path("software/<int:pk>/", views.SoftwareView.as_view(), name="software_view"),
     path("submit", views.submit, name="model_submission"),
     path("contact", views.contact, name="contact_page"),
-    path("account/register", views.register_request, name="register"),
-    # path("login", views.login_request, name="login"),
-    # path("logout", views.logout_request, name="logout"),
 ]
