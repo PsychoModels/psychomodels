@@ -1,0 +1,43 @@
+{% extends 'account/_base_entrance.html' %}
+
+{% load allauth account %}
+
+{% block head_title %}
+    Sign in to your account
+{% endblock head_title %}
+
+{% block card_content %}
+
+
+    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+        Sign in to your account
+    </h1>
+    {% url 'account_login' as login_url %}
+    {% element form form=form method="post" action=login_url tags="entrance,login" %}
+        {% slot body %}
+            {% csrf_token %}
+            {% element fields form=form %}
+            {% endelement %}
+            {{ redirect_field }}
+        {% endslot %}
+
+        {% slot actions %}
+            {% element button type="submit" tags="prominent,login" %}
+                Sign In
+            {% endelement %}
+        {% endslot %}
+
+    {% endelement %}
+
+    {% url 'account_signup' as signup_url %}
+
+    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+        Don’t have an account yet? <a href="{{ signup_url }}"
+                                      class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign
+        up</a>
+    </p>
+
+
+
+
+{% endblock card_content %}
