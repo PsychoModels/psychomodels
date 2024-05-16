@@ -21,6 +21,7 @@ django-allauth = "*"
 [dev-packages]
 black = "*"
 pycodestyle = "*"
+django-browser-reload = "*"
 
 [requires]
 python_version = "3.12"

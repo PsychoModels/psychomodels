@@ -10,6 +10,7 @@ urlpatterns = [
     path("account/", include("allauth.urls")),
     path("markdownx/", include("markdownx.urls")),
     path("models/", include("models.urls"), name="psychomodels"),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
 
 if settings.DEBUG:
