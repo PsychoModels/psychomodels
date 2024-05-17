@@ -16,7 +16,7 @@ typing-extensions = "*"
 whitenoise = "*"
 django = "*"
 python-dotenv = "*"
-django-allauth = "*"
+django-allauth = {extras = ["socialaccount", "github", "google", "orcid"], version = "*"}
 
 [dev-packages]
 black = "*"

@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "allauth.socialaccount.providers.github",
+    "allauth.socialaccount.providers.orcid",
+    "allauth.socialaccount.providers.google",
     "members",
     "django_browser_reload",
 ]
@@ -153,6 +156,7 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -166,3 +170,37 @@ STATICFILES_DIRS = [
 DJANGO_VITE_DEV_MODE = DEBUG
 
 STATIC_ROOT = BASE_DIR / "collectedstatic"
+
+SOCIALACCOUNT_PROVIDERS = {
+    "github": {
+        # For each provider, you can choose whether or not the
+        # email address(es) retrieved from the provider are to be
+        # interpreted as verified.
+        "VERIFIED_EMAIL": False,
+        "APP": {
+            "client_id": os.getenv("GITHUB_CLIENT_ID"),
+            "secret": os.getenv("GITHUB_CLIENT_SECRET"),
+            "key": "",
+        },
+    },
+    "google": {
+        "APP": {
+            "client_id": os.getenv("GOOGLE_CLIENT_ID"),
+            "secret": os.getenv("GOOGLE_CLIENT_SECRET"),
+        },
+    },
+    "orcid": {
+        # Base domain of the API. Default value: 'orcid.org', for the production API
+        "BASE_DOMAIN": "orcid.org",  # for the sandbox API
+        # Member API or Public API? Default: False (for the public API)
+        "MEMBER_API": True,  # for the member API
+        "APP": {
+            "client_id": os.getenv("ORCID_CLIENT_ID"),
+            "secret": os.getenv("ORCID_CLIENT_SECRET"),
+        },
+    },
+}
+
+SOCIALACCOUNT_ENABLED = True
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
