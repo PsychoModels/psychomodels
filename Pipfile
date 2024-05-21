@@ -17,6 +17,7 @@ whitenoise = "*"
 django = "*"
 python-dotenv = "*"
 django-allauth = {extras = ["socialaccount", "github", "google", "orcid"], version = "*"}
+dj-database-url = "*"
 
 [dev-packages]
 black = "*"
