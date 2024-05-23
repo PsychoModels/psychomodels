@@ -18,6 +18,7 @@ django = "*"
 python-dotenv = "*"
 django-allauth = {extras = ["socialaccount", "github", "google", "orcid"], version = "*"}
 dj-database-url = "*"
+sentry-sdk = {extras = ["django"], version = "*"}
 
 [dev-packages]
 black = "*"
