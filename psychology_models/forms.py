@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Psychmodel, Proposal, Framework
+from .models import Proposal, Framework, PsychologyModel
 
 
 class SubmitModelForm(forms.Form):
@@ -15,13 +15,13 @@ class SubmitModelForm(forms.Form):
             "publication",
         ]
 
-    model_name = forms.CharField(required=True)
+    title = forms.CharField(required=True)
     description = forms.CharField(widget=forms.Textarea, required=True)
     publication = forms.CharField(required=False)
 
     def save(self, commit=True):
         model = Proposal()
-        model.title = self.cleaned_data["model_name"]
+        model.title = self.cleaned_data["title"]
         model.description = self.cleaned_data["description"]
         model.publication = self.cleaned_data["publication"]
         if commit:
@@ -31,9 +31,9 @@ class SubmitModelForm(forms.Form):
 
 class PsychmodelForm(forms.ModelForm):
     class Meta:
-        model = Psychmodel
+        model = PsychologyModel
         fields = [
-            "model_name",
+            "title",
             "description",
             # "publication",
             # "authors",

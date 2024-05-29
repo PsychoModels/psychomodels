@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 from .forms import SubmitModelForm
 from .models import (
-    Psychmodel,
+    PsychologyModel,
     Author,
     Framework,
     Language,
@@ -17,12 +17,12 @@ from .models import (
     Softwarepackage,
 )
 
-from .filters import PsychmodelSearch, PsychmodelFilter, FrameworkSearch
+# from .filters import PsychmodelSearch, PsychmodelFilter, FrameworkSearch
 from .forms import PsychmodelForm
 
 
 class IndexView(generic.ListView):
-    queryset = Psychmodel.objects.filter(reviewed=True)
+    queryset = PsychologyModel.objects.filter()
     template_name = "models/model_overview.html"
     context_object_name = "models_list"
 
@@ -30,12 +30,12 @@ class IndexView(generic.ListView):
         queryset = super().get_queryset(*args, **kwargs)
 
         # Filter by search
-        self.searchset = PsychmodelSearch(self.request.GET, queryset=queryset)
-        queryset = self.searchset.qs
-
-        # Filter by filters
-        self.filterset = PsychmodelFilter(self.request.GET, queryset=queryset)
-        queryset = self.filterset.qs
+        # self.searchset = PsychmodelSearch(self.request.GET, queryset=queryset)
+        # queryset = self.searchset.qs
+        #
+        # # Filter by filters
+        # self.filterset = PsychmodelFilter(self.request.GET, queryset=queryset)
+        # queryset = self.filterset.qs
 
         return queryset
 
@@ -47,7 +47,7 @@ class IndexView(generic.ListView):
 
 
 class ModelView(generic.DetailView):
-    model = Psychmodel
+    model = PsychologyModel
     template_name = "models/model_view.html"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
@@ -56,7 +56,7 @@ class ModelView(generic.DetailView):
 
 def edit_model(request, pk):
     template = loader.get_template("models/model_edit.html")
-    model = get_object_or_404(Psychmodel, pk=pk)
+    model = get_object_or_404(PsychologyModel, pk=pk)
     form = PsychmodelForm(instance=model)
     if request.method == "POST":
         form = PsychmodelForm(request.POST, instance=model)
