@@ -1,16 +1,13 @@
 from typing import Any, Dict
-from django.db import models
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.http import HttpResponse, Http404
 from django.views import generic
-from django.db.models import Q
 from django.template import loader
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
-from .forms import NewUserForm, SubmitModelForm, ContactForm
+from .forms import SubmitModelForm
 from .models import (
     Psychmodel,
     Author,
@@ -20,7 +17,6 @@ from .models import (
     Softwarepackage,
 )
 
-from .managers import PsychmodelManager
 from .filters import PsychmodelSearch, PsychmodelFilter, FrameworkSearch
 from .forms import PsychmodelForm
 
@@ -112,22 +108,6 @@ class SoftwareView(generic.DetailView):
 
 
 # Create your views here.
-def index(request):
-    template = loader.get_template("models/index.html")
-    context = {}
-    return HttpResponse(template.render(context, request))
-
-
-def about(request):
-    template = loader.get_template("models/about.html")
-    context = {}
-    return HttpResponse(template.render(context, request))
-
-
-def tutorial(request):
-    template = loader.get_template("models/tutorial.html")
-    context = {}
-    return HttpResponse(template.render(context, request))
 
 
 def submit(request):
@@ -145,53 +125,3 @@ def submit(request):
         messages.error(request, "Unsuccessful submission. Invalid information.")
 
     return render(request, "models/submit.html", context)
-
-
-def contact(request):
-    template = loader.get_template("models/contact.html")
-    context = {"form": ContactForm()}
-
-    if request.method == "POST":
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.send_email(recipients=["leonhard.volz@gmail.com"])
-            messages.success(request, "Message sent successfully.")
-            return redirect("index")
-        messages.error(request, "Unsuccessful submission. Invalid information.")
-    return HttpResponse(template.render(context, request))
-
-
-def register_request(request):
-    template = loader.get_template("registration/register.html")
-    if request.method == "POST":
-        form = NewUserForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            messages.success(request, "Registration successful.")
-            return redirect("models_index")
-        messages.error(request, "Unsuccessful registration. Invalid information.")
-    form = NewUserForm()
-    context = {"form": form}
-    return HttpResponse(template.render(context, request))
-
-
-def login_request(request):
-    template = loader.get_template("registration/login.html")
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
-                return redirect("index")
-            else:
-                messages.error(request, "Invalid username or password.")
-        else:
-            messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
-    context = {"form": form}
-    return HttpResponse(template.render(context, request))

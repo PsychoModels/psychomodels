@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.shortcuts import redirect
 
 urlpatterns = [
-    path("", lambda request: redirect("models/", permanent=False)),
+    path("", include("content_pages.urls"), name="content_pages"),
     path("admin/", admin.site.urls, name="admin_page"),
     path("account/", include("allauth.urls")),
     path("markdownx/", include("markdownx.urls")),
