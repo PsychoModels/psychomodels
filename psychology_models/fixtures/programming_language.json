@@ -1,0 +1,92 @@
+[
+  {
+    "model": "psychology_models.programminglanguage",
+    "pk": 1,
+    "fields": {
+      "name": "Python",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.programminglanguage",
+    "pk": 2,
+    "fields": {
+      "name": "R",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.programminglanguage",
+    "pk": 3,
+    "fields": {
+      "name": "Java",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.programminglanguage",
+    "pk": 4,
+    "fields": {
+      "name": "C++",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.programminglanguage",
+    "pk": 5,
+    "fields": {
+      "name": "Ruby",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.programminglanguage",
+    "pk": 6,
+    "fields": {
+      "name": "Swift",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.programminglanguage",
+    "pk": 7,
+    "fields": {
+      "name": "Go",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.programminglanguage",
+    "pk": 8,
+    "fields": {
+      "name": "PHP",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.programminglanguage",
+    "pk": 9,
+    "fields": {
+      "name": "Rust",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.programminglanguage",
+    "pk": 10,
+    "fields": {
+      "name": "TypeScript",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  }
+]

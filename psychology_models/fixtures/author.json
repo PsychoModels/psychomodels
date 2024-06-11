@@ -1,0 +1,92 @@
+[
+  {
+    "model": "psychology_models.author",
+    "pk": 1,
+    "fields": {
+      "name": "Sigmund Freud",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.author",
+    "pk": 2,
+    "fields": {
+      "name": "Carl Jung",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.author",
+    "pk": 3,
+    "fields": {
+      "name": "Jean Piaget",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.author",
+    "pk": 4,
+    "fields": {
+      "name": "Erik Erikson",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.author",
+    "pk": 5,
+    "fields": {
+      "name": "B.F. Skinner",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.author",
+    "pk": 6,
+    "fields": {
+      "name": "Albert Bandura",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.author",
+    "pk": 7,
+    "fields": {
+      "name": "Abraham Maslow",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.author",
+    "pk": 8,
+    "fields": {
+      "name": "Lev Vygotsky",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.author",
+    "pk": 9,
+    "fields": {
+      "name": "Karen Horney",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.author",
+    "pk": 10,
+    "fields": {
+      "name": "William James",
+      "created_at": "2024-06-08T00:00:00Z",
+      "updated_at": "2024-06-08T00:00:00Z"
+    }
+  }
+]
