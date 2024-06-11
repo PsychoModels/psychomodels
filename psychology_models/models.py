@@ -11,6 +11,7 @@ class Author(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.name
@@ -29,6 +30,7 @@ class Publication(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.title
@@ -39,6 +41,7 @@ class ProgrammingLanguage(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.name
@@ -57,6 +60,7 @@ class Framework(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(null=True)
 
     @property
     def formatted_explanation(self):
@@ -77,6 +81,7 @@ class SoftwarePackage(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.name
@@ -87,6 +92,7 @@ class PsychologyField(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.discipline_name
@@ -98,6 +104,7 @@ class Variable(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.name
@@ -143,6 +150,7 @@ class PsychologyModel(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(null=True)
 
     def get_absolute_url(self):
         return reverse("model_view", kwargs={"slug": self.slug})
@@ -166,3 +174,4 @@ class ModelVariable(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(null=True)
