@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.google",
     "members",
     "django_browser_reload",
+    "algoliasearch_django",
 ]
 
 MIDDLEWARE = [
@@ -217,3 +218,8 @@ sentry_sdk.init(
 )
 
 ALIVENESS_URL = "/health-check/"
+
+ALGOLIA = {
+    "APPLICATION_ID": os.getenv("ALGOLIA_APPLICATION_ID"),
+    "API_KEY": os.getenv("ALGOLIA_API_KEY"),
+}

@@ -1,3 +1,4 @@
+from algoliasearch_django import AlgoliaIndex
 from django.db import models
 from django.urls import reverse
 from autoslug import AutoSlugField
@@ -158,6 +159,12 @@ class PsychologyModel(models.Model):
     @property
     def formatted_explanation(self):
         return markdownify(self.explanation)
+
+    def is_published(self):
+        return self.is_published is not None
+
+    class ContactIndex(AlgoliaIndex):
+        should_index = "is_published"
 
     def __str__(self):
         return self.title

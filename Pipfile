@@ -20,6 +20,7 @@ django-allauth = {extras = ["socialaccount", "github", "google", "orcid"], versi
 dj-database-url = "*"
 sentry-sdk = {extras = ["django"], version = "*"}
 django-lb-health-check = "*"
+algoliasearch-django = "*"
 
 [dev-packages]
 black = "*"
