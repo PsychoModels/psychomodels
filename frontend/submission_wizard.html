@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Psychomodels Submission Wizard</title>
+</head>
+<body>
+<div id="root"></div>
+<script id="initial-data" type="application/json">
+    {
+        "frameworks": [
+            {
+                "id": 1,
+                "name": "Ordinary Differential Equations",
+                "description": "A framework for modeling the change in variables over time using differential equations.",
+                "parent_framework": null,
+                "publication": 1,
+                "explanation": "Used in various fields to model dynamic systems and processes."
+            },
+            {
+                "id": 2,
+                "name": "Memory Models",
+                "description": "Models that explain how memory functions in the human brain.",
+                "parent_framework": null,
+                "publication": 2,
+                "explanation": "Includes models like Atkinson-Shiffrin and Baddeley's working memory model."
+            },
+            {
+                "id": 3,
+                "name": "Drift-Diffusion Models",
+                "description": "A cognitive model that describes decision making as a process of evidence accumulation.",
+                "parent_framework": null,
+                "publication": 3,
+                "explanation": "Often used to explain response times and accuracy in two-choice tasks."
+            },
+            {
+                "id": 4,
+                "name": "Evidence Accumulation Models",
+                "description": "Models that explain decision making through the accumulation of evidence over time.",
+                "parent_framework": null,
+                "publication": 4,
+                "explanation": "Used to study decision-making processes in psychology and neuroscience."
+            },
+            {
+                "id": 5,
+                "name": "Ising Model",
+                "description": "A mathematical model of ferromagnetism in statistical mechanics.",
+                "parent_framework": null,
+                "publication": 5,
+                "explanation": "Applied to social dynamics and neural networks in psychology."
+            }
+        ]
+    }
+</script>
+<script type="module" src="/src/submission_wizard.tsx"></script>
+</body>
+</html>

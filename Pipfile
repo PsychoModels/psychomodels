@@ -4,29 +4,28 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-asgiref = "*"
-django-filter = "*"
 django-markdownx = "*"
 markdown = "*"
-pillow = "*"
 psycopg = "*"
 psycopg2-binary = "*"
 sqlparse = "*"
-typing-extensions = "*"
-whitenoise = "*"
 django = "*"
 python-dotenv = "*"
 django-allauth = {extras = ["socialaccount", "github", "google", "orcid"], version = "*"}
+crispy-tailwind = "*"
+django-crispy-forms = "*"
+django-countries = "*"
+django-browser-reload = "*"
 dj-database-url = "*"
 sentry-sdk = {extras = ["django"], version = "*"}
 django-lb-health-check = "*"
+django-autoslug = "*"
+django-vite-plugin = "*"
 algoliasearch-django = "*"
 
 [dev-packages]
 black = "*"
 pycodestyle = "*"
-django-browser-reload = "*"
-django-vite = "*"
 
 [requires]
 python_version = "3.12"

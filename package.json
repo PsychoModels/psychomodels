@@ -4,19 +4,22 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "tailwind:dev": "tailwindcss -i static/css/style.css -o ./static/generated/css/style.css --watch",
+    "tailwind:build": "tailwindcss -i static/css/style.css -o ./static/generated/css/style.css",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build && yarn run tailwind:build",
     "preview": "vite preview",
-    "tailwind:dev": "tailwindcss -i static/src/css/input.css -o ./static/src/css/output.css --watch"
+    "start": "run-p dev tailwind:dev"
   },
   "dependencies": {
     "alpinejs": "^3.13.10",
-    "flowbite": "^2.3.0"
-  },
-  "devDependencies": {
+    "django-vite-plugin": "^4.0.1",
+    "flowbite": "^2.3.0",
+    "validatorjs": "^3.22.1",
+    "vite": "^5.2.12",
     "@types/alpinejs": "^3.13.10",
-    "tailwindcss": "^3.4.3",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0"
+    "@types/validatorjs": "^3.15.5",
+    "npm-run-all": "^4.1.5",
+    "tailwindcss": "^3.4.3"
   }
 }

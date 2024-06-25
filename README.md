@@ -25,6 +25,8 @@ Install the dependencies for this project if you haven't installed them yet:
 $ pipenv install
 ```
 
+Also install the dev dependencies (for linting and formatting) by running
+
 ```bash
 $ pipenv install --dev
 ```
@@ -35,6 +37,17 @@ Make and apply the migrations for the project to build your local database:
 $ pipenv run python manage.py makemigrations
 $ pipenv run python manage.py migrate
 ```
+
+For the frontend assets (js and css), you need to install node.js and yarn on your machine. Then run the vite and
+tailwind dev server by running:
+
+```bash
+$ yarn install
+$ yarn start
+```
+
+The vite dev server must be running in order for the python runserver command to work. Else you can expect a Vite dev
+server is not started! error.
 
 Run the Django development server:
 

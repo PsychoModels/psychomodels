@@ -1,24 +1,12 @@
 from typing import Any, Dict
-from django.shortcuts import render, get_object_or_404, redirect
 
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from django.views import generic
 from django.template import loader
-from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
 
-from .forms import SubmitModelForm
-from .models import (
-    PsychologyModel,
-    Author,
-    Framework,
-    Language,
-    Modelvariable,
-    Softwarepackage,
-)
+from allauth.account.views import LoginView
 
-# from .filters import PsychmodelSearch, PsychmodelFilter, FrameworkSearch
-from .forms import PsychmodelForm
+from psychology_models.models import PsychologyModel, Framework, ProgrammingLanguage
 
 
 class IndexView(generic.ListView):
@@ -54,74 +42,31 @@ class ModelView(generic.DetailView):
         return super().get_context_data(**kwargs)
 
 
-def edit_model(request, pk):
-    template = loader.get_template("models/model_edit.html")
-    model = get_object_or_404(PsychologyModel, pk=pk)
-    form = PsychmodelForm(instance=model)
-    if request.method == "POST":
-        form = PsychmodelForm(request.POST, instance=model)
-        if form.is_valid():
-            model = form.save()
-            messages.success(request, "Model successfuly changed.")
-        else:
-            messages.error(request, "Unsuccessful submission. Invalid information.")
-    context = {"form": form}
+def submission_wizard_start(request):
+    template = loader.get_template("submission_wizard.html")
+    context = {"section": "SUBMISSION_GUIDELINES"}
     return HttpResponse(template.render(context, request))
 
 
-class Frameworks(generic.ListView):
-    queryset = Framework.objects.all()
-    template_name = "models/frameworks_overview.html"
-    context_object_name = "frameworks_list"
+class CustomLoginView(LoginView):
+    template_name = "submission_wizard.html"  # Your custom template
+    extra_context = {"section": "ACCOUNT"}
 
-    def get_queryset(self, *args, **kwargs):
-        queryset = super().get_queryset(*args, **kwargs)
-        self.filterset = FrameworkSearch(self.request.GET, queryset=queryset)
-        return self.filterset.qs
-
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["search_form"] = self.filterset.form
-        return context
+    def get_success_url(self):
+        return "form"
 
 
-class FrameworkView(generic.DetailView):
-    model = Framework
-    template_name = "models/framework_view.html"
-
-    def get_children(self):
-        return Framework.objects.filter(parent_framework=self.object)
-
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["children"] = self.get_children()
-        return context
+def submission_wizard_account(request):
+    template = loader.get_template("submission_wizard.html")
+    context = {"section": "ACCOUNT"}
+    return HttpResponse(template.render(context, request))
 
 
-class SoftwareView(generic.DetailView):
-    model = Softwarepackage
-    template_name = "models/software.html"
-
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        return context
-
-
-# Create your views here.
-
-
-def submit(request):
+def submission_wizard_form(request):
+    template = loader.get_template("submission_wizard.html")
     context = {
-        "login_form": AuthenticationForm(),
-        # "register_form": NewUserForm(),
-        "model_form": SubmitModelForm(),
+        "section": "FORM",
+        "frameworks": Framework.objects.all(),
+        "programmingLanguages": ProgrammingLanguage.objects.all(),
     }
-    if request.method == "POST":
-        form = SubmitModelForm(request.POST, request.FILES)
-        if form.is_valid():
-            model = form.save()
-            messages.success(request, "Model submission successful.")
-            return redirect("models_index")
-        messages.error(request, "Unsuccessful submission. Invalid information.")
-
-    return render(request, "models/submit.html", context)
+    return HttpResponse(template.render(context, request))
