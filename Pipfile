@@ -22,6 +22,7 @@ django-lb-health-check = "*"
 django-autoslug = "*"
 django-vite-plugin = "*"
 algoliasearch-django = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 black = "*"

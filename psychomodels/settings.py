@@ -50,10 +50,12 @@ INSTALLED_APPS = [
     "django_browser_reload",
     "django_countries",
     "algoliasearch_django",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     "lb_health_check.middleware.AliveCheck",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -268,3 +270,5 @@ ALGOLIA = {
     "APPLICATION_ID": os.getenv("ALGOLIA_APPLICATION_ID"),
     "API_KEY": os.getenv("ALGOLIA_API_KEY"),
 }
+
+CORS_ORIGIN_ALLOW_ALL = DEBUG
