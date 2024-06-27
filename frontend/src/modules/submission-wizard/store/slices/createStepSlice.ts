@@ -6,7 +6,7 @@ type StepSlice = {
 };
 
 export const createStepSlice: StateCreator<StepSlice> = (set) => ({
-  currentStep: 3,
+  currentStep: 4,
   goToStep: (newStep: number) =>
     set((state) => ({ ...state, currentStep: newStep })),
 });

@@ -19,11 +19,10 @@ export const TextAreaField = ({ control, label, name }: Props) => {
         return (
           <div className="">
             <div className="mb-2 block">
-              <Label htmlFor="username4" color={color} value={label} />
+              <Label htmlFor={name} color={color} value={label} />
             </div>
             <Textarea
               rows={6}
-              required
               color={color}
               ref={ref}
               {...fieldAttrs}

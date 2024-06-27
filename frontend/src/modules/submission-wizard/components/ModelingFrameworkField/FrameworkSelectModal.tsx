@@ -25,9 +25,6 @@ export const FrameworkSelectModal = ({
     .filter((framework) => !framework?.isNew) // you cannot select newly created frameworks
     .filter((framework) => !selectedFrameworkIds.includes(framework.id));
 
-  console.debug(frameworks);
-  console.debug(filteredFrameworks);
-
   return (
     <Modal show={show} size="6xl" onClose={onClose} dismissible>
       <Modal.Header>Select a modeling framework</Modal.Header>

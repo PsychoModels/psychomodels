@@ -20,6 +20,9 @@ const customTheme: CustomFlowbiteTheme = {
       },
     },
   },
+  textarea: {
+    base: "block w-full rounded-lg border disabled:cursor-not-allowed disabled:opacity-50",
+  },
 };
 
 interface Props {

@@ -5,3 +5,11 @@
 body {
     background-color: #f2f2f2;
 }
+
+.rc-md-editor .editor-container .sec-md .input {
+    font-size: 1rem !important;
+}
+
+.rc-md-editor .custom-html-style p {
+    font-size: 1rem !important;
+}

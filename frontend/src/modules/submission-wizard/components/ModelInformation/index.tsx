@@ -1,5 +1,4 @@
 import React from "react";
-
 import useStore from "../../store/useStore.ts";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -36,22 +35,19 @@ export const ModelInformation = () => {
   return (
     <>
       <div className="px-6 py-8">
-        <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-8">
-            <TextInputField control={control} label="Title" name="title" />
-          </div>
+        <form
+          className="flex flex-col gap-8 mb-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <TextInputField control={control} label="Title" name="title" />
 
-          <div className="mb-8">
-            <TextAreaField
-              control={control}
-              label="Short description"
-              name="shortDescription"
-            />
-          </div>
+          <TextAreaField
+            control={control}
+            label="Short description"
+            name="shortDescription"
+          />
 
-          <div className="mb-8">
-            <ModelingFrameworkField control={control} />
-          </div>
+          <ModelingFrameworkField control={control} />
         </form>
       </div>
       <div className="flex bg-gray-50 space-x-6 p-6 border-t" color="gray">

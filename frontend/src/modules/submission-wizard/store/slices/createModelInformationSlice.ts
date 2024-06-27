@@ -14,7 +14,7 @@ type ModelInformationSlice = {
 const initialState = {
   title: "",
   shortDescription: "",
-  frameworkIds: [1, 2],
+  frameworkIds: [],
 };
 
 export const createModelInformationSlice: StateCreator<

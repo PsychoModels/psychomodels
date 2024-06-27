@@ -1,51 +1,63 @@
 import React from "react";
 import { Button, Modal } from "flowbite-react";
-import { TextInputField } from "../../../shared/components/Form/TextInputField.tsx";
-import { TextAreaField } from "../../../shared/components/Form/TextAreaField.tsx";
+import { TextInputField } from "../../../shared/components/Form/TextInputField";
+import { TextAreaField } from "../../../shared/components/Form/TextAreaField";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import useStore from "../../store/useStore.ts";
+import { ModelVariable } from "../../../../models";
 
 interface Props {
   show: boolean;
   onClose: () => void;
-  onSelect: (frameworkId: string | number) => void;
+  existingValue: ModelVariable | null;
+  onChange: (value: ModelVariable) => void;
 }
 
-const formSchema = z.object({
+export const variableFormSchema = z.object({
   name: z.string().max(255).min(1),
-  description: z.string().min(1),
-  explanation: z.string().min(1),
+  description: z.string(),
 });
 
-type ValidationSchema = z.infer<typeof formSchema>;
+type ValidationSchema = z.infer<typeof variableFormSchema>;
 
-export const FrameworkCreateModal = ({ show, onClose, onSelect }: Props) => {
+export const VariableFormModal = ({
+  show,
+  onClose,
+  existingValue,
+  onChange,
+}: Props) => {
   const { control, handleSubmit, reset } = useForm<ValidationSchema>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { name: "", description: "", explanation: "" },
+    resolver: zodResolver(variableFormSchema),
+    defaultValues: existingValue || {
+      name: "",
+      description: "",
+    },
   });
 
-  const { addFramework } = useStore((state) => state);
-
   const onSubmit = (values: ValidationSchema) => {
-    const id = `NEW--${Math.random().toString()}`;
-    addFramework({
-      id,
-      isNew: true,
-      ...values,
-    });
+    if (existingValue) {
+      onChange({
+        ...values,
+        id: existingValue.id,
+      });
+    } else {
+      const id = `NEW--${Math.random().toString()}`;
+      onChange({
+        ...values,
+        id,
+      });
+    }
 
     reset();
-
-    onSelect(id);
     onClose();
   };
 
   return (
     <Modal show={show} size="6xl" onClose={onClose}>
-      <Modal.Header>Create new modeling framework</Modal.Header>
+      <Modal.Header>
+        {existingValue ? "Edit variable" : "Add new variable"}
+      </Modal.Header>
       <Modal.Body>
         <form
           className="flex flex-col gap-8 mb-4"
@@ -57,12 +69,6 @@ export const FrameworkCreateModal = ({ show, onClose, onSelect }: Props) => {
             control={control}
             label="Description"
             name="description"
-          />
-
-          <TextAreaField
-            control={control}
-            label="Explanation"
-            name="explanation"
           />
         </form>
       </Modal.Body>

@@ -4,6 +4,7 @@ import useStore from "../../store/useStore.ts";
 import { SubmissionGuidelines } from "../SubmissionGuidelines";
 import { AccountStep } from "../AccountStep";
 import { ModelInformation } from "../ModelInformation/";
+import { PublicationDetails } from "../PublicationDetails";
 
 export const Container = () => {
   const { currentStep } = useStore((state) => state);
@@ -15,6 +16,7 @@ export const Container = () => {
       {currentStep === 1 && <SubmissionGuidelines />}
       {currentStep === 2 && <AccountStep />}
       {currentStep === 3 && <ModelInformation />}
+      {currentStep === 4 && <PublicationDetails />}
     </div>
   );
 };

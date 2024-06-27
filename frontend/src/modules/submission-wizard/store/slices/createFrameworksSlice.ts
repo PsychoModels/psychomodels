@@ -9,10 +9,13 @@ type FrameworksSlice = {
 
 export const createFrameworksSlice: StateCreator<FrameworksSlice> = (set) => ({
   frameworks: [],
-  addFramework: (data) =>
+  addFramework: (data) => {
+    console.log("data", data);
+
     set((state) => ({
       frameworks: [...state.frameworks, data],
-    })),
+    }));
+  },
   setFrameworks: (data) =>
     set(() => ({
       frameworks: data,

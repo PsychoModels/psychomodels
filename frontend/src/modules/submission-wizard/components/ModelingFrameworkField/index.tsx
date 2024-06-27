@@ -3,7 +3,7 @@ import useStore from "../../store/useStore.ts";
 import { Button, Label } from "flowbite-react";
 import { Control, Controller } from "react-hook-form";
 import { FrameworkCard } from "./FrameworkCard.tsx";
-import { TrashIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { PlusIcon } from "@heroicons/react/24/solid";
 import { FrameworkSelectModal } from "./FrameworkSelectModal.tsx";
 import { FrameworkCreateModal } from "./FrameworkCreateModal.tsx";
 import { RemoveFrameworkButton } from "./RemoveFrameworkButton.tsx";
@@ -25,7 +25,7 @@ export const ModelingFrameworkField = ({ control }: Props) => {
         const color = fieldState.invalid ? "failure" : "gray";
 
         return (
-          <div className="">
+          <div>
             <div className="mb-2 block">
               <Label
                 htmlFor="frameworkIds"
@@ -35,7 +35,11 @@ export const ModelingFrameworkField = ({ control }: Props) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {value.map((frameworkId: string) => {
+                console.debug("frameworkId: ", frameworkId);
                 const framework = frameworks.find((f) => f.id === frameworkId);
+
+                console.debug("frameworks: ", frameworks);
+
                 if (!framework) return null;
 
                 return (
