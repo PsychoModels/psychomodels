@@ -74,7 +74,7 @@ class Framework(models.Model):
 class SoftwarePackage(models.Model):
     name = models.CharField()
     description = models.TextField(max_length=1500, null=True, blank=True)
-    documentation = models.URLField(null=True, blank=True)
+    documentation_url = models.URLField(null=True, blank=True)
     code_repository_url = models.URLField(null=True, blank=True)
     programming_language = models.ForeignKey(
         "ProgrammingLanguage", on_delete=models.PROTECT
