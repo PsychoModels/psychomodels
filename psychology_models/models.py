@@ -56,7 +56,7 @@ class SoftwarePackage(models.Model):
         return self.name
 
 
-class PsychologyField(models.Model):
+class PsychologyDiscipline(models.Model):
     discipline_name = models.CharField()
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -108,7 +108,7 @@ class PsychologyModel(models.Model):
     )
     framework = models.ManyToManyField(Framework)
     software_package = models.ManyToManyField(SoftwarePackage, blank=True)
-    psychology_field = models.ManyToManyField(PsychologyField, blank=True)
+    psychology_discipline = models.ManyToManyField(PsychologyDiscipline, blank=True)
 
     code_repository_url = models.URLField(null=True, blank=True)
     data_url = models.URLField(null=True, blank=True)
