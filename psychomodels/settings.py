@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "django_browser_reload",
     "django_countries",
     "algoliasearch_django",
+    "doi_lookup",
     "corsheaders",
 ]
 

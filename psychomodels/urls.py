@@ -11,6 +11,7 @@ urlpatterns = [
     path("markdownx/", include("markdownx.urls")),
     path("models/", include("psychology_models.urls"), name="psychomodels"),
     path("__reload__/", include("django_browser_reload.urls")),
+    path("doi/", include("doi_lookup.urls")),
 ]
 
 if settings.DEBUG:
