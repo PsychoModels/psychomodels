@@ -1,5 +1,7 @@
+type ID = string | number;
+
 export type Framework = {
-  id: number | string;
+  id: ID;
   name: string;
   description: string;
   explanation: string;
@@ -7,12 +9,12 @@ export type Framework = {
 };
 
 export type ProgrammingLanguage = {
-  id: number | string;
+  id: ID;
   name: string;
 };
 
 export type SoftwarePackage = {
-  id: string;
+  id: ID;
   name: string;
   description?: string;
   documentationUrl?: string;
@@ -21,7 +23,25 @@ export type SoftwarePackage = {
 };
 
 export type ModelVariable = {
-  id: string;
+  id: ID;
   name: string;
   description: string;
+};
+
+export type Publication = {
+  url: string;
+  title: string;
+
+  year?: number;
+  outlet?: string;
+  volume?: number;
+  issue?: number;
+  pages?: string;
+
+  authors: Author[];
+};
+
+export type Author = {
+  id: ID;
+  name: string;
 };

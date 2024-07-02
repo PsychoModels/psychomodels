@@ -8,7 +8,7 @@ export const SubmissionGuidelines = () => {
   const { goToStep } = useStore((state) => state);
 
   const onSubmitHandler = () => {
-    goToStep(2);
+    goToStep(3);
   };
 
   return (

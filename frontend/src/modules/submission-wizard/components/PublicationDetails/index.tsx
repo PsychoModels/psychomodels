@@ -1,7 +1,7 @@
 import React from "react";
 import useStore from "../../store/useStore";
 import * as z from "zod";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "flowbite-react";
 import ArrowIcon from "../../../shared/components/Icons/ArrowIcon";
@@ -11,18 +11,38 @@ import { SoftwarePackageField } from "../SoftwarePackageField";
 import { softwarePackageFormSchema } from "../SoftwarePackageField/SoftwarePackageFormModal";
 import { TextInputField } from "../../../shared/components/Form/TextInputField.tsx";
 import { VariablesField } from "../VariablesField";
+import { variableFormSchema } from "../VariablesField/VariableFormModal.tsx";
+import { PublicationSubForm } from "../PublicationSubForm";
 
 const formSchema = z.object({
   explanation: z.string().min(1),
-  programmingLanguage: z.string().min(1).or(z.number().min(1)),
+  programmingLanguageId: z.string().min(1).or(z.number().min(1)),
   softwarePackages: z.array(
-    z.intersection(softwarePackageFormSchema, z.object({ id: z.string() })),
+    z.intersection(
+      softwarePackageFormSchema,
+      z.object({ id: z.string().or(z.number()) }),
+    ),
   ),
   codeRepositoryUrl: z.union([z.literal(""), z.string().trim().url()]),
   dataUrl: z.union([z.literal(""), z.string().trim().url()]),
   variables: z.array(
-    z.intersection(softwarePackageFormSchema, z.object({ id: z.string() })),
+    z.intersection(
+      variableFormSchema,
+      z.object({ id: z.string().or(z.number()) }),
+    ),
   ),
+  publication: z.object({
+    url: z.union([
+      z.literal(""),
+      z.string().trim().url(),
+      z.string().regex(/^10.\d{4,9}\/[-._;()/:A-Z0-9]+$/i),
+    ]),
+    title: z.string().min(1),
+    journal: z.string(),
+    publisher: z.string(),
+    year: z.coerce.number(),
+    volume: z.coerce.number(),
+  }),
 });
 
 type ValidationSchema = z.infer<typeof formSchema>;
@@ -32,20 +52,25 @@ export const PublicationDetails = () => {
     (state) => state,
   );
 
-  const { control, handleSubmit } = useForm<ValidationSchema>({
+  const formMethods = useForm<ValidationSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: { ...publicationDetails },
   });
 
+  const { control, handleSubmit, formState } = formMethods;
+
   const onSubmit = (values: ValidationSchema) => {
+    console.debug("do submit");
     setPublicationDetails({ ...publicationDetails, ...values });
-    goToStep(4);
+    goToStep(5);
   };
 
   const { programmingLanguages } = useStore((state) => state);
 
+  console.debug(formState.errors);
+
   return (
-    <>
+    <FormProvider {...formMethods}>
       <div className="px-6 py-8">
         <form
           className="flex flex-col gap-8 mb-4"
@@ -60,7 +85,7 @@ export const PublicationDetails = () => {
           <SelectField
             control={control}
             label="Programming language"
-            name="programmingLanguage"
+            name="programmingLanguageId"
             placeholder="Select a programming language or add one"
             options={programmingLanguages.map((language) => ({
               label: language.name,
@@ -85,8 +110,9 @@ export const PublicationDetails = () => {
           />
 
           <VariablesField control={control} />
+
+          <PublicationSubForm control={control} />
         </form>
-        <code>{JSON.stringify(publicationDetails, null, 2)}</code>
       </div>
       <div className="flex bg-gray-50 space-x-6 p-6 border-t" color="gray">
         <Button type="button" color="gray" onClick={() => goToStep(3)}>
@@ -96,6 +122,6 @@ export const PublicationDetails = () => {
           Review <ArrowIcon />
         </Button>
       </div>
-    </>
+    </FormProvider>
   );
 };

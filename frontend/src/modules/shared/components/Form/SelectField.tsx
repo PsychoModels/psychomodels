@@ -32,7 +32,7 @@ export const SelectField = ({
               <Label htmlFor={name} color={color} value={label} />
             </div>
             <Select
-
+              sizing="lg"
               defaultValue=""
               id={name}
               color={color}

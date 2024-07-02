@@ -7,6 +7,7 @@ interface Props {
   label: string;
   name: string;
   placeholder?: string;
+  type?: "text" | "email" | "password" | "number";
 }
 
 export const TextInputField = ({
@@ -14,6 +15,7 @@ export const TextInputField = ({
   label,
   name,
   placeholder,
+  type = "text",
 }: Props) => {
   return (
     <Controller
@@ -23,11 +25,12 @@ export const TextInputField = ({
         const color = fieldState.invalid ? "failure" : "gray";
 
         return (
-          <div className="">
+          <div className="flex-1">
             <div className="mb-2 block">
               <Label htmlFor={name} color={color} value={label} />
             </div>
             <TextInput
+              type={type}
               color={color}
               ref={ref}
               {...fieldAttrs}
