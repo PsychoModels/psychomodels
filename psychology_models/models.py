@@ -7,36 +7,6 @@ from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 
 
-class Author(models.Model):
-    name = models.CharField()
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(null=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Publication(models.Model):
-    url = models.URLField()
-    title = models.CharField()
-    authors = models.ManyToManyField(Author)
-
-    year = models.IntegerField(null=True, blank=True)
-    outlet = models.CharField(null=True, blank=True)
-    volume = models.IntegerField(null=True, blank=True)
-    issue = models.IntegerField(null=True, blank=True)
-    pages = models.CharField(null=True, blank=True)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(null=True)
-
-    def __str__(self):
-        return self.title
-
-
 class ProgrammingLanguage(models.Model):
     name = models.CharField()
 
@@ -54,9 +24,7 @@ class Framework(models.Model):
     parent_framework = models.ForeignKey(
         "self", on_delete=models.SET_NULL, null=True, blank=True
     )
-    publication = models.ForeignKey(
-        Publication, on_delete=models.SET_NULL, null=True, blank=True
-    )
+
     explanation = MarkdownxField(null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -89,7 +57,7 @@ class SoftwarePackage(models.Model):
 
 
 class PsychologyField(models.Model):
-    discipline_name = models.CharField(max_length=200)
+    discipline_name = models.CharField()
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -127,11 +95,13 @@ class PsychologyModel(models.Model):
         editable=False,
     )
 
-    publication = models.OneToOneField(Publication, on_delete=models.PROTECT)
-
     title = models.CharField()
     description = models.TextField(max_length=3000)
     explanation = MarkdownxField(null=True)
+
+    publication_doi = models.CharField(null=True)
+    publication_csl_json = models.JSONField(null=True)
+    publication_csl_fetched_at = models.DateTimeField(null=True)
 
     programming_language = models.ForeignKey(
         "ProgrammingLanguage", on_delete=models.PROTECT
