@@ -10,6 +10,12 @@ class CrossRefClient:
         url = "http://dx.doi.org/" + doi
 
         r = requests.get(url, headers=self.headers)
+
+        # Raise an HTTPError if the HTTP request returned an unsuccessful status code
+        r.raise_for_status()
+
+        if "charset" not in r.headers.get("content-type", "").lower():
+            r.encoding = "utf-8"
         return r
 
     def doi2apa(self, doi):

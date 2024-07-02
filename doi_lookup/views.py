@@ -1,6 +1,7 @@
 from django.http import JsonResponse, HttpResponseBadRequest
 from .services import CrossRefClient
 import re
+from django.http import HttpResponse
 
 
 def is_valid_doi(doi):
@@ -14,9 +15,7 @@ def lookup_doi(request, doi):
         return HttpResponseBadRequest("Invalid DOI format")
     try:
         client = CrossRefClient()
-        out = client.doi2json(doi)
-
-        return JsonResponse(out)
+        return HttpResponse(client.doi2apa(doi))
 
     except Exception as e:
         return HttpResponseBadRequest(f"Error fetching DOI information: {str(e)}")
