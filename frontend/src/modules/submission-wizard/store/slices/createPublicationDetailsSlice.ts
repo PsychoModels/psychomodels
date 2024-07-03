@@ -22,6 +22,7 @@ const initialState = {
   codeRepositoryUrl: "",
   dataUrl: "",
   variables: [],
+  publicationDIO: "",
 };
 
 export const createPublicationDetailsSlice: StateCreator<

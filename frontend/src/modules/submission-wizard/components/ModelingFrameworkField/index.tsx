@@ -35,10 +35,7 @@ export const ModelingFrameworkField = ({ control }: Props) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {value.map((frameworkId: string) => {
-                console.debug("frameworkId: ", frameworkId);
                 const framework = frameworks.find((f) => f.id === frameworkId);
-
-                console.debug("frameworks: ", frameworks);
 
                 if (!framework) return null;
 

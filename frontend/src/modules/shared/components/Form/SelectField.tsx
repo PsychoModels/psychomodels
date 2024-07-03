@@ -24,8 +24,6 @@ export const SelectField = ({
       render={({ field: { ref, value, ...fieldAttrs }, fieldState }) => {
         const color = fieldState.invalid ? "failure" : "gray";
 
-        console.debug("fieldState: ", value);
-
         return (
           <div className="">
             <div className="mb-2 block">

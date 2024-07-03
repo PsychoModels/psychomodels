@@ -12,7 +12,7 @@ import { softwarePackageFormSchema } from "../SoftwarePackageField/SoftwarePacka
 import { TextInputField } from "../../../shared/components/Form/TextInputField.tsx";
 import { VariablesField } from "../VariablesField";
 import { variableFormSchema } from "../VariablesField/VariableFormModal.tsx";
-import { PublicationSubForm } from "../PublicationSubForm";
+import { DOIInputField } from "../DOIInputField";
 
 const formSchema = z.object({
   explanation: z.string().min(1),
@@ -31,18 +31,10 @@ const formSchema = z.object({
       z.object({ id: z.string().or(z.number()) }),
     ),
   ),
-  publication: z.object({
-    url: z.union([
-      z.literal(""),
-      z.string().trim().url(),
-      z.string().regex(/^10.\d{4,9}\/[-._;()/:A-Z0-9]+$/i),
-    ]),
-    title: z.string().min(1),
-    journal: z.string(),
-    publisher: z.string(),
-    year: z.coerce.number(),
-    volume: z.coerce.number(),
-  }),
+  publicationDIO: z.union([
+    z.literal(""),
+    z.string().regex(/^10.\d{4,9}\/[-._;()/:A-Z0-9]+$/i),
+  ]),
 });
 
 type ValidationSchema = z.infer<typeof formSchema>;
@@ -57,17 +49,14 @@ export const PublicationDetails = () => {
     defaultValues: { ...publicationDetails },
   });
 
-  const { control, handleSubmit, formState } = formMethods;
+  const { control, handleSubmit } = formMethods;
 
   const onSubmit = (values: ValidationSchema) => {
-    console.debug("do submit");
     setPublicationDetails({ ...publicationDetails, ...values });
     goToStep(5);
   };
 
   const { programmingLanguages } = useStore((state) => state);
-
-  console.debug(formState.errors);
 
   return (
     <FormProvider {...formMethods}>
@@ -76,6 +65,11 @@ export const PublicationDetails = () => {
           className="flex flex-col gap-8 mb-4"
           onSubmit={handleSubmit(onSubmit)}
         >
+          <DOIInputField
+            control={control}
+            label="Publication DOI"
+            name="publicationDIO"
+          />
           <MarkdownField
             control={control}
             label="How does the model works"
@@ -110,8 +104,6 @@ export const PublicationDetails = () => {
           />
 
           <VariablesField control={control} />
-
-          <PublicationSubForm control={control} />
         </form>
       </div>
       <div className="flex bg-gray-50 space-x-6 p-6 border-t" color="gray">

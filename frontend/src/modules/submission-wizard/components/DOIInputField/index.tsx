@@ -2,6 +2,8 @@ import React from "react";
 import { Label, TextInput } from "flowbite-react";
 import { Control, Controller } from "react-hook-form";
 import { GetPublicationFromDOIButton } from "./getPublicationFromDOIButton.tsx";
+import { PublicationMeta } from "./PublicationMeta.tsx";
+import { removeDoiUrlPrefix } from "./util.ts";
 
 interface Props {
   control: Control<any, any>;
@@ -30,6 +32,9 @@ export const DOIInputField = ({ control, label, name, placeholder }: Props) => {
                 {...fieldAttrs}
                 sizing="lg"
                 placeholder={placeholder}
+                onBlur={(e) => {
+                  fieldAttrs.onChange(removeDoiUrlPrefix(e.target.value));
+                }}
                 helperText={
                   fieldState?.error && <>{fieldState?.error.message}</>
                 }
@@ -37,6 +42,7 @@ export const DOIInputField = ({ control, label, name, placeholder }: Props) => {
 
               <GetPublicationFromDOIButton doiValue={fieldAttrs.value} />
             </div>
+            <PublicationMeta doiValue={fieldAttrs.value} />
           </div>
         );
       }}
