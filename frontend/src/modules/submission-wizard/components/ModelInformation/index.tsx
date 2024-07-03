@@ -8,11 +8,13 @@ import { Button } from "flowbite-react";
 import ArrowIcon from "../../../shared/components/Icons/ArrowIcon.tsx";
 import { TextAreaField } from "../../../shared/components/Form/TextAreaField.tsx";
 import { ModelingFrameworkField } from "../ModelingFrameworkField";
+import { PsychologyDisciplineField } from "../PsychologyDisciplineField";
 
 const formSchema = z.object({
   title: z.string().max(255).min(1),
   shortDescription: z.string().min(1),
   frameworkIds: z.array(z.number().or(z.string())).min(1),
+  psychologyDisciplineIds: z.array(z.number().or(z.string())),
 });
 
 type ValidationSchema = z.infer<typeof formSchema>;
@@ -28,6 +30,7 @@ export const ModelInformation = () => {
   });
 
   const onSubmit = (values: ValidationSchema) => {
+    console.debug("ModelInformation", values);
     setModelInformation({ ...modelInformation, ...values });
     goToStep(4);
   };
@@ -48,6 +51,8 @@ export const ModelInformation = () => {
           />
 
           <ModelingFrameworkField control={control} />
+
+          <PsychologyDisciplineField control={control} />
         </form>
       </div>
       <div className="flex bg-gray-50 space-x-6 p-6 border-t" color="gray">

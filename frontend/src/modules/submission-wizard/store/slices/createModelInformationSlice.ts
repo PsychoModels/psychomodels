@@ -4,6 +4,7 @@ type ModelInformation = {
   title: string;
   shortDescription: string;
   frameworkIds: (string | number)[];
+  psychologyDisciplineIds: (string | number)[];
 };
 
 type ModelInformationSlice = {
@@ -15,6 +16,7 @@ const initialState = {
   title: "",
   shortDescription: "",
   frameworkIds: [],
+  psychologyDisciplineIds: [],
 };
 
 export const createModelInformationSlice: StateCreator<

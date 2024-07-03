@@ -1,13 +1,18 @@
 import React, { useEffect } from "react";
 import useStore from "../../../submission-wizard/store/useStore.ts";
-import { Framework, ProgrammingLanguage } from "../../../../models";
+import {
+  Framework,
+  ProgrammingLanguage,
+  PsychologyDiscipline,
+} from "../../../../models";
 
 interface Props {
   children: React.ReactNode;
 }
 
 const InitialDataProvider = ({ children }: Props) => {
-  const { setFrameworks, setProgrammingLanguages } = useStore((state) => state);
+  const { setFrameworks, setProgrammingLanguages, setPsychologyDisciplines } =
+    useStore((state) => state);
   useEffect(() => {
     // Retrieve the initial data from the script tag
     const initialDataScript = document.getElementById("initial-data");
@@ -15,6 +20,7 @@ const InitialDataProvider = ({ children }: Props) => {
     let initialData: {
       frameworks?: Framework[];
       programmingLanguages?: ProgrammingLanguage[];
+      psychologyDisciplines?: PsychologyDiscipline[];
     } = {};
 
     if (initialDataScript?.textContent) {
@@ -26,6 +32,9 @@ const InitialDataProvider = ({ children }: Props) => {
     }
     if (initialData.programmingLanguages) {
       setProgrammingLanguages(initialData.programmingLanguages);
+    }
+    if (initialData.psychologyDisciplines) {
+      setPsychologyDisciplines(initialData.psychologyDisciplines);
     }
   }, []);
 

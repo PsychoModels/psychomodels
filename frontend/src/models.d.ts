@@ -28,20 +28,7 @@ export type ModelVariable = {
   description: string;
 };
 
-export type Publication = {
-  url: string;
-  title: string;
-
-  year?: number;
-  outlet?: string;
-  volume?: number;
-  issue?: number;
-  pages?: string;
-
-  authors: Author[];
-};
-
-export type Author = {
+export type PsychologyDiscipline = {
   id: ID;
   name: string;
 };
