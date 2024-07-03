@@ -57,14 +57,14 @@ class SoftwarePackage(models.Model):
 
 
 class PsychologyDiscipline(models.Model):
-    discipline_name = models.CharField()
+    name = models.CharField()
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True)
 
     def __str__(self):
-        return self.discipline_name
+        return self.name
 
 
 class Variable(models.Model):

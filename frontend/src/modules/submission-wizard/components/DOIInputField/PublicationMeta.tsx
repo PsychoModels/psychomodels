@@ -14,6 +14,7 @@ export const PublicationMeta = ({ doiValue }: Props) => {
   });
 
   if (error) {
+    // @ts-expect-error response is somehow not  defined on the error type
     if (error?.response?.status === 404) {
       return (
         <Alert color="warning" className="mt-4">

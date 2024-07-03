@@ -1,6 +1,6 @@
 [
   {
-    "model": "psychology_models.psychologyfield",
+    "model": "psychology_models.psychologydiscipline",
     "pk": 1,
     "fields": {
       "discipline_name": "Clinical Psychology",
@@ -9,7 +9,7 @@
     }
   },
   {
-    "model": "psychology_models.psychologyfield",
+    "model": "psychology_models.psychologydiscipline",
     "pk": 2,
     "fields": {
       "discipline_name": "Cognitive Psychology",
@@ -18,7 +18,7 @@
     }
   },
   {
-    "model": "psychology_models.psychologyfield",
+    "model": "psychology_models.psychologydiscipline",
     "pk": 3,
     "fields": {
       "discipline_name": "Developmental Psychology",
@@ -27,7 +27,7 @@
     }
   },
   {
-    "model": "psychology_models.psychologyfield",
+    "model": "psychology_models.psychologydiscipline",
     "pk": 4,
     "fields": {
       "discipline_name": "Social Psychology",
@@ -36,7 +36,7 @@
     }
   },
   {
-    "model": "psychology_models.psychologyfield",
+    "model": "psychology_models.psychologydiscipline",
     "pk": 5,
     "fields": {
       "discipline_name": "Industrial-Organizational Psychology",
@@ -45,7 +45,7 @@
     }
   },
   {
-    "model": "psychology_models.psychologyfield",
+    "model": "psychology_models.psychologydiscipline",
     "pk": 6,
     "fields": {
       "discipline_name": "Health Psychology",
@@ -54,7 +54,7 @@
     }
   },
   {
-    "model": "psychology_models.psychologyfield",
+    "model": "psychology_models.psychologydiscipline",
     "pk": 7,
     "fields": {
       "discipline_name": "Forensic Psychology",
@@ -63,7 +63,7 @@
     }
   },
   {
-    "model": "psychology_models.psychologyfield",
+    "model": "psychology_models.psychologydiscipline",
     "pk": 8,
     "fields": {
       "discipline_name": "Experimental Psychology",
@@ -72,7 +72,7 @@
     }
   },
   {
-    "model": "psychology_models.psychologyfield",
+    "model": "psychology_models.psychologydiscipline",
     "pk": 9,
     "fields": {
       "discipline_name": "Neuropsychology",
@@ -81,7 +81,7 @@
     }
   },
   {
-    "model": "psychology_models.psychologyfield",
+    "model": "psychology_models.psychologydiscipline",
     "pk": 10,
     "fields": {
       "discipline_name": "Educational Psychology",
