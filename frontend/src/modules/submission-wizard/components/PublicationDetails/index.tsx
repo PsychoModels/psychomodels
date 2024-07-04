@@ -31,7 +31,7 @@ const formSchema = z.object({
       z.object({ id: z.string().or(z.number()) }),
     ),
   ),
-  publicationDIO: z.union([
+  publicationDOI: z.union([
     z.literal(""),
     z.string().regex(/^10.\d{4,9}\/[-._;()/:A-Z0-9]+$/i),
   ]),
@@ -68,7 +68,7 @@ export const PublicationDetails = () => {
           <DOIInputField
             control={control}
             label="Publication DOI"
-            name="publicationDIO"
+            name="publicationDOI"
           />
           <MarkdownField
             control={control}
