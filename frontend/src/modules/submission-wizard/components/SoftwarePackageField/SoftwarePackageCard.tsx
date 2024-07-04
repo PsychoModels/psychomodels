@@ -19,7 +19,7 @@ export const SoftwarePackageCard = ({
   );
 
   return (
-    <div className="p-4 border border-gray-300 bg-gray-50 rounded-lg text-gray-900 relative">
+    <div className="p-4 border border-gray-300 bg-gray-50 rounded-lg text-gray-900 relative shadow-md">
       <h5 className="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white ">
         {softwarePackage.name}
       </h5>
@@ -59,7 +59,7 @@ export const SoftwarePackageCard = ({
         {programmingLanguage?.name}
       </div>
 
-      <div className="mt-4">{actionButton}</div>
+      {actionButton && <div className="mt-4">{actionButton}</div>}
     </div>
   );
 };

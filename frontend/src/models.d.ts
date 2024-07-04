@@ -32,3 +32,17 @@ export type PsychologyDiscipline = {
   id: ID;
   name: string;
 };
+
+export type PsychologyModel = {
+  title: string;
+  shortDescription: string;
+  frameworks: Framework[];
+  psychologyDisciplines: PsychologyDiscipline[];
+  explanation: string;
+  programmingLanguage: ProgrammingLanguage;
+  softwarePackages: SoftwarePackage[];
+  variables: ModelVariable[];
+  codeRepositoryUrl?: string;
+  dataUrl?: string;
+  publicationDOI?: string;
+};

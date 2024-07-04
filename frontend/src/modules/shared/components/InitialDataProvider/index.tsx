@@ -13,6 +13,9 @@ interface Props {
 const InitialDataProvider = ({ children }: Props) => {
   const { setFrameworks, setProgrammingLanguages, setPsychologyDisciplines } =
     useStore((state) => state);
+
+  const [loaded, setLoaded] = React.useState(false);
+
   useEffect(() => {
     // Retrieve the initial data from the script tag
     const initialDataScript = document.getElementById("initial-data");
@@ -36,7 +39,12 @@ const InitialDataProvider = ({ children }: Props) => {
     if (initialData.psychologyDisciplines) {
       setPsychologyDisciplines(initialData.psychologyDisciplines);
     }
+    setLoaded(true);
   }, []);
+
+  if (!loaded) {
+    return null;
+  }
 
   return <>{children}</>;
 };

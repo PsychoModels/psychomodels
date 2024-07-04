@@ -42,7 +42,13 @@ export const DOIInputField = ({ control, label, name, placeholder }: Props) => {
 
               <GetPublicationFromDOIButton doiValue={fieldAttrs.value} />
             </div>
-            <PublicationMeta doiValue={fieldAttrs.value} />
+            <PublicationMeta doiValue={fieldAttrs.value}>
+              {(publication) => (
+                <div className="bg-gray-50 rounded-lg p-3 table-auto mt-4 text-sm shadow-md">
+                  {publication}
+                </div>
+              )}
+            </PublicationMeta>
           </div>
         );
       }}

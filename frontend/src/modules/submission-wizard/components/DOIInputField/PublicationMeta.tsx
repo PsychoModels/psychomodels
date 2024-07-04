@@ -1,20 +1,39 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Alert } from "flowbite-react";
+import axios from "axios";
+import { removeDoiUrlPrefix } from "./util.ts";
 
 interface Props {
   doiValue: string | undefined;
+  hideErrors?: boolean;
+  enabled?: boolean;
+  children: (publication: string) => React.ReactNode;
 }
 
-export const PublicationMeta = ({ doiValue }: Props) => {
+export const PublicationMeta = ({
+  doiValue,
+  hideErrors,
+  enabled = false,
+  children,
+}: Props) => {
   const { data, error } = useQuery({
     queryKey: ["doi_publication_search", doiValue],
-    enabled: false,
+    enabled,
     retry: false,
+
+    queryFn: enabled
+      ? async () => {
+          const { data } = await axios.get(
+            `${import.meta.env.VITE_BACKEND_URL}doi/lookup/${removeDoiUrlPrefix(doiValue || "")}`,
+          );
+          return data;
+        }
+      : undefined,
   });
 
-  if (error) {
-    // @ts-expect-error response is somehow not  defined on the error type
+  if (error && !hideErrors) {
+    // @ts-expect-error response is somehow not defined on the error type
     if (error?.response?.status === 404) {
       return (
         <Alert color="warning" className="mt-4">
@@ -31,13 +50,10 @@ export const PublicationMeta = ({ doiValue }: Props) => {
       );
     }
   }
+
   if (!data) {
     return null;
   }
 
-  return (
-    <div className="bg-gray-50 rounded-lg p-3 table-auto mt-4 text-sm">
-      {data.toString()}
-    </div>
-  );
+  return <>{children(data.toString())}</>;
 };

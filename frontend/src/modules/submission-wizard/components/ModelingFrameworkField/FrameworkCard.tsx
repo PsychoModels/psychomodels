@@ -10,7 +10,7 @@ interface Props {
 
 export const FrameworkCard = ({ framework, actionButton }: Props) => {
   return (
-    <div className="p-4 border-2 border-gray-300 rounded-[8px] shadow-lg bg-gray-100 text-gray-900 relative">
+    <div className="p-4 border border-gray-300 rounded-lg bg-gray-100 text-gray-900 relative shadow-md">
       <h5 className="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">
         {framework.name}
       </h5>
