@@ -12,7 +12,7 @@ class ProgrammingLanguage(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(null=True)
+    published_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -29,7 +29,7 @@ class Framework(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(null=True)
+    published_at = models.DateTimeField(null=True, blank=True)
 
     @property
     def formatted_explanation(self):
@@ -50,7 +50,7 @@ class SoftwarePackage(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(null=True)
+    published_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -61,7 +61,7 @@ class PsychologyDiscipline(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(null=True)
+    published_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -73,7 +73,7 @@ class Variable(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(null=True)
+    published_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -102,6 +102,8 @@ class PsychologyModel(models.Model):
     publication_doi = models.CharField(null=True)
     publication_csl_json = models.JSONField(null=True)
     publication_csl_fetched_at = models.DateTimeField(null=True)
+    publication_citation = models.TextField(null=True)
+    publication_citation_fetched_at = models.DateTimeField(null=True)
 
     programming_language = models.ForeignKey(
         "ProgrammingLanguage", on_delete=models.PROTECT
@@ -121,7 +123,7 @@ class PsychologyModel(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(null=True)
+    published_at = models.DateTimeField(null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse("model_view", kwargs={"slug": self.slug})
@@ -151,4 +153,4 @@ class ModelVariable(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(null=True)
+    published_at = models.DateTimeField(null=True, blank=True)
