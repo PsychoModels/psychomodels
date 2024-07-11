@@ -1,5 +1,11 @@
+import hashlib
 import requests
 from django.core.cache import cache
+
+
+def sanitize_cache_key(key: str) -> str:
+    """Sanitizes the cache key to ensure it is valid for memcached."""
+    return hashlib.md5(key.encode("utf-8")).hexdigest()
 
 
 class CrossRefClient:
@@ -10,7 +16,8 @@ class CrossRefClient:
     def query(self, doi):
 
         # Check if the response is in the cache
-        cached_response = cache.get(doi)
+        cache_key = sanitize_cache_key(doi + str(self.headers["accept"]))
+        cached_response = cache.get(cache_key)
         if cached_response:
             return cached_response
 
@@ -25,7 +32,7 @@ class CrossRefClient:
             r.encoding = "utf-8"
 
         # Store the response in the cache
-        cache.set(doi, r, timeout=60 * 60 * 24 * 7)  # Cache for 7 days
+        cache.set(cache_key, r, timeout=60 * 60 * 24 * 7)  # Cache for 7 days
         return r
 
     def doi2apa(self, doi):
