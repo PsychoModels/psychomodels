@@ -11,9 +11,7 @@ def is_valid_doi(doi):
     return bool(match)
 
 
-def fetch_and_save(
-    instance, client, fetch_function, attribute_name, fetched_at_name, refetch
-):
+def fetch_and_save(instance, fetch_function, attribute_name, fetched_at_name, refetch):
     now = timezone.now()
     messages = []
 
@@ -55,11 +53,12 @@ def get_doi_citations(queryset, refetch):
     messages = []
 
     for instance in queryset:
-        if is_valid_doi(instance.publication_doi):
+        if instance.publication_doi is not None and is_valid_doi(
+            instance.publication_doi
+        ):
             messages.extend(
                 fetch_and_save(
                     instance,
-                    client,
                     client.doi2apa,
                     "publication_citation",
                     "publication_citation_fetched_at",
@@ -69,7 +68,6 @@ def get_doi_citations(queryset, refetch):
             messages.extend(
                 fetch_and_save(
                     instance,
-                    client,
                     client.doi2json,
                     "publication_csl_json",
                     "publication_csl_fetched_at",

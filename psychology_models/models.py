@@ -193,11 +193,24 @@ class PsychologyModel(models.Model):
     def formatted_explanation(self):
         return markdownify(self.explanation)
 
-    def is_published(self):
-        return self.is_published is not None
+    def programming_language_name(self):
+        return self.programming_language.name
 
-    class ContactIndex(AlgoliaIndex):
-        should_index = "is_published"
+    def is_published(self):
+        return self.published_at is not None
+
+    def framework_names(self):
+        return [framework.name for framework in self.framework.all()]
+
+    def psychology_discipline_names(self):
+        return [discipline.name for discipline in self.psychology_discipline.all()]
+
+    def publication_authors(self):
+        if self.publication_csl_json is None:
+            return []
+        authors = self.publication_csl_json.get("author", [])
+        # TODO: discuss this
+        return [author["family"] for author in authors]
 
     def __str__(self):
         return self.title
