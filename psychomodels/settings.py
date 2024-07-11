@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "algoliasearch_django",
     "doi_lookup",
     "corsheaders",
+    "django_object_actions",
 ]
 
 MIDDLEWARE = [
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+    "django_currentuser.middleware.ThreadLocalUserMiddleware",
 ]
 
 ROOT_URLCONF = "psychomodels.urls"

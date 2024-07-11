@@ -3,6 +3,8 @@ from django.db import models
 from django.urls import reverse
 from autoslug import AutoSlugField
 
+from django_currentuser.db.models import CurrentUserField
+
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 
@@ -13,6 +15,18 @@ class ProgrammingLanguage(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, blank=True)
+
+    created_by = CurrentUserField(related_name="programming_language_created_by")
+    updated_by = CurrentUserField(
+        on_update=True, related_name="programming_language_updated_by"
+    )
+    published_by = models.ForeignKey(
+        "members.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        editable=False,
+        related_name="programming_language_published_by",
+    )
 
     def __str__(self):
         return self.name
@@ -27,15 +41,25 @@ class Framework(models.Model):
 
     explanation = MarkdownxField(null=True, blank=True)
 
-    publication_doi = models.CharField(null=True)
-    publication_csl_json = models.JSONField(null=True)
-    publication_csl_fetched_at = models.DateTimeField(null=True)
-    publication_citation = models.TextField(null=True)
-    publication_citation_fetched_at = models.DateTimeField(null=True)
+    publication_doi = models.CharField(null=True, blank=True)
+    publication_csl_json = models.JSONField(null=True, blank=True)
+    publication_csl_fetched_at = models.DateTimeField(null=True, blank=True)
+    publication_citation = models.TextField(null=True, blank=True)
+    publication_citation_fetched_at = models.DateTimeField(null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, blank=True)
+
+    created_by = CurrentUserField(related_name="framework_created_by")
+    updated_by = CurrentUserField(on_update=True, related_name="framework_updated_by")
+    published_by = models.ForeignKey(
+        "members.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        editable=False,
+        related_name="framework_published_by",
+    )
 
     @property
     def formatted_explanation(self):
@@ -58,6 +82,18 @@ class SoftwarePackage(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, blank=True)
 
+    created_by = CurrentUserField(related_name="software_package_created_by")
+    updated_by = CurrentUserField(
+        on_update=True, related_name="software_package_updated_by"
+    )
+    published_by = models.ForeignKey(
+        "members.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        editable=False,
+        related_name="software_package_published_by",
+    )
+
     def __str__(self):
         return self.name
 
@@ -68,6 +104,18 @@ class PsychologyDiscipline(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, blank=True)
+
+    created_by = CurrentUserField(related_name="psychology_discipline_created_by")
+    updated_by = CurrentUserField(
+        on_update=True, related_name="psychology_discipline_updated_by"
+    )
+    published_by = models.ForeignKey(
+        "members.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        editable=False,
+        related_name="psychology_discipline_published_by",
+    )
 
     def __str__(self):
         return self.name
@@ -81,35 +129,30 @@ class Variable(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, blank=True)
 
+    created_by = CurrentUserField(related_name="variable_created_by")
+    updated_by = CurrentUserField(on_update=True, related_name="variable_updated_by")
+    published_by = models.ForeignKey(
+        "members.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        editable=False,
+        related_name="variable_published_by",
+    )
+
     def __str__(self):
         return self.name
 
 
 class PsychologyModel(models.Model):
-    submitting_user = models.ForeignKey(
-        "members.User",
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name="submitting_user",
-    )
-
-    reviewer = models.ForeignKey(
-        "members.User",
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name="reviewer",
-        editable=False,
-    )
-
     title = models.CharField()
     description = models.TextField(max_length=3000)
     explanation = MarkdownxField(null=True)
 
-    publication_doi = models.CharField(null=True)
-    publication_csl_json = models.JSONField(null=True)
-    publication_csl_fetched_at = models.DateTimeField(null=True)
-    publication_citation = models.TextField(null=True)
-    publication_citation_fetched_at = models.DateTimeField(null=True)
+    publication_doi = models.CharField(null=True, blank=True)
+    publication_csl_json = models.JSONField(null=True, blank=True)
+    publication_csl_fetched_at = models.DateTimeField(null=True, blank=True)
+    publication_citation = models.TextField(null=True, blank=True)
+    publication_citation_fetched_at = models.DateTimeField(null=True, blank=True)
 
     programming_language = models.ForeignKey(
         "ProgrammingLanguage", on_delete=models.PROTECT
@@ -130,6 +173,18 @@ class PsychologyModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, blank=True)
+
+    created_by = CurrentUserField(related_name="psychology_model_created_by")
+    updated_by = CurrentUserField(
+        on_update=True, related_name="psychology_model_updated_by"
+    )
+    published_by = models.ForeignKey(
+        "members.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        editable=False,
+        related_name="psychology_model_published_by",
+    )
 
     def get_absolute_url(self):
         return reverse("model_view", kwargs={"slug": self.slug})
@@ -160,6 +215,18 @@ class ModelVariable(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, blank=True)
+
+    created_by = CurrentUserField(related_name="model_variable_created_by")
+    updated_by = CurrentUserField(
+        on_update=True, related_name="model_variable_updated_by"
+    )
+    published_by = models.ForeignKey(
+        "members.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        editable=False,
+        related_name="model_variable_published_by",
+    )
 
     def __str__(self):
         return self.name

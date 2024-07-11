@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "632e1ac9eb19a563fb8b00e847b10a3d14166496dd7350b36de3a174ff80f215"
+            "sha256": "7f7569318dec385afcf21b8cc29ccb72492c0c29775001a5932a4c3cb13f8c10"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -331,6 +331,15 @@
             "markers": "python_version >= '3.8'",
             "version": "==2.3"
         },
+        "django-currentuser": {
+            "hashes": [
+                "sha256:911e695955d8875da33a910e637d2c76968287cba896c99888fd5e3fa6fad2af",
+                "sha256:b2460971114eaf4829e07eb81d1e92972554308e16e372e892ba61fc47cac77a"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==0.8.0"
+        },
         "django-lb-health-check": {
             "hashes": [
                 "sha256:44a93c37db22c3e27a0404c7e3881007d2b846a2f441626d22a96f28349b332e",
@@ -347,6 +356,15 @@
             ],
             "index": "pypi",
             "version": "==4.0.7"
+        },
+        "django-object-actions": {
+            "hashes": [
+                "sha256:ae0df9984c68a4f42f219a391b71fa0630fe44a2983b39b8064378ebddcff30c",
+                "sha256:e24befedf01b6fcdccbb03c33c0e2c855fd1a88f352a66dc7e2170ba31e80128"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.7' and python_version < '4.0'",
+            "version": "==4.2.0"
         },
         "django-vite-plugin": {
             "hashes": [

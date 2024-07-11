@@ -23,6 +23,8 @@ django-autoslug = "*"
 django-vite-plugin = "*"
 algoliasearch-django = "*"
 django-cors-headers = "*"
+django-object-actions = "*"
+django-currentuser = "*"
 
 [dev-packages]
 black = "*"
