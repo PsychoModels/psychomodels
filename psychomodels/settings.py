@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "doi_lookup",
     "corsheaders",
     "django_object_actions",
+    "reversion",
 ]
 
 MIDDLEWARE = [

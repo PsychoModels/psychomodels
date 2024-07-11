@@ -25,6 +25,7 @@ algoliasearch-django = "*"
 django-cors-headers = "*"
 django-object-actions = "*"
 django-currentuser = "*"
+django-reversion = "*"
 
 [dev-packages]
 black = "*"

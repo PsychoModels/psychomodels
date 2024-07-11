@@ -14,6 +14,7 @@ from .utils.set_publish_state import (
     publish_entity,
     unpublish_entity,
 )
+from reversion.admin import VersionAdmin
 
 
 @admin.action(description="Publish selected psychology models")
@@ -54,7 +55,7 @@ def published_state(self, obj):
         )
 
 
-class PsychologyModelAdmin(DjangoObjectActions, admin.ModelAdmin):
+class PsychologyModelAdmin(DjangoObjectActions, VersionAdmin):
     @action(label="Publish", description="Publish this model")
     @takes_instance_or_queryset
     def publish_this(self, request, obj):
