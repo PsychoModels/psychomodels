@@ -27,6 +27,12 @@ class Framework(models.Model):
 
     explanation = MarkdownxField(null=True, blank=True)
 
+    publication_doi = models.CharField(null=True)
+    publication_csl_json = models.JSONField(null=True)
+    publication_csl_fetched_at = models.DateTimeField(null=True)
+    publication_citation = models.TextField(null=True)
+    publication_citation_fetched_at = models.DateTimeField(null=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, blank=True)
@@ -148,9 +154,12 @@ class ModelVariable(models.Model):
     )
     variable_id = models.ForeignKey(Variable, null=True, on_delete=models.SET_NULL)
 
+    name = models.CharField()
     details = models.TextField(max_length=1500, null=True, blank=True)
-    reference = models.CharField(max_length=12, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name

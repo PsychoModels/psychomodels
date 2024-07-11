@@ -1,0 +1,398 @@
+[
+  {
+    "model": "psychology_models.variable",
+    "pk": 1,
+    "fields": {
+      "name": "Reaction Time",
+      "description": "The time taken by a participant to respond to a stimulus.",
+      "created_at": "2024-01-01T12:00:00Z",
+      "updated_at": "2024-01-01T12:00:00Z",
+      "published_at": "2024-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 2,
+    "fields": {
+      "name": "Accuracy",
+      "description": "The correctness of a participant's responses.",
+      "created_at": "2024-01-02T12:00:00Z",
+      "updated_at": "2024-01-02T12:00:00Z",
+      "published_at": "2024-01-02T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 3,
+    "fields": {
+      "name": "Memory Recall",
+      "description": "The ability to remember previously presented information.",
+      "created_at": "2024-01-03T12:00:00Z",
+      "updated_at": "2024-01-03T12:00:00Z",
+      "published_at": "2024-01-03T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 4,
+    "fields": {
+      "name": "Heart Rate",
+      "description": "The number of heartbeats per minute.",
+      "created_at": "2024-01-04T12:00:00Z",
+      "updated_at": "2024-01-04T12:00:00Z",
+      "published_at": "2024-01-04T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 5,
+    "fields": {
+      "name": "Skin Conductance",
+      "description": "A measure of the skin's ability to conduct electricity, which varies with its moisture level.",
+      "created_at": "2024-01-05T12:00:00Z",
+      "updated_at": "2024-01-05T12:00:00Z",
+      "published_at": "2024-01-05T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 6,
+    "fields": {
+      "name": "Pupil Dilation",
+      "description": "The expansion of the pupil, often in response to cognitive and emotional stimuli.",
+      "created_at": "2024-01-06T12:00:00Z",
+      "updated_at": "2024-01-06T12:00:00Z",
+      "published_at": "2024-01-06T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 7,
+    "fields": {
+      "name": "Eye Movements",
+      "description": "The tracking of eye positions and movements.",
+      "created_at": "2024-01-07T12:00:00Z",
+      "updated_at": "2024-01-07T12:00:00Z",
+      "published_at": "2024-01-07T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 8,
+    "fields": {
+      "name": "Attention Span",
+      "description": "The duration of sustained attention a participant can maintain.",
+      "created_at": "2024-01-08T12:00:00Z",
+      "updated_at": "2024-01-08T12:00:00Z",
+      "published_at": "2024-01-08T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 9,
+    "fields": {
+      "name": "Perceived Stress",
+      "description": "A self-reported measure of stress experienced by the participant.",
+      "created_at": "2024-01-09T12:00:00Z",
+      "updated_at": "2024-01-09T12:00:00Z",
+      "published_at": "2024-01-09T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 10,
+    "fields": {
+      "name": "Mood",
+      "description": "A self-reported measure of the participant's emotional state.",
+      "created_at": "2024-01-10T12:00:00Z",
+      "updated_at": "2024-01-10T12:00:00Z",
+      "published_at": "2024-01-10T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 11,
+    "fields": {
+      "name": "Reaction Time Variability",
+      "description": "The variability in reaction times across multiple trials.",
+      "created_at": "2024-01-11T12:00:00Z",
+      "updated_at": "2024-01-11T12:00:00Z",
+      "published_at": "2024-01-11T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 12,
+    "fields": {
+      "name": "Response Bias",
+      "description": "The tendency to respond in a particular way regardless of the stimulus.",
+      "created_at": "2024-01-12T12:00:00Z",
+      "updated_at": "2024-01-12T12:00:00Z",
+      "published_at": "2024-01-12T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 13,
+    "fields": {
+      "name": "Task Engagement",
+      "description": "The level of involvement and effort a participant puts into a task.",
+      "created_at": "2024-01-13T12:00:00Z",
+      "updated_at": "2024-01-13T12:00:00Z",
+      "published_at": "2024-01-13T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 14,
+    "fields": {
+      "name": "Decision Making Time",
+      "description": "The time taken by a participant to make a decision.",
+      "created_at": "2024-01-14T12:00:00Z",
+      "updated_at": "2024-01-14T12:00:00Z",
+      "published_at": "2024-01-14T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 15,
+    "fields": {
+      "name": "Motor Coordination",
+      "description": "The ability of a participant to coordinate their movements.",
+      "created_at": "2024-01-15T12:00:00Z",
+      "updated_at": "2024-01-15T12:00:00Z",
+      "published_at": "2024-01-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 16,
+    "fields": {
+      "name": "Verbal Fluency",
+      "description": "The ability to produce words fluently in a given amount of time.",
+      "created_at": "2024-01-16T12:00:00Z",
+      "updated_at": "2024-01-16T12:00:00Z",
+      "published_at": "2024-01-16T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 17,
+    "fields": {
+      "name": "Impulse Control",
+      "description": "The ability to control impulses and delay gratification.",
+      "created_at": "2024-01-17T12:00:00Z",
+      "updated_at": "2024-01-17T12:00:00Z",
+      "published_at": "2024-01-17T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 18,
+    "fields": {
+      "name": "Social Interactions",
+      "description": "The frequency and quality of a participant's social interactions.",
+      "created_at": "2024-01-18T12:00:00Z",
+      "updated_at": "2024-01-18T12:00:00Z",
+      "published_at": "2024-01-18T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 19,
+    "fields": {
+      "name": "Cognitive Load",
+      "description": "The amount of mental effort being used in the working memory.",
+      "created_at": "2024-01-19T12:00:00Z",
+      "updated_at": "2024-01-19T12:00:00Z",
+      "published_at": "2024-01-19T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 20,
+    "fields": {
+      "name": "Sleep Quality",
+      "description": "A measure of how well a participant sleeps, often self-reported.",
+      "created_at": "2024-01-20T12:00:00Z",
+      "updated_at": "2024-01-20T12:00:00Z",
+      "published_at": "2024-01-20T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 21,
+    "fields": {
+      "name": "Emotional Arousal",
+      "description": "The intensity of emotional responses.",
+      "created_at": "2024-01-21T12:00:00Z",
+      "updated_at": "2024-01-21T12:00:00Z",
+      "published_at": "2024-01-21T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 22,
+    "fields": {
+      "name": "Facial Expressions",
+      "description": "The movements of facial muscles as an indicator of emotions.",
+      "created_at": "2024-01-22T12:00:00Z",
+      "updated_at": "2024-01-22T12:00:00Z",
+      "published_at": "2024-01-22T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 23,
+    "fields": {
+      "name": "Voice Tone",
+      "description": "The pitch and tone of voice as an indicator of emotions.",
+      "created_at": "2024-01-23T12:00:00Z",
+      "updated_at": "2024-01-23T12:00:00Z",
+      "published_at": "2024-01-23T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 24,
+    "fields": {
+      "name": "Error Rates",
+      "description": "The frequency of errors made by participants during a task.",
+      "created_at": "2024-01-24T12:00:00Z",
+      "updated_at": "2024-01-24T12:00:00Z",
+      "published_at": "2024-01-24T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 25,
+    "fields": {
+      "name": "Learning Curve",
+      "description": "The rate of improvement in performing a task over time.",
+      "created_at": "2024-01-25T12:00:00Z",
+      "updated_at": "2024-01-25T12:00:00Z",
+      "published_at": "2024-01-25T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 26,
+    "fields": {
+      "name": "Mental Fatigue",
+      "description": "A state of mental exhaustion affecting cognitive functions.",
+      "created_at": "2024-01-26T12:00:00Z",
+      "updated_at": "2024-01-26T12:00:00Z",
+      "published_at": "2024-01-26T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 27,
+    "fields": {
+      "name": "Self-Efficacy",
+      "description": "The belief in one's ability to succeed in specific situations.",
+      "created_at": "2024-01-27T12:00:00Z",
+      "updated_at": "2024-01-27T12:00:00Z",
+      "published_at": "2024-01-27T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 28,
+    "fields": {
+      "name": "Intrinsic Motivation",
+      "description": "The internal drive to perform an activity for its own sake.",
+      "created_at": "2024-01-28T12:00:00Z",
+      "updated_at": "2024-01-28T12:00:00Z",
+      "published_at": "2024-01-28T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 29,
+    "fields": {
+      "name": "Extrinsic Motivation",
+      "description": "The drive to perform an activity for external rewards or pressures.",
+      "created_at": "2024-01-29T12:00:00Z",
+      "updated_at": "2024-01-29T12:00:00Z",
+      "published_at": "2024-01-29T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 30,
+    "fields": {
+      "name": "Social Support",
+      "description": "The perception and reality of being cared for by others.",
+      "created_at": "2024-01-30T12:00:00Z",
+      "updated_at": "2024-01-30T12:00:00Z",
+      "published_at": "2024-01-30T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 31,
+    "fields": {
+      "name": "Task Difficulty",
+      "description": "The level of challenge presented by a task.",
+      "created_at": "2024-01-31T12:00:00Z",
+      "updated_at": "2024-01-31T12:00:00Z",
+      "published_at": "2024-01-31T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 32,
+    "fields": {
+      "name": "Confidence Level",
+      "description": "The degree of certainty a participant feels about their abilities.",
+      "created_at": "2024-02-01T12:00:00Z",
+      "updated_at": "2024-02-01T12:00:00Z",
+      "published_at": "2024-02-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 33,
+    "fields": {
+      "name": "Behavioral Intent",
+      "description": "A participant's intention to perform a certain behavior.",
+      "created_at": "2024-02-02T12:00:00Z",
+      "updated_at": "2024-02-02T12:00:00Z",
+      "published_at": "2024-02-02T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 34,
+    "fields": {
+      "name": "Attention to Detail",
+      "description": "The ability to notice and consider the finer points of a task.",
+      "created_at": "2024-02-03T12:00:00Z",
+      "updated_at": "2024-02-03T12:00:00Z",
+      "published_at": "2024-02-03T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 35,
+    "fields": {
+      "name": "Stress Level",
+      "description": "The amount of stress a participant is experiencing.",
+      "created_at": "2024-02-04T12:00:00Z",
+      "updated_at": "2024-02-04T12:00:00Z",
+      "published_at": "2024-02-04T12:00:00Z"
+    }
+  },
+  {
+    "model": "psychology_models.variable",
+    "pk": 36,
+    "fields": {
+      "name": "Conflict Resolution Skills",
+      "description": "The ability to effectively resolve conflicts.",
+      "created_at": "2024-02-05T12:00:00Z",
+      "updated_at": "2024-02-05T12:00:00Z",
+      "published_at": "2024-02-05T12:00:00Z"
+    }
+  }
+]
