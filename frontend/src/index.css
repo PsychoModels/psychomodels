@@ -13,3 +13,7 @@ body {
 .rc-md-editor .custom-html-style p {
     font-size: 1rem !important;
 }
+
+.rc-md-editor .rc-md-navigation {
+    background-color: rgb(249, 250, 251) !important;
+}

@@ -26,7 +26,7 @@ export const FrameworkCard = ({ framework, actionButton }: Props) => {
         <a
           href="#"
           target="_blank"
-          className="inline-flex text-sm items-center text-blue-600 hover:underline"
+          className="inline-flex text-sm items-center text-tertiary hover:underline"
         >
           More details
           <NewWindowIcon />

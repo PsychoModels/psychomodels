@@ -6,13 +6,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "flowbite-react";
 import ArrowIcon from "../../../shared/components/Icons/ArrowIcon";
 import { MarkdownField } from "../../../shared/components/Form/MarkdownField";
-import { SelectField } from "../../../shared/components/Form/SelectField";
 import { SoftwarePackageField } from "../SoftwarePackageField";
-import { softwarePackageFormSchema } from "../SoftwarePackageField/SoftwarePackageFormModal";
 import { TextInputField } from "../../../shared/components/Form/TextInputField.tsx";
 import { VariablesField } from "../VariablesField";
-import { variableFormSchema } from "../VariablesField/VariableFormModal.tsx";
 import { DOIInputField } from "../DOIInputField";
+import { softwarePackageFormSchema } from "../SoftwarePackageField/SoftwarePackageFormModal";
+import { variableFormSchema } from "../VariablesField/VariableFormModal.tsx";
+import { ProgrammingLanguageSelectField } from "../ProgrammingLanguageSelectField";
 
 const formSchema = z.object({
   explanation: z.string().min(1),
@@ -56,8 +56,6 @@ export const PublicationDetails = () => {
     goToStep(5);
   };
 
-  const { programmingLanguages } = useStore((state) => state);
-
   return (
     <FormProvider {...formMethods}>
       <div className="px-6 py-8">
@@ -76,16 +74,7 @@ export const PublicationDetails = () => {
             name="explanation"
           />
 
-          <SelectField
-            control={control}
-            label="Programming language"
-            name="programmingLanguageId"
-            placeholder="Select a programming language or add one"
-            options={programmingLanguages.map((language) => ({
-              label: language.name,
-              value: language.id,
-            }))}
-          />
+          <ProgrammingLanguageSelectField control={control} />
 
           <SoftwarePackageField control={control} />
 

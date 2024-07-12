@@ -5,7 +5,7 @@ import { Flowbite } from "flowbite-react";
 const customTheme: CustomFlowbiteTheme = {
   button: {
     color: {
-      primary: "bg-primary hover:bg-secondary text-white",
+      info: "border border-transparent bg-secondary text-white enabled:hover:bg-primary",
     },
   },
   label: {

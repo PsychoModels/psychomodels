@@ -13,10 +13,8 @@ export default {
     extend: {
       colors: {
         primary: "#244657",
-        secondary: "#026c7a",
-      },
-      borderRadius: {
-        lg: "0.25rem",
+        secondary: "rgb(14 116 144)",
+        tertiary: "#f08410",
       },
     },
   },

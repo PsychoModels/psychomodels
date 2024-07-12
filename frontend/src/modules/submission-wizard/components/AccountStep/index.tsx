@@ -1,13 +1,6 @@
 import React from "react";
-import ArrowIcon from "../../../shared/components/Icons/ArrowIcon.tsx";
-import useStore from "../../store/useStore.ts";
 
 export const AccountStep = () => {
-  const { increaseStep } = useStore((state) => state);
-
-  const onSubmitHandler = () => {
-    increaseStep(2);
-  };
   return (
     <>
       <div className="bg-white px-6 py-8">

@@ -108,7 +108,9 @@ export const MultiSelectCombobox: React.FC<Props> = ({
                         className={({ focus }) =>
                           classNames(
                             "relative cursor-pointer select-none py-2 pl-3 pr-9",
-                            focus ? "bg-cyan-800  text-white" : "text-gray-900",
+                            focus
+                              ? "bg-secondary  text-white"
+                              : "text-gray-900",
                           )
                         }
                       >
@@ -154,7 +156,7 @@ export const MultiSelectCombobox: React.FC<Props> = ({
                     key={itemId}
                     className="rounded-lg bg-gray-200 flex text-sm items-center"
                   >
-                    <div className="py-2 pl-3  text-sky-700">{item?.label}</div>
+                    <div className="py-2 pl-3 text-cyan-700">{item?.label}</div>
                     <div
                       className="p-1 m-1 text-cyan-800 hover:bg-cyan-800 hover:text-white rounded cursor-pointer"
                       onClick={() => removeSelection(itemId)}

@@ -30,15 +30,10 @@ const InitialDataProvider = ({ children }: Props) => {
       initialData = JSON.parse(initialDataScript.textContent);
     }
 
-    if (initialData.frameworks) {
-      setFrameworks(initialData.frameworks);
-    }
-    if (initialData.programmingLanguages) {
-      setProgrammingLanguages(initialData.programmingLanguages);
-    }
-    if (initialData.psychologyDisciplines) {
-      setPsychologyDisciplines(initialData.psychologyDisciplines);
-    }
+    setFrameworks(initialData.frameworks || []);
+    setProgrammingLanguages(initialData.programmingLanguages || []);
+    setPsychologyDisciplines(initialData.psychologyDisciplines || []);
+
     setLoaded(true);
   }, []);
 

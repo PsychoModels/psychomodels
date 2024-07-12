@@ -10,4 +10,9 @@ export default defineConfig({
             addAliases: false
         })
     ],
+    server: {
+        watch: {
+            ignored: ['frontend/']
+        }
+    }
 });

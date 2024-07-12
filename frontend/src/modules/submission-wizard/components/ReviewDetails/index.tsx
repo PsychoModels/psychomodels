@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "flowbite-react";
 import { TextAreaField } from "../../../shared/components/Form/TextAreaField.tsx";
 import { PsychologyModelDetail } from "../PsychologyModelDetail";
-import { Framework, PsychologyModel } from "../../../../models";
+import { PsychologyModel } from "../../../../models";
 
 const formSchema = z.object({
   remarks: z.string(),

@@ -1,27 +1,54 @@
 import React from "react";
 import { MultiSelectCombobox } from "../../../shared/components/MultiSelectCombobox";
-import { Control } from "react-hook-form";
+import { Control, Controller } from "react-hook-form";
 import useStore from "../../store/useStore.ts";
+import { AddPsychologyDisciplineModal } from "./AddPsychologyDisciplineModal.tsx";
 
 interface Props {
   control: Control<any, any>;
 }
 
 export const PsychologyDisciplineField: React.FC<Props> = ({ control }) => {
-  const { psychologyDisciplines } = useStore((state) => state);
-
+  const { psychologyDisciplines, addPsychologyDiscipline } = useStore(
+    (state) => state,
+  );
+  const [showModal, setShowModal] = React.useState(false);
   return (
-    <div>
-      <MultiSelectCombobox
-        control={control}
-        label="Psychology disciplines"
+    <>
+      <div className="relative">
+        <div
+          className="absolute top-0 right-0 text-sm text-gray-500 hover:text-cyan-800 cursor-pointer"
+          onClick={() => setShowModal(true)}
+        >
+          add new discipline
+        </div>
+        <MultiSelectCombobox
+          control={control}
+          label="Psychology disciplines"
+          name="psychologyDisciplineIds"
+          placeholder="Select or search for psychology disciplines"
+          options={psychologyDisciplines.map((discipline) => ({
+            label: discipline.name,
+            value: discipline.id,
+          }))}
+        />
+      </div>
+      <Controller
         name="psychologyDisciplineIds"
-        placeholder="Select or search for psychology disciplines"
-        options={psychologyDisciplines.map((discipline) => ({
-          label: discipline.name,
-          value: discipline.id,
-        }))}
-      />
-    </div>
+        control={control}
+        render={({ field: { value, onChange } }) => {
+          return (
+            <AddPsychologyDisciplineModal
+              show={showModal}
+              onClose={() => setShowModal(false)}
+              onChange={(newItem) => {
+                addPsychologyDiscipline(newItem);
+                onChange([...value, newItem.id]);
+              }}
+            />
+          );
+        }}
+      ></Controller>
+    </>
   );
 };

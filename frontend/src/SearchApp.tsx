@@ -1,20 +1,15 @@
 import algoliasearch from "algoliasearch/lite";
-import { Hit as AlgoliaHit } from "instantsearch.js";
+
 import React from "react";
 import {
   InstantSearch,
   Breadcrumb,
-  Configure,
   ClearRefinements,
   CurrentRefinements,
   DynamicWidgets,
   HierarchicalMenu,
-  Highlight,
-  Hits,
   HitsPerPage,
-  InfiniteHits,
   Menu,
-  Pagination,
   RangeInput,
   RefinementList,
   PoweredBy,
@@ -40,7 +35,7 @@ function SearchApp() {
         <div className="Container">
           <div>
             <DynamicWidgets>
-              <div header="Brands">
+              <div>
                 <RefinementList
                   attribute="brand"
                   searchable={true}
@@ -48,10 +43,10 @@ function SearchApp() {
                   showMore={true}
                 />
               </div>
-              <div header="Categories">
+              <div>
                 <Menu attribute="categories" showMore={true} />
               </div>
-              <div header="Hierarchy">
+              <div>
                 <HierarchicalMenu
                   attributes={[
                     "hierarchicalCategories.lvl0",
@@ -61,10 +56,10 @@ function SearchApp() {
                   showMore={true}
                 />
               </div>
-              <div header="Price">
+              <div>
                 <RangeInput attribute="price" precision={1} />
               </div>
-              <div header="Free Shipping">
+              <div>
                 <ToggleRefinement
                   attribute="free_shipping"
                   label="Free shipping"

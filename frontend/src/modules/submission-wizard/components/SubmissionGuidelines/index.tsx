@@ -28,7 +28,7 @@ export const SubmissionGuidelines = () => {
       </div>
 
       <div className="flex bg-gray-50 space-x-6 p-6 border-t">
-        <Button type="submit" color="primary" onClick={onSubmitHandler}>
+        <Button type="submit" onClick={onSubmitHandler}>
           Agree and continue <ArrowIcon />
         </Button>
       </div>
