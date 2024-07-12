@@ -39,10 +39,6 @@ class CrossRefClient:
         self.headers["accept"] = "text/x-bibliography; style=apa"
         return self.query(doi).text
 
-    def doi2turtle(self, doi):
-        self.headers["accept"] = "text/turtle"
-        return self.query(doi).text
-
     def doi2json(self, doi):
         self.headers["accept"] = "application/vnd.citationstyles.csl+json"
         return self.query(doi).json()

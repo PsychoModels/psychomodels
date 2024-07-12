@@ -1,7 +1,7 @@
+import requests
 from django.test import TestCase, Client
 from django.urls import reverse
-from unittest.mock import patch
-import json
+from unittest.mock import patch, Mock
 
 
 class LookupDOITestCase(TestCase):
@@ -33,3 +33,17 @@ class LookupDOITestCase(TestCase):
         self.assertEqual(
             response.content, b"Error fetching DOI information: Some error"
         )
+
+    @patch("doi_lookup.views.CrossRefClient")
+    def test_doi_not_found(self, MockCrossRefClient):
+        mock_client_instance = MockCrossRefClient.return_value
+
+        mock_http_error = requests.exceptions.HTTPError()
+        mock_http_error.response = Mock()
+        mock_http_error.response.status_code = 404
+
+        mock_client_instance.doi2apa.side_effect = mock_http_error
+
+        response = self.client.get(reverse("lookup_doi", args=["10.1000/unknown-doi"]))
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.content, b"DOI not found.")

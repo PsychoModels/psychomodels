@@ -1,4 +1,5 @@
-from django.http import JsonResponse, HttpResponseBadRequest
+import requests
+from django.http import HttpResponseNotFound, HttpResponseBadRequest
 from .services import CrossRefClient
 import re
 from django.http import HttpResponse
@@ -18,4 +19,10 @@ def lookup_doi(request, doi):
         return HttpResponse(client.doi2apa(doi))
 
     except Exception as e:
-        return HttpResponseBadRequest(f"Error fetching DOI information: {str(e)}")
+        if (
+            isinstance(e, requests.exceptions.HTTPError)
+            and e.response.status_code == 404
+        ):
+            return HttpResponseNotFound("DOI not found.")
+        else:
+            return HttpResponseBadRequest(f"Error fetching DOI information: {str(e)}")
