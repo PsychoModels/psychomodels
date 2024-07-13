@@ -1,5 +1,5 @@
 import React from "react";
-import { MultiSelectCombobox } from "../../../shared/components/MultiSelectCombobox";
+import { MultiSelectComboboxField } from "../../../shared/components/MultiSelectComboboxField";
 import { Control, Controller } from "react-hook-form";
 import useStore from "../../store/useStore.ts";
 import { AddPsychologyDisciplineModal } from "./AddPsychologyDisciplineModal.tsx";
@@ -22,7 +22,7 @@ export const PsychologyDisciplineField: React.FC<Props> = ({ control }) => {
         >
           add new discipline
         </div>
-        <MultiSelectCombobox
+        <MultiSelectComboboxField
           control={control}
           label="Psychology disciplines"
           name="psychologyDisciplineIds"

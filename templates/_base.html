@@ -16,6 +16,7 @@
     {% vite_hmr_client %}
 </head>
 
+
 <body>
 {#{% block navigationbar %}#}
 {#    <nav class="navbar nav-models">#}
@@ -31,6 +32,11 @@
 {#        </ul>#}
 {#    </nav>#}
 {#{% endblock %}#}
+
+<body class="flex flex-col min-h-screen">
+
+{% include '_header_nav.html' %}
+
 
 {% if messages %}
     <div class="messages">

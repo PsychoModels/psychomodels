@@ -38,7 +38,7 @@ const simulateMouseClick = (element: HTMLElement) => {
   );
 };
 
-export const MultiSelectCombobox: React.FC<Props> = ({
+export const MultiSelectComboboxField: React.FC<Props> = ({
   control,
   name,
   label,
@@ -100,7 +100,7 @@ export const MultiSelectCombobox: React.FC<Props> = ({
                 </ComboboxButton>
 
                 {filteredOptions.length > 0 && (
-                  <ComboboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg border-gray-300 bg-gray-50 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                  <ComboboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg border-gray-300 bg-gray-50 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                     {filteredOptions.map((option) => (
                       <ComboboxOption
                         key={option.value}

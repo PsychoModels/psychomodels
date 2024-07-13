@@ -1,53 +1,38 @@
 {% extends '_base.html' %}
+{% load render_vite_bundle %}
 {% load static %}
 
 
-{% block title %}Overview{% endblock %}
+{% block title %}Submit a new psychology computational model{% endblock %}
 
-{% block sidebar %}
 
+{% block extrascripts %}
+    {% if debug %}
+        <script type="module" src="http://localhost:5174/@vite/client"></script>
+
+        <!-- If you're using vite with React, this next script will be needed for HMR -->
+        <script type="module">
+            import RefreshRuntime from 'http://localhost:5174/@react-refresh'
+
+            if (RefreshRuntime) {
+                RefreshRuntime.injectIntoGlobalHook(window)
+                window.$RefreshReg$ = () => {
+                }
+                window.$RefreshSig$ = () => (type) => type
+                window.__vite_plugin_react_preamble_installed__ = true
+            }
+        </script>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-<p>Explore the models</p>
+    <div class="min-h-[600px] max-w-screen-2xl mx-auto my-12">
+        <div id="root"></div>
+    </div>
 
-<hr>
-
-<h2>Models</h2>
-
-<table class="model-table">
-    <tr>
-        <th>Model name</th>
-        <th>Authors</th>
-        <th>Language</th>
-        <th>Framework</th>
-        <th>Variables</th>
-    </tr>
-    {% for object in object_list %}
-    <tr>
-        <td><a href="{{ object.id }}/">{{ object.title }}</a></td>
-        <td>{{ object.publication.authors.first }} {% if object.publication.authors.count > 1 %}et al.{% endif %}</td>
-        <td>{{ object.language }}</td>
-        <td>{% for framework in object.framework.all %}
-                {{framework}}{% if not forloop.last %}; {% endif %}
-            {% endfor%}</td>
-        <td>
-            {% if object.modelvariables.all|length < 6 %}
-                {% for var in object.modelvariables.all %}
-                    {{var}}{% if not forloop.last %}; {% endif %}
-                {% endfor %}
-            {% else %}
-                {% for var in object.modelvariables.all|slice:":5" %}
-                    {{var}};
-                {% endfor %}
-                ...
-            {% endif %}
-        </td>
-    {% empty %}
-        <td>No models fit your search criteria.</td>
-    </tr>
-    {% endfor %}
-</table>
-
-
+    {% if debug %}
+        <script type="module" src="http://localhost:5174/src/search.tsx"></script>
+    {% else %}
+        {#        {% render_vite_bundle %}#}
+    {% endif %}
 {% endblock %}

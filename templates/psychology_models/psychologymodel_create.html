@@ -1,0 +1,129 @@
+{% extends '_base.html' %}
+{% load render_vite_bundle %}
+{% load static %}
+
+
+{% block title %}Submit a new psychology computational model{% endblock %}
+
+
+{% block extrascripts %}
+    {% if debug %}
+        <script type="module" src="http://localhost:5174/@vite/client"></script>
+
+        <!-- If you're using vite with React, this next script will be needed for HMR -->
+        <script type="module">
+            import RefreshRuntime from 'http://localhost:5174/@react-refresh'
+
+            if (RefreshRuntime) {
+                RefreshRuntime.injectIntoGlobalHook(window)
+                window.$RefreshReg$ = () => {
+                }
+                window.$RefreshSig$ = () => (type) => type
+                window.__vite_plugin_react_preamble_installed__ = true
+            }
+        </script>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="min-h-[600px] max-w-screen-2xl mx-auto my-12">
+        <div id="root" class="bg-white rounded-md"></div>
+    </div>
+
+    <script id="initial-data" type="application/json">
+        {
+            "frameworks": [
+                {
+                    "id": 1,
+                    "name": "Ordinary Differential Equations",
+                    "description": "A framework for modeling the change in variables over time using differential equations.",
+                    "parent_framework": null,
+                    "publication": 1,
+                    "explanation": "Used in various fields to model dynamic systems and processes."
+                },
+                {
+                    "id": 2,
+                    "name": "Memory Models",
+                    "description": "Models that explain how memory functions in the human brain.",
+                    "parent_framework": null,
+                    "publication": 2,
+                    "explanation": "Includes models like Atkinson-Shiffrin and Baddeley's working memory model."
+                },
+                {
+                    "id": 3,
+                    "name": "Drift-Diffusion Models",
+                    "description": "A cognitive model that describes decision making as a process of evidence accumulation.",
+                    "parent_framework": null,
+                    "publication": 3,
+                    "explanation": "Often used to explain response times and accuracy in two-choice tasks."
+                },
+                {
+                    "id": 4,
+                    "name": "Evidence Accumulation Models",
+                    "description": "Models that explain decision making through the accumulation of evidence over time.",
+                    "parent_framework": null,
+                    "publication": 4,
+                    "explanation": "Used to study decision-making processes in psychology and neuroscience."
+                },
+                {
+                    "id": 5,
+                    "name": "Ising Model",
+                    "description": "A mathematical model of ferromagnetism in statistical mechanics.",
+                    "parent_framework": null,
+                    "publication": 5,
+                    "explanation": "Applied to social dynamics and neural networks in psychology."
+                }
+            ],
+            "programmingLanguages": [
+                  {
+                        "id": 1,
+                        "name": "Python"
+                    },
+                    {
+                        "id": 2,
+                        "name": "R"
+                    },
+                    {
+                        "id": 3,
+                        "name": "MATLAB"
+                    },
+                    {
+                        "id": 4,
+                        "name": "Julia"
+                    },
+                    {
+                        "id": 5,
+                        "name": "C++"
+                    }
+                ],
+            "psychologyDisciplines": [
+                {
+                    "id": 1,
+                    "name": "Cognitive Psychology"
+                },
+                {
+                    "id": 2,
+                    "name": "Neuroscience"
+                },
+                {
+                    "id": 3,
+                    "name": "Social Psychology"
+                },
+                {
+                    "id": 4,
+                    "name": "Developmental Psychology"
+                },
+                {
+                    "id": 5,
+                    "name": "Clinical Psychology"
+                }
+            ]
+        }
+    </script>
+
+    {% if debug %}
+        <script type="module" src="http://localhost:5174/src/submission_wizard.tsx"></script>
+    {% else %}
+        {#        {% render_vite_bundle %}#}
+    {% endif %}
+{% endblock %}

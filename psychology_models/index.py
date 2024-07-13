@@ -17,6 +17,7 @@ class PsychologyModelIndex(AlgoliaIndex):
         "framework_names",
         "psychology_discipline_names",
         "publication_authors",
+        "slug",
     )
     settings = {
         "searchableAttributes": [
@@ -31,6 +32,16 @@ class PsychologyModelIndex(AlgoliaIndex):
             "framework_names",
             "psychology_discipline_names",
             "publication_authors",
+            "searchable(programming_language_name)",
+            "searchable(framework_names)",
+            "searchable(psychology_discipline_names)",
+            "searchable(publication_authors)",
+        ],
+        "customRanking": [
+            "desc(title)",
+            "asc(title)",
+            "desc(published_at)",
+            "asc(published_at)",
         ],
     }
 

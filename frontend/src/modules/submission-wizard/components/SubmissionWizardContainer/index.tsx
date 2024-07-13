@@ -12,9 +12,8 @@ export const SubmissionWizardContainer = () => {
   const { currentStep } = useStore((state) => state);
 
   return (
-    <div className="w-full max-w-7xl bg-white rounded-lg shadow dark:border md:mt-0xl:p-0 dark:bg-gray-800 dark:border-gray-700 overflow-hidden">
+    <div className="pt-1">
       <StepsHeader />
-
       <StepsTitle />
 
       {currentStep === 1 && <SubmissionGuidelines />}

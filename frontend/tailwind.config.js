@@ -16,6 +16,10 @@ export default {
         secondary: "rgb(14 116 144)",
         tertiary: "#f08410",
       },
+      borderRadius: {
+        md: "0.3rem",
+        lg: "0.3rem",
+      },
     },
   },
   plugins: [flowbite.plugin(), require("@tailwindcss/forms")],
