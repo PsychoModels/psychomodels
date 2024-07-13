@@ -13,7 +13,7 @@ export const ListView = () => {
           className="bg-white dark:border-gray-700 dark:bg-gray-800 hover:bg-gray-50 hover:cursor-pointer p-4 border border-gray-300 rounded-lg text-gray-900 relative shadow-md"
           onClick={() =>
             window.open(
-              `https://staging.psychomodels.org/models/${item.slug}`,
+              `${import.meta.env.VITE_SITE_URL}/models/${item.slug}`,
               "_self",
             )
           }

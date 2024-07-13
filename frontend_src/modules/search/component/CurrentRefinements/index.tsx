@@ -33,28 +33,26 @@ export const CurrentRefinements = () => {
   return (
     <div className="mt-4">
       <ul>
-        {items.map((item) => (
-          <>
-            {item.refinements.map((refinement) => (
-              <li
-                key={refinement.label + refinement.attribute}
-                className="rounded-lg border-gray-300 bg-gray-50 border text-sm inline-block mr-2 mb-2"
+        {items.map((item) => {
+          return item.refinements.map((refinement) => (
+            <li
+              key={refinement.label + refinement.attribute}
+              className="rounded-lg border-gray-300 bg-gray-50 border text-sm inline-block mr-2 mb-2"
+            >
+              <span className="pl-3 text-cyan-700 whitespace-nowrap inline-block align-middle">
+                {capitalize(item.label)}: {refinement?.label}
+              </span>
+              <span
+                className="p-1 m-0.5 text-cyan-800 hover:bg-cyan-800 hover:text-white rounded cursor-pointer inline-block align-middle"
+                onClick={() => {
+                  item.refine(refinement);
+                }}
               >
-                <span className="pl-3 text-cyan-700 whitespace-nowrap inline-block align-middle">
-                  {capitalize(item.label)}: {refinement?.label}
-                </span>
-                <span
-                  className="p-1 m-0.5 text-cyan-800 hover:bg-cyan-800 hover:text-white rounded cursor-pointer inline-block align-middle"
-                  onClick={() => {
-                    item.refine(refinement);
-                  }}
-                >
-                  <XMarkIcon height="16" />
-                </span>
-              </li>
-            ))}
-          </>
-        ))}
+                <XMarkIcon height="16" />
+              </span>
+            </li>
+          ));
+        })}
         <li className="inline-block align-middle">
           <button
             className="flex text-gray-400 hover:text-secondary pt-1"

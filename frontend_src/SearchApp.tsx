@@ -6,8 +6,8 @@ import { ThemeProvider } from "./modules/shared/components/ThemeProvider";
 import { SearchContainer } from "./modules/search/component/SearchContainer";
 
 const searchClient = algoliasearch(
-  "7BGVHSZ032",
-  "1d6a4aeac2b70a66ca38984f832964a1",
+  import.meta.env.VITE_ALGOLIA_APP_ID,
+  import.meta.env.VITE_ALGOLIA_API_KEY,
 );
 
 function SearchApp() {

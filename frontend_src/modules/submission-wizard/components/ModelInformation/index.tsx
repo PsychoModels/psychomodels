@@ -30,7 +30,6 @@ export const ModelInformation = () => {
   });
 
   const onSubmit = (values: ValidationSchema) => {
-    console.debug("ModelInformation", values);
     setModelInformation({ ...modelInformation, ...values });
     goToStep(4);
   };

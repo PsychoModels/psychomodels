@@ -18,10 +18,8 @@ export const SortBy = () => {
   });
   return (
     <div>
-      {" "}
       <Select
         sizing="sm"
-        defaultValue=""
         icon={BarsArrowDownIcon}
         value={currentRefinement}
         onChange={(event) => refine(event.target.value)}

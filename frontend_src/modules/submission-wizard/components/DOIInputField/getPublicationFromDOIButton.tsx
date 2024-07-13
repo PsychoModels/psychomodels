@@ -17,7 +17,7 @@ export const GetPublicationFromDOIButton = ({ doiValue }: Props) => {
     queryKey: ["doi_publication_search", doiValue],
     queryFn: async () => {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}doi/lookup/${removeDoiUrlPrefix(doiValue || "")}`,
+        `${import.meta.env.VITE_SITE_URL}doi/lookup/${removeDoiUrlPrefix(doiValue || "")}`,
       );
       return data;
     },
