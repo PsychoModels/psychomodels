@@ -64,7 +64,11 @@ export const ReviewDetails = () => {
             Remarks
           </h2>
 
-          <TextAreaField control={control} label="Do you have any remarks, feedback or extra details you want to share about this submission?" name="remarks" />
+          <TextAreaField
+            control={control}
+            label="Do you have any remarks, feedback or extra details you want to share about this submission?"
+            name="remarks"
+          />
         </form>
       </div>
       <div className="flex bg-gray-50 space-x-6 p-6 border-t" color="gray">

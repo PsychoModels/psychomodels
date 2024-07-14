@@ -12,12 +12,17 @@ export default [
   ...fixupConfigRules(pluginReactConfig),
 
   {
-    ignores: [],
+    ignores: [
+      "collectedstatic/**",
+      "node_modules/**",
+      "static/dist/**",
+      "static/generated/**",
+    ],
   },
   {
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off',
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
     },
   },
   eslintPluginPrettierRecommended,
