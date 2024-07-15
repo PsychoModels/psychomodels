@@ -2,265 +2,203 @@
 {% load static %}
 
 {% block extrascripts %}
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 {% endblock %}
 
 {% block title %}{{ object.title }}{% endblock %}
 
 {% block content %}
-    <div class="py-8">
-        <div class="w-full max-w-7xl rounded-lg dark:border dark:bg-gray-800 dark:border-gray-700 p-4 border-gray-300 border text-gray-600 gap-10 flex flex-col bg-white mx-auto">
-            <div><h1 class="text-cyan-700 text-2lg text-md font-bold md:text-3xl">Power-law of memory strength</h1>
-                <p class="mt-4">A model describing the memory-strength over time-lag. The decrease in memory-strength as
-                    built from several parameters is most closely represented by a simple power law.</p></div>
-            <div>
-                <div class="font-bold text-gray-700 text-sm mb-4">Modeling frameworks</div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="p-4 border border-gray-300 rounded-lg bg-gray-100 text-gray-900 relative shadow-md"><h5
-                            class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">Ordinary
-                        Differential
-                        Equations</h5>
-                        <div class="mb-1 font-normal text-sm text-gray-500"><p style="overflow: hidden;"><span>A framework for modeling the change in variables over time using differential equations.</span>
-                        </p></div>
-                        <a href="#" target="_blank"
-                           class="inline-flex text-sm items-center text-blue-600 hover:underline">More
-                            details
-                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
-                                 fill="none"
-                                 viewBox="0 0 18 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+
+    <div class="min-h-[600px] mx-auto max-w-screen-2xl px-4 lg:px-6 my-6 w-full">
+
+        <nav class="flex mb-6 mx-6" aria-label="Breadcrumb">
+            <ol role="list" class="flex items-center space-x-4">
+                <li>
+                    <div>
+                        <a href="/" class="text-gray-400 hover:text-gray-500 hover:text-secondary">
+                            <svg class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                 aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                      d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z"
+                                      clip-rule="evenodd"></path>
                             </svg>
-                        </a></div>
-                    <div class="p-4 border border-gray-300 rounded-lg bg-gray-100 text-gray-900 relative shadow-md"><h5
-                            class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">Memory Models</h5>
-                        <div class="mb-1 font-normal text-sm text-gray-500"><p style="overflow: hidden;"><span>Models that explain how memory functions in the human brain.</span>
-                        </p></div>
-                        <a href="#" target="_blank"
-                           class="inline-flex text-sm items-center text-blue-600 hover:underline">More
-                            details
-                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
-                                 fill="none"
-                                 viewBox="0 0 18 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
-                            </svg>
-                        </a></div>
-                </div>
-            </div>
-            <div>
-                <div class="font-bold text-gray-700 text-sm mb-4">Psychology disciplines</div>
-                <p>Cognitive Psychology, Neuroscience</p></div>
-            <div>
-                <div class="font-bold text-gray-700 text-sm mb-2">Publication</div>
-                <div class="">Woods, S. A., Mustafa, M. J., Anderson, N., &amp; Sayer, B. (2018). Innovative work
-                    behavior
-                    and personality traits. Journal of Managerial Psychology, 33(1), 29–42.
-                    https://doi.org/10.1108/jmp-01-2017-0016
-                </div>
-            </div>
-            <div>
-                <div class="font-bold text-gray-700 text-sm mb-2">DOI</div>
-                <div>
-                    <button aria-label="Copy to clipboard" type="button"
-                            class="border border-gray-300 bg-gray-100 p-1.5 hover:bg-gray-200 cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="svg-inline--fa fa-copy"
-                             data-icon="copy" data-prefix="fas" viewBox="0 0 448 512" width="12">
-                            <path fill="currentColor"
-                                  d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"></path>
+                            <span class="sr-only">Home</span>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex items-center">
+
+                        <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
+                             aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                  d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                                  clip-rule="evenodd"></path>
                         </svg>
-                    </button>
-                    <a href="https://doi.org/10.1108/JMP-01-2017-0016" target="_blank"
-                       class="inline-flex items-center text-blue-600 hover:underline ml-2" rel="noreferrer">https://doi.org/10.1108/JMP-01-2017-0016
+
+                        <span class="ml-4 text-sm font-medium text-gray-700"><a href="{% url 'model_search' %}">Explore the
+                                models</a></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex items-center">
+
+                        <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
+                             aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                  d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+
+                        <span class="ml-4 text-sm font-medium text-gray-700">{{ psychologymodel.title }}</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <div class="flex gap-8">
+            <div class="flex-1 rounded-lg p-4 gap-12 flex flex-col bg-white">
+                <div><h1
+                        class="text-cyan-700 text-2lg text-md font-bold md:text-3xl mb-6">{{ psychologymodel.title }}</h1>
+                    <p>{{ psychologymodel.description }}</p></div>
+                <div>
+                    <div class="font-bold text-gray-700 text-sm mb-4">Modeling frameworks</div>
+
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {% for framework in psychologymodel.framework.all %}
+                            <div class="p-4 border border-gray-300 rounded-lg bg-gray-100 text-gray-900 relative shadow-md">
+                                <h5 class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">
+                                    {{ framework.name }}</h5>
+                                <div class="mb-1 font-normal text-sm text-gray-500"><p style="overflow: hidden;">
+                                    <span><span>{{ framework.description }}</span></span>
+                                </p></div>
+                                <a href="#" target="_blank"
+                                   class="inline-flex text-sm items-center text-tertiary hover:underline">More details
+                                    <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
+                                         fill="none" viewBox="0 0 18 18">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                              stroke-width="2"
+                                              d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <div class="font-bold text-gray-700 text-sm mb-4">How does the model work</div>
+
+
+                    <div class="markdown-body">{{ psychologymodel.formatted_explanation|safe }}</div>
+                </div>
+
+                <div>
+                    <div class="font-bold text-gray-700 text-sm mb-4">Variables</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                        {% for variable in psychologymodel.model_variables.all %}
+                            <div class="p-4 border border-gray-300 bg-gray-100 rounded-lg text-gray-900 relative shadow-md">
+                                <h5 class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">{{ variable.name }}</h5>
+                                <p class="mt-3 text-sm">{{ variable.description }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <div class="font-bold text-gray-700 text-sm mb-2">Publication</div>
+                    <div class="">{{ psychologymodel.publication_citation }}
+                    </div>
+                </div>
+            </div>
+            <div class="w-[500px] rounded-lg bg-white gap-6 flex flex-col p-4">
+                <div>
+                    <div class="font-bold text-gray-700 text-sm mb-4">Psychology disciplines</div>
+
+                    {% autoescape off %}
+                        {{ psychologymodel.psychology_discipline.all|escapeseq|join:", " }}
+                    {% endautoescape %}
+                    </p></div>
+                <div>
+                    <div class="font-bold text-gray-700 text-sm mb-2">DOI</div>
+                    <div class="flex">
+                        <button aria-label="Copy to clipboard" type="button"
+                                class="border border-gray-300 bg-gray-100 p-1.5 hover:bg-gray-200 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="svg-inline--fa fa-copy"
+                                 data-icon="copy" data-prefix="fas" viewBox="0 0 448 512" width="12">
+                                <path fill="currentColor"
+                                      d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"></path>
+                            </svg>
+                        </button>
+                        <a href="#" target="_blank"
+                           class="inline-flex items-center text-tertiary hover:underlin ml-2" rel="noreferrer">{{ psychologymodel.publication_doi }}
+                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 18 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                            </svg>
+                        </a></div>
+                </div>
+                <div>
+                    <div class="font-bold text-gray-700 text-sm mb-2">Programming language</div>
+                    <p>{{ psychologymodel.programming_language}}</p></div>
+                <div>
+                    <div class="font-bold text-gray-700 text-sm mb-4">Software packages</div>
+                    <div class="flex flex-col gap-4">
+                        {% for software_package in psychologymodel.software_package.all %}
+                            <div class="p-4 border border-gray-300 bg-gray-50 rounded-lg text-gray-900 relative shadow-md">
+                            <h5
+                                    class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">{{ software_package.name }}</h5>
+                            <div class="text-sm mb-1"><span class="text-gray-600">Documentation:</span> <a
+                                    href="{{  software_package.documentation_url }}" target="_blank"
+                                    class="inline-flex text-sm items-center text-tertiary hover:underlin"
+                                    rel="noreferrer">{{  software_package.documentation_url }}
+                                <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
+                                     fill="none" viewBox="0 0 18 18">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                                </svg>
+                            </a></div>
+                            <div class="text-sm mb-1"><span class="text-gray-600">Code repository:</span> <a
+                                    href="{{  software_package.code_repository_url }}" target="_blank"
+                                    class="inline-flex text-sm items-center text-tertiary hover:underlin"
+                                    rel="noreferrer">{{  software_package.code_repository_url }}
+                                <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
+                                     fill="none" viewBox="0 0 18 18">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                                </svg>
+                            </a></div>
+                            <div class="text-sm mb-1"><span class="text-gray-600">Programming language:</span> {{ software_package.programming_language }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <div class="font-bold text-gray-700 text-sm mb-2">Code repository url</div>
+                    <p><a href="{{ psychologymodel.code_repository_url }}" target="_blank"
+                          class="inline-flex items-center text-tertiary hover:underlin" rel="noreferrer">{{ psychologymodel.code_repository_url }}
                         <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg" fill="none"
                              viewBox="0 0 18 18">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
                         </svg>
-                    </a></div>
-            </div>
-            <div>
-                <div class="font-bold text-gray-700 text-sm mb-4">How does the model work</div>
+                    </a></p>
+                </div>
                 <div>
-                    <div style="height: 100px; overflow: hidden; transition: height 0.3s;">
-                        <div class="markdown-body"><h1>Veliferam moenia et mirata maesto vulgares</h1>
-                            <h2>Has est inde pleno vos adest pinxit</h2>
-                            <p>Lorem markdownum hiatus Cartheia, tenui <em>ante fetus</em> sub artus, in. <strong>Virgis
-                                insilit</strong> viret; incursant huic ecce neu poteram queat illo delata, nec vasta
-                                <em>iam</em> mihi. Figuris adest proque aevo hunc consedit victa; quoque fulvis, nec!
-                                Pectore accipe super proles gratissima esse dumque <a
-                                        href="http://glomeravitcauda.io/vultus-matrem.php">pars
-                                    nomenque</a> resedit silvas ira; dum
-                                pronas maternis.</p>
-                            <pre><code>var status = 1 + linuxLocalhost + portJumper;
-dvd_localhost.opticCopyright += in_sli(name(1 + iphoneSkinMemory,
-        spoolingCyberbullying));
-gamma(fsb_workstation_camera(gpu_printer, tokenKeystroke, icq) +
-        troubleshooting_user, 2);
-if (megabitToken + partyNntp * gigabyte - public_thyristor -
-        wrapPointCharacter) {
-    inboxWinsockBoot(4 / sku);
-    fileTorrent = cpuWep.podcast(adBufferHoneypot, tebibyte);
-    pcmciaColumn = friendly_logic_computer;
-}
-spyware_recursive.hardware_netbios_ftp -= adware_icf + vdsl;
-</code></pre>
-                            <p>Si instructamque rura venturis; aliter, lustrabere et subiere ornique; est
-                                segnior. Aeacus in et bene. Tu <a href="http://sues-sine.com/">mandata</a> inhibe
-                                ululasse
-                                aequor poenas, aede mater fine est animis, est sperne quae inquinat iuga tamen.
-                                Luxuriem placet, fulvos ne, tecta, crudelis in terra numen aberant, Stheneleius
-                                <strong>potui praemia pampineae</strong>. Deorum nostros colla, si iuventae nostrae
-                                Cerealia!</p>
-                            <pre><code>processThroughputCdma.sampleSequenceEditor += keywordsChipsetDirect(58, 4,
-        94 + infotainmentWDv) / terminalService;
-hibernateNasOpengl.systray -= tween_ethernet(rayDialEbook.software_import(
-        bugConsoleDrm + grayscale, 200249 + box, 2));
-disk.olapDrive += zip + 783115;
-if (fatBezelDuplex(297747 + kilobit, cropComputingJson(4,
-        primaryLeopardTag.dimm_ppm_key(bezel_wi, -1)), -2)) {
-    dviSramWiki.reader_reality_tiff(
-            atmDown.dynamic_word_petaflops.warm_directx_compiler(
-            orientationSeo, record_toggle_ctr, biosSecondaryMarket));
-    cursorCiscKeyboard += 88;
-    pcmcia(1, -5);
-}
-driver.rte_json -= metadataUddiTime;
-</code></pre>
-                            <h2>Sic fabula cauti vos</h2>
-                            <p><a href="http://www.anno-comitique.org/">Deplorata carent sensisse</a> opus, locuti iste
-                                adempta qui densetur rubor et siccat, patrumque reluctanti. Haemus flabat
-                                fatale, humo aliter quem procul, magnanimi saturata una nimia, quibus confessus
-                                stupet. Piceumque metit, est feror lumine sine, fraterque incurvae. Humum carae
-                                cornuaque saepe furoribus lignoque umentes.</p>
-                            <pre><code>data.barcraft_mashup = alert.hertz.integratedDrive(internal_nosql_gnutella +
-        sdk_crm - tweet, web_encryption);
-zip_click = java;
-webmail_digitize_publishing += raw_dvd + soft_ssh;
-var phreakingPort = printer;
-if (streaming) {
-    videoBar += ansiPlay;
-} else {
-    cell_dac_cpc(cdRoom, 4, bankPretestUser(definitionLan, pagePseudocode,
-            video_virtualization));
-    losslessTargetProtector(4, 48, ide + 93);
-}
-</code></pre>
-                            <p>Sanguine in comae. Cubat summa, ipse ferarum rugae mens ductum abiit esse
-                                terruit! Frena spatium rogat gaudia acrior, audet nam sua! Herbarum prospexit
-                                <strong>vota</strong>, enim quae concidere nomen invenerit, humi? Obversus <strong>non
-                                    antro
-                                    sidera</strong> diriguit ereptamque <em>mater</em> de haec intrare erubui ardeat
-                                deas
-                                tetigere
-                                iuvenis.</p>
-                            <p>Axis tibi pellens mihi veretur mitissima fugit, huc victa <a
-                                    href="http://patetin.org/quaerit.html">vipereos
-                                rege</a> iniqui foedumque conversa; sorores. Maera
-                                et testes sic, nec <a href="http://www.aestumfraude.io/">vulnus</a>, fortissimus
-                                ieiunia,
-                                facto causa! Aevo quae ab fecit stamina, moderatius mirabile vatibus orbem
-                                Gratia contrahitur dempsisse.</p></div>
-                    </div>
-                    <button class="text-cyan-900 text-sm font-bold">Show More</button>
-                </div>
-                <p></p></div>
-            <div>
-                <div class="font-bold text-gray-700 text-sm mb-2">Programming language</div>
-                <p>Python</p></div>
-            <div>
-                <div class="font-bold text-gray-700 text-sm mb-4">Software packages</div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="p-4 border border-gray-300 bg-gray-50 rounded-lg text-gray-900 relative shadow-md"><h5
-                            class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white ">name</h5>
-                        <p class="my-3 text-sm">description</p>
-                        <div class="text-sm mb-1"><span class="text-gray-600">Documentation:</span> <a
-                                href="https://jaspervdj.be/lorem-markdownum/" target="_blank"
-                                class="inline-flex text-sm items-center text-blue-600 hover:underline" rel="noreferrer">https://jaspervdj.be/lorem-markdownum/
-                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
-                                 fill="none"
-                                 viewBox="0 0 18 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
-                            </svg>
-                        </a></div>
-                        <div class="text-sm mb-1"><span class="text-gray-600">Code repository:</span> <a
-                                href="https://jaspervdj.be/lorem-markdownum/" target="_blank"
-                                class="inline-flex text-sm items-center text-blue-600 hover:underline" rel="noreferrer">https://jaspervdj.be/lorem-markdownum/
-                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
-                                 fill="none"
-                                 viewBox="0 0 18 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
-                            </svg>
-                        </a></div>
-                        <div class="text-sm mb-1"><span class="text-gray-600">Programming language:</span> Python</div>
-                    </div>
-                    <div class="p-4 border border-gray-300 bg-gray-50 rounded-lg text-gray-900 relative shadow-md"><h5
-                            class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white ">name</h5>
-                        <p class="my-3 text-sm">description</p>
-                        <div class="text-sm mb-1"><span class="text-gray-600">Documentation:</span> <a
-                                href="https://jaspervdj.be/lorem-markdownum/" target="_blank"
-                                class="inline-flex text-sm items-center text-blue-600 hover:underline" rel="noreferrer">https://jaspervdj.be/lorem-markdownum/
-                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
-                                 fill="none"
-                                 viewBox="0 0 18 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
-                            </svg>
-                        </a></div>
-                        <div class="text-sm mb-1"><span class="text-gray-600">Code repository:</span> <a
-                                href="https://jaspervdj.be/lorem-markdownum/" target="_blank"
-                                class="inline-flex text-sm items-center text-blue-600 hover:underline" rel="noreferrer">https://jaspervdj.be/lorem-markdownum/
-                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
-                                 fill="none"
-                                 viewBox="0 0 18 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
-                            </svg>
-                        </a></div>
-                        <div class="text-sm mb-1"><span class="text-gray-600">Programming language:</span> Python</div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="font-bold text-gray-700 text-sm mb-2">Code repository url</div>
-                <p><a href="https://jaspervdj.be/lorem-markdownum/" target="_blank"
-                      class="inline-flex items-center text-blue-600 hover:underline" rel="noreferrer">https://jaspervdj.be/lorem-markdownum/
-                    <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg" fill="none"
-                         viewBox="0 0 18 18">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
-                    </svg>
-                </a></p>
-            </div>
-            <div>
-                <div class="font-bold text-gray-700 text-sm mb-2">Data url</div>
-                <p><a href="https://jaspervdj.be/lorem-markdownum/" target="_blank"
-                      class="inline-flex items-center text-blue-600 hover:underline" rel="noreferrer">https://jaspervdj.be/lorem-markdownum/
-                    <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg" fill="none"
-                         viewBox="0 0 18 18">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
-                    </svg>
-                </a></p>
-            </div>
-            <div>
-                <div class="font-bold text-gray-700 text-sm mb-4">Variables</div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="p-4 border border-gray-300 bg-gray-100 rounded-lg text-gray-900 relative shadow-md"><h5
-                            class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">name</h5>
-                        <p class="mt-3 text-sm">description</p></div>
-                    <div class="p-4 border border-gray-300 bg-gray-100 rounded-lg text-gray-900 relative shadow-md"><h5
-                            class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">name</h5>
-                        <p class="mt-3 text-sm">description</p></div>
+                    <div class="font-bold text-gray-700 text-sm mb-2">Data url</div>
+                    <p><a href="{{ psychologymodel.data_url }}" target="_blank"
+                          class="inline-flex items-center text-tertiary hover:underlin" rel="noreferrer">{{ psychologymodel.data_url }}
+                        <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 18 18">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                        </svg>
+                    </a></p>
                 </div>
             </div>
         </div>

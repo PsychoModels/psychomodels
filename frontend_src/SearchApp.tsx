@@ -10,18 +10,16 @@ const searchClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_PUBLIC_API_KEY,
 );
 
-function SearchApp() {
-  return (
-    <ThemeProvider>
-      <InstantSearch
-        searchClient={searchClient}
-        indexName="PsychologyModel"
-        routing={true}
-      >
-        <SearchContainer></SearchContainer>
-      </InstantSearch>
-    </ThemeProvider>
-  );
-}
+const SearchApp = () => (
+  <ThemeProvider>
+    <InstantSearch
+      searchClient={searchClient}
+      indexName="PsychologyModel"
+      routing={true}
+    >
+      <SearchContainer />
+    </InstantSearch>
+  </ThemeProvider>
+);
 
 export default SearchApp;

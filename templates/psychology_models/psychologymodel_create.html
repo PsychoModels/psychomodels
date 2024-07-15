@@ -24,9 +24,15 @@
     {% endif %}
 
     {% vite %}
-    {% vite 'frontend_src/submission_wizard.tsx' %}
+
+    {% if debug %}
+        <script type="module" src="http://localhost:5173/frontend_src/submission_wizard.tsx"></script>
+    {% else %}
+        {% vite 'frontend_src/submission_wizard.tsx' %}
+    {% endif %}
 
 {% endblock %}
+
 
 {% block content %}
     <div class="min-h-[600px] mx-auto max-w-screen-2xl px-4 lg:px-6 mt-6 w-full mb-20">

@@ -70,7 +70,7 @@ export const PsychologyModelDetail = ({ psychologyModel }: Props) => {
               <a
                 href={`https://doi.org/${psychologyModel.publicationDOI}`}
                 target="_blank"
-                className="inline-flex items-center text-blue-600 hover:underline ml-2"
+                className="inline-flex items-center text-tertiary hover:underlin ml-2"
                 rel="noreferrer"
               >
                 {`https://doi.org/${psychologyModel.publicationDOI}`}
@@ -116,7 +116,7 @@ export const PsychologyModelDetail = ({ psychologyModel }: Props) => {
                 <a
                   href={psychologyModel.codeRepositoryUrl}
                   target="_blank"
-                  className="inline-flex items-center text-blue-600 hover:underline"
+                  className="inline-flex items-center text-tertiary hover:underlin"
                   rel="noreferrer"
                 >
                   {psychologyModel.codeRepositoryUrl}
@@ -134,7 +134,7 @@ export const PsychologyModelDetail = ({ psychologyModel }: Props) => {
                 <a
                   href={psychologyModel.dataUrl}
                   target="_blank"
-                  className="inline-flex items-center text-blue-600 hover:underline"
+                  className="inline-flex items-center text-tertiary hover:underlin"
                   rel="noreferrer"
                 >
                   {psychologyModel.dataUrl}

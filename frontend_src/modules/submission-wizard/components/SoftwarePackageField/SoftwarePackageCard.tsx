@@ -24,15 +24,13 @@ export const SoftwarePackageCard = ({
         {softwarePackage.name}
       </h5>
 
-      <p className="my-3 text-sm">{softwarePackage.description}</p>
-
       {softwarePackage.documentationUrl && (
         <div className="text-sm mb-1">
           <span className="text-gray-600">Documentation:</span>{" "}
           <a
             href={softwarePackage.documentationUrl}
             target="_blank"
-            className="inline-flex text-sm items-center text-blue-600 hover:underline"
+            className="inline-flex text-sm items-center text-tertiary hover:underlin"
             rel="noreferrer"
           >
             {softwarePackage.documentationUrl} <NewWindowIcon />
@@ -46,7 +44,7 @@ export const SoftwarePackageCard = ({
           <a
             href={softwarePackage.codeRepositoryUrl}
             target="_blank"
-            className="inline-flex text-sm items-center text-blue-600 hover:underline"
+            className="inline-flex text-sm items-center text-tertiary hover:underlin"
             rel="noreferrer"
           >
             {softwarePackage.codeRepositoryUrl} <NewWindowIcon />
