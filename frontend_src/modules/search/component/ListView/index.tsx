@@ -11,12 +11,7 @@ export const ListView = () => {
         <div
           key={item.objectID}
           className="bg-white dark:border-gray-700 dark:bg-gray-800 hover:bg-gray-50 hover:cursor-pointer p-4 border border-gray-300 rounded-lg text-gray-900 relative shadow-md"
-          onClick={() =>
-            window.open(
-              `${import.meta.env.VITE_SITE_URL}/models/${item.slug}`,
-              "_self",
-            )
-          }
+          onClick={() => window.open(`/models/${item.slug}`, "_self")}
         >
           <h3 className="text-secondary font-bold mb-2 text-lg">
             {item.title}

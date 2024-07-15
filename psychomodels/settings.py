@@ -271,8 +271,8 @@ DJANGO_VITE_PLUGIN = {
 }
 
 ALGOLIA = {
-    "APPLICATION_ID": os.getenv("ALGOLIA_APPLICATION_ID"),
-    "API_KEY": os.getenv("ALGOLIA_API_KEY"),
+    "APPLICATION_ID": os.getenv("ALGOLIA_APP_ID") or "NO_APP_ID",
+    "API_KEY": os.getenv("ALGOLIA_API_KEY") or "NO_API_KEY",
 }
 
 CORS_ORIGIN_ALLOW_ALL = DEBUG

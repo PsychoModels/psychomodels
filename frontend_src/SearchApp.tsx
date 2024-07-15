@@ -7,7 +7,7 @@ import { SearchContainer } from "./modules/search/component/SearchContainer";
 
 const searchClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_APP_ID,
-  import.meta.env.VITE_ALGOLIA_API_KEY,
+  import.meta.env.VITE_ALGOLIA_PUBLIC_API_KEY,
 );
 
 function SearchApp() {

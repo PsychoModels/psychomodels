@@ -25,7 +25,7 @@ export const PublicationMeta = ({
     queryFn: enabled
       ? async () => {
           const { data } = await axios.get(
-            `${import.meta.env.VITE_SITE_URL}doi/lookup/${removeDoiUrlPrefix(doiValue || "")}`,
+            `/doi/lookup/${removeDoiUrlPrefix(doiValue || "")}`,
           );
           return data;
         }

@@ -20,7 +20,7 @@ export const SearchContainer = () => {
   const [isListView, setIsListView] = useState(true);
 
   return (
-    <div className="flex gap-12">
+    <div className="flex gap-8">
       <div className="w-96">
         <FacetedContainer />
       </div>

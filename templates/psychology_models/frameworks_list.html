@@ -24,7 +24,7 @@
 <table>
     {% for object in object_list %}
     <tr>
-        <td><a href="{{ object.id }}/">{{ object.framework_name }}</a></td>
+        <td><a href="{{ object.id }}/">{{ object.name }}</a></td>
 
     {% empty %}
         <td>No models fit your search criteria.</td>

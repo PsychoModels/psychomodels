@@ -1,42 +1,27 @@
 {% load static %}
-{% load django_vite %}
+{% load vite %}
 
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <html lang="en"></html>
 
-    <link rel="shortcut icon" type="image/icon" href="{% static '/img/favicon.ico' %}">
+    <!--Vite dev client for hmr (will not be displayed on production)-->
+    {% vite %}
 
-    <link rel="stylesheet" href="{% static 'src/css/output.css' %}">
-    {% vite_asset 'static/src/ts/main.ts' %}
+    {% vite 'js/main.ts' %}
+
+    <link rel="stylesheet" href="{% static 'generated/css/style.css' %}">
+
     {% block extrascripts %}{% endblock %}
-    {% vite_hmr_client %}
+
 </head>
-
-
-<body>
-{#{% block navigationbar %}#}
-{#    <nav class="navbar nav-models">#}
-{#        <div class="navbar-icon">#}
-{#            <a href="{% url 'models_index' %}"><img src="{% static '/img/pm_logo_white.svg' %}" alt="Icon"></a>#}
-{#        </div>#}
-{#        <h3><a href="{% url 'models_index' %}"><b>Psycho</b><em>Models</em></a></h3>#}
-{#        <ul>#}
-{#            <li><a href="{% url 'models_about' %}">About</a></li>#}
-{#            <li><a href="{% url 'models_overview' %}">Explore the models</a></li>#}
-{#            <li><a href="{% url 'model_submission' %}">Submit a new model</a></li>#}
-{#            <li><a href="{% url 'contact_page' %}">Contact</a></li>#}
-{#        </ul>#}
-{#    </nav>#}
-{#{% endblock %}#}
 
 <body class="flex flex-col min-h-screen">
 
 {% include '_header_nav.html' %}
-
 
 {% if messages %}
     <div class="messages">
@@ -48,23 +33,14 @@
     </div>
 {% endif %}
 
-{% block sidebar %}
+
+
+{% block content %}
 {% endblock %}
 
-{% block site %}
-    <div class="container mx-auto mt-4">
-
-        <h1>{% block title %}Psychomodels{% endblock %}</h1>
-
-        {% block content %}
-        {% endblock %}
-    </div>
-{% endblock %}
 
 {% block footer %}
-    <footer class="footer">
-        <p>&copy; 2023 <a href="">PsychoModels</a>. All rights reserved.</p>
-    </footer>
+   {% include '_footer.html' %}
 {% endblock %}
 
 </body>

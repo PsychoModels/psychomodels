@@ -1,0 +1,47 @@
+{% extends 'account/_base_entrance.html' %}
+
+{% load allauth account %}
+
+{% block head_title %}
+    Create an account
+{% endblock head_title %}
+
+{% block card_content %}
+
+    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+        Create an account
+    </h1>
+
+
+    {% url 'account_signup' as action_url %}
+    {% element form form=form method="post" action=action_url tags="entrance,signup" %}
+        {% slot body %}
+            {% csrf_token %}
+            {% element fields form=form unlabeled=True %}
+            {% endelement %}
+            {{ redirect_field }}
+        {% endslot %}
+
+        {% slot actions %}
+            {% element button tags="prominent,signup" type="submit" %}
+                Sign Up
+            {% endelement %}
+        {% endslot %}
+
+    {% endelement %}
+
+    {% url 'account_login' as login_url %}
+
+    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+        Already have an account? <a href="{{ login_url }}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login
+        here</a>
+    </p>
+
+    <div class="flex items-center w-full max-w-md space-x-2 mt-4">
+        <hr class="flex-1 border-gray-300 dark:border-gray-700">
+        <span class="text-sm text-gray-500 dark:text-gray-400">or </span>
+        <hr class="flex-1 border-gray-300 dark:border-gray-700">
+    </div>
+
+    {% include 'account/_social_buttons_list.html' %}
+{% endblock card_content %}
