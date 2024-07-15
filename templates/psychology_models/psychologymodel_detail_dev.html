@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-{% load render_vite_bundle %}
+
 {% load static %}
 
 
@@ -7,22 +7,7 @@
 
 
 {% block extrascripts %}
-    {% if debug %}
-        <script type="module" src="http://localhost:5173/@vite/client"></script>
 
-        <!-- If you're using vite with React, this next script will be needed for HMR -->
-        <script type="module">
-            import RefreshRuntime from 'http://localhost:5173/@react-refresh'
-
-            if (RefreshRuntime) {
-                RefreshRuntime.injectIntoGlobalHook(window)
-                window.$RefreshReg$ = () => {
-                }
-                window.$RefreshSig$ = () => (type) => type
-                window.__vite_plugin_react_preamble_installed__ = true
-            }
-        </script>
-    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -34,9 +19,5 @@
         <div id="root"></div>
     </div>
 
-    {% if debug %}
-        <script type="module" src="http://localhost:5173/frontend_src/detail_view_dev.tsx"></script>
-    {% else %}
-        {% render_vite_bundle %}
-    {% endif %}
+
 {% endblock %}

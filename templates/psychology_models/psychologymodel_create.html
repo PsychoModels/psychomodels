@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-{% load render_vite_bundle %}
+{% load vite %}
 {% load static %}
 
 
@@ -7,9 +7,8 @@
 
 
 {% block extrascripts %}
-    {% if debug %}
-        <script type="module" src="http://localhost:5173/@vite/client"></script>
 
+    {% if debug %}
         <!-- If you're using vite with React, this next script will be needed for HMR -->
         <script type="module">
             import RefreshRuntime from 'http://localhost:5173/@react-refresh'
@@ -23,6 +22,10 @@
             }
         </script>
     {% endif %}
+
+    {% vite %}
+    {% vite 'frontend_src/submission_wizard.tsx' %}
+
 {% endblock %}
 
 {% block content %}
@@ -149,9 +152,9 @@
         }
     </script>
 
-    {% if debug %}
-        <script type="module" src="http://localhost:5173/frontend_src/submission_wizard.tsx"></script>
-    {% else %}
-        {#        {% render_vite_bundle %}#}
-    {% endif %}
+<!--    {% if debug %}-->
+<!--        <script type="module" src="http://localhost:5173/frontend_src/submission_wizard.tsx"></script>-->
+<!--    {% else %}-->
+<!--        {#        {% render_vite_bundle %}#}-->
+<!--    {% endif %}-->
 {% endblock %}
