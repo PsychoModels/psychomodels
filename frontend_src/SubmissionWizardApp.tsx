@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SubmissionWizardContainer } from "./modules/submission-wizard/components/SubmissionWizardContainer";
+import { SubmissionWizardRouter } from "./modules/submission-wizard/components/SubmissionWizardRouter";
 import { ThemeProvider } from "./modules/shared/components/ThemeProvider";
 import InitialDataProvider from "./modules/shared/components/InitialDataProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ function SubmissionWizardApp() {
     <ThemeProvider>
       <InitialDataProvider>
         <QueryClientProvider client={queryClient}>
-          <SubmissionWizardContainer />
+          <SubmissionWizardRouter />
         </QueryClientProvider>
       </InitialDataProvider>
     </ThemeProvider>

@@ -1,14 +1,17 @@
 import React from "react";
-// import { EuiButton } from "@elastic/eui";
 import ArrowIcon from "../../../shared/components/Icons/ArrowIcon.tsx";
 import useStore from "../../store/useStore.ts";
 import { Button } from "flowbite-react";
+import { useNavigate } from "@tanstack/react-router";
 
 export const SubmissionGuidelines = () => {
-  const { goToStep } = useStore((state) => state);
+  const navigate = useNavigate({ from: "/" });
+
+  const { setCompletedStatus } = useStore((state) => state);
 
   const onSubmitHandler = () => {
-    goToStep(3);
+    setCompletedStatus("submissionGuidelines", true);
+    navigate({ to: "/account" });
   };
 
   return (

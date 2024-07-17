@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useStore from "../../store/useStore.ts";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -9,6 +9,7 @@ import ArrowIcon from "../../../shared/components/Icons/ArrowIcon.tsx";
 import { TextAreaField } from "../../../shared/components/Form/TextAreaField.tsx";
 import { ModelingFrameworkField } from "../ModelingFrameworkField";
 import { PsychologyDisciplineField } from "../PsychologyDisciplineField";
+import { useNavigate } from "@tanstack/react-router";
 
 const formSchema = z.object({
   title: z.string().max(255).min(1),
@@ -20,18 +21,33 @@ const formSchema = z.object({
 type ValidationSchema = z.infer<typeof formSchema>;
 
 export const ModelInformation = () => {
-  const { modelInformation, setModelInformation, goToStep } = useStore(
-    (state) => state,
-  );
+  const navigate = useNavigate({ from: "/model-information" });
+  const { setCompletedStatus } = useStore((state) => state);
 
-  const { control, handleSubmit } = useForm<ValidationSchema>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { ...modelInformation },
-  });
+  const { modelInformation, setModelInformation } = useStore((state) => state);
+
+  const { control, handleSubmit, getValues, formState } =
+    useForm<ValidationSchema>({
+      resolver: zodResolver(formSchema),
+      defaultValues: { ...modelInformation },
+    });
 
   const onSubmit = (values: ValidationSchema) => {
     setModelInformation({ ...modelInformation, ...values });
-    goToStep(4);
+    setCompletedStatus("modelInformation", true);
+    navigate({ to: "/publication-details" });
+  };
+
+  useEffect(() => {
+    return function saveFormState() {
+      const values = getValues();
+      setModelInformation({ ...modelInformation, ...values });
+      setCompletedStatus("modelInformation", formState.isValid);
+    };
+  }, [formState.isValid]);
+
+  const onNavigateBack = () => {
+    navigate({ to: "/account" });
   };
 
   return (
@@ -55,7 +71,7 @@ export const ModelInformation = () => {
         </form>
       </div>
       <div className="flex bg-gray-50 space-x-6 p-6 border-t" color="gray">
-        <Button type="button" color="gray" onClick={() => goToStep(2)}>
+        <Button type="button" color="gray" onClick={onNavigateBack}>
           Back
         </Button>
         <Button type="submit" onClick={handleSubmit(onSubmit)}>

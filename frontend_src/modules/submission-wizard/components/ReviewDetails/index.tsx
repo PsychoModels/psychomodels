@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useStore from "../../store/useStore.ts";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { Button } from "flowbite-react";
 import { TextAreaField } from "../../../shared/components/Form/TextAreaField.tsx";
 import { PsychologyModelDetail } from "../PsychologyModelDetail";
 import { PsychologyModel } from "../../../../models";
+import { useNavigate } from "@tanstack/react-router";
 
 const formSchema = z.object({
   remarks: z.string(),
@@ -15,10 +16,12 @@ const formSchema = z.object({
 type ValidationSchema = z.infer<typeof formSchema>;
 
 export const ReviewDetails = () => {
+  const navigate = useNavigate({ from: "/review" });
+
   const {
     reviewDetails,
     setReviewDetails,
-    goToStep,
+
     modelInformation,
     publicationDetails,
     programmingLanguages,
@@ -26,15 +29,27 @@ export const ReviewDetails = () => {
     psychologyDisciplines,
   } = useStore((state) => state);
 
-  const { control, handleSubmit } = useForm<ValidationSchema>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { ...reviewDetails },
-  });
+  const { control, handleSubmit, getValues, formState } =
+    useForm<ValidationSchema>({
+      resolver: zodResolver(formSchema),
+      defaultValues: { ...reviewDetails },
+    });
 
   const onSubmit = (values: ValidationSchema) => {
     setReviewDetails({ ...reviewDetails, ...values });
 
     // Todo
+  };
+
+  useEffect(() => {
+    return function saveFormState() {
+      const values = getValues();
+      setReviewDetails({ ...reviewDetails, ...values });
+    };
+  }, [formState.isValid]);
+
+  const onNavigateBack = () => {
+    navigate({ to: "/publication-details" });
   };
 
   const psychologyModel: PsychologyModel = {
@@ -72,7 +87,7 @@ export const ReviewDetails = () => {
         </form>
       </div>
       <div className="flex bg-gray-50 space-x-6 p-6 border-t" color="gray">
-        <Button type="button" color="gray" onClick={() => goToStep(4)}>
+        <Button type="button" color="gray" onClick={onNavigateBack}>
           Back
         </Button>
         <Button type="submit" onClick={handleSubmit(onSubmit)}>

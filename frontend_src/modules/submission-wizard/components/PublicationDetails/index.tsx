@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useStore from "../../store/useStore";
 import * as z from "zod";
 import { FormProvider, useForm } from "react-hook-form";
@@ -13,6 +13,7 @@ import { DOIInputField } from "../DOIInputField";
 import { softwarePackageFormSchema } from "../SoftwarePackageField/SoftwarePackageFormModal";
 import { variableFormSchema } from "../VariablesField/VariableFormModal.tsx";
 import { ProgrammingLanguageSelectField } from "../ProgrammingLanguageSelectField";
+import { useNavigate } from "@tanstack/react-router";
 
 const formSchema = z.object({
   explanation: z.string().min(1),
@@ -40,7 +41,10 @@ const formSchema = z.object({
 type ValidationSchema = z.infer<typeof formSchema>;
 
 export const PublicationDetails = () => {
-  const { publicationDetails, setPublicationDetails, goToStep } = useStore(
+  const navigate = useNavigate({ from: "/publication-details" });
+  const { setCompletedStatus } = useStore((state) => state);
+
+  const { publicationDetails, setPublicationDetails } = useStore(
     (state) => state,
   );
 
@@ -48,12 +52,24 @@ export const PublicationDetails = () => {
     resolver: zodResolver(formSchema),
     defaultValues: { ...publicationDetails },
   });
-
-  const { control, handleSubmit } = formMethods;
+  const { control, handleSubmit, getValues, formState } = formMethods;
 
   const onSubmit = (values: ValidationSchema) => {
     setPublicationDetails({ ...publicationDetails, ...values });
-    goToStep(5);
+    setCompletedStatus("publicationDetails", true);
+    navigate({ to: "/review" });
+  };
+
+  useEffect(() => {
+    return function saveFormState() {
+      const values = getValues();
+      setPublicationDetails({ ...publicationDetails, ...values });
+      setCompletedStatus("publicationDetails", formState.isValid);
+    };
+  }, [formState.isValid]);
+
+  const onNavigateBack = () => {
+    navigate({ to: "/model-information" });
   };
 
   return (
@@ -96,7 +112,7 @@ export const PublicationDetails = () => {
         </form>
       </div>
       <div className="flex bg-gray-50 space-x-6 p-6 border-t" color="gray">
-        <Button type="button" color="gray" onClick={() => goToStep(3)}>
+        <Button type="button" color="gray" onClick={onNavigateBack}>
           Back
         </Button>
         <Button type="submit" onClick={handleSubmit(onSubmit)}>

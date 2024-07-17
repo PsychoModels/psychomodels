@@ -4,7 +4,7 @@ import {
   createModelInformationSlice,
 } from "./slices/createModelInformationSlice";
 
-import { createStepSlice, StepSlice } from "./slices/createStepSlice";
+import { createStepStatusSlice, StepSlice } from "./slices/createStepStatusSlice.ts";
 import {
   createFrameworksSlice,
   FrameworksSlice,
@@ -35,7 +35,7 @@ const useStore = create<
     ReviewDetailsSlice &
     PsychologyDisciplinesSlice
 >()((...a) => ({
-  ...createStepSlice(...a),
+  ...createStepStatusSlice(...a),
   ...createModelInformationSlice(...a),
   ...createFrameworksSlice(...a),
   ...createPublicationDetailsSlice(...a),
