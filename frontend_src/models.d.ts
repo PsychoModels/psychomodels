@@ -25,7 +25,15 @@ export type SoftwarePackage = {
 export type ModelVariable = {
   id: ID;
   name: string;
+  details: string;
+  variable: Variable;
+};
+
+export type Variable = {
+  id: ID;
+  name: string;
   description: string;
+  isNew?: boolean;
 };
 
 export type PsychologyDiscipline = {

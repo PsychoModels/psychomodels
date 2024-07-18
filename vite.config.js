@@ -9,6 +9,8 @@ export default defineConfig({
         "./static/js/main.ts",
         "./frontend_src/submission_wizard.tsx",
         "./frontend_src/search.tsx",
+        "./frontend_src/account.tsx",
+        "./frontend_src/contact_form.tsx",
       ],
       addAliases: false,
     }),
