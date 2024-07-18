@@ -4,7 +4,10 @@ import {
   createModelInformationSlice,
 } from "./slices/createModelInformationSlice";
 
-import { createStepStatusSlice, StepSlice } from "./slices/createStepStatusSlice.ts";
+import {
+  createStepStatusSlice,
+  StepSlice,
+} from "./slices/createStepStatusSlice.ts";
 import {
   createFrameworksSlice,
   FrameworksSlice,
@@ -25,6 +28,10 @@ import {
   createPsychologyDisciplinesSlice,
   PsychologyDisciplinesSlice,
 } from "./slices/createPsychologyDisciplinesSlice.ts";
+import {
+  createVariableSlice,
+  VariableSlice,
+} from "./slices/createVariableSlice.ts";
 
 const useStore = create<
   ModelInformationSlice &
@@ -33,7 +40,8 @@ const useStore = create<
     PublicationDetailsSlice &
     ProgrammingLanguagesSlice &
     ReviewDetailsSlice &
-    PsychologyDisciplinesSlice
+    PsychologyDisciplinesSlice &
+    VariableSlice
 >()((...a) => ({
   ...createStepStatusSlice(...a),
   ...createModelInformationSlice(...a),
@@ -42,6 +50,7 @@ const useStore = create<
   ...createProgrammingLanguagesSlice(...a),
   ...createReviewDetailsSlice(...a),
   ...createPsychologyDisciplinesSlice(...a),
+  ...createVariableSlice(...a),
 }));
 
 export default useStore;

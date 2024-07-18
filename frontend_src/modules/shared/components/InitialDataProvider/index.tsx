@@ -4,6 +4,7 @@ import {
   Framework,
   ProgrammingLanguage,
   PsychologyDiscipline,
+  Variable,
 } from "../../../../models";
 
 interface Props {
@@ -11,8 +12,12 @@ interface Props {
 }
 
 const InitialDataProvider = ({ children }: Props) => {
-  const { setFrameworks, setProgrammingLanguages, setPsychologyDisciplines } =
-    useStore((state) => state);
+  const {
+    setFrameworks,
+    setProgrammingLanguages,
+    setPsychologyDisciplines,
+    setVariables,
+  } = useStore((state) => state);
 
   const [loaded, setLoaded] = React.useState(false);
 
@@ -24,6 +29,7 @@ const InitialDataProvider = ({ children }: Props) => {
       frameworks?: Framework[];
       programmingLanguages?: ProgrammingLanguage[];
       psychologyDisciplines?: PsychologyDiscipline[];
+      variables?: Variable[];
     } = {};
 
     if (initialDataScript?.textContent) {
@@ -33,6 +39,7 @@ const InitialDataProvider = ({ children }: Props) => {
     setFrameworks(initialData.frameworks || []);
     setProgrammingLanguages(initialData.programmingLanguages || []);
     setPsychologyDisciplines(initialData.psychologyDisciplines || []);
+    setVariables(initialData.variables || []);
 
     setLoaded(true);
   }, []);
