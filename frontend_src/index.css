@@ -13,3 +13,7 @@
 .rc-md-editor .rc-md-navigation {
     background-color: rgb(249, 250, 251) !important;
 }
+
+.extra-padding-for-doi-button input {
+    padding-right: 130px;
+}

@@ -38,6 +38,7 @@ export const DOIInputField = ({ control, label, name, placeholder }: Props) => {
                 helperText={
                   fieldState?.error && <>{fieldState?.error.message}</>
                 }
+                className="extra-padding-for-doi-button"
               />
 
               <GetPublicationFromDOIButton doiValue={fieldAttrs.value} />

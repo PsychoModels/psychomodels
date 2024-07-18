@@ -30,7 +30,7 @@ export const SubmissionGuidelines = () => {
         </div>
       </div>
 
-      <div className="flex bg-gray-50 space-x-6 p-6 border-t">
+      <div className="flex bg-gray-50 space-x-6 p-6 border-t md:justify-start justify-end">
         <Button type="submit" onClick={onSubmitHandler}>
           Agree and continue <ArrowIcon />
         </Button>

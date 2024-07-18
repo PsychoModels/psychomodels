@@ -70,7 +70,7 @@ export const ModelInformation = () => {
           <PsychologyDisciplineField control={control} />
         </form>
       </div>
-      <div className="flex bg-gray-50 space-x-6 p-6 border-t" color="gray">
+      <div className="flex bg-gray-50 space-x-6 p-6 border-t md:justify-start justify-between">
         <Button type="button" color="gray" onClick={onNavigateBack}>
           Back
         </Button>
