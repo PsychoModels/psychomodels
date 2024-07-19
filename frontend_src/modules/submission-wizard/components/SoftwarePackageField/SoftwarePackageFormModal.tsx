@@ -98,7 +98,7 @@ export const SoftwarePackageFormModal = ({
             control={control}
             label="Programming language"
             name="programmingLanguageId"
-            placeholder="Select a programming language or add one"
+            placeholder="Select a programming language"
             options={programmingLanguages.map((language) => ({
               label: language.name,
               value: language.id,

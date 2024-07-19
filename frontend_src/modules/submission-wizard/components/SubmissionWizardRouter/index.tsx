@@ -14,7 +14,6 @@ import {
   RouterProvider,
   ScrollRestoration,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
 const rootRoute = createRootRoute({
   component: () => {

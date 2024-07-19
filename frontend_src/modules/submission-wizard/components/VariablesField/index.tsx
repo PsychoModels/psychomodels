@@ -18,7 +18,7 @@ export const VariablesField = ({ control }: Props) => {
 
   return (
     <Controller
-      name="variables"
+      name="modelVariables"
       control={control}
       render={({ field: { value, onChange }, fieldState }) => {
         const color = fieldState.invalid ? "failure" : "gray";
@@ -26,20 +26,20 @@ export const VariablesField = ({ control }: Props) => {
         return (
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="variables" color={color} value="Variables" />
+              <Label htmlFor="modelVariables" color={color} value="Variables" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {value?.map((variable: ModelVariable) => {
+              {value?.map((modelVariable: ModelVariable) => {
                 return (
                   <VariableCard
-                    key={variable.id}
-                    variable={variable}
+                    key={modelVariable.id}
+                    modelVariable={modelVariable}
                     actionButton={
                       <div className="flex gap-2">
                         <Button
                           size="xs"
                           onClick={() => {
-                            setEditExistingValue(variable);
+                            setEditExistingValue(modelVariable);
                             setCreateModalIsOpen(true);
                           }}
                         >
@@ -51,7 +51,7 @@ export const VariablesField = ({ control }: Props) => {
                             onChange(
                               value?.filter(
                                 ({ id }: { id: string | number }) =>
-                                  id !== variable.id,
+                                  id !== modelVariable.id,
                               ),
                             );
                           }}
@@ -93,7 +93,7 @@ export const VariablesField = ({ control }: Props) => {
                     );
                     onChange(updatedValue);
                   } else {
-                    onChange([...value, variable]);
+                    onChange([...(value || []), variable]);
                   }
                 }}
               />

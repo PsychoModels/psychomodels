@@ -11,7 +11,6 @@ import { TextInputField } from "../../../shared/components/Form/TextInputField.t
 import { VariablesField } from "../VariablesField";
 import { DOIInputField } from "../DOIInputField";
 import { softwarePackageFormSchema } from "../SoftwarePackageField/SoftwarePackageFormModal";
-import { variableFormSchema } from "../VariablesField/VariableFormModal.tsx";
 import { ProgrammingLanguageSelectField } from "../ProgrammingLanguageSelectField";
 import { useNavigate } from "@tanstack/react-router";
 
@@ -26,12 +25,12 @@ const formSchema = z.object({
   ),
   codeRepositoryUrl: z.union([z.literal(""), z.string().trim().url()]),
   dataUrl: z.union([z.literal(""), z.string().trim().url()]),
-  variables: z.array(
-    z.intersection(
-      variableFormSchema,
-      z.object({ id: z.string().or(z.number()) }),
-    ),
-  ),
+  // modelVariables: z.array(
+  //   z.intersection(
+  //     variableFormSchema,
+  //     z.object({ id: z.string().or(z.number()) }),
+  //   ),
+  // ),
   publicationDOI: z.union([
     z.literal(""),
     z.string().regex(/^10.\d{4,9}\/[-._;()/:A-Z0-9]+$/i),

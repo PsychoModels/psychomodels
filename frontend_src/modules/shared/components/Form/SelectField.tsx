@@ -21,7 +21,7 @@ export const SelectField = ({
     <Controller
       name={name}
       control={control}
-      render={({ field: { ref, value, ...fieldAttrs }, fieldState }) => {
+      render={({ field: { ref, ...fieldAttrs }, fieldState }) => {
         const color = fieldState.invalid ? "failure" : "gray";
 
         return (

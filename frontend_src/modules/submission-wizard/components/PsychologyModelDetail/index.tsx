@@ -149,7 +149,7 @@ export const PsychologyModelDetail = ({ psychologyModel }: Props) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {psychologyModel.variables.map((variable) => (
-                <VariableCard key={variable.id} variable={variable} />
+                <VariableCard key={variable.id} modelVariable={variable} />
               ))}
             </div>
           </div>
