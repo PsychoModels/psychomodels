@@ -66,7 +66,9 @@ class PsychologyModelAdmin(DjangoObjectActions, VersionAdmin):
     def unpublish_this(self, request, obj):
         action_unpublish_psychology_model(self, request, obj)
 
-    @action(label="Fetch citation", description="(Re)-fetch citation for publications")
+    @action(
+        label="(Re)-fetch citation", description="(Re)-fetch citation for publications"
+    )
     @takes_instance_or_queryset
     def get_doi_citations(self, request, obj):
         action_get_doi_citations(self, request, obj, True)

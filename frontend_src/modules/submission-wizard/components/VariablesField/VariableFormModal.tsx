@@ -46,7 +46,7 @@ export const VariableFormModal = ({
     ? baseSchema.merge(customVariableSchema)
     : baseSchema.merge(variableIdSchema);
 
-  const { control, handleSubmit, watch, reset, formState } = useForm({
+  const { control, handleSubmit, watch, reset } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
       variableId: existingValue?.variable.id || "",

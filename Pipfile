@@ -11,12 +11,10 @@ psycopg2-binary = "*"
 sqlparse = "*"
 django = "*"
 python-dotenv = "*"
-django-allauth = {extras = ["socialaccount", "github", "google", "orcid"], version = "*"}
-crispy-tailwind = "*"
-django-crispy-forms = "*"
 django-countries = "*"
 django-browser-reload = "*"
 dj-database-url = "*"
+gunicorn = "*"
 sentry-sdk = {extras = ["django"], version = "*"}
 django-lb-health-check = "*"
 django-autoslug = "*"
@@ -26,6 +24,8 @@ django-cors-headers = "*"
 django-object-actions = "*"
 django-currentuser = "*"
 django-reversion = "*"
+djangorestframework = "*"
+django-allauth = {extras = ["socialaccount", "github", "google", "orcid"], version = "*"}
 
 [dev-packages]
 black = "*"

@@ -31,7 +31,6 @@ export const SelectField = ({
             </div>
             <Select
               sizing="lg"
-              defaultValue=""
               id={name}
               color={color}
               ref={ref}

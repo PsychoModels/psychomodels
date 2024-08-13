@@ -147,7 +147,10 @@ export const MultiSelectComboboxField: React.FC<Props> = ({
               </div>
             </Combobox>
 
-            <div className="flex gap-2 mt-2">
+            <div
+              className="flex gap-2 mt-2"
+              data-testid={`${name}-multi-select-option-list`}
+            >
               {value?.map((itemId: string | number) => {
                 const item = options.find((option) => option.value === itemId);
 

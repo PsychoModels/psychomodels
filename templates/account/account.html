@@ -1,0 +1,53 @@
+{% extends '_base.html' %}
+{% load vite %}
+{% load static %}
+{% load countries %}
+
+{% block title %}Account{% endblock %}
+
+{% block extrascripts %}
+
+    {% if debug %}
+        <!-- If you're using vite with React, this next script will be needed for HMR -->
+        <script type="module">
+            import RefreshRuntime from 'http://localhost:5173/@react-refresh'
+
+            if (RefreshRuntime) {
+                RefreshRuntime.injectIntoGlobalHook(window)
+                window.$RefreshReg$ = () => {
+                }
+                window.$RefreshSig$ = () => (type) => type
+                window.__vite_plugin_react_preamble_installed__ = true
+            }
+        </script>
+    {% endif %}
+
+    {% vite %}
+
+    {% if debug %}
+        <script type="module" src="http://localhost:5173/frontend_src/account.tsx"></script>
+    {% else %}
+        {% vite 'frontend_src/account.tsx' %}
+    {% endif %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class=" mx-auto max-w-screen-2xl md:px-4 lg:px-6 mt-6 w-full mb-20">
+
+        <div id="root"></div>
+    </div>
+
+    {% get_countries as countries %}
+
+    <script id="initial-data" type="application/json">
+        {
+            "countries": [
+        {% for code, name in countries %}
+            {"code": "{{ code }}", "name": "{{ name }}"}{% if not forloop.last %},{% endif %}
+                {% endfor %}
+        ]
+    }
+    </script>
+{% endblock %}

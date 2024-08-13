@@ -15,7 +15,7 @@ def fetch_and_save(instance, fetch_function, attribute_name, fetched_at_name, re
     now = timezone.now()
     messages = []
 
-    if getattr(instance, fetched_at_name) is not None or refetch:
+    if getattr(instance, fetched_at_name) is None or refetch:
         try:
             result = fetch_function(instance.publication_doi)
             setattr(instance, attribute_name, result)

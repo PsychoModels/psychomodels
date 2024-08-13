@@ -1,4 +1,3 @@
-from algoliasearch_django import AlgoliaIndex
 from django.db import models
 from django.urls import reverse
 from autoslug import AutoSlugField
@@ -206,11 +205,16 @@ class PsychologyModel(models.Model):
         return [discipline.name for discipline in self.psychology_discipline.all()]
 
     def publication_authors(self):
+        def get_initials(given_name):
+            return "".join([name[0] + "." for name in given_name.split()])
+
         if self.publication_csl_json is None:
             return []
+
         authors = self.publication_csl_json.get("author", [])
-        # TODO: discuss this
-        return [author["family"] for author in authors]
+        return [
+            f"{author['family']} {get_initials(author['given'])}" for author in authors
+        ]
 
     def __str__(self):
         return self.title

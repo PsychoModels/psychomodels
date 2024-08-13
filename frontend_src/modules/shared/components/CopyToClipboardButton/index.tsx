@@ -5,6 +5,8 @@ interface Props {
   text: string;
 }
 
+// TODO: add copied animation
+
 export const CopyToClipboardButton = ({ text }: Props) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(text);

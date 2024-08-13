@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import useStore from "../../../submission-wizard/store/useStore.ts";
 import {
+  Country,
   Framework,
   ProgrammingLanguage,
   PsychologyDiscipline,
@@ -17,6 +18,7 @@ const InitialDataProvider = ({ children }: Props) => {
     setProgrammingLanguages,
     setPsychologyDisciplines,
     setVariables,
+    setCountries,
   } = useStore((state) => state);
 
   const [loaded, setLoaded] = React.useState(false);
@@ -30,6 +32,7 @@ const InitialDataProvider = ({ children }: Props) => {
       programmingLanguages?: ProgrammingLanguage[];
       psychologyDisciplines?: PsychologyDiscipline[];
       variables?: Variable[];
+      countries?: Country[];
     } = {};
 
     if (initialDataScript?.textContent) {
@@ -40,6 +43,7 @@ const InitialDataProvider = ({ children }: Props) => {
     setProgrammingLanguages(initialData.programmingLanguages || []);
     setPsychologyDisciplines(initialData.psychologyDisciplines || []);
     setVariables(initialData.variables || []);
+    setCountries(initialData.countries || []);
 
     setLoaded(true);
   }, []);

@@ -28,10 +28,6 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split("
 # Application definition
 
 INSTALLED_APPS = [
-    "core",
-    "crispy_forms",
-    "crispy_tailwind",
-    "psychology_models",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -42,18 +38,21 @@ INSTALLED_APPS = [
     "django_vite_plugin",
     "allauth",
     "allauth.account",
+    "allauth.headless",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.github",
     "allauth.socialaccount.providers.orcid",
     "allauth.socialaccount.providers.google",
-    "members",
     "django_browser_reload",
     "django_countries",
     "algoliasearch_django",
-    "doi_lookup",
     "corsheaders",
     "django_object_actions",
     "reversion",
+    "psychology_models",
+    "members",
+    "doi_lookup",
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -127,8 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = "/account/profile/check"
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -188,10 +185,6 @@ STATIC_ROOT = BASE_DIR / "collectedstatic"
 
 SOCIALACCOUNT_PROVIDERS = {
     "github": {
-        # For each provider, you can choose whether or not the
-        # email address(es) retrieved from the provider are to be
-        # interpreted as verified.
-        "VERIFIED_EMAIL": False,
         "APP": {
             "client_id": os.getenv("GITHUB_CLIENT_ID"),
             "secret": os.getenv("GITHUB_CLIENT_SECRET"),
@@ -205,16 +198,14 @@ SOCIALACCOUNT_PROVIDERS = {
         },
     },
     "orcid": {
-        # Base domain of the API. Default value: 'orcid.org', for the production API
-        "BASE_DOMAIN": "orcid.org",  # for the sandbox API
-        # Member API or Public API? Default: False (for the public API)
-        "MEMBER_API": True,  # for the member API
         "APP": {
             "client_id": os.getenv("ORCID_CLIENT_ID"),
             "secret": os.getenv("ORCID_CLIENT_SECRET"),
         },
     },
 }
+
+LOGIN_REDIRECT_URL = "/account/"
 
 SOCIALACCOUNT_ENABLED = True
 
@@ -285,3 +276,10 @@ CACHES = {
         "LOCATION": "unique-snowflake",
     }
 }
+
+HEADLESS_FRONTEND_URLS = {
+    "account_reset_password_from_key": "https://app.org/account/password/reset/key/{key}",
+    "account_signup": "https://app.org/account/signup",
+}
+
+HEADLESS_ADAPTER = "members.headless_adapter.MemberAllauthHeadlessAdapter"
