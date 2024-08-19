@@ -6,6 +6,8 @@ from django_object_actions import (
     takes_instance_or_queryset,
 )
 from django.contrib import messages
+from import_export.admin import ImportExportModelAdmin
+
 from . import models
 from .utils.get_doi_citations import get_doi_citations
 from .utils.set_publish_state import (
@@ -55,7 +57,14 @@ def published_state(self, obj):
         )
 
 
-class PsychologyModelAdmin(DjangoObjectActions, VersionAdmin):
+class AdminMixin(ImportExportModelAdmin, VersionAdmin, admin.ModelAdmin):
+    actions = [action_publish, action_unpublish]
+
+    def published_state(self, obj):
+        return published_state(self, obj)
+
+
+class PsychologyModelAdmin(DjangoObjectActions, AdminMixin):
     @action(label="Publish", description="Publish this model")
     @takes_instance_or_queryset
     def publish_this(self, request, obj):
@@ -92,9 +101,6 @@ class PsychologyModelAdmin(DjangoObjectActions, VersionAdmin):
         action_get_doi_citations,
     ]
 
-    def published_state(self, obj):
-        return published_state(self, obj)
-
     def get_change_actions(self, request, object_id, form_url):
         actions = super(PsychologyModelAdmin, self).get_change_actions(
             request, object_id, form_url
@@ -110,14 +116,7 @@ class PsychologyModelAdmin(DjangoObjectActions, VersionAdmin):
         return actions
 
 
-class AdminMixin:
-    actions = [action_publish, action_unpublish]
-
-    def published_state(self, obj):
-        return published_state(self, obj)
-
-
-class FrameworkAdmin(DjangoObjectActions, admin.ModelAdmin):
+class FrameworkAdmin(DjangoObjectActions, AdminMixin):
     @action(label="Fetch citation", description="(Re)-fetch citation for publications")
     @takes_instance_or_queryset
     def get_doi_citations(self, request, obj):
@@ -139,7 +138,7 @@ class FrameworkAdmin(DjangoObjectActions, admin.ModelAdmin):
     list_display = ("name", "published_state")
 
 
-class VariableAdmin(AdminMixin, admin.ModelAdmin):
+class VariableAdmin(AdminMixin):
     readonly_fields = ("published_at",)
     list_display = ("name", "published_state")
 
@@ -147,7 +146,7 @@ class VariableAdmin(AdminMixin, admin.ModelAdmin):
         return published_state(self, obj)
 
 
-class ModelVariableAdmin(AdminMixin, admin.ModelAdmin):
+class ModelVariableAdmin(AdminMixin):
     readonly_fields = ("published_at",)
     list_display = ("name", "published_state")
 
@@ -155,7 +154,7 @@ class ModelVariableAdmin(AdminMixin, admin.ModelAdmin):
         return published_state(self, obj)
 
 
-class ProgrammingLanguageAdmin(AdminMixin, admin.ModelAdmin):
+class ProgrammingLanguageAdmin(AdminMixin):
     readonly_fields = ("published_at",)
     list_display = ("name", "published_state")
 
@@ -163,7 +162,7 @@ class ProgrammingLanguageAdmin(AdminMixin, admin.ModelAdmin):
         return published_state(self, obj)
 
 
-class PsychologyDisciplineAdmin(AdminMixin, admin.ModelAdmin):
+class PsychologyDisciplineAdmin(AdminMixin):
     readonly_fields = ("published_at",)
     list_display = ("name", "published_state")
 
@@ -171,7 +170,7 @@ class PsychologyDisciplineAdmin(AdminMixin, admin.ModelAdmin):
         return published_state(self, obj)
 
 
-class SoftwarePackageAdmin(AdminMixin, admin.ModelAdmin):
+class SoftwarePackageAdmin(AdminMixin):
     readonly_fields = ("published_at",)
     list_display = ("name", "published_state")
 

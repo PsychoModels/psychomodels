@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "doi_lookup",
     "api",
     "after_response",
+    "import_export",
 ]
 
 MIDDLEWARE = [
