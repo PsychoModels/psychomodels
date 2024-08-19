@@ -17,11 +17,32 @@ interface Props {
 }
 
 export const softwarePackageFormSchema = z.object({
-  name: z.string().max(255).min(1),
+  name: z.string().max(255).min(1, {
+    message: "Software package name is required",
+  }),
   description: z.string(),
-  documentationUrl: z.union([z.literal(""), z.string().trim().url()]),
-  codeRepositoryUrl: z.union([z.literal(""), z.string().trim().url()]),
-  programmingLanguageId: z.string().min(1).or(z.number().min(1)),
+  documentationUrl: z.union([
+    z.literal(""),
+    z.string().trim().url({
+      message: "Invalid documentation URL",
+    }),
+  ]),
+  codeRepositoryUrl: z.union([
+    z.literal(""),
+    z.string().trim().url({
+      message: "Invalid code repository URL",
+    }),
+  ]),
+  programmingLanguageId: z
+    .string()
+    .min(1, {
+      message: "Programming language is required",
+    })
+    .or(
+      z.number().min(1, {
+        message: "Programming language is required",
+      }),
+    ),
 });
 
 type ValidationSchema = z.infer<typeof softwarePackageFormSchema>;
@@ -39,6 +60,7 @@ export const SoftwarePackageFormModal = ({
       description: "",
       documentationUrl: "",
       codeRepositoryUrl: "",
+      programmingLanguageId: "",
     },
   });
 
@@ -72,7 +94,7 @@ export const SoftwarePackageFormModal = ({
           className="flex flex-col gap-8 mb-4"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <TextInputField control={control} label="Name" name="name" />
+          <TextInputField control={control} label="Name" name="name" required />
 
           <TextAreaField
             control={control}
@@ -96,7 +118,7 @@ export const SoftwarePackageFormModal = ({
 
           <SelectField
             control={control}
-            label="Programming language"
+            label="Programming language*"
             name="programmingLanguageId"
             placeholder="Select a programming language"
             options={programmingLanguages.map((language) => ({

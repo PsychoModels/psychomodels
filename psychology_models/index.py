@@ -14,8 +14,10 @@ class PsychologyModelIndex(AlgoliaIndex):
         "updated_at",
         "publication_doi",
         "programming_language_name",
+        "framework_index_fields",
         "framework_names",
         "psychology_discipline_names",
+        "software_package_names",
         "publication_authors",
         "slug",
     )

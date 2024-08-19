@@ -13,7 +13,10 @@ interface Props {
 }
 
 export const programmingLanguageFormSchema = z.object({
-  name: z.string().max(255).min(1),
+  name: z
+    .string()
+    .max(255)
+    .min(1, { message: "Programming language name is required" }),
 });
 
 type ValidationSchema = z.infer<typeof programmingLanguageFormSchema>;
@@ -35,6 +38,7 @@ export const AddProgrammingLanguageModal = ({
     onChange({
       ...values,
       id,
+      isNew: true,
     });
 
     reset();
@@ -49,7 +53,7 @@ export const AddProgrammingLanguageModal = ({
           className="flex flex-col gap-8 mb-4"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <TextInputField control={control} label="Name" name="name" />
+          <TextInputField control={control} label="Name" name="name" required />
         </form>
       </Modal.Body>
       <Modal.Footer>

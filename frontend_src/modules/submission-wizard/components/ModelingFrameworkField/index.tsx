@@ -30,7 +30,7 @@ export const ModelingFrameworkField = ({ control }: Props) => {
               <Label
                 htmlFor="frameworkIds"
                 color={color}
-                value="Modeling frameworks"
+                value="Modeling frameworks*"
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -66,6 +66,7 @@ export const ModelingFrameworkField = ({ control }: Props) => {
                   onClick={() => {
                     setSelectModalIsOpen(true);
                   }}
+                  data-testid="select-framework-button"
                 >
                   Select framework <PlusIcon height="20" className="ml-3" />
                 </Button>

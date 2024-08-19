@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
 {% load vite %}
 {% load static %}
+{% load countries %}
 
 
 {% block title %}Submit a new psychology computational model{% endblock %}
@@ -67,13 +68,20 @@
         <div id="root" class="bg-white md:rounded-md"></div>
     </div>
 
+    {% get_countries as countries %}
+
     <script id="initial-data" type="application/json">
         {
             "frameworks": {{ frameworks|safe }},
-            "programmingLanguages": {{ software_packages|safe }},
-            "psychologyDisciplines": {{ psychology_disciplines|safe}},
-            "variables": {{ variables|safe}}
-        }
+            "programmingLanguages": {{ programming_languages|safe }},
+            "psychologyDisciplines": {{ psychology_disciplines|safe }},
+            "variables": {{ variables|safe }},
+            "countries": [
+        {% for code, name in countries %}
+            {"code": "{{ code }}", "name": "{{ name }}"}{% if not forloop.last %},{% endif %}
+                {% endfor %}
+        ]
+    }
     </script>
 
 {% endblock %}

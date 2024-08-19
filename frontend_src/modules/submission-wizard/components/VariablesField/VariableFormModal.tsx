@@ -17,7 +17,9 @@ interface Props {
 }
 
 const baseSchema = z.object({
-  name: z.string().max(255).min(1),
+  name: z.string().max(255).min(1, {
+    message: "Model variable name is required",
+  }),
   details: z.string(),
 });
 
@@ -49,7 +51,7 @@ export const VariableFormModal = ({
   const { control, handleSubmit, watch, reset } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      variableId: existingValue?.variable.id || "",
+      variableId: existingValue?.variableId || "",
       variableName: "",
       variableDescription: "",
       name: existingValue?.name || "",
@@ -87,38 +89,35 @@ export const VariableFormModal = ({
   ) => {
     let variable: Variable;
     if (createCustomVariable) {
-      const newVariableId = `NEW--${Math.random().toString()}`;
       variable = {
         name: values.variableName,
         description: values.variableDescription,
-        id: newVariableId,
+        id: `NEW--${Math.random().toString()}`,
+        isNew: true,
       };
 
-      addVariable({
-        isNew: true,
-        ...variable,
-      });
+      addVariable(variable);
     } else {
       variable = variables.find(
         (variable) => variable.id == values.variableId,
       )!;
     }
 
-    const newValue = {
-      ...values,
-      variable: variable,
+    const newModelVariable = {
+      name: values.name,
+      details: values.details,
+      variableId: variable.id,
     };
 
     if (existingValue) {
       onChange({
-        ...newValue,
+        ...newModelVariable,
         id: existingValue.id,
       });
     } else {
-      const id = `NEW--${Math.random().toString()}`;
       onChange({
-        ...newValue,
-        id,
+        ...newModelVariable,
+        id: `NEW--${Math.random().toString()}`,
       });
     }
 
@@ -148,7 +147,7 @@ export const VariableFormModal = ({
 
                 <SelectComboboxField
                   control={control}
-                  label="Variable"
+                  label="Variable*"
                   name="variableId"
                   placeholder="Select a variable"
                   options={variableOptions}
@@ -176,6 +175,7 @@ export const VariableFormModal = ({
                   control={control}
                   label="Variable"
                   name="variableName"
+                  required
                 />
               </div>
 
@@ -183,11 +183,12 @@ export const VariableFormModal = ({
                 control={control}
                 label="Description"
                 name="variableDescription"
+                required
               />
             </>
           )}
 
-          <TextInputField control={control} label="Name" name="name" />
+          <TextInputField control={control} label="Name" name="name" required />
 
           <TextAreaField control={control} label="Details" name="details" />
         </form>

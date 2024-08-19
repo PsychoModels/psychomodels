@@ -5,7 +5,8 @@
     "fields": {
       "name": "Python",
       "created_at": "2024-06-08T00:00:00Z",
-      "updated_at": "2024-06-08T00:00:00Z"
+      "updated_at": "2024-06-08T00:00:00Z",
+      "published_at": "2024-06-08T00:00:00Z"
     }
   },
   {
@@ -14,7 +15,8 @@
     "fields": {
       "name": "R",
       "created_at": "2024-06-08T00:00:00Z",
-      "updated_at": "2024-06-08T00:00:00Z"
+      "updated_at": "2024-06-08T00:00:00Z",
+      "published_at": "2024-06-08T00:00:00Z"
     }
   },
   {
@@ -23,7 +25,8 @@
     "fields": {
       "name": "Java",
       "created_at": "2024-06-08T00:00:00Z",
-      "updated_at": "2024-06-08T00:00:00Z"
+      "updated_at": "2024-06-08T00:00:00Z",
+      "published_at": "2024-06-08T00:00:00Z"
     }
   },
   {
@@ -32,7 +35,8 @@
     "fields": {
       "name": "C++",
       "created_at": "2024-06-08T00:00:00Z",
-      "updated_at": "2024-06-08T00:00:00Z"
+      "updated_at": "2024-06-08T00:00:00Z",
+      "published_at": "2024-06-08T00:00:00Z"
     }
   },
   {
@@ -41,7 +45,8 @@
     "fields": {
       "name": "Ruby",
       "created_at": "2024-06-08T00:00:00Z",
-      "updated_at": "2024-06-08T00:00:00Z"
+      "updated_at": "2024-06-08T00:00:00Z",
+      "published_at": "2024-06-08T00:00:00Z"
     }
   },
   {
@@ -50,7 +55,8 @@
     "fields": {
       "name": "Swift",
       "created_at": "2024-06-08T00:00:00Z",
-      "updated_at": "2024-06-08T00:00:00Z"
+      "updated_at": "2024-06-08T00:00:00Z",
+      "published_at": "2024-06-08T00:00:00Z"
     }
   },
   {
@@ -59,7 +65,8 @@
     "fields": {
       "name": "Go",
       "created_at": "2024-06-08T00:00:00Z",
-      "updated_at": "2024-06-08T00:00:00Z"
+      "updated_at": "2024-06-08T00:00:00Z",
+      "published_at": "2024-06-08T00:00:00Z"
     }
   },
   {
@@ -68,7 +75,8 @@
     "fields": {
       "name": "PHP",
       "created_at": "2024-06-08T00:00:00Z",
-      "updated_at": "2024-06-08T00:00:00Z"
+      "updated_at": "2024-06-08T00:00:00Z",
+      "published_at": "2024-06-08T00:00:00Z"
     }
   },
   {
@@ -77,7 +85,8 @@
     "fields": {
       "name": "Rust",
       "created_at": "2024-06-08T00:00:00Z",
-      "updated_at": "2024-06-08T00:00:00Z"
+      "updated_at": "2024-06-08T00:00:00Z",
+      "published_at": "2024-06-08T00:00:00Z"
     }
   },
   {
@@ -86,7 +95,8 @@
     "fields": {
       "name": "TypeScript",
       "created_at": "2024-06-08T00:00:00Z",
-      "updated_at": "2024-06-08T00:00:00Z"
+      "updated_at": "2024-06-08T00:00:00Z",
+      "published_at": "2024-06-08T00:00:00Z"
     }
   }
 ]

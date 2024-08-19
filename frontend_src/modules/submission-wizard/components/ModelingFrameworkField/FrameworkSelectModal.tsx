@@ -29,7 +29,10 @@ export const FrameworkSelectModal = ({
     <Modal show={show} size="6xl" onClose={onClose} dismissible>
       <Modal.Header>Select a modeling framework</Modal.Header>
       <Modal.Body>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          data-testid="framework-select-list"
+        >
           {filteredFrameworks.map((framework) => (
             <FrameworkCard
               key={framework.id}
@@ -63,7 +66,11 @@ export const FrameworkSelectModal = ({
         )}
       </Modal.Body>
       <Modal.Footer>
-        <Button className="whitespace-nowrap" onClick={onClickCreateNew}>
+        <Button
+          className="whitespace-nowrap"
+          onClick={onClickCreateNew}
+          data-testid="create-new-framework-button"
+        >
           Create new modeling framework
           <PlusIcon height="20" className="ml-3" />
         </Button>

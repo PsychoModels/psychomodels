@@ -12,9 +12,13 @@ import { PsychologyDisciplineField } from "../PsychologyDisciplineField";
 import { useNavigate } from "@tanstack/react-router";
 
 const formSchema = z.object({
-  title: z.string().max(255).min(1),
-  shortDescription: z.string().min(1),
-  frameworkIds: z.array(z.number().or(z.string())).min(1),
+  title: z.string().max(255).min(1, { message: "Title is required" }),
+  shortDescription: z
+    .string()
+    .min(1, { message: "Short description is required" }),
+  frameworkIds: z
+    .array(z.number().or(z.string()))
+    .min(1, { message: "At least one framework is required" }),
   psychologyDisciplineIds: z.array(z.number().or(z.string())),
 });
 
@@ -57,12 +61,18 @@ export const ModelInformation = () => {
           className="flex flex-col gap-8 mb-4"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <TextInputField control={control} label="Title" name="title" />
+          <TextInputField
+            control={control}
+            label="Title"
+            name="title"
+            required={true}
+          />
 
           <TextAreaField
             control={control}
             label="Short description"
             name="shortDescription"
+            required={true}
           />
 
           <ModelingFrameworkField control={control} />

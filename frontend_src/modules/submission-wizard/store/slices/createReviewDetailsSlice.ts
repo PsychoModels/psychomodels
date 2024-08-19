@@ -1,4 +1,5 @@
 import { StateCreator } from "zustand";
+import { sliceResetFns } from "../resetSlice.ts";
 
 type ReviewDetails = {
   remarks: string;
@@ -10,17 +11,23 @@ type ReviewDetailsSlice = {
 };
 
 const initialState = {
-  remarks: "",
+  reviewDetails: {
+    remarks: "",
+  },
 };
 
 export const createReviewDetailsSlice: StateCreator<ReviewDetailsSlice> = (
   set,
-) => ({
-  reviewDetails: initialState,
-  setReviewDetails: (data) =>
-    set((state) => ({
-      reviewDetails: { ...state.reviewDetails, ...data },
-    })),
-});
+) => {
+  sliceResetFns.add(() => set(initialState));
+
+  return {
+    ...initialState,
+    setReviewDetails: (data) =>
+      set((state) => ({
+        reviewDetails: { ...state.reviewDetails, ...data },
+      })),
+  };
+};
 
 export type { ReviewDetails, ReviewDetailsSlice };

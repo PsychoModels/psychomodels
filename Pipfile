@@ -26,6 +26,7 @@ django-currentuser = "*"
 django-reversion = "*"
 djangorestframework = "*"
 django-allauth = {extras = ["socialaccount", "github", "google", "orcid"], version = "*"}
+django-after-response = "*"
 
 [dev-packages]
 black = "*"

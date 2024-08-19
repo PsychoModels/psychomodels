@@ -1,82 +1,91 @@
-import { expect, describe, beforeEach, it } from "vitest";
-
-import create from "zustand";
+import { describe, it, expect } from "vitest";
+import { renderHook, act } from "@testing-library/react-hooks";
+import { create } from "zustand";
 import {
   createFrameworksSlice,
-  Framework,
   FrameworksSlice,
 } from "./createFrameworksSlice";
+import { Framework } from "../../../../models";
 
-const useStore = create<FrameworksSlice>(createFrameworksSlice);
+const mockFramework: Framework = {
+  id: 1,
+  name: "Test Framework",
+  description: "A test framework for testing",
+  explanation: "An explanation of the test framework",
+};
 
-describe("createFrameworksSlice", () => {
+const anotherMockFramework: Framework = {
+  id: 2,
+  name: "Another Test Framework",
+  description: "Another test framework for testing",
+  explanation: "Another explanation of the test framework",
+};
+
+describe("FrameworksSlice", () => {
+  let useTestStore: any;
+
+  // Reset Zustand store before each test to ensure clean state
   beforeEach(() => {
-    // Reset the state before each test
-    useStore.setState({ frameworks: [] });
+    useTestStore = create<FrameworksSlice>()((...a) => ({
+      ...createFrameworksSlice(...a),
+    }));
   });
 
-  it("should initialize with an empty frameworks array", () => {
-    const { frameworks } = useStore.getState();
-    expect(frameworks).toEqual([]);
+  it("should initialize with the correct default state", () => {
+    const { result } = renderHook(() => useTestStore());
+
+    // Verify the initial state is an empty frameworks array
+    expect(result.current.frameworks).toEqual([]);
   });
 
-  it("should add a framework to the frameworks array", () => {
-    const newFramework: Framework = {
-      id: 1,
-      name: "React",
-      description: "A JavaScript library for building user interfaces",
-      explanation: "Maintained by Facebook",
-    };
-    useStore.getState().addFramework(newFramework);
+  it("should set frameworks using setFrameworks", () => {
+    const { result } = renderHook(() => useTestStore());
 
-    const { frameworks } = useStore.getState();
-    expect(frameworks).toHaveLength(1);
-    expect(frameworks).toContainEqual(newFramework);
+    act(() => {
+      result.current.setFrameworks([mockFramework]);
+    });
+
+    // Verify the frameworks array is updated correctly
+    expect(result.current.frameworks).toEqual([mockFramework]);
   });
 
-  it("should set the frameworks array with provided data", () => {
-    const frameworksData: Framework[] = [
-      {
-        id: 1,
-        name: "React",
-        description: "A JavaScript library for building user interfaces",
-        explanation: "Maintained by Facebook",
-      },
-      {
-        id: 2,
-        name: "Angular",
-        description:
-          "A platform for building mobile and desktop web applications",
-        explanation: "Maintained by Google",
-      },
-    ];
+  it("should add a framework using addFramework", () => {
+    const { result } = renderHook(() => useTestStore());
 
-    useStore.getState().setFrameworks(frameworksData);
+    act(() => {
+      result.current.addFramework(mockFramework);
+    });
 
-    const { frameworks } = useStore.getState();
-    expect(frameworks).toEqual(frameworksData);
+    // Verify the framework was added to the array
+    expect(result.current.frameworks).toEqual([mockFramework]);
+
+    // Add another framework and verify it is added to the list
+    act(() => {
+      result.current.addFramework(anotherMockFramework);
+    });
+
+    // Verify the frameworks array now contains both frameworks
+    expect(result.current.frameworks).toEqual([
+      mockFramework,
+      anotherMockFramework,
+    ]);
   });
 
-  it("should correctly update frameworks array when adding multiple frameworks", () => {
-    const framework1: Framework = {
-      id: 1,
-      name: "Vue",
-      description: "A progressive framework for building user interfaces",
-      explanation: "Created by Evan You",
-    };
-    const framework2: Framework = {
-      id: 2,
-      name: "Svelte",
-      description: "A radical new approach to building user interfaces",
-      explanation: "Created by Rich Harris",
-    };
+  it("should replace the frameworks array when setFrameworks is called again", () => {
+    const { result } = renderHook(() => useTestStore());
 
-    useStore.getState().addFramework(framework1);
-    useStore.getState().addFramework(framework2);
+    act(() => {
+      result.current.setFrameworks([mockFramework]);
+    });
 
-    const { frameworks } = useStore.getState();
-    expect(frameworks).toHaveLength(2);
-    expect(frameworks).toContainEqual(framework1);
-    expect(frameworks).toContainEqual(framework2);
+    expect(result.current.frameworks).toEqual([mockFramework]);
+
+    // Replace frameworks array with a new one
+    act(() => {
+      result.current.setFrameworks([anotherMockFramework]);
+    });
+
+    // Verify the frameworks array is replaced, not appended
+    expect(result.current.frameworks).toEqual([anotherMockFramework]);
   });
 });

@@ -1,4 +1,5 @@
 import { StateCreator } from "zustand";
+import { sliceResetFns } from "../resetSlice.ts";
 
 type ModelInformation = {
   title: string;
@@ -13,21 +14,26 @@ type ModelInformationSlice = {
 };
 
 const initialState = {
-  title: "Power-law of memory strength",
-  shortDescription:
-    "A model describing the memory-strength over time-lag. The decrease in memory-strength as built from several parameters is most closely represented by a simple power law.",
-  frameworkIds: [1, 2],
-  psychologyDisciplineIds: [1, 2],
+  modelInformation: {
+    title: "",
+    shortDescription: "",
+    frameworkIds: [],
+    psychologyDisciplineIds: [],
+  },
 };
 
 export const createModelInformationSlice: StateCreator<
   ModelInformationSlice
-> = (set) => ({
-  modelInformation: initialState,
-  setModelInformation: (data) =>
-    set((state) => ({
-      modelInformation: { ...state.modelInformation, ...data },
-    })),
-});
+> = (set) => {
+  sliceResetFns.add(() => set(initialState));
+
+  return {
+    ...initialState,
+    setModelInformation: (data) =>
+      set((state) => ({
+        modelInformation: { ...state.modelInformation, ...data },
+      })),
+  };
+};
 
 export type { ModelInformation, ModelInformationSlice };

@@ -7,18 +7,26 @@ type PsychologyDisciplinesSlice = {
   setPsychologyDisciplines: (data: PsychologyDiscipline[]) => void;
 };
 
+const initialState = {
+  psychologyDisciplines: [],
+};
+
 export const createPsychologyDisciplinesSlice: StateCreator<
   PsychologyDisciplinesSlice
-> = (set) => ({
-  psychologyDisciplines: [],
-  addPsychologyDiscipline: (data) =>
-    set((state) => ({
-      psychologyDisciplines: [...state.psychologyDisciplines, data],
-    })),
-  setPsychologyDisciplines: (data) =>
-    set(() => ({
-      psychologyDisciplines: data,
-    })),
-});
+> = (set) => {
+  // do not reset this slice
+
+  return {
+    ...initialState,
+    addPsychologyDiscipline: (data) =>
+      set((state) => ({
+        psychologyDisciplines: [...state.psychologyDisciplines, data],
+      })),
+    setPsychologyDisciplines: (data) =>
+      set(() => ({
+        psychologyDisciplines: data,
+      })),
+  };
+};
 
 export type { PsychologyDisciplinesSlice };

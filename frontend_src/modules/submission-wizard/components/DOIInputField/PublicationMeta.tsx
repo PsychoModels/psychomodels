@@ -32,18 +32,22 @@ export const PublicationMeta = ({
       : undefined,
   });
 
+  if (!doiValue) {
+    return null;
+  }
+
   if (error && !hideErrors) {
     // @ts-expect-error response is somehow not defined on the error type
     if (error?.response?.status === 404) {
       return (
-        <Alert color="warning" className="mt-4">
+        <Alert color="warning" className="mt-4" data-testid="error-message">
           <span className="font-medium">DOI not found:</span> Could not fetch
           publication details. Please check the DOI.
         </Alert>
       );
     } else {
       return (
-        <Alert color="failure" className="mt-4">
+        <Alert color="failure" className="mt-4" data-testid="error-message">
           <span className="font-medium">Error:</span> Could not fetch
           publication details. Please try again.
         </Alert>

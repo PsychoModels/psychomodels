@@ -15,6 +15,7 @@ interface Props {
   title?: string;
   addSeparator?: boolean;
   isCompleted: boolean;
+  allowNavigate?: boolean;
 }
 
 interface ConditionalLinkProps {
@@ -37,6 +38,7 @@ export const Step = ({
   addSeparator,
   stepNumber,
   isCompleted,
+  allowNavigate = true,
 }: Props) => {
   const match = useMatches();
   const isCurrent = match.slice(-1)[0]?.id === route;
@@ -63,7 +65,7 @@ export const Step = ({
   if (isCompleted) {
     return (
       <li className="relative md:flex md:flex-1">
-        <ConditionalLink useLink={isCompleted} to={route}>
+        <ConditionalLink useLink={isCompleted && allowNavigate} to={route}>
           <div className="group flex w-full items-center">
             <span className="flex items-center px-6 py-4 text-sm font-medium">
               <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-cyan-700">
@@ -82,7 +84,7 @@ export const Step = ({
 
   return (
     <li className="relative md:flex md:flex-1">
-      <ConditionalLink useLink={isCompleted} to={route}>
+      <ConditionalLink useLink={isCompleted && allowNavigate} to={route}>
         <div className="group flex items-center">
           <span className="flex items-center px-6 py-4 text-sm font-medium">
             <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-gray-300">

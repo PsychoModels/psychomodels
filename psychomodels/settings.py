@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "members",
     "doi_lookup",
     "api",
+    "after_response",
 ]
 
 MIDDLEWARE = [

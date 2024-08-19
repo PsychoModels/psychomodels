@@ -13,7 +13,10 @@ interface Props {
 }
 
 export const psychologyDisciplineFormSchema = z.object({
-  name: z.string().max(255).min(1),
+  name: z
+    .string()
+    .max(255)
+    .min(1, { message: "Psychology discipline name is required" }),
 });
 
 type ValidationSchema = z.infer<typeof psychologyDisciplineFormSchema>;
@@ -35,6 +38,7 @@ export const AddPsychologyDisciplineModal = ({
     onChange({
       ...values,
       id,
+      isNew: true,
     });
 
     reset();
@@ -49,7 +53,7 @@ export const AddPsychologyDisciplineModal = ({
           className="flex flex-col gap-8 mb-4"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <TextInputField control={control} label="Name" name="name" />
+          <TextInputField control={control} label="Name" name="name" required />
         </form>
       </Modal.Body>
       <Modal.Footer>

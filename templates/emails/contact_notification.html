@@ -1,0 +1,97 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="en">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta name="x-apple-disable-message-reformatting"/>
+    <style>
+        @media all and (min-width: 600px) {
+            body {
+                padding: 32px;
+            }
+
+            .container {
+                overflow: hidden;
+                box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15), 0px 8px 24px 0px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+            }
+        }
+    </style>
+</head>
+<div style="display:none;overflow:hidden;line-height:1px;opacity:0;max-height:0;max-width:0">Contact PsychoModels
+</div>
+
+<body style="background-color:rgb(242, 242, 242);font-family:-apple-system,Roboto,Oxygen-Sans,Ubuntu,Cantarell,&quot;Helvetica Neue&quot;,sans-serif;margin:0">
+<table align="center" width="100%" class="container" border="0" cellPadding="0" cellSpacing="0" role="presentation"
+       style="max-width:37.5em">
+    <tbody>
+    <tr style="width:100%">
+        <td>
+            <table align="center" width="100%" class="content" border="0" cellPadding="0" cellSpacing="0"
+                   role="presentation" style="background-color:#FFF">
+                <tbody>
+                <tr>
+                    <td>
+                        <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0"
+                               role="presentation">
+                            <tbody style="width:100%">
+                            <tr style="width:100%"><img src="https://www.psychomodels.org/static/email/header.jpg"
+                                                        style="display:block;outline:none;border:none;text-decoration:none;max-width:100%;max-height:126px;"
+                                                        width="600"/></tr>
+                            </tbody>
+                        </table>
+                        <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0"
+                               role="presentation" style="padding:20px">
+                            <tbody style="width:100%">
+                            <tr style="width:100%">
+                                <td data-id="__react-email-column">
+                                    <p style="font-size:14px;line-height:24px;margin:16px 0">There is a new contact form
+                                        submission from <strong>Psycho</strong><em>Models</em>.<br/>You can view the
+                                        details below or at in
+                                        the admin panel:<br/><a href="{{ admin_url }}"
+                                                                target="_blank">{{ admin_url }}</a>.
+                                    </p>
+                                    <p style="font-size:14px;line-height:24px;margin:16px 0;margin-top:40px"><b>Sender
+                                        e-mail: </b> {{ contact_message.email }}</p>
+                                    <p style="font-size:14px;line-height:24px;margin:16px 0">
+                                        <b>Subject: </b>{{ contact_message.subject }}
+                                    </p>
+                                    <p style="font-size:14px;line-height:24px;margin:16px 0"><b>Message: </b></p>
+                                    <p style="font-size:14px;line-height:24px;margin:16px 0">{{ contact_message.message }}</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation"
+       style="max-width:37.5em">
+    <tbody>
+    <tr style="width:100%">
+        <td>
+            <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation"
+                   style="text-align:center;margin-top:16px;margin-bottom:16px;">
+                <tbody>
+                <tr>
+                    <td><a href="https://www.psychomodels.org/"
+                           style="color:gray;text-decoration:none;text-align:center;font-size:14px"
+                           target="_blank"><strong>Psycho</strong><em>Models</em></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+
+</html>

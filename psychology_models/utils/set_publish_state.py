@@ -1,6 +1,5 @@
 from django.utils import timezone
 from django_currentuser.middleware import (
-    get_current_user,
     get_current_authenticated_user,
 )
 
@@ -14,16 +13,17 @@ def publish_psychology_model(queryset):
             pm_instance.published_by = get_current_authenticated_user()
             pm_instance.save()
 
-            pm_instance.programming_language.published_at = now
-            pm_instance.programming_language.published_by = (
-                get_current_authenticated_user()
-            )
-            pm_instance.programming_language.save()
+            if pm_instance.programming_language:
+                pm_instance.programming_language.published_at = now
+                pm_instance.programming_language.published_by = (
+                    get_current_authenticated_user()
+                )
+                pm_instance.programming_language.save()
 
             related_models = [
                 (pm_instance.framework.all()),
                 (pm_instance.software_package.all()),
-                (pm_instance.model_variables.all()),
+                (pm_instance.model_variable.all()),
                 (pm_instance.psychology_discipline.all()),
             ]
 
@@ -33,7 +33,7 @@ def publish_psychology_model(queryset):
                     related_instance.published_by = get_current_authenticated_user()
                     related_instance.save()
 
-            for variable_instance in pm_instance.model_variables.all():
+            for variable_instance in pm_instance.model_variable.all():
                 variable_instance.published_at = now
                 variable_instance.published_by = get_current_authenticated_user()
                 variable_instance.save()

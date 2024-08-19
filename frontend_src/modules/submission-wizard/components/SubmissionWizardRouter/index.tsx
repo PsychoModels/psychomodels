@@ -15,6 +15,12 @@ import {
   ScrollRestoration,
 } from "@tanstack/react-router";
 
+import { AccountSignupPage } from "../AccountSignupPage";
+import { AccountLoginPage } from "../AccountLoginPage";
+import { AccountForgotPasswordPage } from "../AccountForgotPasswordPage";
+import { ThankYouPage } from "../ThankYouPage";
+import { AccountProfilePage } from "../AccountProfilePage";
+
 const rootRoute = createRootRoute({
   component: () => {
     return (
@@ -31,7 +37,7 @@ const rootRoute = createRootRoute({
 const submissionGuidelinesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: function Index() {
+  component: function IndexPage() {
     return <SubmissionGuidelines />;
   },
 });
@@ -39,46 +45,83 @@ const submissionGuidelinesRoute = createRoute({
 const accountRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/account",
-  component: function Index() {
+  component: function AccountPage() {
     return <AccountStep />;
   },
 });
 
 const modelInformationRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/model-information",
-  component: function Index() {
+  path: "/model-information/",
+  component: function ModelInformationPage() {
     return <ModelInformation />;
   },
 });
 
 const publicationDetailsRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/publication-details",
-  component: function Index() {
+  path: "/publication-details/",
+  component: function PublicationDetailsPage() {
     return <PublicationDetails />;
   },
 });
 
 const reviewRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/review",
-  component: function Index() {
+  path: "/review/",
+  component: function ReviewPage() {
     return <ReviewDetails />;
   },
 });
 
 const completedRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/submitted",
-  component: function Index() {
-    return <div>done</div>;
+  path: "/thank-you/",
+  component: function CompletedPage() {
+    return <ThankYouPage />;
+  },
+});
+
+export const accountLoginRoute = createRoute({
+  getParentRoute: () => accountRoute,
+  path: "/",
+  component: function Login() {
+    return <AccountLoginPage />;
+  },
+});
+
+export const accountSignupRoute = createRoute({
+  getParentRoute: () => accountRoute,
+  path: "/signup/",
+  component: function Signup() {
+    return <AccountSignupPage />;
+  },
+});
+
+export const accountProfileRoute = createRoute({
+  getParentRoute: () => accountRoute,
+  path: "/profile/",
+  component: function Profile() {
+    return <AccountProfilePage />;
+  },
+});
+
+export const accountForgotPasswordRoute = createRoute({
+  getParentRoute: () => accountRoute,
+  path: "/password/reset/",
+  component: function Signup() {
+    return <AccountForgotPasswordPage />;
   },
 });
 
 const routeTree = rootRoute.addChildren([
   submissionGuidelinesRoute,
-  accountRoute,
+  accountRoute.addChildren([
+    accountLoginRoute,
+    accountSignupRoute,
+    accountForgotPasswordRoute,
+    accountProfileRoute,
+  ]),
   modelInformationRoute,
   publicationDetailsRoute,
   reviewRoute,
@@ -86,12 +129,6 @@ const routeTree = rootRoute.addChildren([
 ]);
 
 const router = createRouter({ routeTree });
-
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
-}
 
 export const SubmissionWizardRouter = () => {
   return <RouterProvider router={router} basepath="/models/submission/" />;

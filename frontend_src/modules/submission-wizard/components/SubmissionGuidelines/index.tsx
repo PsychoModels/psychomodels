@@ -3,6 +3,7 @@ import ArrowIcon from "../../../shared/components/Icons/ArrowIcon.tsx";
 import useStore from "../../store/useStore.ts";
 import { Button } from "flowbite-react";
 import { useNavigate } from "@tanstack/react-router";
+import NewWindowIcon from "../../../shared/components/Icons/NewWindowIcon.tsx";
 
 export const SubmissionGuidelines = () => {
   const navigate = useNavigate({ from: "/" });
@@ -16,16 +17,86 @@ export const SubmissionGuidelines = () => {
 
   return (
     <>
-      <div className="bg-white px-6 py-8">
+      <div className="bg-white px-6 py-8 text-gray-600">
         <div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+          <p className="max-w-screen-md mb-4">
+            Mathematical and computational models describing
+            psychological/behavioral measurements, systems, or theories can be
+            submitted to <strong>Psycho</strong>
+            <em>Models</em>, irrespective of the modeling formats or programming
+            language they are encoded in or the modeling framework used for
+            representing the measurement, system, or theory.
+          </p>
+
+          <p className="max-w-screen-md mb-4">
+            You need an account and be logged in to submit a model. Users can
+            log in with their Google or Github account.
+          </p>
+
+          <p className="max-w-screen-md mb-4">
+            The submitted model will not be publicly available from{" "}
+            <strong>Psycho</strong>
+            <em>Models</em> straightaway. If you wish to know more about the
+            submission, curation, annotation, and publication processes, please
+            refer to the relevant sections of the{" "}
+            <a
+              href="/about#faq"
+              target={"_blank"}
+              className="text-tertiary hover:underline inline-flex items-center"
+            >
+              Frequently Asked Questions <NewWindowIcon />
+            </a>
+            .
+          </p>
+
+          <p className="max-w-screen-md mb-4">
+            To ensure a prompt processing of your model, please go through the
+            following checklist before submission.
+          </p>
+          <ul className="max-w-screen-sm mb-12 list-disc pl-8 space-y-2">
+            <li>
+              Enter all relevant information in appropriate fields in the
+              submission pipeline, which would be useful for processing your
+              models.
+            </li>
+            <li>
+              If you created the model (or collaborated on its creation) but are
+              not an author of the associated publication, please add your
+              personal information (first and last name, organization, and email
+              address) in the model, so that your contribution can be
+              acknowledged.
+            </li>
+            <li>
+              Choose a short but meaningful name for your model. Please keep it
+              under ten words. For inspiration, visit{" "}
+              <a
+                href="/models"
+                target={"_blank"}
+                className="text-tertiary hover:underline inline-flex items-center"
+              >
+                Explore the models
+                <NewWindowIcon />
+              </a>
+              .
+            </li>
+            <li>Please check if the urls you submit work.</li>
+          </ul>
+
+          <p className="max-w-screen-md mb-4">
+            All details provided about the models in <strong>Psycho</strong>
+            <em>Models</em> are available under the terms of the Creative
+            Commons CC0 1.0 (Public Domain Dedication). Therefore you need to
+            agree to release the information you will provide in the Public
+            Domain before submitting them to <strong>Psycho</strong>
+            <em>Models</em>. Please note that this does not extend to
+            publications, code repositories, and data repositories linked to the{" "}
+            <strong>Psycho</strong>
+            <em>Models</em> database.
+          </p>
+
+          <p className="max-w-screen-md mb-4 font-bold">
+            Thank you for contributing to <strong>Psycho</strong>
+            <em>Models</em>!
           </p>
         </div>
       </div>

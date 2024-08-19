@@ -1,4 +1,5 @@
 import { StateCreator } from "zustand";
+import { sliceResetFns } from "../resetSlice.ts";
 
 type StepSlice = {
   completedStatus: {
@@ -14,7 +15,7 @@ type StepSlice = {
   ) => void;
 };
 
-export const createStepStatusSlice: StateCreator<StepSlice> = (set) => ({
+const initialState = {
   completedStatus: {
     submissionGuidelines: false,
     account: false,
@@ -22,16 +23,24 @@ export const createStepStatusSlice: StateCreator<StepSlice> = (set) => ({
     publicationDetails: false,
     review: false,
   },
-  setCompletedStatus: (
-    name: keyof StepSlice["completedStatus"],
-    value: boolean,
-  ) =>
-    set((state) => ({
-      completedStatus: {
-        ...state.completedStatus,
-        [name]: value,
-      },
-    })),
-});
+};
+
+export const createStepStatusSlice: StateCreator<StepSlice> = (set) => {
+  sliceResetFns.add(() => set(initialState));
+
+  return {
+    ...initialState,
+    setCompletedStatus: (
+      name: keyof StepSlice["completedStatus"],
+      value: boolean,
+    ) =>
+      set((state) => ({
+        completedStatus: {
+          ...state.completedStatus,
+          [name]: value,
+        },
+      })),
+  };
+};
 
 export type { StepSlice };

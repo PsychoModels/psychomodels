@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import useStore from "../../store/useStore.ts";
+import { DOIInputField } from "../DOIInputField";
 
 interface Props {
   show: boolean;
@@ -14,9 +15,21 @@ interface Props {
 }
 
 const formSchema = z.object({
-  name: z.string().max(255).min(1),
-  description: z.string().min(1),
-  explanation: z.string().min(1),
+  name: z.string().max(255).min(1, { message: "Name is required" }),
+  description: z.string().min(1, { message: "Description is required" }),
+  explanation: z
+    .string()
+    .min(1, { message: "How does the model work is required" }),
+  publicationDOI: z.union([
+    z.literal(""),
+    z.string().regex(/^10.\d{4,9}\/[-._;()/:A-Z0-9]+$/i, {
+      message: "Invalid publication DOI",
+    }),
+  ]),
+  documentationUrl: z.union([
+    z.literal(""),
+    z.string().trim().url({ message: "Invalid documentation URL" }),
+  ]),
 });
 
 type ValidationSchema = z.infer<typeof formSchema>;
@@ -24,7 +37,13 @@ type ValidationSchema = z.infer<typeof formSchema>;
 export const FrameworkCreateModal = ({ show, onClose, onSelect }: Props) => {
   const { control, handleSubmit, reset } = useForm<ValidationSchema>({
     resolver: zodResolver(formSchema),
-    defaultValues: { name: "", description: "", explanation: "" },
+    defaultValues: {
+      name: "",
+      description: "",
+      explanation: "",
+      publicationDOI: "",
+      documentationUrl: "",
+    },
   });
 
   const { addFramework } = useStore((state) => state);
@@ -51,18 +70,33 @@ export const FrameworkCreateModal = ({ show, onClose, onSelect }: Props) => {
           className="flex flex-col gap-8 mb-4"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <TextInputField control={control} label="Name" name="name" />
+          <TextInputField control={control} label="Name" name="name" required />
 
           <TextAreaField
             control={control}
             label="Description"
             name="description"
+            required
           />
 
           <TextAreaField
             control={control}
-            label="Explanation"
+            label="How does it work"
             name="explanation"
+            required
+          />
+
+          <DOIInputField
+            control={control}
+            label="Publication DOI"
+            name="publicationDOI"
+          />
+
+          <TextInputField
+            control={control}
+            label="Documentation url"
+            name="documentationUrl"
+            placeholder="https://"
           />
         </form>
       </Modal.Body>

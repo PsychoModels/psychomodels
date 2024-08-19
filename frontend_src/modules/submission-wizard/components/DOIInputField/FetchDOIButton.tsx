@@ -10,8 +10,8 @@ interface Props {
 
 const DOI_REGEX = /^10.\d{4,9}\/[-._;()/:A-Z0-9]+$/i;
 
-export const GetPublicationFromDOIButton = ({ doiValue }: Props) => {
-  const isValidDOI = DOI_REGEX.test(removeDoiUrlPrefix(doiValue || ""));
+export const FetchDOIButton = ({ doiValue }: Props) => {
+  const isValidDOI = DOI_REGEX.test(removeDoiUrlPrefix(doiValue?.trim() || ""));
 
   const { refetch, isRefetching, isLoading } = useQuery({
     queryKey: ["doi_publication_search", doiValue],

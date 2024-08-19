@@ -32,6 +32,10 @@ import {
   createVariableSlice,
   VariableSlice,
 } from "./slices/createVariableSlice.ts";
+import {
+  CountriesSlice,
+  createCountriesSlice,
+} from "./slices/createCountriesSlice.ts";
 
 const useStore = create<
   ModelInformationSlice &
@@ -41,7 +45,8 @@ const useStore = create<
     ProgrammingLanguagesSlice &
     ReviewDetailsSlice &
     PsychologyDisciplinesSlice &
-    VariableSlice
+    VariableSlice &
+    CountriesSlice
 >()((...a) => ({
   ...createStepStatusSlice(...a),
   ...createModelInformationSlice(...a),
@@ -51,6 +56,7 @@ const useStore = create<
   ...createReviewDetailsSlice(...a),
   ...createPsychologyDisciplinesSlice(...a),
   ...createVariableSlice(...a),
+  ...createCountriesSlice(...a),
 }));
 
 export default useStore;

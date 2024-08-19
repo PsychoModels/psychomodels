@@ -9,7 +9,7 @@ from markdownx.utils import markdownify
 
 
 class ProgrammingLanguage(models.Model):
-    name = models.CharField()
+    name = models.CharField(unique=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -45,6 +45,10 @@ class Framework(models.Model):
     publication_csl_fetched_at = models.DateTimeField(null=True, blank=True)
     publication_citation = models.TextField(null=True, blank=True)
     publication_citation_fetched_at = models.DateTimeField(null=True, blank=True)
+
+    documentation_url = models.URLField(null=True, blank=True)
+
+    slug = AutoSlugField(populate_from="name", unique=True, null=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -98,7 +102,7 @@ class SoftwarePackage(models.Model):
 
 
 class PsychologyDiscipline(models.Model):
-    name = models.CharField()
+    name = models.CharField(unique=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -142,10 +146,36 @@ class Variable(models.Model):
         return self.name
 
 
+class ModelVariable(models.Model):
+    variable = models.ForeignKey("Variable", on_delete=models.PROTECT)
+
+    name = models.CharField()
+    details = models.TextField(max_length=1500, null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(null=True, blank=True)
+
+    created_by = CurrentUserField(related_name="model_variable_created_by")
+    updated_by = CurrentUserField(
+        on_update=True, related_name="model_variable_updated_by"
+    )
+    published_by = models.ForeignKey(
+        "members.User",
+        on_delete=models.SET_NULL,
+        null=True,
+        editable=False,
+        related_name="model_variable_published_by",
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class PsychologyModel(models.Model):
     title = models.CharField()
     description = models.TextField(max_length=3000)
-    explanation = MarkdownxField(null=True)
+    explanation = MarkdownxField(null=True, blank=True)
 
     publication_doi = models.CharField(null=True, blank=True)
     publication_csl_json = models.JSONField(null=True, blank=True)
@@ -154,20 +184,20 @@ class PsychologyModel(models.Model):
     publication_citation_fetched_at = models.DateTimeField(null=True, blank=True)
 
     programming_language = models.ForeignKey(
-        "ProgrammingLanguage", on_delete=models.PROTECT
+        "ProgrammingLanguage", on_delete=models.PROTECT, null=True, blank=True
     )
     framework = models.ManyToManyField(Framework)
     software_package = models.ManyToManyField(SoftwarePackage, blank=True)
     psychology_discipline = models.ManyToManyField(PsychologyDiscipline, blank=True)
 
+    model_variable = models.ManyToManyField(ModelVariable, blank=True)
+
     code_repository_url = models.URLField(null=True, blank=True)
     data_url = models.URLField(null=True, blank=True)
 
-    model_variables = models.ManyToManyField(
-        Variable, through="ModelVariable", blank=True
-    )
+    submission_remarks = models.TextField(max_length=5000, null=True, blank=True)
 
-    slug = AutoSlugField(populate_from="title")
+    slug = AutoSlugField(populate_from="title", unique=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -193,7 +223,7 @@ class PsychologyModel(models.Model):
         return markdownify(self.explanation)
 
     def programming_language_name(self):
-        return self.programming_language.name
+        return self.programming_language.name if self.programming_language else None
 
     def is_published(self):
         return self.published_at is not None
@@ -203,6 +233,21 @@ class PsychologyModel(models.Model):
 
     def psychology_discipline_names(self):
         return [discipline.name for discipline in self.psychology_discipline.all()]
+
+    def software_package_names(self):
+        return [
+            software_package.name for software_package in self.software_package.all()
+        ]
+
+    def framework_index_fields(self):
+        return [
+            {
+                "name": framework.name,
+                "description": framework.description,
+                "explanation": framework.explanation,
+            }
+            for framework in self.framework.all()
+        ]
 
     def publication_authors(self):
         def get_initials(given_name):
@@ -218,32 +263,3 @@ class PsychologyModel(models.Model):
 
     def __str__(self):
         return self.title
-
-
-class ModelVariable(models.Model):
-    model_id = models.ForeignKey(
-        PsychologyModel, related_name="Variables", on_delete=models.RESTRICT
-    )
-    variable_id = models.ForeignKey(Variable, null=True, on_delete=models.SET_NULL)
-
-    name = models.CharField()
-    details = models.TextField(max_length=1500, null=True, blank=True)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(null=True, blank=True)
-
-    created_by = CurrentUserField(related_name="model_variable_created_by")
-    updated_by = CurrentUserField(
-        on_update=True, related_name="model_variable_updated_by"
-    )
-    published_by = models.ForeignKey(
-        "members.User",
-        on_delete=models.SET_NULL,
-        null=True,
-        editable=False,
-        related_name="model_variable_published_by",
-    )
-
-    def __str__(self):
-        return self.name

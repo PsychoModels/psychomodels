@@ -4,12 +4,14 @@
     "pk": 1,
     "fields": {
       "name": "Ordinary Differential Equations",
+      "slug": "ordinary-differential-equations",
       "description": "A framework for modeling the change in variables over time using differential equations.",
       "parent_framework": null,
       "publication_doi": "10.1525/collabra.186",
       "explanation": "Used in various fields to model dynamic systems and processes.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -17,12 +19,14 @@
     "pk": 2,
     "fields": {
       "name": "Memory Models",
+      "slug": "memory-models",
       "description": "Models that explain how memory functions in the human brain.",
       "parent_framework": 1,
       "publication_doi": "10.1177/0956797614551374",
       "explanation": "Includes models like Atkinson-Shiffrin and Baddeley's working memory model.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -30,12 +34,14 @@
     "pk": 3,
     "fields": {
       "name": "Drift-Diffusion Models",
+      "slug": "drift-diffusion-models",
       "description": "A cognitive model that describes decision making as a process of evidence accumulation.",
       "parent_framework": 1,
       "publication_doi": "10.1037/a0038548",
       "explanation": "Often used to explain response times and accuracy in two-choice tasks.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -43,12 +49,14 @@
     "pk": 4,
     "fields": {
       "name": "Evidence Accumulation Models",
+      "slug": "evidence-accumulation-models",
       "description": "Models that explain decision making through the accumulation of evidence over time.",
       "parent_framework": null,
       "publication_doi": "10.1177/0956797618799365",
       "explanation": "Used to study decision-making processes in psychology and neuroscience.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -56,12 +64,14 @@
     "pk": 5,
     "fields": {
       "name": "Ising Model",
+      "slug": "ising-model",
       "description": "A mathematical model of ferromagnetism in statistical mechanics.",
       "parent_framework": null,
       "publication_doi": "10.1177/0956797618792752",
       "explanation": "Applied to social dynamics and neural networks in psychology.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -69,12 +79,14 @@
     "pk": 6,
     "fields": {
       "name": "Phase Transition Models",
+      "slug": "phase-transition-models",
       "description": "Models that describe transitions between different states of matter or systems.",
       "parent_framework": null,
       "publication_doi": "10.1177/2515245917747646",
       "explanation": "Used in psychology to model sudden changes in behavior.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -82,12 +94,14 @@
     "pk": 7,
     "fields": {
       "name": "Cusp-Catastrophe Models",
+      "slug": "cusp-catastrophe-models",
       "description": "A type of catastrophe model that describes how small changes in conditions can lead to sudden shifts in behavior.",
       "parent_framework": null,
       "publication_doi": "10.1177/2515245917750018",
       "explanation": "Applied to understand phenomena like decision making and psychological disorders.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -95,12 +109,14 @@
     "pk": 8,
     "fields": {
       "name": "Network Models",
+      "slug": "network-models",
       "description": "Models that represent systems as networks of interconnected nodes.",
       "parent_framework": null,
       "publication_doi": "10.1177/2515245918806633",
       "explanation": "Used to study relationships and interactions in various fields, including psychology.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -108,12 +124,14 @@
     "pk": 9,
     "fields": {
       "name": "Causal Graphs",
+      "slug": "causal-graphs",
       "description": "Graphical models that represent causal relationships between variables.",
       "parent_framework": null,
       "publication_doi": "10.1177/2515245919879675",
       "explanation": "Used in psychology to infer causal relationships from data.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -121,12 +139,14 @@
     "pk": 10,
     "fields": {
       "name": "Amortized Bayesian Inference",
+      "slug": "amortized-bayesian-inference",
       "description": "A method of approximate inference that leverages neural networks to perform rapid Bayesian inference.",
       "parent_framework": null,
       "publication_doi": "10.1037/a0038548",
       "explanation": "Applied to cognitive models to explain human inference and learning.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -134,12 +154,14 @@
     "pk": 11,
     "fields": {
       "name": "Leaky Competing Accumulator",
+      "slug": "leaky-competing-accumulator",
       "description": "A model of decision making that incorporates both leakage and competition between accumulating evidence.",
       "parent_framework": null,
       "publication_doi": "10.1177/0956797614563768",
       "explanation": "Explains how decisions are made under time pressure and uncertainty.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -147,12 +169,14 @@
     "pk": 12,
     "fields": {
       "name": "Categorization Model",
+      "slug": "categorization-model",
       "description": "Models that explain how humans categorize objects and concepts.",
       "parent_framework": null,
       "publication_doi": "10.1177/17456916211019520",
       "explanation": "Includes exemplar and prototype models of categorization.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -160,12 +184,14 @@
     "pk": 13,
     "fields": {
       "name": "Category Abstraction Learning",
+      "slug": "category-abstraction-learning",
       "description": "Models that explain how humans learn and abstract categories from examples.",
       "parent_framework": null,
       "publication_doi": "10.1177/1529100612436522",
       "explanation": "Focuses on the process of forming general concepts from specific instances.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -173,12 +199,14 @@
     "pk": 14,
     "fields": {
       "name": "Reinforcement Learning",
+      "slug": "reinforcement-learning",
       "description": "A type of machine learning where an agent learns to make decisions by receiving rewards or penalties.",
       "parent_framework": null,
       "publication_doi": "10.1177/0956797618769845",
       "explanation": "Used in psychology to model learning and behavior.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -186,12 +214,14 @@
     "pk": 15,
     "fields": {
       "name": "Structural Equation Model",
+      "slug": "structural-equation-model",
       "description": "A multivariate statistical analysis technique that is used to analyze structural relationships.",
       "parent_framework": null,
       "publication_doi": "10.1177/2515245917747646",
       "explanation": "Combines factor analysis and multiple regression analysis.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -199,12 +229,14 @@
     "pk": 16,
     "fields": {
       "name": "Exemplar Model",
+      "slug": "exemplar-model",
       "description": "A model of categorization where objects are classified based on their similarity to specific examples.",
       "parent_framework": null,
       "publication_doi": "10.1037/amp0000896",
       "explanation": "Contrasts with prototype models which use average representations.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -212,12 +244,14 @@
     "pk": 17,
     "fields": {
       "name": "Connectionism",
+      "slug": "connectionism",
       "description": "A theoretical framework for understanding the mind as a network of simple units.",
       "parent_framework": null,
       "publication_doi": "10.1177/0956797618818478",
       "explanation": "Involves neural networks and parallel distributed processing.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -225,12 +259,14 @@
     "pk": 18,
     "fields": {
       "name": "Parallel Constraint Satisfaction Network Model",
+      "slug": "parallel-constraint-satisfaction-network-model",
       "description": "A model that explains decision making by finding a consistent assignment of values to variables.",
       "parent_framework": null,
       "publication_doi": "10.1103/PhysRevB.83.035309",
       "explanation": "Used to model cognitive processes such as reasoning and perception.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -238,12 +274,14 @@
     "pk": 19,
     "fields": {
       "name": "Probabilistic Reasoning",
+      "slug": "probabilistic-reasoning",
       "description": "Reasoning and making decisions based on probabilities.",
       "parent_framework": null,
       "publication_doi": "10.1177/0956797614563768",
       "explanation": "Involves the use of Bayesian inference and other probabilistic models.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -251,12 +289,14 @@
     "pk": 20,
     "fields": {
       "name": "Resource Rational Analysis",
+      "slug": "resource-rational-analysis",
       "description": "A framework that combines rational models with assumptions about cognitive limitations.",
       "parent_framework": null,
       "publication_doi": "10.1177/0956797614563769",
       "explanation": "Used to explain human behavior in terms of optimal use of limited resources.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -264,12 +304,14 @@
     "pk": 21,
     "fields": {
       "name": "Agent-Based Model",
+      "slug": "agent-based-model",
       "description": "A computational model for simulating the interactions of agents to assess their effects on the system.",
       "parent_framework": null,
       "publication_doi": "10.1177/1529100612436522",
       "explanation": "Used to study complex systems in social sciences and psychology.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -277,12 +319,14 @@
     "pk": 22,
     "fields": {
       "name": "Multiple-Cue Judgment Model",
+      "slug": "multiple-cue-judgment-model",
       "description": "Models that describe how people integrate multiple cues to make judgments.",
       "parent_framework": null,
       "publication_doi": "10.1177/0956797618769845",
       "explanation": "Often used to study decision making and perception.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -290,12 +334,14 @@
     "pk": 23,
     "fields": {
       "name": "Bayesian Sampler",
+      "slug": "bayesian-sampler",
       "description": "A method in Bayesian inference that samples from the posterior distribution.",
       "parent_framework": null,
       "publication_doi": "10.1177/2515245917747646",
       "explanation": "Used in models of cognition and decision making.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -303,12 +349,14 @@
     "pk": 24,
     "fields": {
       "name": "Signal Detection Theory",
+      "slug": "signal-detection-theory",
       "description": "A means to quantify the ability to discern between signal and noise.",
       "parent_framework": null,
       "publication_doi": "10.1037/amp0000896",
       "explanation": "Used in psychology to study perception and decision making.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -316,12 +364,14 @@
     "pk": 25,
     "fields": {
       "name": "Ising Model of Explanatory Coherence",
+      "slug": "ising-model-of-explanatory-coherence",
       "description": "A model that applies the Ising model to explain coherence in human reasoning.",
       "parent_framework": 5,
       "publication_doi": "10.1177/0956797618818478",
       "explanation": "Explains how elements cohere to form coherent explanations.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   },
   {
@@ -329,12 +379,14 @@
     "pk": 26,
     "fields": {
       "name": "Statistical Models",
+      "slug": "statistical-models",
       "description": "Models that use statistical methods to describe and infer patterns in data.",
       "parent_framework": null,
       "publication_doi": "10.1177/0956797618792752",
       "explanation": "Widely used across various fields in psychology for data analysis.",
       "created_at": "2021-01-01T00:00:00Z",
-      "updated_at": "2021-01-01T00:00:00Z"
+      "updated_at": "2021-01-01T00:00:00Z",
+      "published_at": "2021-01-01T00:00:00Z"
     }
   }
 ]

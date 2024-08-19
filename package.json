@@ -13,7 +13,6 @@
     "coverage": "vitest run --coverage",
     "tailwind:dev": "tailwindcss -i static/css/style.css -o ./static/generated/css/style.css --watch",
     "tailwind:build": "tailwindcss -i static/css/style.css -o ./static/generated/css/style.css",
-    "postinstall": "patch-package",
     "start": "run-p dev tailwind:dev"
   },
   "dependencies": {
@@ -27,13 +26,13 @@
     "algoliasearch": "^4.23.3",
     "autoprefixer": "^10.4.19",
     "axios": "^1.7.2",
+    "better-react-mathjax": "^2.0.3",
     "django-vite-plugin": "^4.0.1",
     "downshift": "^9.0.6",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.10.1",
     "instantsearch.js": "^4.71.1",
     "markdown-it": "^14.1.0",
-    "patch-package": "^8.0.0",
     "postcss": "^8.4.38",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

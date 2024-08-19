@@ -7,16 +7,24 @@ type VariableSlice = {
   setVariables: (data: Variable[]) => void;
 };
 
-export const createVariableSlice: StateCreator<VariableSlice> = (set) => ({
+const initialState = {
   variables: [],
-  addVariable: (data) =>
-    set((state) => ({
-      variables: [...state.variables, data],
-    })),
-  setVariables: (data) =>
-    set(() => ({
-      variables: data,
-    })),
-});
+};
+
+export const createVariableSlice: StateCreator<VariableSlice> = (set) => {
+  // do not reset this slice
+
+  return {
+    ...initialState,
+    addVariable: (data) =>
+      set((state) => ({
+        variables: [...state.variables, data],
+      })),
+    setVariables: (data) =>
+      set(() => ({
+        variables: data,
+      })),
+  };
+};
 
 export type { VariableSlice };

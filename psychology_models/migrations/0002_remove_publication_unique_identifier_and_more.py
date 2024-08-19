@@ -98,7 +98,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name="psychologymodel",
-            name="model_variables",
+            name="model_variable",
             field=models.ManyToManyField(
                 blank=True,
                 through="psychology_models.ModelVariable",

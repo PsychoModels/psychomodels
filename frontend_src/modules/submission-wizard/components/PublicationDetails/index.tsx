@@ -15,25 +15,32 @@ import { ProgrammingLanguageSelectField } from "../ProgrammingLanguageSelectFiel
 import { useNavigate } from "@tanstack/react-router";
 
 const formSchema = z.object({
-  explanation: z.string().min(1),
-  programmingLanguageId: z.string().min(1).or(z.number().min(1)),
+  explanation: z.string(),
+  programmingLanguageId: z.string().or(z.number()),
   softwarePackages: z.array(
     z.intersection(
       softwarePackageFormSchema,
       z.object({ id: z.string().or(z.number()) }),
     ),
   ),
-  codeRepositoryUrl: z.union([z.literal(""), z.string().trim().url()]),
-  dataUrl: z.union([z.literal(""), z.string().trim().url()]),
-  // modelVariables: z.array(
-  //   z.intersection(
-  //     variableFormSchema,
-  //     z.object({ id: z.string().or(z.number()) }),
-  //   ),
-  // ),
+  codeRepositoryUrl: z.union([
+    z.literal(""),
+    z.string().trim().url({
+      message: "Invalid code repositoryURL",
+    }),
+  ]),
+  dataUrl: z.union([
+    z.literal(""),
+    z.string().trim().url({
+      message: "Invalid data URL",
+    }),
+  ]),
+
   publicationDOI: z.union([
     z.literal(""),
-    z.string().regex(/^10.\d{4,9}\/[-._;()/:A-Z0-9]+$/i),
+    z.string().regex(/^10.\d{4,9}\/[-._;()/:A-Z0-9]+$/i, {
+      message: "Invalid publication DOI",
+    }),
   ]),
 });
 
@@ -85,7 +92,7 @@ export const PublicationDetails = () => {
           />
           <MarkdownField
             control={control}
-            label="How does the model works"
+            label="How does the model work"
             name="explanation"
           />
 

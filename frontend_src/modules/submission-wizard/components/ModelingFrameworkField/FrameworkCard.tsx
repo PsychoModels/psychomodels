@@ -24,9 +24,10 @@ export const FrameworkCard = ({ framework, actionButton }: Props) => {
       </div>
       {!framework.isNew && (
         <a
-          href="#"
+          href={`/framework/${framework.slug}`}
           target="_blank"
           className="inline-flex text-sm items-center text-tertiary hover:underline"
+          rel="noreferrer"
         >
           More details
           <NewWindowIcon />

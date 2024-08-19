@@ -3,6 +3,7 @@ from django.utils import timezone
 import re
 from doi_lookup.services import CrossRefClient
 from django.contrib import messages as django_messages
+import after_response
 
 
 def is_valid_doi(doi):
@@ -48,6 +49,7 @@ def fetch_and_save(instance, fetch_function, attribute_name, fetched_at_name, re
     return messages
 
 
+@after_response.enable
 def get_doi_citations(queryset, refetch):
     client = CrossRefClient()
     messages = []

@@ -4,11 +4,18 @@ from . import views
 
 
 urlpatterns = [
-    path("", views.psychology_model_search, name="model_search"),
-    path("submission/", views.psychology_model_create, name="model_create"),
+    path("models/", views.psychology_model_search, name="model_search"),
+    path("models/submission/", views.psychology_model_create, name="model_create"),
     re_path(
-        r"^submission/.+", views.psychology_model_create, name="model_create_catch_all"
+        r"^models/submission/.+",
+        views.psychology_model_create,
+        name="model_create_catch_all",
     ),
-    path("detail_view_dev", views.detail_view_dev, name="model_detail_view_dev"),
-    path("<slug:slug>/", views.ModelDetailView.as_view(), name="model_detail"),
+    path("models/<slug:slug>/", views.ModelDetailView.as_view(), name="model_view"),
+    path("framework/", views.FrameworkListView.as_view(), name="framework_list"),
+    path(
+        "framework/<slug:slug>/",
+        views.FrameworkDetailView.as_view(),
+        name="framework_detail",
+    ),
 ]

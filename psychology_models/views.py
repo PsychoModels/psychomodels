@@ -1,22 +1,47 @@
 from typing import Any, Dict
-
+from django.contrib.auth.mixins import UserPassesTestMixin
 import json
+
+from django.http import Http404
 from django.shortcuts import render
 from django.views import generic
 from psychology_models.models import (
     PsychologyModel,
     Framework,
-    SoftwarePackage,
     PsychologyDiscipline,
     Variable,
+    ProgrammingLanguage,
 )
 
 
-class ModelDetailView(generic.DetailView):
+class ModelDetailView(UserPassesTestMixin, generic.DetailView):
     model = PsychologyModel
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         return super().get_context_data(**kwargs)
+
+    def get_object(self, queryset=None):
+        # Get the object
+        obj = super().get_object(queryset=queryset)
+
+        # Check if the object is published or if the user is an admin
+        if (
+            obj.published_at is not None
+            or self.request.user.is_staff
+            or obj.created_by == self.request.user
+        ):
+            return obj
+        else:
+            raise Http404("Psychology model does not exist!")
+
+    def test_func(self):
+        # Allow access if the model is published or the user is an admin
+        obj = self.get_object()
+        return (
+            obj.published_at is not None
+            or self.request.user.is_staff
+            or obj.created_by == self.request.user
+        )
 
 
 def psychology_model_search(request):
@@ -25,25 +50,19 @@ def psychology_model_search(request):
 
 def psychology_model_create(request):
     frameworks = Framework.objects.exclude(published_at__isnull=True)
-    software_packages = SoftwarePackage.objects.exclude(published_at__isnull=True)
+    programming_languages = ProgrammingLanguage.objects.exclude(
+        published_at__isnull=True
+    )
     psychology_disciplines = PsychologyDiscipline.objects.exclude(
         published_at__isnull=True
     )
     variables = Variable.objects.exclude(published_at__isnull=True)
 
     frameworks_json = json.dumps(
-        list(frameworks.values("id", "name", "description", "parent_framework"))
+        list(frameworks.values("id", "name", "description", "parent_framework", "slug"))
     )
-    software_packages_json = json.dumps(
-        list(
-            software_packages.values(
-                "id",
-                "name",
-                "documentation_url",
-                "code_repository_url",
-                "programming_language",
-            )
-        )
+    programming_languages_json = json.dumps(
+        list(programming_languages.values("id", "name"))
     )
     psychology_disciplines_json = json.dumps(
         list(psychology_disciplines.values("id", "name"))
@@ -55,15 +74,59 @@ def psychology_model_create(request):
         "psychology_models/psychologymodel_create.html",
         {
             "frameworks": frameworks_json,
-            "software_packages": software_packages_json,
+            "programming_languages": programming_languages_json,
             "psychology_disciplines": psychology_disciplines_json,
             "variables": variables_json,
         },
     )
 
 
-def detail_view_dev(request):
-    return render(
-        request,
-        "psychology_models/psychologymodel_detail_dev.html",
-    )
+class FrameworkDetailView(UserPassesTestMixin, generic.DetailView):
+    model = Framework
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+
+        framework = self.object
+        related_psychology_models = PsychologyModel.objects.filter(
+            framework=framework
+        ).prefetch_related("framework", "psychology_discipline", "programming_language")
+
+        context["related_psychology_models"] = related_psychology_models
+
+        return context
+
+    def get_object(self, queryset=None):
+        # Get the object
+        obj = super().get_object(queryset=queryset)
+
+        # Check if the object is published or if the user is an admin
+        if (
+            obj.published_at is not None
+            or self.request.user.is_staff
+            or obj.created_by == self.request.user
+        ):
+            return obj
+        else:
+            raise Http404("Framework does not exist!")
+
+    def test_func(self):
+        # Allow access if the model is published or the user is an admin
+        obj = self.get_object()
+        return (
+            obj.published_at is not None
+            or self.request.user.is_staff
+            or obj.created_by == self.request.user
+        )
+
+
+class FrameworkListView(generic.ListView):
+    model = Framework
+    context_object_name = "frameworks"
+
+    def get_queryset(self):
+        return Framework.objects.filter(published_at__isnull=False)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
