@@ -8,6 +8,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>
+        {% block title %}
+            PsychoModels
+        {% endblock %}
+        {% if block.super %}
+            - PsychoModels
+        {% endif %}
+    </title>
+
     <!--Vite dev client for hmr (will not be displayed on production)-->
     {% vite %}
 
@@ -40,8 +49,9 @@
 
 
 {% block footer %}
-   {% include '_footer.html' %}
+    {% include '_footer.html' %}
 {% endblock %}
 
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>
 </html>

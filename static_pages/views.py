@@ -14,7 +14,19 @@ def about(request):
     return HttpResponse(template.render(context, request))
 
 
-def tutorial(request):
-    template = loader.get_template("static_pages/tutorial.html")
+def contact(request):
+    template = loader.get_template("static_pages/contact.html")
+    context = {}
+    return HttpResponse(template.render(context, request))
+
+
+def privacy_policy(request):
+    template = loader.get_template("static_pages/privacy_policy.html")
+    context = {}
+    return HttpResponse(template.render(context, request))
+
+
+def terms_conditions(request):
+    template = loader.get_template("static_pages/terms_conditions.html")
     context = {}
     return HttpResponse(template.render(context, request))
