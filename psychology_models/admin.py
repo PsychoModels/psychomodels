@@ -16,7 +16,6 @@ from .utils.set_publish_state import (
     publish_entity,
     unpublish_entity,
 )
-from reversion.admin import VersionAdmin
 
 
 @admin.action(description="Publish selected psychology models")
@@ -57,7 +56,7 @@ def published_state(self, obj):
         )
 
 
-class AdminMixin(ImportExportModelAdmin, VersionAdmin, admin.ModelAdmin):
+class AdminMixin(ImportExportModelAdmin, admin.ModelAdmin):
     actions = [action_publish, action_unpublish]
 
     def published_state(self, obj):

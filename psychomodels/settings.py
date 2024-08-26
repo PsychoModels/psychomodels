@@ -52,9 +52,11 @@ INSTALLED_APPS = [
     "psychology_models",
     "members",
     "doi_lookup",
+    "rest_framework",
     "api",
     "after_response",
     "import_export",
+    "contact",
 ]
 
 MIDDLEWARE = [
@@ -144,7 +146,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = os.getenv("STATIC_URL", "static/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -153,7 +155,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "members.User"
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -171,6 +179,8 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
+
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ""
 
 
 STATICFILES_FINDERS = [
@@ -228,6 +238,7 @@ sentry_sdk.init(
     # of sampled transactions.
     # We recommend adjusting this value in production.
     profiles_sample_rate=1.0,
+    environment=os.getenv("SENTRY_ENVIRONMENT", "development"),
 )
 
 if os.getenv("DEBUG_LOGGING") == "True":
@@ -280,8 +291,8 @@ CACHES = {
 }
 
 HEADLESS_FRONTEND_URLS = {
-    "account_reset_password_from_key": "https://app.org/account/password/reset/key/{key}",
-    "account_signup": "https://app.org/account/signup",
+    "account_reset_password_from_key": "https://www.psychomodels.org/account/password/reset/key/{key}",
+    "account_signup": "https://www.psychomodels.org/account/signup",
 }
 
 HEADLESS_ADAPTER = "members.headless_adapter.MemberAllauthHeadlessAdapter"

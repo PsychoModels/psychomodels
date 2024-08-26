@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from contact.models import ContactMessage
 from psychology_models.models import (
     PsychologyModel,
     Framework,
@@ -321,3 +322,9 @@ class UserProfileSerializer(CountryFieldMixin, serializers.ModelSerializer):
             "department",
             "country",
         ]
+
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactMessage
+        fields = ["email", "subject", "message"]

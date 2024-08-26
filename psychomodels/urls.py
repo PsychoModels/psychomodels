@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 
+
 urlpatterns = [
     path("", include("static_pages.urls"), name="static_pages"),
     path("", include("psychology_models.urls"), name="psychomodels"),

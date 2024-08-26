@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PsychologyModelViewSet, UserProfileViewSet
+from .views import PsychologyModelViewSet, UserProfileViewSet, ContactViewSet
 
 urlpatterns = [
     path(
@@ -11,5 +11,10 @@ urlpatterns = [
         "user/profile/",
         UserProfileViewSet.as_view({"put": "update"}),
         name="user_profile_update",
+    ),
+    path(
+        "contact/",
+        ContactViewSet.as_view({"post": "create"}),
+        name="" "contact_message_create",
     ),
 ]
