@@ -73,6 +73,7 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "django_currentuser.middleware.ThreadLocalUserMiddleware",
+    "psychology_models.middleware.RedirectToMainDomainMiddleware",
 ]
 
 ROOT_URLCONF = "psychomodels.urls"
