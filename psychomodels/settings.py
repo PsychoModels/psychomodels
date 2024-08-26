@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "after_response",
     "import_export",
     "contact",
+    "highlighted",
 ]
 
 MIDDLEWARE = [
