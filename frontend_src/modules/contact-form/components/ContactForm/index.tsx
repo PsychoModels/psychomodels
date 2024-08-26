@@ -19,15 +19,14 @@ type ValidationSchema = z.infer<typeof formSchema>;
 export const ContactForm = () => {
   const [isDone, setIsDone] = React.useState(false);
 
-  const { control, handleSubmit, getValues, formState } =
-    useForm<ValidationSchema>({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        email: "",
-        subject: "",
-        message: "",
-      },
-    });
+  const { control, handleSubmit } = useForm<ValidationSchema>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      subject: "",
+      message: "",
+    },
+  });
 
   const mutation = useMutation({
     mutationFn: (data: ValidationSchema) => {

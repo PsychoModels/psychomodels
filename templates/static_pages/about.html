@@ -2,52 +2,166 @@
 {% load static %}
 
 
-{% block sidebar %}
-    <nav class="sidebar">
-        <h3>Content</h3>
-        <ul>
-          <li><a href="#sum">Summary / Mission</a></li>
-          <li><a href="#cit">Citation</a></li>
-          <li><a href="#tou">Terms of Use</a></li>
-          <li><a href="#con">Contact</a></li>
-          <li><a href="#ack">Acknowledgments</a></li>
-          <li><a href="#dis">Disclaimer</a></li>
-        </ul>
-    </nav>
-{% endblock %}
+{% block title %}About us{% endblock %}
 
-{% block title %}About{% endblock %}
 
 {% block content %}
 
-    <a class="hidden-anchor" id="sum"></a>
-    <h2>Short summary and mission statement of PsychoModels</h2>
-    <p>PsychoModel’s mission is to expand and improve mathematical and computational modeling practices across psychological science.
-    In particular, PsychoModels aims to ensure that included models are clearly annotated and presented in a similar way, making it easier to skim a model
-    and grasp its content than currently existing repositories allow for.</p>
-    <p>Furthermore, it intends to facilitate the development of a common language around modelling; communication between researchers; model review efforts;
-        reuse of the models in the database; and the improvement of modeling education in all areas of psychology.</p>
+    <div class="min-h-[600px] mx-auto max-w-screen-2xl md:px-4 lg:px-6 mt-6 w-full mb-20">
+        <nav class="flex mb-6 mx-6" aria-label="Breadcrumb">
+            <ol role="list" class="flex items-center space-x-4">
+                <li>
+                    <div>
+                        <a href="/" class="text-gray-400 hover:text-gray-500 hover:text-secondary">
+                            <svg class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                 aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                      d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="sr-only">Home</span>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
+                             aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                  d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="ml-4 text-sm font-medium text-gray-700">About us</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+        <div class="bg-white md:rounded-md">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8 min-w-96 text-gray-600 leading-7">
+                <h2 class="text-cyan-700  text-xl font-bold md:text-2xl">About us</h2>
 
-    <a class="hidden-anchor" id="cit"></a>
-    <h2>A ‘how to cite PsychoModels’</h2>
-    <p>If you use models from PsychoModels in a publication, please credit the author(s) when referencing them. You can find authors' names, and in many cases their publications introducing the models, on the page for their contribution. If you are unsure how to cite a specific model, please ask us!</p>
-    <p>Please also include the standard citation for PsychoModels:</p>
 
-    <cite>van Dongen, N.N.N., & Volz, L. (2023). PsychoModels: The mathematical and computational model repository for psychological science. <a href="">FINAL_URL</a> </cite>
+                <div class="pt-6 pb-6">
+                    <h2 class="text-cyan-700 text-lg font-medium md:text-xl mb-4"><a id="mission-statement"></a>Mission statement</h2>
+                    <p class="max-w-screen-md mb-4"><strong>Psycho</strong><em>Models’</em> mission is to expand and
+                        improve mathematical and
+                        computational modeling practices across psychological science. Computational modeling is
+                        increasingly relevant for psychological research, but traditional publication outlets don’t
+                        facilitate their usefulness. Major issues are the lack of documentation standards, indexing
+                        systems, or systematic links between repositories. <strong>Psycho</strong><em>Models</em>
+                        creates a curated resource
+                        addressing these issues. The aim is a comprehensive inventory of mathematical and computational
+                        models, connecting publication records with entries in code and data repositories, enriched by
+                        markers of psychological context, that can be easily accessed and quired. Finally, <strong>Psycho</strong><em>Models</em>
+                        intends to facilitate the development of a common language around modeling; communication
+                        between researchers; model review efforts; reuse of the models in the database; and the
+                        improvement of modeling education in all areas of psychology.</p>
+                </div>
 
-    <a class="hidden-anchor" id="tou"></a>
-    <h2>Terms of Use</h2>
-    <p>(like https://www.ebi.ac.uk/biomodels/termsofuse)</p>
+                <div class="pb-6">
 
-    <a class="hidden-anchor" id="con"></a>
-    <h2>How to contact us</h2>
-    <p>contact info</p>
+                    <h2 class="text-cyan-700 text-lg font-medium md:text-xl mb-4"><a id="how-to-cite"></a>How to cite</h2>
+                    <p class="max-w-screen-md mb-4">
+                        If you use models from <strong>Psycho</strong><em>Models</em>, please credit the author(s) by
+                        referencing them. You can
+                        find author names and publication details on the model pages. You can <a
+                            href="{% url 'contact' %}" class="text-tertiary hover:underline inline-flex items-center">contact
+                        us</a> if you are
+                        unsure how to cite a particular model. Please also include the standard citation for
+                        <strong>Psycho</strong><em>Models</em>:<br/>
 
-    <a class="hidden-anchor" id="ack"></a>
-    <h2>Acknowledgments</h2>
-    <p>acknowledge</p>
+                        <span class="pt-4 inline-block">van Dongen, N.N.N., & Volz, L. (2024). <em>PsychoModels: The mathematical and computational model
+                            repository for psychological science</em>. <a href="https://psychomodels.org/"
+                                                                          class="underline">https://psychomodels.org</a></span>
 
-    <a class="hidden-anchor" id="dis"></a>
-    <h2>Disclaimer</h2>
-    <p>The PsychoModels database is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the PsychoModels team be liable for any claim, damages or other liability whatsoever, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the database or the use or other dealings in the database.</p>
+                    </p>
+                </div>
+
+                <div class="pb-6">
+                    <h2 class="text-cyan-700 text-lg font-medium md:text-xl mb-4"><a id="terms-of-use"></a>Terms of Use</h2>
+                    <p class="max-w-screen-md mb-4">To the extent possible under law, all copyright and related or
+                        neighboring rights to the entire dataset distributed by <strong>Psycho</strong><em>Models</em>
+                        have been dedicated to the
+                        public domain worldwide.
+
+                        All content available on the <strong>Psycho</strong><em>Models</em> database–which does not
+                        extend to the linked code
+                        repositories, data repositories, and publications–is provided under the terms of the <a
+                                href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank"
+                                class="text-tertiary hover:underline inline-flex items-center">
+                            Creative
+                            Commons CC0 Public Domain Dedication license
+                            <svg class="w-3 h-3 ms-1.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
+                                 fill="none" viewBox="0 0 18 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                            </svg>
+                        </a>.
+                    </p>
+
+                    <strong>
+                        Creative Commons CC0
+                    </strong>
+                    <p class="max-w-screen-md mb-4">More information about the <a
+                            href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank"
+                            class="text-tertiary hover:underline inline-flex items-center">CC0
+                        <svg class="w-3 h-3 ms-1.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
+                             fill="none" viewBox="0 0 18 18">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                        </svg>
+                    </a> is available on the
+                        associated <a
+                                href="https://www.ebi.ac.uk/biomodels/faq" target="_blank"
+                                class="text-tertiary hover:underline inline-flex items-center">FAQ
+                            <svg class="w-3 h-3 ms-1.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
+                                 fill="none" viewBox="0 0 18 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                            </svg>
+                        </a>
+                        and the <a
+                                href="http://creativecommons.org/publicdomain/zero/1.0/legalcode.txt" target="_blank"
+                                class="text-tertiary hover:underline inline-flex items-center">Legal Code
+                            <svg class="w-3 h-3 ms-1.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
+                                 fill="none" viewBox="0 0 18 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                            </svg>
+                        </a>.
+                    </p>
+
+                </div>
+
+
+                <div class="pb-6">
+                    <h2 class="text-cyan-700 text-lg font-medium md:text-xl mb-4"><a id="disclaimer"></a>Disclaimer
+                    </h2>
+                    <p class="max-w-screen-md mb-4">The <strong>Psycho</strong><em>Models</em> database is provided "as
+                        is", without warranty of
+                        any kind, express or implied, including but not limited to the warranties of merchantability,
+                        fitness for a particular purpose and noninfringement. In no event shall the
+                        <strong>Psycho</strong><em>Models</em> team be
+                        liable for any claim, damages or other liability whatsoever, whether in an action of contract,
+                        tort or otherwise, arising from, out of or in connection with the database or the use or other
+                        dealings in the database.</p>
+                </div>
+
+                <div class="pb-6">
+                    <h2 class="text-cyan-700 text-lg font-medium md:text-xl mb-4"><a id="acknowledgments"></a>Acknowledgments
+                    </h2>
+                    <p class="max-w-screen-md mb-4"><strong>Psycho</strong><em>Models</em> is managed by Noah van Dongen
+                        and Leonhard Volz.
+                        <strong>Psycho</strong><em>Models</em> is made possible through the NWO grant no.
+                        OSF23.1.031.<br/>
+                        <strong>Psycho</strong><em>Models</em> was developed by Vincent Verbrugh.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

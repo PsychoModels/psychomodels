@@ -37,9 +37,9 @@
                         href="{% url 'model_create' %}">Submit
                 </a></li>
                 <li class="{% if request.resolver_match.url_name == 'about' %}current{% endif %}"><a
-                        href="/about/">About</a></li>
+                        href="{% url 'about' %}">About</a></li>
                 <li class="{% if request.resolver_match.url_name == 'contact' %}current{% endif %}"><a
-                        href="/contact/">Contact</a>
+                        href="{% url 'contact' %}">Contact</a>
                 </li>
                 {% if request.user.is_authenticated %}
 
