@@ -33,9 +33,19 @@
 {% include '_header_nav.html' %}
 
 {% if messages %}
-    <div class="messages">
+    <div class="messages mx-auto max-w-screen-2xl w-full">
         {% for message in messages %}
-            <div class="message {{ message.tags }}">
+            <div class="p-4 m-2 text-sm rounded-lg message {{ message.tags }}  {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+              text-red-800 bg-red-50
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    text-green-800 bg-green-50
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                    text-yellow-800 bg-yellow-50
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                     text-blue-800 bg-blue-50
+                {% else %}
+                    text-gray-800 bg-gray-50
+                {% endif %}">
                 {{ message }}
             </div>
         {% endfor %}
