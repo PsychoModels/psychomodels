@@ -1,5 +1,6 @@
 {% extends '_base.html' %}
 {% load static %}
+{% load highlighted_psychology_models %}
 
 {% block content %}
 
@@ -25,5 +26,17 @@
 
     </div>
 
+
+    <div class="mx-auto max-w-screen-2xl lg:px-6 my-6 w-full">
+        <div class="font-bold text-gray-600 mb-8 ml-4 text-center">Highlighted models</div>
+
+        <div class="grid rid-cols-1 lg:grid-cols-2 gap-4 mb-12">
+            {% get_highlighted_psychology_models as highlighted_psychology_models %}
+            {% for highlighted in highlighted_psychology_models %}
+
+                {% include 'psychology_models/_psychology_model_card.html' with psychology_model=highlighted.psychology_model %}
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}

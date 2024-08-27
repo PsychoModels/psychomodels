@@ -60,8 +60,50 @@
                                 <a href="/models/" class="text-sm leading-6 text-gray-300 hover:text-white italic">Show
                                     all</a>
                             </li>
+<<<<<<< HEAD
                         </ul>
                     </div>
+=======
+                        {% endfor %}
+                        <li>
+                            <a href="{% url 'framework_list' %}"
+                               class="text-sm leading-6 text-gray-300 hover:text-white italic">Show all</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold leading-6 text-white">Disciplines</h3>
+                    <ul role="list" class="mt-6 space-y-4">
+                        {% get_highlighted_psychology_disciplines as highlighted_disciplines %}
+                        {% for highlighted in highlighted_disciplines %}
+                            <li>
+                                <a href="/models/?PsychologyModel[refinementList][psychology_discipline_names][0]={{ highlighted.psychology_discipline.name|urlencode }}"
+                                   class="text-sm leading-6 text-gray-300 hover:text-white">{{ highlighted.psychology_discipline.name }}</a>
+                            </li>
+                        {% endfor %}
+                        <li>
+                            <a href="/models/" class="text-sm leading-6 text-gray-300 hover:text-white italic">Show
+                                all</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold leading-6 text-white">Programming languages</h3>
+                    <ul role="list" class="mt-6 space-y-4">
+                        {% get_highlighted_programming_languages as highlighted_programming_languages %}
+                        {% for highlighted in highlighted_programming_languages %}
+                            <li>
+
+                                <a href="/models/?PsychologyModel[refinementList][programming_language_name][0]={{ highlighted.programming_language.name|urlencode }}"
+                                   class="text-sm leading-6 text-gray-300 hover:text-white">{{ highlighted.programming_language.name }}</a>
+                            </li>
+                        {% endfor %}
+                        <li>
+                            <a href="/models/" class="text-sm leading-6 text-gray-300 hover:text-white italic">Show
+                                all</a>
+                        </li>
+                    </ul>
+>>>>>>> c2fe0b1 (feat: add highlighted models on homepage)
                 </div>
             </div>
         </div>

@@ -1,0 +1,20 @@
+<a href="{% url 'model_view' psychology_model.slug %}">
+    <div class="bg-white hover:bg-gray-50 hover:cursor-pointer p-4 md:border md:border-gray-300 md:rounded-lg text-gray-900 relative md:shadow-md">
+        <h3 class="text-secondary font-bold mb-2 text-lg">{{ psychology_model.title }}</h3>
+        <div class="text-sm mb-1"><span
+                class="text-gray-500 font-bold">Frameworks:</span> {{ psychology_model.framework.all|join:", " }}
+        </div>
+        {% if psychology_model.psychology_discipline.all %}
+            <div class="text-sm mb-1"><span class="text-gray-500 font-bold">Disciplines:</span>
+                {{ psychology_model.psychology_discipline.all|join:", " }}
+            </div>
+        {% endif %}
+        {% if psychology_model.programming_language %}
+            <div class="text-sm mb-1"><span
+                    class="text-gray-500 font-bold">Programming language:</span> {{ psychology_model.programming_language.name }}
+            </div>
+        {% endif %}
+        <div class=" mb-1"><p style="overflow: hidden;">{{ psychology_model.description }}</p>
+        </div>
+    </div>
+</a>

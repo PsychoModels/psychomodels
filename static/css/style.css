@@ -160,7 +160,7 @@ body {
 }
 
 
-.center {
+.main-header .center {
     margin: auto;
 
 
@@ -174,12 +174,12 @@ body {
     z-index: 1;
 }
 
-.center h1 {
+.main-header .center h1 {
     font-size: 64px;
     margin: 30px;
 }
 
-.center p {
+.main-header .center p {
     font-size: 22px;
 
 }
