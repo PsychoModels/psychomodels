@@ -1,0 +1,142 @@
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+databases:
+  - engine: PG
+    name: db
+domains:
+  - domain: staging.psychomodels.org
+    type: PRIMARY
+  - domain: staging.psychomodels.com
+    type: ALIAS
+  - domain: staging.psychomodels.net
+    type: ALIAS
+envs:
+  - key: DJANGO_SECRET_KEY
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:GXRYJ3yhUEiVtSJt3sKb+HPgXqVXZZ4T:SaYt2/KI0rHEoCukOlichRZlcLDAof/DQSRrwMnMWLwusTejwpx1AfqrX5VRFllYcZQKf8C0kAwU48teCRNl1EalideqFWWiV6Y=]
+  - key: DEBUG_LOGGING
+    scope: RUN_AND_BUILD_TIME
+    value: "True"
+  - key: SENTRY_DSN
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:G0gw0cRJ1iGgzVBsz9bgtH1XOGzoRxrS:riQrO9JB5Ou2UTpweUP1dvCxcFpj0PWQzDf8q5X1BIsmVDn05R+xaoXwNzqmOpVf/9aW1Ros38rBC+wKOTkr0O4EARH7Brllzl6K+0s8XhkSXRhkWZLDg5R1F38JRXWGx8uzpA31Ra7WBXmABEak]
+  - key: ALGOLIA_APP_ID
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:ph7ndU9VUCYa+5fwnehL1QfPd01p4Fm4:56cSLC28z5FR5Gdfir9HHXcBPe95a/GNJvk=]
+  - key: ALGOLIA_API_KEY
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:r0OMuhSZpysmV607c/D/eUwiJVtqqpJF:uDMv7lOKFe205zVegMTPADBH8SRxpszpQIE466PHkQKdIC1bN0iZgpyRpoRfGXLf]
+  - key: VITE_ALGOLIA_PUBLIC_API_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: 40065a0bc437a9630480f15026f35bc0
+  - key: VITE_ALGOLIA_APP_ID
+    scope: RUN_AND_BUILD_TIME
+    value: CGO09MBMG6
+  - key: GOOGLE_CLIENT_ID
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:228YUO7Hk0th4FiFBS3lBPAn6tp1z1IA:ugZ38y5aYQqMjrg+O1VtOz8rcArw2i7ZE9fgffdKIxJ4NzuAeVl1T58pvSAfxhga/ED7oL7j5ZoyP0JcRKGINSReTJU0fJrqNncimYaDBVwYPbn37cPcWA==]
+  - key: GOOGLE_CLIENT_SECRET
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:jZs0v5QxS4hXHVDg8uXJX9CyJmNLo9fu:F82sp+cTJpY/iIW0IJv/V27mblo/pRhV6snZ/J1pjve506oSr/MM52bkGwE+/dmlUpyq]
+  - key: GITHUB_CLIENT_ID
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:FYh4GhG9mjGjt6kWTdp8P+I6zgm1GBec:QzIUz9JSh8GM8JG1cAjXUQv5qIVQLQQx3+Ht4KGf6Dqdq3mi]
+  - key: GITHUB_CLIENT_SECRET
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:UaQ5NLA4cIZjn8VZXJiYO1MKpHvTyjaw:LoFD4xmBYWEMwda7m33yJsZvzMatPysPrT6Cy3g6SRGKea+17pqgPU4Pmug90FyzAS8ZTF7kv6s=]
+  - key: ORCID_CLIENT_ID
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:GAiU3tZKyyZbIvycjs4iA2vL/pmAPfiO:uCftH4Be1brIP4vqxS9u00HbEv5pBIRsQbOBH7WsV5IurIQH]
+  - key: ORCID_CLIENT_SECRET
+    scope: RUN_AND_BUILD_TIME
+    type: SECRET
+    value: EV[1:DASH70b599MAZzOpf2TXe0tyOjEB/I5V:dFl1qDwE3TxCk/rlEwy/CA2D8hd47MyBGc29uCl4EBaSiW4C4ge4zLAtErvAdzTNwsyn2A==]
+  - key: SENTRY_ENVIRONMENT
+    scope: RUN_AND_BUILD_TIME
+    value: staging
+features:
+  - buildpack-stack=ubuntu-22
+ingress:
+  rules:
+    - component:
+        name: server
+      match:
+        path:
+          prefix: /
+    - component:
+        name: static
+      match:
+        path:
+          prefix: /static
+jobs:
+  - envs:
+      - key: DISABLE_COLLECTSTATIC
+        scope: BUILD_TIME
+        value: "1"
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: ${db.DATABASE_URL}
+    github:
+      branch: develop
+      repo: PsychoModels/psychomodels
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    kind: PRE_DEPLOY
+    name: migrate
+    run_command: DJANGO_VITE_DEV_MODE=True python manage.py migrate
+name: psychomodels-staging
+region: ams
+services:
+  - build_command: pipenv install --deploy && DJANGO_VITE_DEV_MODE=True yarn run build
+      && pipenv run python manage.py collectstatic --noinput
+    environment_slug: python
+    envs:
+      - key: DISABLE_COLLECTSTATIC
+        scope: BUILD_TIME
+        value: "1"
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: ${db.DATABASE_URL}
+      - key: DJANGO_ALLOWED_HOSTS
+        scope: RUN_TIME
+        value: psychomodels-staging-ro72h.ondigitalocean.app,staging.psychomodels.org,staging.psychomodels.com,staging.psychomodels.net
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: ${db.DATABASE_URL}
+    github:
+      branch: develop
+      repo: PsychoModels/psychomodels
+    health_check:
+      failure_threshold: 5
+      http_path: /health-check/
+      initial_delay_seconds: 30
+      period_seconds: 10
+      port: 8080
+      success_threshold: 1
+      timeout_seconds: 5
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    name: server
+    run_command: gunicorn --worker-tmp-dir /dev/shm psychomodels.wsgi
+    source_dir: /
+static_sites:
+  - build_command: pipenv install --deploy && DJANGO_VITE_DEV_MODE=True yarn run build
+      && pipenv run python manage.py collectstatic --noinput
+    environment_slug: python
+    github:
+      branch: develop
+      repo: PsychoModels/psychomodels
+    name: static
+    output_dir: /collectedstatic
+    source_dir: /
