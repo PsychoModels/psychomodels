@@ -115,6 +115,8 @@ export const ContactForm = () => {
             <Button
               type="submit"
               onClick={handleSubmit(onSubmit)}
+              isProcessing={mutation.isPending}
+              disabled={mutation.isPending}
               className="w-full md:max-w-md"
             >
               Send message
