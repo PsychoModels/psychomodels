@@ -1,5 +1,5 @@
 <a href="{% url 'model_view' psychology_model.slug %}">
-    <div class="bg-white hover:bg-gray-50 hover:cursor-pointer p-4 md:border md:border-gray-300 md:rounded-lg text-gray-900 relative md:shadow-md">
+    <div class="bg-white hover:bg-gray-50 hover:cursor-pointer p-4 {% if show_border %}md:border md:border-gray-300 {% endif %}md:rounded-lg text-gray-900 relative md:shadow-md">
         <h3 class="text-secondary font-bold mb-2 text-lg">{{ psychology_model.title }}</h3>
         <div class="text-sm mb-1"><span
                 class="text-gray-500 font-bold">Frameworks:</span> {{ psychology_model.framework.all|join:", " }}

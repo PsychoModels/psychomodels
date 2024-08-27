@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block extrascripts %}
-
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {% endblock %}
 
 {% block title %}{{ object.title }}{% endblock %}
 
 {% block content %}
-
-    <div class="min-h-[600px] mx-auto max-w-screen-2xl px-4 lg:px-6 my-6 w-full">
+    <div class="min-h-[600px] mx-auto max-w-screen-2xl lg:px-6 my-6 w-full">
 
         <nav class="flex mb-6 mx-6" aria-label="Breadcrumb">
             <ol role="list" class="flex items-center space-x-4">
@@ -56,16 +56,25 @@
             </ol>
         </nav>
 
-        <div class="flex gap-8">
-            <div class="flex-1 rounded-lg p-4 gap-12 flex flex-col bg-white">
-                <div><h1
-                        class="text-cyan-700 text-2lg text-md font-bold md:text-3xl mb-6">{{ psychologymodel.title }}</h1>
-                    <p>{{ psychologymodel.description }}</p></div>
+        {% if psychologymodel.published_at is None %}
+            <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300"
+                 role="alert">
+                This psychology model is not published. You can view it because you are logged in as a staff member or
+                you submitted this model.
+            </div>
+        {% endif %}
+
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <div class="flex-1 sm:rounded-md p-4 flex flex-col gap-12 bg-white text-gray-600 overflow-hidden">
                 <div>
-                    <div class="font-bold text-gray-700 text-sm mb-4">Modeling frameworks</div>
+                    <h1 class="text-cyan-700 text-2lg text-md font-bold md:text-3xl mb-6">{{ psychologymodel.title }}</h1>
+                    <p>{{ psychologymodel.description }}</p>
+                </div>
+                <div>
+                    <div class="font-bold text-gray-700 mb-4">Modeling frameworks</div>
 
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="grid rid-cols-1 md:grid-cols-2 gap-4">
                         {% for framework in psychologymodel.framework.all %}
                             <div class="p-4 border border-gray-300 rounded-lg bg-gray-100 text-gray-900 relative shadow-md">
                                 <h5 class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">
@@ -73,7 +82,7 @@
                                 <div class="mb-1 font-normal text-sm text-gray-500"><p style="overflow: hidden;">
                                     <span><span>{{ framework.description }}</span></span>
                                 </p></div>
-                                <a href="#" target="_blank"
+                                <a href="{% url 'framework_detail' slug=framework.slug %}" target="_blank"
                                    class="inline-flex text-sm items-center text-tertiary hover:underline">More details
                                     <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
                                          fill="none" viewBox="0 0 18 18">
@@ -86,52 +95,153 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div>
-                    <div class="font-bold text-gray-700 text-sm mb-4">How does the model work</div>
 
+                {% if psychologymodel.explanation %}
+                    <div>
+                        <div class="font-bold text-gray-700 mb-4">How does the model work</div>
 
-                    <div class="markdown-body">{{ psychologymodel.formatted_explanation|safe }}</div>
-                </div>
-
-                <div>
-                    <div class="font-bold text-gray-700 text-sm mb-4">Variables</div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-                        {% for variable in psychologymodel.model_variables.all %}
-                            <div class="p-4 border border-gray-300 bg-gray-100 rounded-lg text-gray-900 relative shadow-md">
-                                <h5 class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">{{ variable.name }}</h5>
-                                <p class="mt-3 text-sm">{{ variable.description }}</p>
-                            </div>
-                        {% endfor %}
+                        <div class="markdown-body overflow-auto flex flex-col gap-4">
+                            {{ psychologymodel.formatted_explanation|safe }}
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <div class="font-bold text-gray-700 text-sm mb-2">Publication</div>
-                    <div class="">{{ psychologymodel.publication_citation }}
+                {% endif %}
+
+                {% if psychologymodel.model_variable.all %}
+                    <div>
+                        <div class="font-bold text-gray-700  mb-4">Model variables</div>
+                        <div class="grid rid-cols-1 md:grid-cols-2 gap-4">
+
+                            {% for model_variable in psychologymodel.model_variable.all %}
+                                <div class="p-4 border border-gray-300 bg-gray-100 rounded-lg text-gray-900 relative shadow-md">
+                                    <h5 class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">{{ model_variable.name }}</h5>
+                                    {% if model_variable.details %}
+                                        <p class="mt-3 text-sm mb-2">{{ model_variable.details }}</p>{% endif %}
+
+                                    {% if model_variable.variable.name %}
+                                        <div class="text-sm mb-2">
+                                            <span class="text-gray-600">Variable:</span> {{ model_variable.variable.name }}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if model_variable.variable.description %}
+                                        <div class="text-sm mb-2">
+                                            <span class="text-gray-600">Description:</span> {{ model_variable.variable.description }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
+
+                {% if psychologymodel.publication_citation %}
+                    <div>
+                        <div class="font-bold text-gray-700  mb-2">Publication</div>
+                        <div class="">{{ psychologymodel.publication_citation }}
+                        </div>
+                    </div>
+                {% endif %}
+
             </div>
-            <div class="w-[500px] rounded-lg bg-white gap-6 flex flex-col p-4">
-                <div>
-                    <div class="font-bold text-gray-700 text-sm mb-4">Psychology disciplines</div>
+            <div class="w-full lg:w-[500px] sm:rounded-md bg-white p-4 flex flex-col gap-8">
+                {% if psychologymodel.psychology_discipline.all %}
+                    <div>
+                        <div class="font-bold text-gray-700  mb-4">Psychology disciplines</div>
+                        {{ psychologymodel.psychology_discipline.all|join:", " }}
+                    </div>
+                {% endif %}
 
-                    {% autoescape off %}
-                        {{ psychologymodel.psychology_discipline.all|escapeseq|join:", " }}
-                    {% endautoescape %}
-                    </p></div>
-                <div>
-                    <div class="font-bold text-gray-700 text-sm mb-2">DOI</div>
-                    <div class="flex">
-                        <button aria-label="Copy to clipboard" type="button"
-                                class="border border-gray-300 bg-gray-100 p-1.5 hover:bg-gray-200 cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="svg-inline--fa fa-copy"
-                                 data-icon="copy" data-prefix="fas" viewBox="0 0 448 512" width="12">
-                                <path fill="currentColor"
-                                      d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"></path>
-                            </svg>
-                        </button>
-                        <a href="#" target="_blank"
-                           class="inline-flex items-center text-tertiary hover:underlin ml-2" rel="noreferrer">{{ psychologymodel.publication_doi }}
+                {% if psychologymodel.publication_doi %}
+                    <div>
+                        <div class="font-bold text-gray-700  mb-2">DOI</div>
+                        <div class="flex">
+                            <button aria-label="Copy to clipboard" type="button"
+                                    onclick="navigator.clipboard.writeText('{{ psychologymodel.publication_doi }}');"
+                                    class="border border-gray-300 bg-gray-100 p-1.5 hover:bg-gray-200 cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                     class="svg-inline--fa fa-copy"
+                                     data-icon="copy" data-prefix="fas" viewBox="0 0 448 512" width="12">
+                                    <path fill="currentColor"
+                                          d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"></path>
+                                </svg>
+                            </button>
+                            <a href="https://doi.org/{{ psychologymodel.publication_doi }}" target="_blank"
+                               class="inline-flex items-center text-tertiary hover:underlin ml-2"
+                               rel="noreferrer">{{ psychologymodel.publication_doi }}
+                                <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 18 18">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                                </svg>
+                            </a></div>
+                    </div>
+                {% endif %}
+
+                {% if psychologymodel.programming_language %}
+                    <div>
+                        <div class="font-bold text-gray-700  mb-2">Programming language</div>
+                        <p>{{ psychologymodel.programming_language }}</p>
+                    </div>
+                {% endif %}
+
+                {% if psychologymodel.software_package.all %}
+                    <div>
+                        <div class="font-bold text-gray-700  mb-4">Software packages</div>
+                        <div class="flex flex-col gap-4">
+                            {% for software_package in psychologymodel.software_package.all %}
+                                <div class="p-4 border border-gray-300 bg-gray-50 rounded-lg text-gray-900 relative shadow-md">
+                                    <h5 class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">{{ software_package.name }}</h5>
+
+                                    {% if software_package.documentation_url %}
+                                        <div class="text-sm mb-1"><span class="text-gray-600">Documentation:</span> <a
+                                                href="{{ software_package.documentation_url }}" target="_blank"
+                                                class="inline-flex text-sm items-center text-tertiary hover:underlin"
+                                                rel="noreferrer">{{ software_package.documentation_url }}
+                                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]"
+                                                 xmlns="http://www.w3.org/2000/svg"
+                                                 fill="none" viewBox="0 0 18 18">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                      stroke-linejoin="round"
+                                                      stroke-width="2"
+                                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                                            </svg>
+                                        </a></div>
+                                    {% endif %}
+
+                                    {% if software_package.code_repository_url %}
+                                        <div class="text-sm mb-1"><span class="text-gray-600">Code repository:</span> <a
+                                                href="{{ software_package.code_repository_url }}" target="_blank"
+                                                class="inline-flex text-sm items-center text-tertiary hover:underlin"
+                                                rel="noreferrer">{{ software_package.code_repository_url }}
+                                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]"
+                                                 xmlns="http://www.w3.org/2000/svg"
+                                                 fill="none" viewBox="0 0 18 18">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                      stroke-linejoin="round"
+                                                      stroke-width="2"
+                                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                                            </svg>
+                                        </a></div>
+                                    {% endif %}
+
+
+                                    <div class="mb-1"><span
+                                            class="text-gray-600">Programming language:</span> {{ software_package.programming_language }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if psychologymodel.code_repository_url %}
+                    <div>
+                        <div class="font-bold text-gray-700 mb-2">Code repository url</div>
+                        <p><a href="{{ psychologymodel.code_repository_url }}" target="_blank"
+                              class="inline-flex items-center text-tertiary hover:underline"
+                              rel="noreferrer">{{ psychologymodel.code_repository_url }}
                             <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
                                  fill="none"
                                  viewBox="0 0 18 18">
@@ -139,67 +249,27 @@
                                       stroke-width="2"
                                       d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
                             </svg>
-                        </a></div>
-                </div>
-                <div>
-                    <div class="font-bold text-gray-700 text-sm mb-2">Programming language</div>
-                    <p>{{ psychologymodel.programming_language}}</p></div>
-                <div>
-                    <div class="font-bold text-gray-700 text-sm mb-4">Software packages</div>
-                    <div class="flex flex-col gap-4">
-                        {% for software_package in psychologymodel.software_package.all %}
-                            <div class="p-4 border border-gray-300 bg-gray-50 rounded-lg text-gray-900 relative shadow-md">
-                            <h5
-                                    class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">{{ software_package.name }}</h5>
-                            <div class="text-sm mb-1"><span class="text-gray-600">Documentation:</span> <a
-                                    href="{{  software_package.documentation_url }}" target="_blank"
-                                    class="inline-flex text-sm items-center text-tertiary hover:underlin"
-                                    rel="noreferrer">{{  software_package.documentation_url }}
-                                <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
-                                     fill="none" viewBox="0 0 18 18">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
-                                </svg>
-                            </a></div>
-                            <div class="text-sm mb-1"><span class="text-gray-600">Code repository:</span> <a
-                                    href="{{  software_package.code_repository_url }}" target="_blank"
-                                    class="inline-flex text-sm items-center text-tertiary hover:underlin"
-                                    rel="noreferrer">{{  software_package.code_repository_url }}
-                                <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
-                                     fill="none" viewBox="0 0 18 18">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
-                                </svg>
-                            </a></div>
-                            <div class="text-sm mb-1"><span class="text-gray-600">Programming language:</span> {{ software_package.programming_language }}</div>
-                        </div>
-                        {% endfor %}
+                        </a></p>
                     </div>
-                </div>
-                <div>
-                    <div class="font-bold text-gray-700 text-sm mb-2">Code repository url</div>
-                    <p><a href="{{ psychologymodel.code_repository_url }}" target="_blank"
-                          class="inline-flex items-center text-tertiary hover:underlin" rel="noreferrer">{{ psychologymodel.code_repository_url }}
-                        <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg" fill="none"
-                             viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
-                        </svg>
-                    </a></p>
-                </div>
-                <div>
-                    <div class="font-bold text-gray-700 text-sm mb-2">Data url</div>
-                    <p><a href="{{ psychologymodel.data_url }}" target="_blank"
-                          class="inline-flex items-center text-tertiary hover:underlin" rel="noreferrer">{{ psychologymodel.data_url }}
-                        <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg" fill="none"
-                             viewBox="0 0 18 18">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
-                        </svg>
-                    </a></p>
-                </div>
+                {% endif %}
+
+                {% if psychologymodel.data_url %}
+                    <div>
+                        <div class="font-bold text-gray-700 mb-2">Data url</div>
+                        <p><a href="{{ psychologymodel.data_url }}" target="_blank"
+                              class="inline-flex items-center text-tertiary hover:underlin"
+                              rel="noreferrer">{{ psychologymodel.data_url }}
+                            <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 18 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"></path>
+                            </svg>
+                        </a></p>
+                    </div>
+                {% endif %}
+
             </div>
         </div>
     </div>

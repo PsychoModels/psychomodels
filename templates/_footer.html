@@ -6,64 +6,23 @@
 <footer class="mt-auto" style="background:#484849;" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="mx-auto max-w-screen-2xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
-        <div class="flex xl:gap-8">
-            <div class="space-y-8 pr-40">
+        <div class="grid gap-8 lg:grid-cols-3">
+            <div class="space-y-8">
                 <img src="{% static '/img/pm_logo_white.svg' %}" class="h-12" alt="Psycho Models Logo">
-                <p class="text-md leading-6" style="color: #f08410; ">The model repository for psychological science</p>
+                <p class="text-md leading-6 whitespace-nowrap" style="color: #f08410; ">The model repository for psychological science</p>
 
             </div>
-            <div class="mt-16  xl:mt-0  flex-1">
-                <div class="md:grid md:grid-cols-3 md:gap-8">
-                    <div>
-                        <h3 class="text-sm font-semibold leading-6 text-white">Frameworks</h3>
-                        <ul role="list" class="mt-6 space-y-4">
-                            {% get_highlighted_frameworks as highlighted_frameworks %}
-                            {% for highlighted in highlighted_frameworks %}
-                                <li>
-                                    <a href="#"
-                                       class="text-sm leading-6 text-gray-300 hover:text-white">{{ highlighted.framework.name }}</a>
-                                </li>
-                            {% endfor %}
-                            <li>
-                                <a href="#" class="text-sm leading-6 text-gray-300 hover:text-white italic">Show all</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-sm font-semibold leading-6 text-white">Disciplines</h3>
-                        <ul role="list" class="mt-6 space-y-4">
-                            {% get_highlighted_psychology_disciplines as highlighted_disciplines %}
-                            {% for highlighted in highlighted_disciplines %}
-                                <li>
-                                    <a href="/models/?PsychologyModel[refinementList][psychology_discipline_names][0]={{ highlighted.psychology_discipline.name|urlencode }}"
-                                       class="text-sm leading-6 text-gray-300 hover:text-white">{{ highlighted.psychology_discipline.name }}</a>
-                                </li>
-                            {% endfor %}
-                            <li>
-                                <a href="/models/" class="text-sm leading-6 text-gray-300 hover:text-white italic">Show
-                                    all</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-sm font-semibold leading-6 text-white">Programming languages</h3>
-                        <ul role="list" class="mt-6 space-y-4">
-                            {% get_highlighted_programming_languages as highlighted_programming_languages %}
-                            {% for highlighted in highlighted_frameworks %}
-                                <li>
 
-                                    <a href="/models/?PsychologyModel[refinementList][programming_languages_names][0]={{ highlighted.programming_languages.name|urlencode }}"
-                                       class="text-sm leading-6 text-gray-300 hover:text-white">{{ highlighted.programming_languages.name }}</a>
-                                </li>
-                            {% endfor %}
+            <div class="lg:col-span-2 grid gap-8 md:grid-cols-3">
+                <div>
+                    <h3 class="text-sm font-semibold leading-6 text-white">Frameworks</h3>
+                    <ul role="list" class="mt-6 space-y-4">
+                        {% get_highlighted_frameworks as highlighted_frameworks %}
+                        {% for highlighted in highlighted_frameworks %}
                             <li>
-                                <a href="/models/" class="text-sm leading-6 text-gray-300 hover:text-white italic">Show
-                                    all</a>
+                                <a href="{% url 'framework_detail' highlighted.framework.slug %}"
+                                   class="text-sm leading-6 text-gray-300 hover:text-white">{{ highlighted.framework.name }}</a>
                             </li>
-<<<<<<< HEAD
-                        </ul>
-                    </div>
-=======
                         {% endfor %}
                         <li>
                             <a href="{% url 'framework_list' %}"
@@ -103,9 +62,9 @@
                                 all</a>
                         </li>
                     </ul>
->>>>>>> c2fe0b1 (feat: add highlighted models on homepage)
                 </div>
             </div>
+
         </div>
         <div class="flex mt-16 border-t border-white/10 sm:mt-20 lg:mt-24 py-4">
             <div>

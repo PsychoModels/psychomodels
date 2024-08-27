@@ -1,0 +1,58 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}All frameworks{% endblock %}
+
+{% block content %}
+    <div class="min-h-[600px] mx-auto max-w-screen-2xl lg:px-6 my-6 w-full">
+
+        <nav class="flex mb-6 mx-6" aria-label="Breadcrumb">
+            <ol role="list" class="flex items-center space-x-4">
+                <li>
+                    <div>
+                        <a href="/" class="text-gray-400 hover:text-gray-500 hover:text-secondary">
+                            <svg class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                 aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                      d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="sr-only">Home</span>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex items-center">
+
+                        <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
+                             aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                  d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+
+                        <span class="ml-4 text-sm font-medium text-gray-700">Frameworks</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+
+        <div class="grid rid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for framework in frameworks.all %}
+                <a href="{% url 'framework_detail' slug=framework.slug %}">
+                    <div class="bg-white hover:bg-gray-50 hover:cursor-pointer p-4 md:rounded-lg text-gray-900 relative md:shadow-md">
+                        <h5 class="mb-2 font-semibold tracking-tight text-gray-900 dark:text-white">
+                            {{ framework.name }}</h5>
+                        <div class="mb-1 font-normal text-sm text-gray-500"><p style="overflow: hidden;">
+                            {{ framework.description }}
+                        </p></div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+
+
+    </div>
+
+{% endblock %}

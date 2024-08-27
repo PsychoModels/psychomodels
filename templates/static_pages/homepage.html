@@ -20,7 +20,7 @@
 
         <p>
             We aim to create a database that encourages sharing, reusing, and extending computational implementations of
-            formal models in psychology. By creating a platform designed for productive exchange within modeling groups
+            formal models in psychology.<br />By creating a platform designed for productive exchange within modeling groups
             and between modelers and empirical researchers, modeling practices among researchers will flourish and
             expand. </p>
 
@@ -28,13 +28,13 @@
 
 
     <div class="mx-auto max-w-screen-2xl lg:px-6 my-6 w-full">
-        <div class="font-bold text-gray-600 mb-8 ml-4 text-center">Highlighted models</div>
+        <h4 class="font-bold text-gray-600 mb-8 ml-4 text-center text-xl sm:text-2xl">Highlighted Models</h4>
 
         <div class="grid rid-cols-1 lg:grid-cols-2 gap-4 mb-12">
             {% get_highlighted_psychology_models as highlighted_psychology_models %}
             {% for highlighted in highlighted_psychology_models %}
 
-                {% include 'psychology_models/_psychology_model_card.html' with psychology_model=highlighted.psychology_model %}
+                {% include 'psychology_models/_psychology_model_card.html' with psychology_model=highlighted.psychology_model show_border=False %}
             {% endfor %}
         </div>
     </div>
