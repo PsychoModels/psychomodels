@@ -13,7 +13,10 @@
     "coverage": "vitest run --coverage",
     "tailwind:dev": "tailwindcss -i static/css/style.css -o ./static/generated/css/style.css --watch",
     "tailwind:build": "tailwindcss -i static/css/style.css -o ./static/generated/css/style.css",
-    "start": "run-p dev tailwind:dev"
+    "start": "run-p dev tailwind:dev",
+    "e2e-test": "playwright test",
+    "e2e-test:ui": "playwright test --ui",
+    "e2e-test:codegen": "playwright codegen"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.1",
@@ -48,6 +51,7 @@
   "devDependencies": {
     "@eslint/compat": "^1.1.0",
     "@hookform/devtools": "^4.3.1",
+    "@playwright/test": "^1.47.0",
     "@tanstack/router-devtools": "^1.45.4",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.4.8",
@@ -59,7 +63,6 @@
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@types/react-text-truncate": "^0.14.4",
-    "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^1.6.0",
     "eslint": "9.x",
     "eslint-config-prettier": "^9.1.0",

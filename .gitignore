@@ -14,7 +14,6 @@ __pycache__/
 
 .env
 
-static/src/css/output.css
 static/generated/
 static/manifest.json
 static/dist/
@@ -25,3 +24,9 @@ collectedstatic/
 node_modules/
 
 .hotfile
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+/coverage/*
