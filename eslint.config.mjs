@@ -17,6 +17,7 @@ export default [
       "node_modules/**",
       "static/dist/**",
       "static/generated/**",
+      "playwright-report/**",
     ],
   },
   {

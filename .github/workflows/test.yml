@@ -1,9 +1,10 @@
 name: Python Linting and testing
 
-on: [push, pull_request]
+on:
+  workflow_call:
 
 jobs:
-  lint-and-test:
+  django:
     runs-on: ubuntu-latest
 
     services:
@@ -25,21 +26,45 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
           python -m pip install pipenv
-          pipenv install --dev
+          pipenv requirements --dev > requirements.txt
+          pip install -r requirements.txt
 
       - name: Linting
-        run: pipenv run black .
+        run: python -m black .
 
       - name: Tests
-        run: pipenv run python manage.py test
+        run: python manage.py test --keepdb
         env:
           DATABASE_NAME: postgres
           DATABASE_USER: postgres
           DATABASE_PASSWORD: postgres
           DATABASE_HOST: localhost
           DATABASE_PORT: 5432
+
+  frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Yarn dependencies
+        run: npm install --global yarn && yarn install
+
+      - name: Linting
+        run: yarn run lint
+
+      - name: Run TypeScript type-check
+        run: yarn run tsc --noEmit
+
+      - name: Tests
+        run: yarn run test

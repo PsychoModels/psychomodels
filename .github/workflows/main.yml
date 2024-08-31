@@ -1,0 +1,24 @@
+name: Main
+
+on:
+  push:
+    branches: [main, develop]
+
+jobs:
+  lint-and-test:
+    name: Linting and testing
+    uses: ./.github/workflows/test.yml
+
+  playwright:
+    name: Playwright e2e tests
+    uses: ./.github/workflows/playwright.yml
+
+  release:
+    name: Release 🚀
+    needs:
+      - lint-and-test
+      - playwright
+    uses: ./.github/workflows/release.yml
+    secrets: inherit
+    with:
+      environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}

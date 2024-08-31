@@ -1,0 +1,3 @@
+FROM node:20-alpine
+RUN yarn global add serve
+CMD ["serve", "-p", "80", "--cors", "--single", "--no-clipboard", "/home/django-docker/collectedstatic/"]

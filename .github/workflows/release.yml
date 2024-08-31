@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+        description: 'The environment that the artifacts will deploy to.'
+
+jobs:
+  deploy:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    name: Deploy to ${{ inputs.environment }}
+    steps:
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Deploy to Staging
+        if: ${{ inputs.environment == 'staging' }}
+        run: doctl app create-deployment ${{ secrets.DIGITALOCEAN_STAGING_APP }}
+
+      - name: Deploy to Production
+        if: ${{ inputs.environment == 'production' }}
+        run: doctl app create-deployment ${{ secrets.DIGITALOCEAN_PRODUCTION_APP }}

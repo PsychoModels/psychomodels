@@ -1,0 +1,62 @@
+# docker-compose.yml
+version: "3.8"
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django_app
+    volumes:
+       - static-content:/home/django-docker/collectedstatic
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c 'python manage.py migrate &&
+             python manage.py loaddata programming_language software_package framework psychology_discipline variable || true &&
+             python manage.py runserver 0.0.0.0:8000'
+    environment:
+      DATABASE_NAME: postgres
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DJANGO_SECRET_KEY: django-docker-insecure
+      EMAIL_BACKEND: django.core.mail.backends.console.EmailBackend
+      STATIC_URL: http://localhost:8001/
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16
+    container_name: postgres_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck :
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
+      interval : 5s
+      timeout : 5s
+      retries : 5
+    ports:
+      - "5433:5432"
+
+  static-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.serve-static
+    container_name: static_server
+    volumes:
+       - static-content:/home/django-docker/collectedstatic
+    ports:
+      - "8001:80"
+    depends_on:
+      - django
+
+volumes:
+  postgres_data:
+  static-content:
