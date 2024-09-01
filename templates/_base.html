@@ -63,5 +63,11 @@
 {% endblock %}
 
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+{% if debug == False %}
+    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+    <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""
+                   referrerpolicy="no-referrer-when-downgrade"/></noscript>
+{% endif %}
 </body>
 </html>
