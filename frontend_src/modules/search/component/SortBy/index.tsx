@@ -5,10 +5,10 @@ import { useSortBy } from "react-instantsearch";
 
 const SORT_ITEMS = [
   { value: "PsychologyModel", label: "Relevance" },
-  { value: "psychology_index_title_asc", label: "Title (asc)" },
+  { value: "psychology_index_title_asc", label: "Title A - Z" },
   {
     value: "psychology_index_title_desc",
-    label: "Title (desc)",
+    label: "Title Z - A",
   },
 ];
 

@@ -8,23 +8,18 @@ export const TableView = () => {
   return (
     <Table>
       <Table.Head>
-        <Table.HeadCell>Title</Table.HeadCell>
-        <Table.HeadCell>Frameworks</Table.HeadCell>
-        <Table.HeadCell>Disciplines</Table.HeadCell>
+        <Table.HeadCell className="bg-gray-200">Title</Table.HeadCell>
+        <Table.HeadCell className="bg-gray-200">Frameworks</Table.HeadCell>
+        <Table.HeadCell className="bg-gray-200">Disciplines</Table.HeadCell>
       </Table.Head>
       <Table.Body className="divide-y">
         {items.map((item) => (
           <Table.Row
             key={item.objectID}
-            className="bg-white dark:border-gray-700 dark:bg-gray-800 hover:bg-secondary hover:text-white hover:cursor-pointer"
-            onClick={() =>
-              window.open(
-                `https://staging.psychomodels.org/models/${item.slug}`,
-                "_self",
-              )
-            }
+            className="bg-white hover:bg-gray-50 hover:cursor-pointer"
+            onClick={() => window.open(`/models/${item.slug}`, "_self")}
           >
-            <Table.Cell className="whitespace-nowrap font-medium dark:text-white">
+            <Table.Cell className="whitespace-nowrap text-black text-base">
               {item.title}
             </Table.Cell>
             <Table.Cell>{item.framework_names.join(", ")}</Table.Cell>

@@ -42,7 +42,12 @@ export const SearchContainer = () => {
         >
           <>
             <div className="flex items-center mt-8 mb-4">
-              <div className="text-md text-gray-700 ml-4">{totalHits}</div>
+              <div
+                className="text-md text-gray-700 ml-4"
+                data-testid="total-hits"
+              >
+                {totalHits}
+              </div>
               <div className="ml-auto mr-4">
                 <SortBy />
               </div>

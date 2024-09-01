@@ -39,7 +39,10 @@ export const RefinementListUi = ({
   const isRefined = items.some((item) => item.isRefined);
 
   return (
-    <div className="bg-white rounded-md p-4">
+    <div
+      className="bg-white rounded-md p-4"
+      data-testid={`refinement-list-${attribute}`}
+    >
       <div className="flex justify-between mb-2">
         <Label value={label} />
         {isRefined && (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Spinner, TextInput } from "flowbite-react";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/solid";
 
@@ -35,7 +35,7 @@ export const SearchBoxUI = ({
   sizing,
   showSearchIcon,
 }: SearchBoxUIProps) => {
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -46,9 +46,9 @@ export const SearchBoxUI = ({
     if (inputRef.current) {
       inputRef.current.blur();
     }
-  }
+  };
 
-  function handleReset(event: React.FormEvent<HTMLFormElement>) {
+  const handleReset = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -57,7 +57,11 @@ export const SearchBoxUI = ({
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  }
+  };
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   return (
     <div>

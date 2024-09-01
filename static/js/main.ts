@@ -18,3 +18,10 @@ document
     document.getElementById("main-menu-mobile")?.classList.toggle("hidden");
     document.getElementById("mobile-menu-icon")?.classList.toggle("open");
   });
+
+document
+  .getElementById("accountMenuButton")
+  ?.addEventListener("hover", function () {
+    document.getElementById("main-menu-mobile")?.classList.toggle("hidden");
+    document.getElementById("mobile-menu-icon")?.classList.toggle("open");
+  });

@@ -5,12 +5,16 @@ export type Framework = {
   name: string;
   description: string;
   explanation: string;
+  publicationDOI?: string;
+  documentationUrl?: string;
   isNew?: boolean;
+  slug?: string;
 };
 
 export type ProgrammingLanguage = {
   id: ID;
   name: string;
+  isNew?: boolean;
 };
 
 export type SoftwarePackage = {
@@ -26,7 +30,7 @@ export type ModelVariable = {
   id: ID;
   name: string;
   details: string;
-  variable: Variable;
+  variableId: number | string;
 };
 
 export type Variable = {
@@ -39,6 +43,7 @@ export type Variable = {
 export type PsychologyDiscipline = {
   id: ID;
   name: string;
+  isNew?: boolean;
 };
 
 export type PsychologyModel = {
@@ -46,11 +51,16 @@ export type PsychologyModel = {
   shortDescription: string;
   frameworks: Framework[];
   psychologyDisciplines: PsychologyDiscipline[];
-  explanation: string;
-  programmingLanguage: ProgrammingLanguage;
+  explanation?: string;
+  programmingLanguage: ProgrammingLanguage | undefined;
   softwarePackages: SoftwarePackage[];
   variables: ModelVariable[];
   codeRepositoryUrl?: string;
   dataUrl?: string;
   publicationDOI?: string;
+};
+
+export type Country = {
+  code: string;
+  name: string;
 };
