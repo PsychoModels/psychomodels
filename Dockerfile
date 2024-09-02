@@ -7,20 +7,15 @@ RUN apt-get update && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs
 
-# Install pipenv
-# We do not use pipenv in docker for running the project but we do need it to generate the requirements.txt for pip
-RUN pip install pipenv
 
 WORKDIR /home/django-docker
 
 # Copy Python and Node.js dependencies
-COPY Pipfile .
-COPY Pipfile.lock .
+COPY requirements.txt .
 COPY package.json .
 COPY yarn.lock .
 
 # Install Python and Node.js dependencies
-RUN pipenv requirements > requirements.txt
 RUN pip install -r requirements.txt
 RUN npm install --global yarn
 RUN yarn install --production=false

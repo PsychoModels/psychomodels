@@ -97,8 +97,8 @@ jobs:
 name: psychomodels-staging
 region: ams
 services:
-  - build_command: pipenv install --deploy && DJANGO_VITE_DEV_MODE=True yarn run build
-      && pipenv run python manage.py collectstatic --noinput
+  - build_command: pip install -r requirements.txt && yarn run build
+      && python manage.py collectstatic --noinput
     environment_slug: python
     envs:
       - key: DISABLE_COLLECTSTATIC
@@ -131,8 +131,8 @@ services:
     run_command: gunicorn --worker-tmp-dir /dev/shm psychomodels.wsgi
     source_dir: /
 static_sites:
-  - build_command: pipenv install --deploy && DJANGO_VITE_DEV_MODE=True yarn run build
-      && pipenv run python manage.py collectstatic --noinput
+  - build_command: pip install -r requirements.txt && yarn run build
+      && python manage.py collectstatic --noinput
     environment_slug: python
     github:
       branch: develop
