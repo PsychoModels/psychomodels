@@ -68,4 +68,15 @@
         <div id="root" class="bg-white md:rounded-md"></div>
     </div>
 
+    {% if request.user.is_authenticated and request.user.email %}
+        <script id="initial-data" type="application/json">
+            {
+                "userEmail": "{{ request.user.email|safe }}"
+
+            }
+        </script>
+    {% endif %}
+
+
+
 {% endblock %}

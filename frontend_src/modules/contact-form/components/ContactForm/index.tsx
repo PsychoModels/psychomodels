@@ -32,13 +32,17 @@ const Wrapper = ({ children }: WrapperProps) => (
   </div>
 );
 
-export const ContactForm = () => {
+interface Props {
+  initialEmail?: string;
+}
+
+export const ContactForm = ({ initialEmail }: Props) => {
   const [isDone, setIsDone] = React.useState(false);
 
   const { control, handleSubmit } = useForm<ValidationSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      email: initialEmail || "",
       subject: "",
       message: "",
     },
