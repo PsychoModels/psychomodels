@@ -10,7 +10,6 @@ from contact.models import ContactMessage
 def send_contact_notification(contact_message: ContactMessage):
     subject = "New contact form submission"
     to_email = os.getenv("NOTIFY_EMAILS", "").split(",")
-    from_email = os.getenv("DEFAULT_FROM_EMAIL", None)
     admin_url = "https://www.psychomodels.org" + reverse(
         "admin:contact_contactmessage_change", args=[contact_message.id]
     )
@@ -35,7 +34,7 @@ Message:
 {contact_message.message}
         """
 
-    email = EmailMultiAlternatives(subject, text_content, from_email, to_email)
+    email = EmailMultiAlternatives(subject, text_content, None, to_email)
 
     email.attach_alternative(html_content, "text/html")
 
@@ -45,7 +44,6 @@ Message:
 def send_contact_confirmation(contact_message: ContactMessage):
     subject = "Contact PsychoModels"
     to_email = [contact_message.email]
-    from_email = os.getenv("DEFAULT_FROM_EMAIL", None)
     # Load your HTML template
     html_content = render_to_string(
         "emails/contact_confirmation.html",
@@ -64,7 +62,7 @@ Your message:
 {contact_message.message}
 """
 
-    email = EmailMultiAlternatives(subject, text_content, from_email, to_email)
+    email = EmailMultiAlternatives(subject, text_content, None, to_email)
 
     email.attach_alternative(html_content, "text/html")
 

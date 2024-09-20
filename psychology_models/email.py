@@ -12,7 +12,6 @@ from psychology_models.models import PsychologyModel
 def send_submission_notification(psychology_model: PsychologyModel):
     subject = "New model submission"
     to_email = os.getenv("NOTIFY_EMAILS", "").split(",")
-    from_email = os.getenv("DEFAULT_FROM_EMAIL", None)
     admin_url = "https://www.psychomodels.org" + reverse(
         "admin:psychology_models_psychologymodel_change", args=[psychology_model.id]
     )
@@ -29,7 +28,7 @@ Please review and publish the model in the admin panel:
 {admin_url}.
         """
 
-    email = EmailMultiAlternatives(subject, text_content, from_email, to_email)
+    email = EmailMultiAlternatives(subject, text_content, None, to_email)
 
     email.attach_alternative(html_content, "text/html")
 
@@ -43,7 +42,6 @@ def send_submission_confirmation(psychology_model: PsychologyModel):
 
     subject = "Your submission to PsychoModels"
     to_email = [psychology_model.created_by.email]
-    from_email = os.getenv("DEFAULT_FROM_EMAIL", None)
     model_url = "https://www.psychomodels.org" + reverse(
         "model_view", args=[psychology_model.slug]
     )
@@ -75,7 +73,7 @@ Thank you for contributing to PsychoModels!
 PsychoModels https://www.psychomodels.org/
         """
 
-    email = EmailMultiAlternatives(subject, text_content, from_email, to_email)
+    email = EmailMultiAlternatives(subject, text_content, None, to_email)
 
     email.attach_alternative(html_content, "text/html")
 
