@@ -4,8 +4,11 @@ import after_response
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.urls import reverse
+from email.utils import formataddr
 
 from psychology_models.models import PsychologyModel
+
+from_email = formataddr(("PsychoModels", "no-reply@psychomodels.org"))
 
 
 @after_response.enable
@@ -28,7 +31,7 @@ Please review and publish the model in the admin panel:
 {admin_url}.
         """
 
-    email = EmailMultiAlternatives(subject, text_content, None, to_email)
+    email = EmailMultiAlternatives(subject, text_content, from_email, to_email)
 
     email.attach_alternative(html_content, "text/html")
 
@@ -73,7 +76,7 @@ Thank you for contributing to PsychoModels!
 PsychoModels https://www.psychomodels.org/
         """
 
-    email = EmailMultiAlternatives(subject, text_content, None, to_email)
+    email = EmailMultiAlternatives(subject, text_content, from_email, to_email)
 
     email.attach_alternative(html_content, "text/html")
 

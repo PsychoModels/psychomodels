@@ -3,8 +3,12 @@ import os
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.urls import reverse
+from email.utils import formataddr
 
 from contact.models import ContactMessage
+
+
+from_email = formataddr(("PsychoModels", "no-reply@psychomodels.org"))
 
 
 def send_contact_notification(contact_message: ContactMessage):
@@ -34,7 +38,7 @@ Message:
 {contact_message.message}
         """
 
-    email = EmailMultiAlternatives(subject, text_content, None, to_email)
+    email = EmailMultiAlternatives(subject, text_content, from_email, to_email)
 
     email.attach_alternative(html_content, "text/html")
 
@@ -62,7 +66,7 @@ Your message:
 {contact_message.message}
 """
 
-    email = EmailMultiAlternatives(subject, text_content, None, to_email)
+    email = EmailMultiAlternatives(subject, text_content, from_email, to_email)
 
     email.attach_alternative(html_content, "text/html")
 
