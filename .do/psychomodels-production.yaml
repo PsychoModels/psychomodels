@@ -31,9 +31,6 @@ envs:
     scope: RUN_AND_BUILD_TIME
     type: SECRET
     value: EV[1:RvzKrXfj9f4ehLeyNJ2eLDgjHfopHU7P:iJqgECGHsKVpoU9lWS0NzdKqdC1aZVGoc0cB5Xg2+QvvLH4+ynCkhLVz+d/0zo551yX3QLK6pw==]
-  - key: DEBUG_LOGGING
-    scope: RUN_AND_BUILD_TIME
-    value: "True"
   - key: SENTRY_DSN
     scope: RUN_AND_BUILD_TIME
     type: SECRET
@@ -78,13 +75,19 @@ envs:
     value: EV[1:jrFPIGmlyuGTtsCBjxcUJYddD3DEfC54:ECdEmRtmRwgyLWALzQewI15rFS7C627Xka9SLHcq5F8m0T6t0cAZhMADhWNzygOMnLYhYEA39oYMLGHMHCBZqJjg]
   - key: DEFAULT_FROM_EMAIL
     scope: RUN_AND_BUILD_TIME
-    value: PsychoModels <no-reply@psychomodels.org>
+    value: no-reply@psychomodels.org
   - key: ORCID_CLIENT_SECRET
     scope: RUN_AND_BUILD_TIME
     value: eec7f3aa-0922-4f1d-80e0-cc870566ec3d
   - key: GITHUB_CLIENT_SECRET
     scope: RUN_AND_BUILD_TIME
     value: f9c5a256b4a1263edebab1cfa16be54cbd268657
+  - key: NOTIFY_EMAILS
+    scope: RUN_AND_BUILD_TIME
+    value: nnnvandongen@gmail.com,leonhard.volz@gmail.com
+  - key: EMAIL_BACKEND
+    scope: RUN_AND_BUILD_TIME
+    value: django.core.mail.backends.smtp.EmailBackend
 features:
   - buildpack-stack=ubuntu-22
 ingress:
