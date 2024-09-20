@@ -23,7 +23,8 @@ export const FrameworkSelectModal = ({
 
   const filteredFrameworks = frameworks
     .filter((framework) => !framework?.isNew) // you cannot select newly created frameworks
-    .filter((framework) => !selectedFrameworkIds.includes(framework.id));
+    .filter((framework) => !selectedFrameworkIds.includes(framework.id))
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <Modal show={show} size="6xl" onClose={onClose} dismissible>
