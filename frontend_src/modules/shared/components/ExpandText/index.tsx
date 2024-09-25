@@ -34,6 +34,7 @@ export const ExpandText = ({ children }: Props) => {
       </div>
       {isOverflowing && (
         <button
+          type="button"
           onClick={toggleTextDisplay}
           className="text-cyan-900 text-sm font-bold"
         >
