@@ -28,7 +28,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("Submission wizard - add new framework", async ({ page }) => {
-  // Model information step
+  // Model summary step
   await page.locator('input[name="title"]').fill("Title");
   await page
     .locator('textarea[name="shortDescription"]')
@@ -59,9 +59,9 @@ test("Submission wizard - add new framework", async ({ page }) => {
     .fill("https://www.tandfonline.com/doi/full/10.1080/2153599X.2022.2070255");
   await page.getByRole("button", { name: "Save" }).click();
 
-  await page.getByRole("button", { name: "Publication details" }).click();
+  await page.getByRole("button", { name: "Model Details" }).click();
 
-  //Publication details step
+  //Model Details step
   await page.getByRole("button", { name: "Review" }).click();
 
   // Review step
@@ -81,7 +81,7 @@ test("Submission wizard - add new framework", async ({ page }) => {
 test.skip("Submission wizard - select and add new discipline", async ({
   page,
 }) => {
-  // Model information step
+  // Model summary step
   await page.locator('input[name="title"]').fill("Title");
   await page
     .locator('textarea[name="shortDescription"]')
@@ -110,9 +110,9 @@ test.skip("Submission wizard - select and add new discipline", async ({
 
   await expect(disciplineList.getByText("New discipline")).toBeVisible();
 
-  await page.getByRole("button", { name: "Publication details" }).click();
+  await page.getByRole("button", { name: "Model Details" }).click();
 
-  //Publication details step
+  //Model Details step
   await page.getByRole("button", { name: "Review" }).click();
 
   // Review step
@@ -147,7 +147,7 @@ test("Submission wizard - Publication DOI", async ({ page }) => {
 });
 
 test("Submission wizard - new programming language", async ({ page }) => {
-  // Model information step
+  // Model summary step
   await page.locator('input[name="title"]').fill("Title");
   await page
     .locator('textarea[name="shortDescription"]')
@@ -159,9 +159,9 @@ test("Submission wizard - new programming language", async ({ page }) => {
     .getByRole("button")
     .click();
 
-  await page.getByRole("button", { name: "Publication details" }).click();
+  await page.getByRole("button", { name: "Model Details" }).click();
 
-  // Publication details step
+  // Model Details step
   await page.getByText("add new language").click();
   await page.getByRole("textbox").fill("Haskell");
   await page.getByRole("button", { name: "Save" }).click();
@@ -179,7 +179,7 @@ test("Submission wizard - new programming language", async ({ page }) => {
 });
 
 test("Submission wizard - add software package", async ({ page }) => {
-  // Model information step
+  // Model summary step
   await page.locator('input[name="title"]').fill("Title");
   await page
     .locator('textarea[name="shortDescription"]')
@@ -191,9 +191,9 @@ test("Submission wizard - add software package", async ({ page }) => {
     .getByRole("button")
     .click();
 
-  await page.getByRole("button", { name: "Publication details" }).click();
+  await page.getByRole("button", { name: "Model Details" }).click();
 
-  //Publication details step
+  //Model Details step
   await page.getByRole("button", { name: "Add software package" }).click();
   await page.locator('input[name="name"]').fill("Django");
   await page
@@ -233,7 +233,7 @@ test("Submission wizard - add software package", async ({ page }) => {
 });
 
 test("Submission wizard - select and add variables", async ({ page }) => {
-  // Model information step
+  // Model summary step
   await page.locator('input[name="title"]').fill("Title");
   await page
     .locator('textarea[name="shortDescription"]')
@@ -245,9 +245,9 @@ test("Submission wizard - select and add variables", async ({ page }) => {
     .getByRole("button")
     .click();
 
-  await page.getByRole("button", { name: "Publication details" }).click();
+  await page.getByRole("button", { name: "Model Details" }).click();
 
-  //Publication details step
+  //Model Details step
   await page.getByRole("button", { name: "Add variable" }).click();
   await page.getByPlaceholder("Select a variable").click();
   await page.getByText("Reaction Time", { exact: true }).click();

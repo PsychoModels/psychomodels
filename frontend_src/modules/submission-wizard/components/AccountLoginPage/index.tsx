@@ -11,7 +11,7 @@ export const AccountLoginPage = () => {
     if (data?.data?.user?.first_name && data?.data?.user?.last_name) {
       setCompletedStatus("account", true);
       navigate({
-        to: "/model-information",
+        to: "/model-summary",
       });
     } else {
       navigate({

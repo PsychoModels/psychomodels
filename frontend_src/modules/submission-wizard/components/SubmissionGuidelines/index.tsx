@@ -35,7 +35,7 @@ export const SubmissionGuidelines = () => {
 
           <p className="max-w-screen-md mb-4">
             The submission is a multi-staged process. Certain aspects are
-            mandatory ( title, summary, and publication details) others are only
+            mandatory ( title, summary, and model details) others are only
             requested. Non-mandatory details can be submitted later.
           </p>
 

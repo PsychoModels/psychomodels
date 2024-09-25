@@ -11,7 +11,7 @@ const NextStepDisabledTooltipWrapper = ({
 }: {
   children: ReactNode;
 }) => (
-  <Tooltip content="You must be logged in to go to the model information step">
+  <Tooltip content="You must be logged in to go to the model summary step">
     {children}
   </Tooltip>
 );
@@ -43,7 +43,7 @@ export const AccountStep = () => {
 
   const onNavigateNext = () => {
     setCompletedStatus("account", true);
-    navigate({ to: "/model-information" });
+    navigate({ to: "/model-summary" });
   };
 
   const onNavigateBack = () => {
@@ -109,7 +109,7 @@ export const AccountStep = () => {
             onClick={onNavigateNext}
             disabled={nextStepDisabled}
           >
-            Model information
+            Model summary
             <ArrowIcon />
           </Button>
         </NextStepWrapperComponent>

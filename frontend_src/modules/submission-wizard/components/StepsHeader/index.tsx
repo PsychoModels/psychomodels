@@ -37,15 +37,15 @@ export const StepsHeader = () => {
 
         <Step
           stepNumber={3}
-          title="Model information"
+          title="Model summary"
           addSeparator
-          route="/model-information"
+          route="/model-summary"
           isCompleted={completedStatus.modelInformation || allCompleted}
           allowNavigate={allowNavigate}
         />
         <Step
           stepNumber={4}
-          title="Publication details"
+          title="Model Details"
           addSeparator
           route="/publication-details"
           isCompleted={completedStatus.publicationDetails || allCompleted}

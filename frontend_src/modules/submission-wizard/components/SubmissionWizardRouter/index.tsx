@@ -52,7 +52,7 @@ const accountRoute = createRoute({
 
 const modelInformationRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/model-information/",
+  path: "/model-summary/",
   component: function ModelInformationPage() {
     return <ModelInformation />;
   },

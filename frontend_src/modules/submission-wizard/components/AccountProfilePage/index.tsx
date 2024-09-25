@@ -55,7 +55,7 @@ export const AccountProfilePage = () => {
   const onSaveSuccess = () => {
     setCompletedStatus("account", true);
     navigate({
-      to: "/model-information",
+      to: "/model-summary",
     });
   };
 

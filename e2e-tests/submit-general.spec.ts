@@ -39,9 +39,9 @@ test("Submission wizard - only required input", async ({ page }) => {
   await page.getByLabel("Country*").selectOption("AT");
   await page.getByRole("button", { name: "Save profile" }).click();
 
-  // Model information step
+  // Model summary step
   await expect(
-    page.getByRole("heading", { name: "Model information" }),
+    page.getByRole("heading", { name: "Model summary" }),
   ).toBeVisible();
   await expect(
     page.locator('[data-testid="step-progress-indicator"]'),
@@ -59,11 +59,11 @@ test("Submission wizard - only required input", async ({ page }) => {
     .getByRole("button")
     .click();
 
-  await page.getByRole("button", { name: "Publication details" }).click();
+  await page.getByRole("button", { name: "Model Details" }).click();
 
-  //Publication details step
+  //Model Details step
   await expect(
-    page.getByRole("heading", { name: "Publication details" }),
+    page.getByRole("heading", { name: "Model Details" }),
   ).toBeVisible();
   await expect(
     page.locator('[data-testid="step-progress-indicator"]'),
@@ -149,9 +149,9 @@ test("Submission wizard - login", async ({ page }) => {
   await page.locator('input[name="password"]').fill(PASSWORD);
   await page.getByRole("button", { name: "Login" }).click();
 
-  // Model information step
+  // Model summary step
   await expect(
-    page.getByRole("heading", { name: "Model information" }),
+    page.getByRole("heading", { name: "Model summary" }),
   ).toBeVisible();
   await expect(
     page.locator('[data-testid="step-progress-indicator"]'),
@@ -169,11 +169,11 @@ test("Submission wizard - login", async ({ page }) => {
     .getByRole("button")
     .click();
 
-  await page.getByRole("button", { name: "Publication details" }).click();
+  await page.getByRole("button", { name: "Model Details" }).click();
 
-  //Publication details step
+  //Model Details step
   await expect(
-    page.getByRole("heading", { name: "Publication details" }),
+    page.getByRole("heading", { name: "Model Details" }),
   ).toBeVisible();
   await expect(
     page.locator('[data-testid="step-progress-indicator"]'),
@@ -219,12 +219,12 @@ test("Submission wizard - skipped steps error messages", async ({ page }) => {
   ).toBeVisible();
   await expect(
     page.getByText(
-      "You have not completed the Model information step. Please go back to review",
+      "You have not completed the Model summary step. Please go back to review",
     ),
   ).toBeVisible();
   await expect(
     page.getByText(
-      "You have not completed the Publication details step. Please go back to review",
+      "You have not completed the Model Details step. Please go back to review",
     ),
   ).toBeVisible();
 });

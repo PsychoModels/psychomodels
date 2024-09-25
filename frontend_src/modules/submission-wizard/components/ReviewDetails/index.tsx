@@ -24,14 +24,14 @@ export type ValidationSchema = z.infer<typeof formSchema>;
 const STEP_TITLES = {
   submissionGuidelines: "Submission guidelines",
   account: "Login to your account",
-  modelInformation: "Model information",
-  publicationDetails: "Publication details",
+  modelInformation: "Model summary",
+  publicationDetails: "Model Details",
 };
 
 const STEP_LINKS = {
   submissionGuidelines: "/",
   account: "/account",
-  modelInformation: "/model-information",
+  modelInformation: "/model-summary",
   publicationDetails: "/publication-details",
 };
 

@@ -8,7 +8,7 @@ interface Props {
   route:
     | "/"
     | "/account"
-    | "/model-information"
+    | "/model-summary"
     | "/publication-details"
     | "/review"
     | "/submitted";

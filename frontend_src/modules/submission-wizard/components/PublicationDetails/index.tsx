@@ -74,7 +74,7 @@ export const PublicationDetails = () => {
   }, [formState.isValid]);
 
   const onNavigateBack = () => {
-    navigate({ to: "/model-information" });
+    navigate({ to: "/model-summary" });
   };
 
   return (

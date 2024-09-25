@@ -25,7 +25,7 @@ const formSchema = z.object({
 type ValidationSchema = z.infer<typeof formSchema>;
 
 export const ModelInformation = () => {
-  const navigate = useNavigate({ from: "/model-information" });
+  const navigate = useNavigate({ from: "/model-summary" });
   const { setCompletedStatus } = useStore((state) => state);
 
   const { modelInformation, setModelInformation } = useStore((state) => state);
@@ -84,7 +84,7 @@ export const ModelInformation = () => {
           Back
         </Button>
         <Button type="submit" onClick={handleSubmit(onSubmit)}>
-          Publication details <ArrowIcon />
+          Model Details <ArrowIcon />
         </Button>
       </div>
     </>
