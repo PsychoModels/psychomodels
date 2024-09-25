@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import useStore from "../../store/useStore.ts";
 import { DOIInputField } from "../DOIInputField";
+import { MarkdownField } from "../../../shared/components/Form/MarkdownField.tsx";
 
 interface Props {
   show: boolean;
@@ -79,11 +80,11 @@ export const FrameworkCreateModal = ({ show, onClose, onSelect }: Props) => {
             required
           />
 
-          <TextAreaField
+          <MarkdownField
             control={control}
-            label="How does it work"
+            label="How does it work*"
             name="explanation"
-            required
+            showExplanation={false}
           />
 
           <DOIInputField

@@ -104,6 +104,7 @@ export const PublicationDetails = () => {
             label="Code repository url"
             name="codeRepositoryUrl"
             placeholder="https://"
+            tooltipText="The URL to the code repository where the model is hosted."
           />
 
           <TextInputField

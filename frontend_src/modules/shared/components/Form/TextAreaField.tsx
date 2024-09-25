@@ -1,12 +1,14 @@
 import React from "react";
-import { Label, Textarea } from "flowbite-react";
+import { Label, Textarea, Tooltip } from "flowbite-react";
 import { Control, Controller } from "react-hook-form";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   control: Control<any, any>;
   label: string;
   name: string;
   required?: boolean;
+  tooltipText?: string;
 }
 
 export const TextAreaField = ({
@@ -14,6 +16,7 @@ export const TextAreaField = ({
   label,
   name,
   required = false,
+  tooltipText,
 }: Props) => {
   return (
     <Controller
@@ -30,6 +33,16 @@ export const TextAreaField = ({
                 color={color}
                 value={`${label}${required ? "*" : ""}`}
               />
+
+              {tooltipText && (
+                <div className="float-right">
+                  <Tooltip content={tooltipText} placement="left">
+                    <div className="w-5 h-5">
+                      <QuestionMarkCircleIcon color="#244657" />
+                    </div>
+                  </Tooltip>
+                </div>
+              )}
             </div>
             <Textarea
               rows={6}

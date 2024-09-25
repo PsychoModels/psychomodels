@@ -8,8 +8,8 @@ import {
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import React, { useState } from "react";
 import { Control, Controller } from "react-hook-form";
-import { Label } from "flowbite-react";
-import { XMarkIcon } from "@heroicons/react/24/solid";
+import { Label, Tooltip } from "flowbite-react";
+import { QuestionMarkCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
 
 // @ts-ignore
 function classNames(...classes) {
@@ -22,6 +22,7 @@ interface Props {
   name: string;
   options: { label: string; value: string | number }[];
   placeholder?: string;
+  tooltipText?: string;
 }
 
 export const SelectComboboxField: React.FC<Props> = ({
@@ -30,6 +31,7 @@ export const SelectComboboxField: React.FC<Props> = ({
   label,
   options,
   placeholder,
+  tooltipText,
 }) => {
   const [query, setQuery] = useState("");
 
@@ -54,6 +56,16 @@ export const SelectComboboxField: React.FC<Props> = ({
           <div>
             <div className="mb-2 block">
               <Label htmlFor={name} color={color} value={label} />
+
+              {tooltipText && (
+                <div className="float-right">
+                  <Tooltip content={tooltipText} placement="left">
+                    <div className="w-5 h-5">
+                      <QuestionMarkCircleIcon color="#244657" />
+                    </div>
+                  </Tooltip>
+                </div>
+              )}
             </div>
 
             {selectedItem && (
