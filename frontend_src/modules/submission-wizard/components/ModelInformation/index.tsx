@@ -46,7 +46,6 @@ export const ModelInformation = () => {
     return function saveFormState() {
       const values = getValues();
       setModelInformation({ ...modelInformation, ...values });
-      setCompletedStatus("modelInformation", formState.isValid);
     };
   }, [formState.isValid]);
 

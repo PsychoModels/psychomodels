@@ -70,7 +70,6 @@ export const PublicationDetails = () => {
     return function saveFormState() {
       const values = getValues();
       setPublicationDetails({ ...publicationDetails, ...values });
-      setCompletedStatus("publicationDetails", formState.isValid);
     };
   }, [formState.isValid]);
 

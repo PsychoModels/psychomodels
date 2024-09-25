@@ -34,24 +34,17 @@ export const SubmissionGuidelines = () => {
           </p>
 
           <p className="max-w-screen-md mb-4">
-            The submitted model will not be publicly available from{" "}
-            <strong>Psycho</strong>
-            <em>Models</em> straightaway. If you wish to know more about the
-            submission, curation, annotation, and publication processes, please
-            refer to the relevant sections of the{" "}
-            <a
-              href="/about#faq"
-              target={"_blank"}
-              className="text-tertiary hover:underline inline-flex items-center"
-            >
-              Frequently Asked Questions <NewWindowIcon />
-            </a>
-            .
+            The submission is a multi-staged process. Certain aspects are
+            mandatory ( title, summary, and publication details) others are only
+            requested. Non-mandatory details can be submitted later.
           </p>
 
           <p className="max-w-screen-md mb-4">
-            To ensure a prompt processing of your model, please go through the
-            following checklist before submission.
+            The submitted model will not be publicly available from{" "}
+            <strong>Psycho</strong>
+            <em>Models</em> straightaway. It will first be reviewed by our
+            curators. To ensure a prompt processing of your model, please go
+            through the following checklist before submission.
           </p>
           <ul className="max-w-screen-sm mb-12 list-disc pl-8 space-y-2">
             <li>
@@ -77,11 +70,13 @@ export const SubmissionGuidelines = () => {
                 Explore the models
                 <NewWindowIcon />
               </a>
-              .
             </li>
             <li>Please check if the urls you submit work.</li>
           </ul>
 
+          <h2 className="text-cyan-700 text-lg font-medium md:text-xl mb-4">
+            Terms of Agreement
+          </h2>
           <p className="max-w-screen-md mb-4">
             All details provided about the models in <strong>Psycho</strong>
             <em>Models</em> are available under the terms of the Creative
