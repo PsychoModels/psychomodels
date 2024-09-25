@@ -40,7 +40,7 @@ jobs:
 
     # Run Playwright tests
     - name: Run Playwright tests
-      run: yarn playwright test
+      run: yarn playwright test --trace on
 
     # Upload Playwright report
     - uses: actions/upload-artifact@v4
