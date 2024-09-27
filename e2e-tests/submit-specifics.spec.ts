@@ -47,7 +47,7 @@ test("Submission wizard - add new framework", async ({ page }) => {
     .fill("Framework description");
   await page.locator('textarea[name="description"]').press("Tab");
   await page
-    .locator('textarea[name="textarea"]')
+    .locator('textarea[name="explanation"]')
     .fill("How does the framework works");
 
   await page.locator('input[name="publicationDOI"]').click();
