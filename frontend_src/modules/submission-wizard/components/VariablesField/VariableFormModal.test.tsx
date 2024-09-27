@@ -21,7 +21,9 @@ describe("VariableFormModal", () => {
       />,
     );
 
-    expect(screen.getByText("Add new variable to your model")).toBeInTheDocument();
+    expect(
+      screen.getByText("Add new variable to your model"),
+    ).toBeInTheDocument();
     expect(screen.getByLabelText("Variable*")).toBeInTheDocument();
     expect(screen.getByLabelText("Name*")).toBeInTheDocument();
     expect(screen.getByLabelText("Details")).toBeInTheDocument();
