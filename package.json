@@ -64,6 +64,7 @@
     "@types/react-dom": "^18.2.22",
     "@types/react-text-truncate": "^0.14.4",
     "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/ui": "^2.1.1",
     "eslint": "9.x",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",

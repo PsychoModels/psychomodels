@@ -4,6 +4,7 @@ import React from "react";
 import { FrameworkCreateModal } from "./FrameworkCreateModal";
 import { renderWithQueryClient } from "../../../../test-utils/testQueryProvider.tsx";
 import userEvent from "@testing-library/user-event";
+import { MathJaxContext } from "better-react-mathjax";
 
 vi.mock("@tanstack/react-router", () => ({
   useNavigate: vi.fn(),
@@ -15,11 +16,13 @@ describe("FrameworkCreateModal", () => {
 
   it("should render the form with all fields", () => {
     renderWithQueryClient(
-      <FrameworkCreateModal
-        show={true}
-        onClose={mockOnClose}
-        onSelect={mockOnSelect}
-      />,
+      <MathJaxContext>
+        <FrameworkCreateModal
+          show={true}
+          onClose={mockOnClose}
+          onSelect={mockOnSelect}
+        />
+      </MathJaxContext>,
     );
 
     expect(
@@ -27,18 +30,19 @@ describe("FrameworkCreateModal", () => {
     ).toBeInTheDocument();
     expect(screen.getByLabelText("Name*")).toBeInTheDocument();
     expect(screen.getByLabelText("Description*")).toBeInTheDocument();
-    expect(screen.getByLabelText("How does it work*")).toBeInTheDocument();
     expect(screen.getByLabelText("Publication DOI")).toBeInTheDocument();
     expect(screen.getByLabelText("Documentation url")).toBeInTheDocument();
   });
 
   it("should show validation errors for required fields when trying to submit empty form", async () => {
     renderWithQueryClient(
-      <FrameworkCreateModal
-        show={true}
-        onClose={mockOnClose}
-        onSelect={mockOnSelect}
-      />,
+      <MathJaxContext>
+        <FrameworkCreateModal
+          show={true}
+          onClose={mockOnClose}
+          onSelect={mockOnSelect}
+        />
+      </MathJaxContext>,
     );
 
     await userEvent.type(

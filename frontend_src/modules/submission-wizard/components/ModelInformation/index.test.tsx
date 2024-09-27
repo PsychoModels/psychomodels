@@ -29,7 +29,7 @@ describe("ModelInformation", () => {
   it("should show validation errors for the required fields", async () => {
     render(<ModelInformation />);
 
-    fireEvent.click(screen.getByText(/publication details/i));
+    fireEvent.click(screen.getByText(/model details/i));
 
     // Check if validation errors are shown
     await waitFor(() => {

@@ -52,6 +52,7 @@ export const MarkdownField = ({
                 value={value}
                 renderHTML={(text) => mdParser.render(text)}
                 onChange={handleEditorChange}
+                name={name}
               />
             </MathJax>
 

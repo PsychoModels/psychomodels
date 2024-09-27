@@ -24,8 +24,8 @@ describe("VariableFormModal", () => {
     expect(
       screen.getByText("Add new variable to your model"),
     ).toBeInTheDocument();
-    expect(screen.getByLabelText("Variable*")).toBeInTheDocument();
     expect(screen.getByLabelText("Name*")).toBeInTheDocument();
+    expect(screen.getByLabelText("Label*")).toBeInTheDocument();
     expect(screen.getByLabelText("Details")).toBeInTheDocument();
   });
 
@@ -40,7 +40,7 @@ describe("VariableFormModal", () => {
     );
 
     // Initially, the "create custom variable" link should be shown
-    const createCustomLink = screen.getByText("create custom variable");
+    const createCustomLink = screen.getByText("create new variable");
     expect(createCustomLink).toBeInTheDocument();
 
     // Click to create custom variable
@@ -48,9 +48,9 @@ describe("VariableFormModal", () => {
 
     waitFor(() => {
       // Ensure the custom variable form fields are shown
-      expect(screen.getByLabelText("Variable")).toBeInTheDocument();
+      expect(screen.getByLabelText("Name")).toBeInTheDocument();
       expect(screen.getByLabelText("Description")).toBeInTheDocument();
-      expect(screen.queryByLabelText("Variable*")).not.toBeInTheDocument(); // Existing variable select should be gone
+      expect(screen.queryByLabelText("Name*")).not.toBeInTheDocument(); // Existing variable select should be gone
     });
 
     // Toggle back to select existing variable
@@ -58,8 +58,8 @@ describe("VariableFormModal", () => {
     fireEvent.click(selectExistingLink);
 
     // Ensure the existing variable select is shown again
-    expect(screen.getByLabelText("Variable*")).toBeInTheDocument();
-    expect(screen.queryByLabelText("Variable")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Name*")).toBeInTheDocument();
+    expect(screen.queryByLabelText("Name")).not.toBeInTheDocument();
   });
 
   it("does not submit the form if required fields are missing", async () => {
