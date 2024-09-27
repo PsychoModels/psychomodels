@@ -300,3 +300,7 @@ HEADLESS_FRONTEND_URLS = {
 }
 
 HEADLESS_ADAPTER = "members.headless_adapter.MemberAllauthHeadlessAdapter"
+
+# disable rate limits for e2e tests only
+disable_account_rate_limits = os.getenv("DISABLE_ACCOUNT_RATE_LIMITS", "False")
+ACCOUNT_RATE_LIMITS = False if disable_account_rate_limits.lower() == "true" else True

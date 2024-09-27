@@ -24,6 +24,7 @@ services:
       DJANGO_SECRET_KEY: django-docker-insecure
       EMAIL_BACKEND: django.core.mail.backends.console.EmailBackend
       STATIC_URL: http://localhost:8001/
+      DISABLE_ACCOUNT_RATE_LIMITS: True
     depends_on:
       db:
         condition: service_healthy

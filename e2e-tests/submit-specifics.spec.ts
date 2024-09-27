@@ -47,8 +47,9 @@ test("Submission wizard - add new framework", async ({ page }) => {
     .fill("Framework description");
   await page.locator('textarea[name="description"]').press("Tab");
   await page
-    .locator('textarea[name="explanation"]')
+    .locator('textarea[name="textarea"]')
     .fill("How does the framework works");
+
   await page.locator('input[name="publicationDOI"]').click();
   await page
     .locator('input[name="publicationDOI"]')
@@ -255,7 +256,7 @@ test("Submission wizard - select and add variables", async ({ page }) => {
   await page.locator('textarea[name="details"]').fill("Details X");
   await page.getByRole("button", { name: "Save" }).click();
   await page.getByRole("button", { name: "Add variable" }).click();
-  await page.getByText("create custom variable").click();
+  await page.getByText("create new variable").click();
   await page.locator('input[name="variableName"]').fill("Counter measure");
   await page
     .locator('textarea[name="variableDescription"]')
