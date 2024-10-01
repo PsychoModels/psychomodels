@@ -270,8 +270,10 @@ test("Submission wizard - select and add variables", async ({ page }) => {
   // Review step
   const reviewForm = await page.locator('[data-testid="review-form"]');
   await expect(reviewForm.getByText("Variables")).toBeVisible();
-  await expect(reviewForm.getByRole("heading", { name: "X" })).toBeVisible();
-  await expect(reviewForm.getByText("Variable: Counter measure")).toBeVisible();
+  await expect(
+    reviewForm.getByRole("heading", { name: "Counter measure" }),
+  ).toBeVisible();
+  await expect(reviewForm.getByText("Label: X")).toBeVisible();
 
   await page.getByRole("button", { name: "Submit Psychology model" }).click();
   await expect(
