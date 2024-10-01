@@ -13,6 +13,7 @@ class MemberAllauthHeadlessAdapter(DefaultHeadlessAdapter):
             "country": str(user.country) if user.country.code is not None else None,
             "university": user.university,
             "department": user.department,
+            "position": user.position,
         }
 
         return user_data

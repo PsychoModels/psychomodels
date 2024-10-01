@@ -8,6 +8,7 @@ class User(AbstractUser):
     last_name = models.CharField(null=True, blank=True)
     university = models.CharField(null=True, blank=True)
     department = models.CharField(null=True, blank=True)
+    position = models.CharField(null=True, blank=True)
     country = CountryField(null=True, blank=True)
 
     def __str__(self):

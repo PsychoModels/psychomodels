@@ -320,6 +320,7 @@ class UserProfileSerializer(CountryFieldMixin, serializers.ModelSerializer):
             "last_name",
             "university",
             "department",
+            "position",
             "country",
         ]
 

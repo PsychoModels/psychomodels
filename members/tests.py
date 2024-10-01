@@ -15,6 +15,7 @@ class UserModelTest(TestCase):
             last_name="User",
             university="Test University",
             department="Computer Science",
+            position="Student",
             country="US",
         )
 
@@ -26,6 +27,7 @@ class UserModelTest(TestCase):
         self.assertEqual(self.user.last_name, "User")
         self.assertEqual(self.user.university, "Test University")
         self.assertEqual(self.user.department, "Computer Science")
+        self.assertEqual(self.user.position, "Student")
         self.assertEqual(self.user.country, Country(code="US"))
 
     def test_user_str_method(self):
@@ -42,12 +44,14 @@ class UserModelTest(TestCase):
             last_name=None,
             university=None,
             department=None,
+            position=None,
             country=None,
         )
         self.assertEqual(user_with_blank_fields.first_name, None)
         self.assertEqual(user_with_blank_fields.last_name, None)
         self.assertEqual(user_with_blank_fields.university, None)
         self.assertEqual(user_with_blank_fields.department, None)
+        self.assertEqual(user_with_blank_fields.position, None)
         self.assertEqual(user_with_blank_fields.country, None)
 
     def test_country_field(self):

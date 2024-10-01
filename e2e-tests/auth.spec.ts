@@ -31,6 +31,7 @@ test("Successful signup and login flow", async ({ page }) => {
   await page.locator('input[name="last_name"]').fill("Maslow");
   await page.locator('input[name="university"]').fill("Columbia University");
   await page.locator('input[name="department"]').fill("Psychology");
+  await page.locator('input[name="position"]').fill("Student");
   await page.getByLabel("Country*").selectOption("US");
   await page.getByRole("button", { name: "Save profile" }).click();
   await expect(page.getByText("Your profile has been")).toBeVisible();

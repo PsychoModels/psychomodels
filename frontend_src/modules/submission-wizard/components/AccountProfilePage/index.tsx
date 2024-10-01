@@ -49,6 +49,7 @@ export const AccountProfilePage = () => {
     last_name: user?.last_name || "",
     university: user?.university || "",
     department: user?.department || "",
+    position: user?.position || "",
     country: user?.country || "",
   };
 

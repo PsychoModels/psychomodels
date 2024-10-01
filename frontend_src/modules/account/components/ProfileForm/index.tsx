@@ -14,7 +14,8 @@ const formSchema = z.object({
   first_name: z.string().min(1),
   last_name: z.string().min(1),
   university: z.string().min(1),
-  department: z.string().min(1),
+  department: z.string(),
+  position: z.string(),
   country: z.string().min(2).min(2),
 });
 
@@ -90,7 +91,7 @@ export const ProfileForm = ({ onSaveSuccess, initialValues }: Props) => {
 
         <TextInputField
           control={control}
-          label="University"
+          label="Institution"
           required
           name="university"
           size="lg"
@@ -99,10 +100,17 @@ export const ProfileForm = ({ onSaveSuccess, initialValues }: Props) => {
         <TextInputField
           control={control}
           label="Department"
-          required
           name="department"
           size="lg"
         />
+
+        <TextInputField
+          control={control}
+          label="Position"
+          name="position"
+          size="lg"
+        />
+
         <SelectField
           control={control}
           label="Country*"
