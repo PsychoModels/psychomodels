@@ -11,15 +11,15 @@ export const FacetedContainer = () => {
       />
 
       <RefinementList
-        attribute="programming_language_name"
-        label="Programming language"
-        searchablePlaceholder="Search for a programming language"
-      />
-
-      <RefinementList
         attribute="psychology_discipline_names"
         label="Discipline"
         searchablePlaceholder="Search for a discipline"
+      />
+
+      <RefinementList
+        attribute="programming_language_name"
+        label="Programming language"
+        searchablePlaceholder="Search for a programming language"
       />
 
       <RefinementList
