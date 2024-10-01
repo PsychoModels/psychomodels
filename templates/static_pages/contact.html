@@ -8,7 +8,7 @@
 
 {% block extrascripts %}
 
-{% if debug %}
+{% if debug|default:False %}
     <!-- If you're using vite with React, this next script will be needed for HMR -->
     <script type="module">
         import RefreshRuntime from 'http://localhost:5173/@react-refresh'
@@ -25,7 +25,7 @@
 
     {% vite %}
 
-    {% if debug %}
+    {% if debug|default:False %}
         <script type="module" src="http://localhost:5173/frontend_src/contact_form.tsx"></script>
     {% else %}
         {% vite 'frontend_src/contact_form.tsx' %}
