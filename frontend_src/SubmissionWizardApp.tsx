@@ -13,7 +13,16 @@ function SubmissionWizardApp() {
     <ThemeProvider>
       <InitialDataProvider>
         <QueryClientProvider client={queryClient}>
-          <MathJaxContext>
+          <MathJaxContext
+            config={{
+              tex: {
+                inlineMath: [
+                  ["$", "$"],
+                  ["\\(", "\\)"],
+                ],
+              },
+            }}
+          >
             <SubmissionWizardRouter />
           </MathJaxContext>
         </QueryClientProvider>
