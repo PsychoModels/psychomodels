@@ -89,7 +89,7 @@ class FrameworkDetailView(UserPassesTestMixin, generic.DetailView):
 
         framework = self.object
         related_psychology_models = PsychologyModel.objects.filter(
-            framework=framework
+            framework=framework, published_at__isnull=False
         ).prefetch_related("framework", "psychology_discipline", "programming_language")
 
         context["related_psychology_models"] = related_psychology_models
