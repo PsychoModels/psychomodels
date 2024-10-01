@@ -4,15 +4,42 @@ import useStore from "../../store/useStore.ts";
 import { Button } from "flowbite-react";
 import { useNavigate } from "@tanstack/react-router";
 import NewWindowIcon from "../../../shared/components/Icons/NewWindowIcon.tsx";
+import { useQuery } from "@tanstack/react-query";
+import { getSession } from "../../../account/lib/allauth.ts";
 
 export const SubmissionGuidelines = () => {
   const navigate = useNavigate({ from: "/" });
 
   const { setCompletedStatus } = useStore((state) => state);
 
+  const { data: sessionData } = useQuery({
+    queryKey: ["auth", "session", "status"],
+    queryFn: async () => {
+      try {
+        const data = await getSession();
+
+        data.loggedIn = true;
+        return data;
+      } catch (error) {
+        // @ts-ignore
+        if (error?.response?.status === 401) {
+          return { loggedIn: false };
+        }
+        throw error;
+      }
+    },
+  });
+
   const onSubmitHandler = () => {
     setCompletedStatus("submissionGuidelines", true);
-    navigate({ to: "/account" });
+
+    // jump over account step if user is already logged in
+    if (sessionData && sessionData.loggedIn === true) {
+      setCompletedStatus("account", true);
+      navigate({ to: "/model-summary" });
+    } else {
+      navigate({ to: "/account" });
+    }
   };
 
   return (
