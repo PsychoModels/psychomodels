@@ -85,6 +85,7 @@ class PsychologyModelAdmin(DjangoObjectActions, AdminMixin):
 
     readonly_fields = (
         "publication_citation",
+        "created_at",
         "published_at",
         "published_by",
     )
@@ -128,7 +129,7 @@ class FrameworkAdmin(DjangoObjectActions, AdminMixin):
     def published_state(self, obj):
         return published_state(self, obj)
 
-    readonly_fields = ("publication_citation", "published_at")
+    readonly_fields = ("created_at", "publication_citation", "published_at")
     exclude = (
         "publication_csl_json",
         "publication_csl_fetched_at",
@@ -138,7 +139,7 @@ class FrameworkAdmin(DjangoObjectActions, AdminMixin):
 
 
 class VariableAdmin(AdminMixin):
-    readonly_fields = ("published_at",)
+    readonly_fields = ("created_at", "published_at")
     list_display = ("name", "published_state")
 
     def published_state(self, obj):
@@ -146,7 +147,7 @@ class VariableAdmin(AdminMixin):
 
 
 class ModelVariableAdmin(AdminMixin):
-    readonly_fields = ("published_at",)
+    readonly_fields = ("created_at", "published_at")
     list_display = ("name", "published_state")
 
     def published_state(self, obj):
@@ -154,7 +155,7 @@ class ModelVariableAdmin(AdminMixin):
 
 
 class ProgrammingLanguageAdmin(AdminMixin):
-    readonly_fields = ("published_at",)
+    readonly_fields = ("created_at", "published_at")
     list_display = ("name", "published_state")
 
     def published_state(self, obj):
@@ -162,7 +163,7 @@ class ProgrammingLanguageAdmin(AdminMixin):
 
 
 class PsychologyDisciplineAdmin(AdminMixin):
-    readonly_fields = ("published_at",)
+    readonly_fields = ("created_at", "published_at")
     list_display = ("name", "published_state")
 
     def published_state(self, obj):
@@ -170,7 +171,7 @@ class PsychologyDisciplineAdmin(AdminMixin):
 
 
 class SoftwarePackageAdmin(AdminMixin):
-    readonly_fields = ("published_at",)
+    readonly_fields = ("created_at", "published_at")
     list_display = ("name", "published_state")
 
     def published_state(self, obj):
