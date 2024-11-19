@@ -235,10 +235,11 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 CRISPY_TEMPLATE_PACK = "tailwind"
 
-sentry_sdk.init(
-    dsn=os.getenv("SENTRY_DSN"),
-    environment=os.getenv("SENTRY_ENVIRONMENT", "development"),
-)
+if (os.getenv("SENTRY_DSN")):
+    sentry_sdk.init(
+        dsn=os.getenv("SENTRY_DSN"),
+        environment=os.getenv("SENTRY_ENVIRONMENT", "development"),
+    )
 
 if os.getenv("DEBUG_LOGGING") == "True":
     LOGGING = {

@@ -1,4 +1,3 @@
--i https://pypi.org/simple
 black==24.8.0; python_version >= '3.8'
 click==8.1.7; python_version >= '3.7'
 mypy-extensions==1.0.0; python_version >= '3.5'
