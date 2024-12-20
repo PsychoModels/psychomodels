@@ -1,11 +1,20 @@
 # PsychoModels
 
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Main](https://github.com/PsychoModels/psychomodels/actions/workflows/main.yml/badge.svg)](https://github.com/PsychoModels/psychomodels/actions/workflows/main.yml)
+
+
 This project establishes a database of formal models in psychology.
 
 PsychoModels is managed by Noah van Dongen and Leonhard Volz. PsychoModels is made possible through the NWO grant no.
 OSF23.1.031.
 
 PsychoModels was developed by Leonhard Volz who created the MVP and Vincent Verbrugh.
+
+
+## License
+
+This project is licensed under the terms of the [Apache License 2.0](LICENSE).
 
 ## Requirements
 
@@ -141,7 +150,7 @@ The linting check is also run on the CI pipeline using Github actions.
 
 The project is hosted at Digital Ocean on App Platform and a managed Postgres database. The project is automatically
 deployed to production on every push to the `main` branch and to staging on `develop` branch if the tests succeed on the CI/CD pipeline.
-The Digital Ocean App Platform config is stored at `./do/**`. Make sure to sync the config if you make changes through the Digital Ocean interface.
+The Digital Ocean App Platform config is stored in a separate repository.
 
 
 ## Database schema
