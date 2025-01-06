@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 import dj_database_url
 import sentry_sdk
+import sys
 
 from django.core.management.utils import get_random_secret_key
 
@@ -303,3 +304,17 @@ disable_account_rate_limits = (
 )
 if disable_account_rate_limits:
     ACCOUNT_RATE_LIMITS = False
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+# django-after-response does not work well when running tests
+if 'test' in sys.argv:
+    AFTER_RESPONSE_RUN_ASYNC = False

@@ -1,6 +1,8 @@
 from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
+
+from members.models import User
 from psychology_models.models import (
     PsychologyModel,
     ProgrammingLanguage,
@@ -39,12 +41,34 @@ class PsychologyModelAPITest(APITestCase):
         # Define the URL for the PsychologyModel list endpoint
         self.url = reverse("psychology_models_create")
 
+        # Create a test user
+        self.user = User.objects.create_user(username="testuser", password="testpassword", email="testuser@example.com")
+
+    def test_create_psychology_model_without_login(self):
+        """
+        Ensure that unauthenticated requests are rejected.
+        """
+        payload = {
+            "title": "Psychology Model #1",
+            "description": "A detailed description of the advanced psychology model.",
+            "explanation": "## Detailed Markdown explanation",
+        }
+
+        # Send POST request without authentication
+        response = self.client.post(self.url, payload, format="json")
+
+        # Check that the response status is 401 Unauthorized
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_create_psychology_model_with_only_required_fields(self):
         payload = {
             "title": "Psychology Model #1",
             "description": "A detailed description of the advanced psychology model.",
             "explanation": "## Detailed Markdown explanation",
         }
+
+        # Log in the test user
+        self.client.login(username="testuser", password="testpassword")
 
         # Send POST request to create the PsychologyModel
         response = self.client.post(self.url, payload, format="json")
@@ -70,14 +94,20 @@ class PsychologyModelAPITest(APITestCase):
             ],
         }
 
+        # Log in the test user
+        self.client.login(username="testuser", password="testpassword")
+
         # Send POST request to create the PsychologyModel
         response = self.client.post(self.url, payload, format="json")
 
         # Check that the response status is 201 Created
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+
         # Fetch the created PsychologyModel from the database
         psychology_model = PsychologyModel.objects.get(title="Psychology Model #2")
+
+        self.assertEqual(psychology_model.created_by, self.user)
 
         discipline_names = [
             discipline.name
@@ -100,6 +130,9 @@ class PsychologyModelAPITest(APITestCase):
             ],
         }
 
+        # Log in the test user
+        self.client.login(username="testuser", password="testpassword")
+
         # Send POST request to create the PsychologyModel
         response = self.client.post(self.url, payload, format="json")
 
@@ -116,6 +149,9 @@ class PsychologyModelAPITest(APITestCase):
             "explanation": "explanation",
             "programming_language": {"id": self.existing_programming_language.id},
         }
+
+        # Log in the test user
+        self.client.login(username="testuser", password="testpassword")
 
         # Send POST request to create the PsychologyModel
         response = self.client.post(self.url, payload, format="json")
@@ -135,6 +171,9 @@ class PsychologyModelAPITest(APITestCase):
             "explanation": "explanation",
             "programming_language": {"name": "R"},
         }
+
+        # Log in the test user
+        self.client.login(username="testuser", password="testpassword")
 
         # Send POST request to create the PsychologyModel
         response = self.client.post(self.url, payload, format="json")
@@ -157,6 +196,9 @@ class PsychologyModelAPITest(APITestCase):
             "explanation": "explanation",
             "programming_language": {"id": 9999},
         }
+
+        # Log in the test user
+        self.client.login(username="testuser", password="testpassword")
 
         # Send POST request to create the PsychologyModel
         response = self.client.post(self.url, payload, format="json")
@@ -184,6 +226,9 @@ class PsychologyModelAPITest(APITestCase):
                 }
             ],
         }
+
+        # Log in the test user
+        self.client.login(username="testuser", password="testpassword")
 
         # Send POST request to create the PsychologyModel
         response = self.client.post(self.url, payload, format="json")
@@ -231,6 +276,9 @@ class PsychologyModelAPITest(APITestCase):
             ],
         }
 
+        # Log in the test user
+        self.client.login(username="testuser", password="testpassword")
+
         # Send POST request to create the PsychologyModel
         response = self.client.post(self.url, payload, format="json")
 
@@ -265,6 +313,9 @@ class PsychologyModelAPITest(APITestCase):
             ],
         }
 
+        # Log in the test user
+        self.client.login(username="testuser", password="testpassword")
+
         # Send POST request to create the PsychologyModel
         response = self.client.post(self.url, payload, format="json")
 
@@ -296,6 +347,9 @@ class PsychologyModelAPITest(APITestCase):
                 }
             ],
         }
+
+        # Log in the test user
+        self.client.login(username="testuser", password="testpassword")
 
         # Send POST request to create the PsychologyModel
         response = self.client.post(self.url, payload, format="json")
@@ -329,6 +383,9 @@ class PsychologyModelAPITest(APITestCase):
                 }
             ],
         }
+
+        # Log in the test user
+        self.client.login(username="testuser", password="testpassword")
 
         # Send POST request to create the PsychologyModel
         response = self.client.post(self.url, payload, format="json")
