@@ -1,7 +1,6 @@
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-import sys
 import dj_database_url
 import sentry_sdk
 
@@ -277,6 +276,7 @@ DJANGO_VITE_PLUGIN = {
 ALGOLIA = {
     "APPLICATION_ID": os.getenv("ALGOLIA_APP_ID") or "NO_APP_ID",
     "API_KEY": os.getenv("ALGOLIA_API_KEY") or "NO_API_KEY",
+    "AUTO_INDEXING": os.getenv("ALGOLIA_AUTO_INDEXING", "True") == "True",
 }
 
 CORS_ORIGIN_ALLOW_ALL = DEBUG
