@@ -42,6 +42,7 @@ jobs:
           DATABASE_PASSWORD: postgres
           DATABASE_HOST: localhost
           DATABASE_PORT: 5432
+          ALGOLIA_AUTO_INDEXING: False
 
   frontend:
     runs-on: ubuntu-latest
