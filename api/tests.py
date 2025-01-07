@@ -9,6 +9,7 @@ from psychology_models.models import (
     PsychologyDiscipline,
     Framework,
     Variable,
+    PsychologyModelDraft,
 )
 
 
@@ -42,7 +43,21 @@ class PsychologyModelAPITest(APITestCase):
         self.url = reverse("psychology_models_create")
 
         # Create a test user
-        self.user = User.objects.create_user(username="testuser", password="testpassword", email="testuser@example.com")
+        self.user = User.objects.create_user(
+            username="testuser", password="testpassword", email="testuser@example.com"
+        )
+
+        self.user2 = User.objects.create_user(
+            username="otheruser",
+            password="otherpassword",
+            email="otheruser@example.com",
+        )
+
+        # Create a draft
+        self.draft = PsychologyModelDraft.objects.create(
+            data="{}",
+            created_by=self.user,
+        )
 
     def test_create_psychology_model_without_login(self):
         """
@@ -102,7 +117,6 @@ class PsychologyModelAPITest(APITestCase):
 
         # Check that the response status is 201 Created
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
 
         # Fetch the created PsychologyModel from the database
         psychology_model = PsychologyModel.objects.get(title="Psychology Model #2")
@@ -404,3 +418,80 @@ class PsychologyModelAPITest(APITestCase):
         self.assertEqual(model_variable.details, "Details")
         self.assertEqual(model_variable.variable.name, "Stress")
         self.assertEqual(model_variable.variable.description, "desc")
+
+    def test_list_drafts_authenticated(self):
+        self.client.login(username="testuser", password="testpassword")
+        url = "/api/psychology_models/draft/"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+
+    def test_list_drafts_unauthenticated(self):
+        url = "/api/psychology_models/draft/"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_retrieve_draft_authenticated(self):
+        self.client.login(username="testuser", password="testpassword")
+        url = f"/api/psychology_models/draft/{self.draft.id}/"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_retrieve_draft_unauthenticated(self):
+        url = f"/api/psychology_models/draft/{self.draft.id}/"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_retrieve_draft_not_owned(self):
+        self.client.login(username="otheruser", password="otherpassword")
+        url = f"/api/psychology_models/draft/{self.draft.id}/"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_create_draft_authenticated(self):
+        self.client.login(username="testuser", password="testpassword")
+        url = "/api/psychology_models/draft/"
+        payload = {
+            "data": {},
+        }
+        response = self.client.post(url, payload, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_draft_unauthenticated(self):
+        url = "/api/psychology_models/draft/"
+        payload = {
+            "data": {},
+        }
+        response = self.client.post(url, payload, format="json")
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_update_draft_authenticated(self):
+        self.client.login(username="testuser", password="testpassword")
+        url = f"/api/psychology_models/draft/{self.draft.id}/"
+        payload = {
+            "data": {},
+        }
+        response = self.client.put(url, payload, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_update_draft_not_owned(self):
+        self.client.login(username="otheruser", password="otherpassword")
+        url = f"/api/psychology_models/draft/{self.draft.id}/"
+        payload = {
+            "data": {},
+        }
+        response = self.client.put(url, payload, format="json")
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_delete_draft_authenticated(self):
+        self.client.login(username="testuser", password="testpassword")
+        url = f"/api/psychology_models/draft/{self.draft.id}/"
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(PsychologyModelDraft.objects.filter(id=self.draft.id).exists())
+
+    def test_delete_draft_not_owned(self):
+        self.client.login(username="otheruser", password="otherpassword")
+        url = f"/api/psychology_models/draft/{self.draft.id}/"
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

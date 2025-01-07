@@ -9,6 +9,7 @@ from psychology_models.models import (
     Variable,
     ModelVariable,
     ProgrammingLanguage,
+    PsychologyModelDraft,
 )
 from members.models import User
 from django_countries.serializers import CountryFieldMixin
@@ -329,3 +330,16 @@ class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactMessage
         fields = ["email", "subject", "message"]
+
+
+class PsychologyModelDraftSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PsychologyModelDraft
+        fields = ["data", "id"]
+
+    def validate_data(self, value):
+        if not isinstance(value, dict):  # Ensure it's a JSON object (dictionary)
+            raise serializers.ValidationError(
+                "The 'data' field must be a valid JSON object."
+            )
+        return value

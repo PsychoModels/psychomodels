@@ -263,3 +263,15 @@ class PsychologyModel(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class PsychologyModelDraft(models.Model):
+    data = models.JSONField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    created_by = CurrentUserField(related_name="psychology_model_draft_created_by")
+    updated_by = CurrentUserField(
+        on_update=True, related_name="psychology_model_draft_updated_by"
+    )
