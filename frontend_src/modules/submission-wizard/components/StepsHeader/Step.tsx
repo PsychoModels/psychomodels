@@ -65,7 +65,7 @@ export const Step = ({
   if (isCompleted) {
     return (
       <li className="relative md:flex md:flex-1">
-        <ConditionalLink useLink={isCompleted && allowNavigate} to={route}>
+        <ConditionalLink useLink={allowNavigate} to={route}>
           <div className="group flex w-full items-center">
             <span className="flex items-center px-6 py-4 text-sm font-medium">
               <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-cyan-700">
@@ -84,7 +84,7 @@ export const Step = ({
 
   return (
     <li className="relative md:flex md:flex-1">
-      <ConditionalLink useLink={isCompleted && allowNavigate} to={route}>
+      <ConditionalLink useLink={allowNavigate} to={route}>
         <div className="group flex items-center">
           <span className="flex items-center px-6 py-4 text-sm font-medium">
             <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-gray-300">

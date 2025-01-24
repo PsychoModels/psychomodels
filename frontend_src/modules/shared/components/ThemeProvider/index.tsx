@@ -39,7 +39,7 @@ const customTheme: CustomFlowbiteTheme = {
     head: {
       base: "group/head text-xs text-secondary dark:text-gray-400",
       cell: {
-        base: "bg-gray-50 px-6 py-3 group-first/head:first:rounded-tl-lg group-first/head:last:rounded-tr-lg dark:bg-gray-700",
+        base: "bg-gray-200 px-6 py-3 group-first/head:first:rounded-tl-lg group-first/head:last:rounded-tr-lg dark:bg-gray-700",
       },
     },
     row: {

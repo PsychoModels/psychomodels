@@ -1,11 +1,8 @@
 {% extends '_base.html' %}
-{% load vite %}
 {% load static %}
-{% load countries %}
+{% load vite %}
 
-
-{% block title %}{{ page_title }} - PsychoModels{% endblock %}
-
+{% block title %}My (draft) models - PsychoModels{% endblock %}
 
 {% block extrascripts %}
 
@@ -27,16 +24,16 @@
     {% vite %}
 
     {% if debug|default:False %}
-        <script type="module" src="http://localhost:5173/frontend_src/submission_wizard.tsx"></script>
+        <script type="module" src="http://localhost:5173/frontend_src/my_model_list.tsx"></script>
     {% else %}
-        {% vite 'frontend_src/submission_wizard.tsx' %}
+        {% vite 'frontend_src/my_model_list.tsx' %}
     {% endif %}
 
 {% endblock %}
 
-
 {% block content %}
-    <div class="min-h-[600px] mx-auto max-w-screen-2xl md:px-4 lg:px-6 mt-6 w-full mb-20">
+    <div class="min-h-[600px] mx-auto max-w-screen-2xl lg:px-6 my-6 w-full">
+
         <nav class="flex mb-6 mx-6" aria-label="Breadcrumb">
             <ol role="list" class="flex items-center space-x-4">
                 <li>
@@ -54,35 +51,27 @@
                 </li>
                 <li>
                     <div class="flex items-center">
+
                         <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
                              aria-hidden="true">
                             <path fill-rule="evenodd"
                                   d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
                                   clip-rule="evenodd"></path>
                         </svg>
-                        <span class="ml-4 text-sm font-medium text-gray-700">{{breadcrumb_title}}</span>
+
+                        <span class="ml-4 text-sm font-medium text-gray-700">My (draft) models</span>
                     </div>
                 </li>
             </ol>
         </nav>
-        <div id="root" class="bg-white md:rounded-md"></div>
+        <div id="root"></div>
     </div>
 
-    {% get_countries as countries %}
-
-    <script id="initial-data" type="application/json">
+    <script id="data" type="application/json">
         {
-            "existing_draft": {{ existing_draft|default:"null"|safe }},
-            "frameworks": {{ frameworks|safe }},
-            "programmingLanguages": {{ programming_languages|safe }},
-            "psychologyDisciplines": {{ psychology_disciplines|safe }},
-            "variables": {{ variables|safe }},
-            "countries": [
-        {% for code, name in countries %}
-            {"code": "{{ code }}", "name": "{{ name }}"}{% if not forloop.last %},{% endif %}
-                {% endfor %}
-        ]
-    }
+            "models": {{ models|safe }},
+            "drafts": {{ drafts|safe }}
+        }
     </script>
 
 {% endblock %}

@@ -76,6 +76,12 @@
              class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="accountMenu">
                 <li>
+                    <a href="{% url 'my_model_list' %}"
+                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                        My draft submissions
+                    </a>
+                </li>
+                <li>
                     <a href="{% url 'members_profile_edit' %}"
                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         Edit profile
@@ -115,7 +121,7 @@
             </li>
             {% if request.user.is_authenticated %}
                 <li class="text-center">
-                    <a href="/account/">Account</a>
+                    <a href="{% url 'my_model_list' %}">My draft submissions</a>
                 </li>
                 <li class="text-center">
                     <a href="{% url 'members_profile_edit' %}">

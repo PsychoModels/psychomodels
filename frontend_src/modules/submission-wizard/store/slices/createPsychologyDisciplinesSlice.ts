@@ -1,5 +1,6 @@
 import { StateCreator } from "zustand";
 import { PsychologyDiscipline } from "../../../../models";
+import { draftSliceSerializeFns } from "../serializeDraftSlice.ts";
 
 type PsychologyDisciplinesSlice = {
   psychologyDisciplines: PsychologyDiscipline[];
@@ -13,8 +14,15 @@ const initialState = {
 
 export const createPsychologyDisciplinesSlice: StateCreator<
   PsychologyDisciplinesSlice
-> = (set) => {
+> = (set, getState) => {
   // do not reset this slice
+
+  // only serialize new disciplines for draft submission
+  draftSliceSerializeFns.add(() => ({
+    psychologyDisciplines: getState().psychologyDisciplines.filter(
+      (pd) => pd.isNew,
+    ),
+  }));
 
   return {
     ...initialState,

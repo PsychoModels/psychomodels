@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import useStore from "../../store/useStore.ts";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -10,6 +10,7 @@ import { TextAreaField } from "../../../shared/components/Form/TextAreaField.tsx
 import { ModelingFrameworkField } from "../ModelingFrameworkField";
 import { PsychologyDisciplineField } from "../PsychologyDisciplineField";
 import { useNavigate } from "@tanstack/react-router";
+import { SaveAsDraftButton } from "../SaveAsDraftButton";
 
 const formSchema = z.object({
   title: z.string().max(255).min(1, { message: "Title is required" }),
@@ -36,6 +37,12 @@ export const ModelInformation = () => {
       defaultValues: { ...modelInformation },
     });
 
+  const isValidRef = useRef(formState.isValid);
+
+  useEffect(() => {
+    isValidRef.current = formState.isValid;
+  }, [formState.isValid]);
+
   const onSubmit = (values: ValidationSchema) => {
     setModelInformation({ ...modelInformation, ...values });
     setCompletedStatus("modelInformation", true);
@@ -43,11 +50,17 @@ export const ModelInformation = () => {
   };
 
   useEffect(() => {
-    return function saveFormState() {
+    return () => {
       const values = getValues();
       setModelInformation({ ...modelInformation, ...values });
+      setCompletedStatus("modelInformation", isValidRef.current);
     };
-  }, [formState.isValid]);
+  }, []);
+
+  const beforeSaveDraft = useCallback(() => {
+    const values = getValues();
+    setModelInformation({ ...modelInformation, ...values });
+  }, []);
 
   const onNavigateBack = () => {
     navigate({ to: "/account" });
@@ -79,13 +92,21 @@ export const ModelInformation = () => {
           <PsychologyDisciplineField control={control} />
         </form>
       </div>
+      <div className="md:hidden flex justify-end">
+        <SaveAsDraftButton asLink beforeSaveDraft={beforeSaveDraft} />
+      </div>
       <div className="flex bg-gray-50 space-x-6 p-6 border-t md:justify-start justify-between">
         <Button type="button" color="gray" onClick={onNavigateBack}>
           Back
         </Button>
+
         <Button type="submit" onClick={handleSubmit(onSubmit)}>
           Model Details <ArrowIcon />
         </Button>
+
+        <div className="!ml-auto hidden md:block">
+          <SaveAsDraftButton beforeSaveDraft={beforeSaveDraft} />
+        </div>
       </div>
     </>
   );

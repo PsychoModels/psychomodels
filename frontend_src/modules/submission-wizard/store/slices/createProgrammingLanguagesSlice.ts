@@ -1,5 +1,6 @@
 import { StateCreator } from "zustand";
 import { ProgrammingLanguage } from "../../../../models";
+import { draftSliceSerializeFns } from "../serializeDraftSlice.ts";
 
 type ProgrammingLanguagesSlice = {
   programmingLanguages: ProgrammingLanguage[];
@@ -13,8 +14,15 @@ const initialState = {
 
 export const createProgrammingLanguagesSlice: StateCreator<
   ProgrammingLanguagesSlice
-> = (set) => {
+> = (set, getState) => {
   // do not reset this slice
+
+  // only serialize new programming languages for draft submission
+  draftSliceSerializeFns.add(() => ({
+    programmingLanguages: getState().programmingLanguages.filter(
+      (pl) => pl.isNew,
+    ),
+  }));
 
   return {
     ...initialState,

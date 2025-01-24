@@ -9,7 +9,6 @@ export const StepsHeader = () => {
   const match = useMatches();
   const currentRoute = match.slice(-1)[0]?.id;
 
-  const allowNavigate = currentRoute !== "/thank-you/";
   const allCompleted = currentRoute === "/thank-you/";
 
   return (
@@ -24,7 +23,14 @@ export const StepsHeader = () => {
           addSeparator
           route="/"
           isCompleted={completedStatus.submissionGuidelines || allCompleted}
-          allowNavigate={allowNavigate}
+          allowNavigate={
+            !allCompleted &&
+            (completedStatus.submissionGuidelines ||
+              completedStatus.account ||
+              completedStatus.modelInformation ||
+              completedStatus.publicationDetails ||
+              completedStatus.review)
+          }
         />
         <Step
           stepNumber={2}
@@ -32,7 +38,13 @@ export const StepsHeader = () => {
           addSeparator
           route="/account"
           isCompleted={completedStatus.account || allCompleted}
-          allowNavigate={allowNavigate}
+          allowNavigate={
+            !allCompleted &&
+            (completedStatus.account ||
+              completedStatus.modelInformation ||
+              completedStatus.publicationDetails ||
+              completedStatus.review)
+          }
         />
 
         <Step
@@ -41,7 +53,12 @@ export const StepsHeader = () => {
           addSeparator
           route="/model-summary"
           isCompleted={completedStatus.modelInformation || allCompleted}
-          allowNavigate={allowNavigate}
+          allowNavigate={
+            !allCompleted &&
+            (completedStatus.modelInformation ||
+              completedStatus.publicationDetails ||
+              completedStatus.review)
+          }
         />
         <Step
           stepNumber={4}
@@ -49,14 +66,17 @@ export const StepsHeader = () => {
           addSeparator
           route="/publication-details"
           isCompleted={completedStatus.publicationDetails || allCompleted}
-          allowNavigate={allowNavigate}
+          allowNavigate={
+            !allCompleted &&
+            (completedStatus.publicationDetails || completedStatus.review)
+          }
         />
         <Step
           stepNumber={5}
           title="Review"
           route="/review"
           isCompleted={completedStatus.review || allCompleted}
-          allowNavigate={allowNavigate}
+          allowNavigate={!allCompleted && completedStatus.review}
         />
       </ol>
     </nav>

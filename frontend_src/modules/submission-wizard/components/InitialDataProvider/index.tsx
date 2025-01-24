@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import useStore from "../../../submission-wizard/store/useStore.ts";
+import useStore from "../../store/useStore.ts";
 import {
   Country,
   Framework,

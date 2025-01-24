@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import useStore from "../../store/useStore.ts";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "flowbite-react";
+import { Alert, Button } from "flowbite-react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { ReviewForm } from "./ReviewForm.tsx";
 import { useMutation } from "@tanstack/react-query";
@@ -14,6 +14,7 @@ import {
 } from "../../util/prepareSubmissionData.ts";
 import { getCSRFToken } from "../../../account/lib/django.ts";
 import { resetAllSlices } from "../../store/resetSlice.ts";
+import { SaveAsDraftButton } from "../SaveAsDraftButton";
 
 const formSchema = z.object({
   remarks: z.string(),
@@ -42,11 +43,12 @@ export const ReviewDetails = () => {
 
   const { reviewDetails, setReviewDetails, completedStatus } = storeState;
 
-  const { control, handleSubmit, getValues, formState } =
-    useForm<ValidationSchema>({
+  const { control, handleSubmit, getValues, reset } = useForm<ValidationSchema>(
+    {
       resolver: zodResolver(formSchema),
       defaultValues: { ...reviewDetails },
-    });
+    },
+  );
 
   const mutation = useMutation({
     mutationFn: (submissionData: PsychologyModelSubmissionData) => {
@@ -57,12 +59,9 @@ export const ReviewDetails = () => {
       });
     },
     onSuccess: () => {
+      reset({});
       resetAllSlices();
       navigate({ to: "/thank-you" });
-    },
-    onError: () => {
-      // todo
-      alert("todo: error");
     },
   });
 
@@ -81,7 +80,7 @@ export const ReviewDetails = () => {
       const values = getValues();
       setReviewDetails({ ...reviewDetails, ...values });
     };
-  }, [formState.isValid]);
+  }, []);
 
   const onNavigateBack = () => {
     navigate({ to: "/publication-details" });
@@ -93,6 +92,11 @@ export const ReviewDetails = () => {
       return value;
     },
   );
+
+  const beforeSaveDraft = useCallback(() => {
+    const values = getValues();
+    setReviewDetails({ ...reviewDetails, ...values });
+  }, []);
 
   return (
     <>
@@ -126,6 +130,17 @@ export const ReviewDetails = () => {
           />
         )}
       </div>
+      <div className="md:hidden flex justify-end">
+        <SaveAsDraftButton asLink beforeSaveDraft={beforeSaveDraft} />
+      </div>
+
+      {mutation.isError && (
+        <Alert color="failure" className="m-4">
+          An error occurred. Please try again.
+          <br />
+        </Alert>
+      )}
+
       <div className="flex bg-gray-50 space-x-6 p-6 border-t" color="gray">
         <Button type="button" color="gray" onClick={onNavigateBack}>
           Back
@@ -138,6 +153,9 @@ export const ReviewDetails = () => {
         >
           Submit Psychology model
         </Button>
+        <div className="!ml-auto hidden md:block">
+          <SaveAsDraftButton beforeSaveDraft={beforeSaveDraft} />
+        </div>
       </div>
     </>
   );

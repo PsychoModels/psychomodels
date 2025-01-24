@@ -1,5 +1,6 @@
 import { StateCreator } from "zustand";
 import { Framework } from "../../../../models";
+import { draftSliceSerializeFns } from "../serializeDraftSlice.ts";
 
 type FrameworksSlice = {
   frameworks: Framework[];
@@ -11,8 +12,16 @@ const initialState = {
   frameworks: [],
 };
 
-export const createFrameworksSlice: StateCreator<FrameworksSlice> = (set) => {
+export const createFrameworksSlice: StateCreator<FrameworksSlice> = (
+  set,
+  getState,
+) => {
   // do not reset this slice
+
+  // only serialize new frameworks for draft submission
+  draftSliceSerializeFns.add(() => ({
+    frameworks: getState().frameworks.filter((f) => f.isNew),
+  }));
 
   return {
     ...initialState,

@@ -3,6 +3,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
 import { ModelInformation } from "./index.tsx";
 import { useNavigate } from "@tanstack/react-router";
+import { renderWithQueryClient } from "../../../../test-utils/testQueryProvider.tsx";
 
 vi.mock("@tanstack/react-router", () => ({
   useNavigate: vi.fn(),
@@ -18,7 +19,7 @@ describe("ModelInformation", () => {
   });
 
   it("should render the form with all fields", () => {
-    render(<ModelInformation />);
+    renderWithQueryClient(<ModelInformation />);
 
     expect(screen.getByLabelText("Title*")).toBeInTheDocument();
     expect(screen.getByLabelText("Short description*")).toBeInTheDocument();
@@ -27,7 +28,7 @@ describe("ModelInformation", () => {
   });
 
   it("should show validation errors for the required fields", async () => {
-    render(<ModelInformation />);
+    renderWithQueryClient(<ModelInformation />);
 
     fireEvent.click(screen.getByText(/model details/i));
 

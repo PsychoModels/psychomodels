@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import useStore from "../../store/useStore";
 import * as z from "zod";
 import { FormProvider, useForm } from "react-hook-form";
@@ -13,6 +13,7 @@ import { DOIInputField } from "../DOIInputField";
 import { softwarePackageFormSchema } from "../SoftwarePackageField/SoftwarePackageFormModal";
 import { ProgrammingLanguageSelectField } from "../ProgrammingLanguageSelectField";
 import { useNavigate } from "@tanstack/react-router";
+import { SaveAsDraftButton } from "../SaveAsDraftButton";
 
 const formSchema = z.object({
   explanation: z.string(),
@@ -60,6 +61,12 @@ export const PublicationDetails = () => {
   });
   const { control, handleSubmit, getValues, formState } = formMethods;
 
+  const isValidRef = useRef(formState.isValid);
+
+  useEffect(() => {
+    isValidRef.current = formState.isValid;
+  }, [formState.isValid]);
+
   const onSubmit = (values: ValidationSchema) => {
     setPublicationDetails({ ...publicationDetails, ...values });
     setCompletedStatus("publicationDetails", true);
@@ -67,15 +74,21 @@ export const PublicationDetails = () => {
   };
 
   useEffect(() => {
-    return function saveFormState() {
+    return () => {
       const values = getValues();
       setPublicationDetails({ ...publicationDetails, ...values });
+      setCompletedStatus("publicationDetails", isValidRef.current);
     };
-  }, [formState.isValid]);
+  }, []);
 
   const onNavigateBack = () => {
     navigate({ to: "/model-summary" });
   };
+
+  const beforeSaveDraft = useCallback(() => {
+    const values = getValues();
+    setPublicationDetails({ ...publicationDetails, ...values });
+  }, []);
 
   return (
     <FormProvider {...formMethods}>
@@ -117,13 +130,21 @@ export const PublicationDetails = () => {
           <VariablesField control={control} />
         </form>
       </div>
+      <div className="md:hidden flex justify-end">
+        <SaveAsDraftButton asLink beforeSaveDraft={beforeSaveDraft} />
+      </div>
       <div className="flex bg-gray-50 space-x-6 p-6 border-t md:justify-start justify-between">
         <Button type="button" color="gray" onClick={onNavigateBack}>
           Back
         </Button>
+
         <Button type="submit" onClick={handleSubmit(onSubmit)}>
           Review <ArrowIcon />
         </Button>
+
+        <div className="!ml-auto hidden md:block">
+          <SaveAsDraftButton beforeSaveDraft={beforeSaveDraft} />
+        </div>
       </div>
     </FormProvider>
   );

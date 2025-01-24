@@ -36,6 +36,10 @@ import {
   CountriesSlice,
   createCountriesSlice,
 } from "./slices/createCountriesSlice.ts";
+import {
+  createDraftStateSlice,
+  DraftStateSlice,
+} from "./slices/createDraftStateSlice.ts";
 
 const useStore = create<
   ModelInformationSlice &
@@ -46,8 +50,10 @@ const useStore = create<
     ReviewDetailsSlice &
     PsychologyDisciplinesSlice &
     VariableSlice &
-    CountriesSlice
+    CountriesSlice &
+    DraftStateSlice
 >()((...a) => ({
+  // the order of the slices is pertinent for deserialization
   ...createStepStatusSlice(...a),
   ...createModelInformationSlice(...a),
   ...createFrameworksSlice(...a),
@@ -57,6 +63,7 @@ const useStore = create<
   ...createPsychologyDisciplinesSlice(...a),
   ...createVariableSlice(...a),
   ...createCountriesSlice(...a),
+  ...createDraftStateSlice(...a),
 }));
 
 export default useStore;

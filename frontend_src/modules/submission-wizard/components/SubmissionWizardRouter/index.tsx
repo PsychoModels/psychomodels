@@ -20,6 +20,7 @@ import { AccountLoginPage } from "../AccountLoginPage";
 import { AccountForgotPasswordPage } from "../AccountForgotPasswordPage";
 import { ThankYouPage } from "../ThankYouPage";
 import { AccountProfilePage } from "../AccountProfilePage";
+import { saveDraft } from "../../util/saveDraft.ts";
 
 const rootRoute = createRootRoute({
   component: () => {
@@ -56,6 +57,9 @@ const modelInformationRoute = createRoute({
   component: function ModelInformationPage() {
     return <ModelInformation />;
   },
+  onLeave: () => {
+    saveDraft();
+  },
 });
 
 const publicationDetailsRoute = createRoute({
@@ -64,6 +68,9 @@ const publicationDetailsRoute = createRoute({
   component: function PublicationDetailsPage() {
     return <PublicationDetails />;
   },
+  onLeave: () => {
+    saveDraft();
+  },
 });
 
 const reviewRoute = createRoute({
@@ -71,6 +78,9 @@ const reviewRoute = createRoute({
   path: "/review/",
   component: function ReviewPage() {
     return <ReviewDetails />;
+  },
+  onLeave: () => {
+    saveDraft();
   },
 });
 

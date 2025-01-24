@@ -1,5 +1,6 @@
 import { StateCreator } from "zustand";
 import { sliceResetFns } from "../resetSlice.ts";
+import { draftSliceSerializeFns } from "../serializeDraftSlice.ts";
 
 type ModelInformation = {
   title: string;
@@ -24,8 +25,12 @@ const initialState = {
 
 export const createModelInformationSlice: StateCreator<
   ModelInformationSlice
-> = (set) => {
+> = (set, getState) => {
   sliceResetFns.add(() => set(initialState));
+
+  draftSliceSerializeFns.add(() => ({
+    modelInformation: getState().modelInformation,
+  }));
 
   return {
     ...initialState,

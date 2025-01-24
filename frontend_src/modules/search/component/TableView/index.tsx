@@ -8,9 +8,9 @@ export const TableView = () => {
   return (
     <Table>
       <Table.Head>
-        <Table.HeadCell className="bg-gray-200">Title</Table.HeadCell>
-        <Table.HeadCell className="bg-gray-200">Frameworks</Table.HeadCell>
-        <Table.HeadCell className="bg-gray-200">Disciplines</Table.HeadCell>
+        <Table.HeadCell>Title</Table.HeadCell>
+        <Table.HeadCell>Frameworks</Table.HeadCell>
+        <Table.HeadCell>Disciplines</Table.HeadCell>
       </Table.Head>
       <Table.Body className="divide-y">
         {items.map((item) => (

@@ -1,5 +1,6 @@
 import { StateCreator } from "zustand";
 import { Variable } from "../../../../models";
+import { draftSliceSerializeFns } from "../serializeDraftSlice.ts";
 
 type VariableSlice = {
   variables: Variable[];
@@ -11,8 +12,16 @@ const initialState = {
   variables: [],
 };
 
-export const createVariableSlice: StateCreator<VariableSlice> = (set) => {
+export const createVariableSlice: StateCreator<VariableSlice> = (
+  set,
+  getState,
+) => {
   // do not reset this slice
+
+  // only serialize new variables for draft submission
+  draftSliceSerializeFns.add(() => ({
+    variables: getState().variables.filter((v) => v.isNew),
+  }));
 
   return {
     ...initialState,
