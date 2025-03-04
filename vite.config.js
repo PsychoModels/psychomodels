@@ -11,6 +11,7 @@ export default defineConfig({
         "./frontend_src/search.tsx",
         "./frontend_src/account.tsx",
         "./frontend_src/contact_form.tsx",
+        "./frontend_src/my_model_list.tsx",
       ],
       addAliases: false,
     }),
