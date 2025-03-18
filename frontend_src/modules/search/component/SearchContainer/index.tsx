@@ -4,8 +4,12 @@ import { FacetedContainer } from "../FacetedContainer";
 import { SearchBox } from "../SearchBox";
 import { useStats } from "react-instantsearch";
 import { CurrentRefinements } from "../CurrentRefinements";
-import { Alert, Button } from "flowbite-react";
-import { TableCellsIcon, ListBulletIcon } from "@heroicons/react/24/solid";
+import { Alert, Button, Drawer } from "flowbite-react";
+import {
+  TableCellsIcon,
+  ListBulletIcon,
+  FunnelIcon,
+} from "@heroicons/react/24/solid";
 import { cx } from "instantsearch-ui-components";
 import { SortBy } from "../SortBy";
 import { TableView } from "../TableView";
@@ -18,10 +22,15 @@ export const SearchContainer = () => {
   const totalHits = `${nbHits.toLocaleString()} ${nbHits === 1 ? "result" : "results"} found`;
 
   const [isListView, setIsListView] = useState(true);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
 
   return (
     <div className="flex gap-8">
-      <div className="w-96">
+      <div className="w-96 hidden md:block">
         <FacetedContainer />
       </div>
       <div className="flex-1">
@@ -42,16 +51,24 @@ export const SearchContainer = () => {
         >
           <>
             <div className="flex items-center mt-8 mb-4">
+              <Button
+                size="sm"
+                color="gray"
+                className="p-0 mr-2 md:hidden"
+                onClick={toggleDrawer}
+              >
+                <FunnelIcon width={20} />
+              </Button>
               <div
                 className="text-md text-gray-700 ml-4"
                 data-testid="total-hits"
               >
                 {totalHits}
               </div>
-              <div className="ml-auto mr-4">
+              <div className="mr-4 md:ml-auto hidden md:block">
                 <SortBy />
               </div>
-              <Button.Group>
+              <Button.Group className="ml-auto md:ml-0">
                 <Button
                   size="sm"
                   color="gray"
@@ -77,6 +94,21 @@ export const SearchContainer = () => {
           </>
         </NoResultsBoundary>
       </div>
+
+      <Drawer
+        open={isDrawerOpen}
+        onClose={toggleDrawer}
+        className="bg-gray-100 z-999"
+      >
+        <Drawer.Header>
+          <button onClick={toggleDrawer} className="mb-20">
+            Close
+          </button>
+        </Drawer.Header>
+        <Drawer.Items>
+          <FacetedContainer />
+        </Drawer.Items>
+      </Drawer>
     </div>
   );
 };
