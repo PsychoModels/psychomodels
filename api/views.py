@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from rest_framework import viewsets, status
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
@@ -11,6 +13,7 @@ from psychology_models.email import (
 )
 from psychology_models.models import PsychologyModel, Framework, PsychologyModelDraft
 from psychology_models.utils.get_doi_citations import get_doi_citations
+from psychology_models.utils.set_publish_state import publish_reletated_entities
 
 from .serializers import (
     PsychologyModelSerializer,
@@ -26,7 +29,19 @@ class PsychologyModelViewSet(viewsets.ViewSet):
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
+
+             # set the published_pending_moderation_at if the user is verified
+            if request.user.verified is True:
+                serializer.validated_data["published_pending_moderation_at"] = timezone.now()
+                
+
             instance = serializer.save()
+
+            # publish all the related entities if pushing pending moderation
+            if request.user.verified is True:
+                publish_reletated_entities(instance)
+
+
 
             # fetch all the doi publication meta data for the psychology model and newly created frameworks
             queryset = PsychologyModel.objects.filter(pk=instance.pk)

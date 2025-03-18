@@ -26,9 +26,10 @@ class ModelDetailView(UserPassesTestMixin, generic.DetailView):
         # Get the object
         obj = super().get_object(queryset=queryset)
 
+        print( obj.is_published())
         # Check if the object is published or if the user is an admin
         if (
-            obj.published_at is not None
+            obj.is_published()
             or self.request.user.is_staff
             or obj.created_by == self.request.user
         ):
@@ -40,7 +41,7 @@ class ModelDetailView(UserPassesTestMixin, generic.DetailView):
         # Allow access if the model is published or the user is an admin
         obj = self.get_object()
         return (
-            obj.published_at is not None
+            obj.is_published()
             or self.request.user.is_staff
             or obj.created_by == self.request.user
         )

@@ -12,6 +12,7 @@ from . import models
 from .utils.get_doi_citations import get_doi_citations
 from .utils.set_publish_state import (
     publish_psychology_model,
+    publish_psychology_model_pending_moderation,
     unpublish_psychology_model,
     publish_entity,
     unpublish_entity,
@@ -21,6 +22,10 @@ from .utils.set_publish_state import (
 @admin.action(description="Publish selected psychology models")
 def action_publish_psychology_model(modeladmin, request, queryset):
     publish_psychology_model(queryset)
+
+@admin.action(description="Publish pending moderation selected psychology models")
+def action_publish_psychology_model_pending_moderation(modeladmin, request, queryset):
+    publish_psychology_model_pending_moderation(queryset)
 
 
 @admin.action(description="Unpublish selected psychology models")
@@ -51,9 +56,14 @@ def published_state(self, obj):
             '<span style="background-color: #c5fcd8; padding:0.125rem 0.5rem; border-radius:4px;">Published</span>'
         )
     else:
-        return format_html(
-            '<span style="background-color: #fef5e1; padding:0.125rem 0.5rem; border-radius:4px;">Not Published</span>'
-        )
+        if obj.published_pending_moderation_at is not None:
+            return format_html(
+                '<span style="background-color: #FFB74D; padding:0.125rem 0.5rem; border-radius:4px;">Published Post-moderation</span>'
+            )
+        else:
+            return format_html(
+                '<span style="background-color: #fef5e1; padding:0.125rem 0.5rem; border-radius:4px;">Not Published</span>'
+            )
 
 
 class AdminMixin(ImportExportModelAdmin, admin.ModelAdmin):
@@ -68,6 +78,11 @@ class PsychologyModelAdmin(DjangoObjectActions, AdminMixin):
     @takes_instance_or_queryset
     def publish_this(self, request, obj):
         action_publish_psychology_model(self, request, obj)
+
+    @action(label="Publish pending moderation", description="Publish this model pending moderation")
+    @takes_instance_or_queryset
+    def publish_this_pending_moderation(self, request, obj):
+        action_publish_psychology_model_pending_moderation(self, request, obj)
 
     @action(label="Unpublish", description="Unpublish this model")
     @takes_instance_or_queryset
@@ -86,6 +101,7 @@ class PsychologyModelAdmin(DjangoObjectActions, AdminMixin):
     readonly_fields = (
         "publication_citation",
         "created_at",
+        "published_pending_moderation_at",
         "published_at",
         "published_by",
     )
@@ -97,6 +113,7 @@ class PsychologyModelAdmin(DjangoObjectActions, AdminMixin):
     list_display = ("title", "published_state")
     actions = [
         action_publish_psychology_model,
+        action_publish_psychology_model_pending_moderation,
         action_unpublish_psychology_model,
         action_get_doi_citations,
     ]
