@@ -15,6 +15,7 @@ import { SortBy } from "../SortBy";
 import { TableView } from "../TableView";
 import { ListView } from "../ListView";
 import { NoResultsBoundary } from "../NoResultsBoundary";
+import { Pagination } from "../Pagination";
 
 export const SearchContainer = () => {
   const { nbHits } = useStats();
@@ -91,6 +92,8 @@ export const SearchContainer = () => {
 
             {isListView && <ListView />}
             {!isListView && <TableView />}
+
+            {nbHits > 0 && <Pagination />}
           </>
         </NoResultsBoundary>
       </div>
