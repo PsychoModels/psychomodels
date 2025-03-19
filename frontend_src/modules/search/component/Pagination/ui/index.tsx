@@ -152,8 +152,7 @@ export function Pagination({
         "flex justify-center items-center",
         classNames.root,
         nbPages <= 1 &&
-        cx("ais-Pagination--noRefinement", classNames.noRefinementRoot),
-
+          cx("ais-Pagination--noRefinement", classNames.noRefinementRoot),
       )}
     >
       <ul className={cx("ais-Pagination-list flex gap-5", classNames.list)}>
@@ -196,7 +195,7 @@ export function Pagination({
                 "ais-Pagination-item--page",
                 classNames.pageItem,
                 page === currentPage &&
-                cx("ais-Pagination-item--selected", classNames.selectedItem),
+                  cx("ais-Pagination-item--selected", classNames.selectedItem),
               )}
               classNames={classNames}
               aria-label={translations.pageItemAriaLabel({
@@ -280,7 +279,10 @@ function PaginationItem({
   return (
     <li className={cx("ais-Pagination-item", classNames.item, className)}>
       <a
-        className={cx("ais-Pagination-link display-block px-2 py-1 bg-gray-200 rounded-md", classNames.link)}
+        className={cx(
+          "ais-Pagination-link display-block px-2 py-1 bg-gray-200 rounded-md",
+          classNames.link,
+        )}
         href={href}
         {...props}
       />
