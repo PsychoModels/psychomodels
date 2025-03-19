@@ -18,6 +18,9 @@ import { SaveAsDraftButton } from "../SaveAsDraftButton";
 
 const formSchema = z.object({
   remarks: z.string(),
+  termsOfAgreement: z.boolean().refine((value) => value === true, {
+    message: "You must agree to the terms of agreement.",
+  }),
 });
 
 export type ValidationSchema = z.infer<typeof formSchema>;

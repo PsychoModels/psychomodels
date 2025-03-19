@@ -3,12 +3,18 @@ import { MultiSelectComboboxField } from "../../../shared/components/MultiSelect
 import { Control, Controller } from "react-hook-form";
 import useStore from "../../store/useStore.ts";
 import { AddPsychologyDisciplineModal } from "./AddPsychologyDisciplineModal.tsx";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
+import { Tooltip } from "flowbite-react";
 
 interface Props {
   control: Control<any, any>;
+  tooltipText?: string;
 }
 
-export const PsychologyDisciplineField: React.FC<Props> = ({ control }) => {
+export const PsychologyDisciplineField: React.FC<Props> = ({
+  control,
+  tooltipText,
+}) => {
   const { psychologyDisciplines, addPsychologyDiscipline } = useStore(
     (state) => state,
   );
@@ -16,12 +22,23 @@ export const PsychologyDisciplineField: React.FC<Props> = ({ control }) => {
   return (
     <>
       <div className="relative">
+        {tooltipText && (
+          <div className="float-right ml-3">
+            <Tooltip content={tooltipText} placement="left">
+              <div className="w-5 h-5">
+                <QuestionMarkCircleIcon color="#244657" />
+              </div>
+            </Tooltip>
+          </div>
+        )}
+
         <div
-          className="absolute top-0 right-0 text-sm text-gray-500 hover:text-cyan-800 cursor-pointer"
+          className="float-right text-sm text-gray-500 hover:text-cyan-800 cursor-pointer"
           onClick={() => setShowModal(true)}
         >
           add new discipline
         </div>
+
         <MultiSelectComboboxField
           control={control}
           label="Psychology disciplines"

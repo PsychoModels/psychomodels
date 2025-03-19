@@ -3,11 +3,17 @@ import React from "react";
 import { Control, Controller } from "react-hook-form";
 import useStore from "../../store/useStore.ts";
 import { AddProgrammingLanguageModal } from "./AddProgrammingLanguageModal.tsx";
+import { Tooltip } from "flowbite-react";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   control: Control<any, any>;
+  tooltipText?: string;
 }
-export const ProgrammingLanguageSelectField = ({ control }: Props) => {
+export const ProgrammingLanguageSelectField = ({
+  control,
+  tooltipText,
+}: Props) => {
   const { programmingLanguages, addProgrammingLanguage } = useStore(
     (state) => state,
   );
@@ -16,12 +22,15 @@ export const ProgrammingLanguageSelectField = ({ control }: Props) => {
   return (
     <>
       <div className="relative">
-        <div
-          className="absolute top-0 right-0 text-sm text-gray-500 hover:text-cyan-800 cursor-pointer"
-          onClick={() => setShowModal(true)}
-        >
-          add new language
-        </div>
+        {tooltipText && (
+          <div className="float-right ml-3">
+            <Tooltip content={tooltipText} placement="left">
+              <div className="w-5 h-5">
+                <QuestionMarkCircleIcon color="#244657" />
+              </div>
+            </Tooltip>
+          </div>
+        )}
         <SelectField
           control={control}
           label="Programming language"

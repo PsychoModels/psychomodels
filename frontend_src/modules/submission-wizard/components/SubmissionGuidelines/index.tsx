@@ -101,21 +101,6 @@ export const SubmissionGuidelines = () => {
             <li>Please check if the urls you submit work.</li>
           </ul>
 
-          <h2 className="text-cyan-700 text-lg font-medium md:text-xl mb-4">
-            Terms of Agreement
-          </h2>
-          <p className="max-w-screen-md mb-4">
-            All details provided about the models in <strong>Psycho</strong>
-            <em>Models</em> are available under the terms of the Creative
-            Commons CC0 1.0 (Public Domain Dedication). Therefore you need to
-            agree to release the information you will provide in the Public
-            Domain before submitting them to <strong>Psycho</strong>
-            <em>Models</em>. Please note that this does not extend to
-            publications, code repositories, and data repositories linked to the{" "}
-            <strong>Psycho</strong>
-            <em>Models</em> database.
-          </p>
-
           <p className="max-w-screen-md mb-4 font-bold">
             Thank you for contributing to <strong>Psycho</strong>
             <em>Models</em>!

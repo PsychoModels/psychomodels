@@ -1,18 +1,26 @@
 import React from "react";
-import { Label, TextInput } from "flowbite-react";
+import { Label, TextInput, Tooltip } from "flowbite-react";
 import { Control, Controller } from "react-hook-form";
 import { FetchDOIButton } from "./FetchDOIButton.tsx";
 import { PublicationMeta } from "./PublicationMeta.tsx";
 import { removeDoiUrlPrefix } from "./util.ts";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   control: Control<any, any>;
   label: string;
   name: string;
   placeholder?: string;
+  tooltipText?: string;
 }
 
-export const DOIInputField = ({ control, label, name, placeholder }: Props) => {
+export const DOIInputField = ({
+  control,
+  label,
+  name,
+  placeholder,
+  tooltipText,
+}: Props) => {
   return (
     <Controller
       name={name}
@@ -24,6 +32,15 @@ export const DOIInputField = ({ control, label, name, placeholder }: Props) => {
           <div className="">
             <div className="mb-2 block">
               <Label htmlFor={name} color={color} value={label} />
+              {tooltipText && (
+                <div className="float-right">
+                  <Tooltip content={tooltipText} placement="left">
+                    <div className="w-5 h-5">
+                      <QuestionMarkCircleIcon color="#244657" />
+                    </div>
+                  </Tooltip>
+                </div>
+              )}
             </div>
             <div className="relative">
               <TextInput

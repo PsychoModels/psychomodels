@@ -101,6 +101,7 @@ export const PublicationDetails = () => {
             control={control}
             label="Publication DOI"
             name="publicationDOI"
+            tooltipText='Enter the DOI of the journal publication in which the model (first) appeared. By pressing "Get details," all relevant information about the article will be fetched and presented in APA format.'
           />
           <MarkdownField
             control={control}
@@ -108,7 +109,10 @@ export const PublicationDetails = () => {
             name="explanation"
           />
 
-          <ProgrammingLanguageSelectField control={control} />
+          <ProgrammingLanguageSelectField
+            control={control}
+            tooltipText='Select the programming language in which the model was written. Use the "add new language" button if the language is not on the list.'
+          />
 
           <SoftwarePackageField control={control} />
 

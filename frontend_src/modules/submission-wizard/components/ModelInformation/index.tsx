@@ -78,6 +78,7 @@ export const ModelInformation = () => {
             label="Title"
             name="title"
             required={true}
+            tooltipText="Choose a short but descriptive name for your model. Please keep it under ten words. For inspiration, visit Explore the models."
           />
 
           <TextAreaField
@@ -85,11 +86,18 @@ export const ModelInformation = () => {
             label="Short description"
             name="shortDescription"
             required={true}
+            tooltipText="Provide a summary of what the model is, does, and/or is used for, comparable to an abstract of a journal publication. The technical details about how the model works can be left out (they can be provided in the next step)."
           />
 
-          <ModelingFrameworkField control={control} />
+          <ModelingFrameworkField
+            control={control}
+            tooltipText="Select the framework or model family to which the model belongs. You can introduce a new framework if the proper framework is not yet part of the list."
+          />
 
-          <PsychologyDisciplineField control={control} />
+          <PsychologyDisciplineField
+            control={control}
+            tooltipText="Select the discipline(s) to which the model applies or for which it was developed."
+          />
         </form>
       </div>
       <div className="md:hidden flex justify-end">

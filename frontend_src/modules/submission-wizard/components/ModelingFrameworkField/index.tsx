@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import useStore from "../../store/useStore.ts";
-import { Button, Label } from "flowbite-react";
+import { Button, Label, Tooltip } from "flowbite-react";
 import { Control, Controller } from "react-hook-form";
 import { FrameworkCard } from "./FrameworkCard.tsx";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { FrameworkSelectModal } from "./FrameworkSelectModal.tsx";
 import { FrameworkCreateModal } from "./FrameworkCreateModal.tsx";
 import { RemoveFrameworkButton } from "./RemoveFrameworkButton.tsx";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   control: Control<any, any>;
+  tooltipText?: string;
 }
 
-export const ModelingFrameworkField = ({ control }: Props) => {
+export const ModelingFrameworkField = ({ control, tooltipText }: Props) => {
   const { frameworks } = useStore((state) => state);
   const [selectModalIsOpen, setSelectModalIsOpen] = useState(false);
   const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
@@ -32,6 +34,16 @@ export const ModelingFrameworkField = ({ control }: Props) => {
                 color={color}
                 value="Modeling frameworks*"
               />
+
+              {tooltipText && (
+                <div className="float-right">
+                  <Tooltip content={tooltipText} placement="left">
+                    <div className="w-5 h-5">
+                      <QuestionMarkCircleIcon color="#244657" />
+                    </div>
+                  </Tooltip>
+                </div>
+              )}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {value.map((frameworkId: string) => {
