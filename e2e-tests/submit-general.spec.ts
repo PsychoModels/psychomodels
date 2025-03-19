@@ -89,6 +89,8 @@ test("Submission wizard - only required input", async ({ page }) => {
   ).toBeVisible();
 
   await page.getByRole("textbox").fill("Remarks");
+  await page.getByLabel("Yes, I agree to release the").check();
+
   await page.getByRole("button", { name: "Submit Psychology model" }).click();
   await expect(
     page.getByRole("heading", { name: "Submission complete" }),
@@ -199,6 +201,7 @@ test("Submission wizard - login", async ({ page }) => {
   ).toBeVisible();
 
   await page.getByRole("textbox").fill("Remarks");
+  await page.getByLabel("Yes, I agree to release the").check();
   await page.getByRole("button", { name: "Submit Psychology model" }).click();
   await expect(
     page.getByRole("heading", { name: "Submission complete" }),
@@ -319,6 +322,7 @@ test("Submission wizard - jump over account step if already logged in", async ({
   ).toBeVisible();
 
   await page.getByRole("textbox").fill("Remarks");
+  await page.getByLabel("Yes, I agree to release the").check();
   await page.getByRole("button", { name: "Submit Psychology model" }).click();
   await expect(
     page.getByRole("heading", { name: "Submission complete" }),

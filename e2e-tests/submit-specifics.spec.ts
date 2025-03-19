@@ -72,6 +72,7 @@ test("Submission wizard - add new framework", async ({ page }) => {
   ).toBeVisible();
   await expect(reviewForm.getByText("Framework description")).toBeVisible();
 
+  await page.getByLabel("Yes, I agree to release the").check();
   await page.getByRole("button", { name: "Submit Psychology model" }).click();
   await expect(
     page.getByRole("heading", { name: "Submission complete" }),
@@ -124,6 +125,7 @@ test.skip("Submission wizard - select and add new discipline", async ({
     ),
   ).toBeVisible();
 
+  await page.getByLabel("Yes, I agree to release the").check();
   await page.getByRole("button", { name: "Submit Psychology model" }).click();
   await expect(
     page.getByRole("heading", { name: "Submission complete" }),
@@ -163,7 +165,7 @@ test("Submission wizard - new programming language", async ({ page }) => {
   await page.getByRole("button", { name: "Model Details" }).click();
 
   // Model Details step
-  await page.getByText("add new language").click();
+  await page.getByTestId("add-programming-language-button").click();
   await page.getByRole("textbox").fill("Haskell");
   await page.getByRole("button", { name: "Save" }).click();
 
@@ -173,6 +175,7 @@ test("Submission wizard - new programming language", async ({ page }) => {
   const reviewForm = await page.locator('[data-testid="review-form"]');
   await expect(reviewForm.getByText("Haskell")).toBeVisible();
 
+  await page.getByLabel("Yes, I agree to release the").check();
   await page.getByRole("button", { name: "Submit Psychology model" }).click();
   await expect(
     page.getByRole("heading", { name: "Submission complete" }),
@@ -227,6 +230,7 @@ test("Submission wizard - add software package", async ({ page }) => {
   ).toBeVisible();
   await expect(reviewForm.getByText("Software packages")).toBeVisible();
 
+  await page.getByLabel("Yes, I agree to release the").check();
   await page.getByRole("button", { name: "Submit Psychology model" }).click();
   await expect(
     page.getByRole("heading", { name: "Submission complete" }),
@@ -275,6 +279,7 @@ test("Submission wizard - select and add variables", async ({ page }) => {
   ).toBeVisible();
   await expect(reviewForm.getByText("Label: X")).toBeVisible();
 
+  await page.getByLabel("Yes, I agree to release the").check();
   await page.getByRole("button", { name: "Submit Psychology model" }).click();
   await expect(
     page.getByRole("heading", { name: "Submission complete" }),

@@ -31,6 +31,13 @@ export const ProgrammingLanguageSelectField = ({
             </Tooltip>
           </div>
         )}
+        <div
+          className="float-right text-sm text-gray-500 hover:text-cyan-800 cursor-pointer"
+          onClick={() => setShowModal(true)}
+          data-testid="add-programming-language-button"
+        >
+          add new language
+        </div>
         <SelectField
           control={control}
           label="Programming language"
