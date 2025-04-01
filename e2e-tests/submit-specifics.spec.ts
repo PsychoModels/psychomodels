@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/models/submission/");
 
   // Submission guidelines step
-  await page.getByRole("button", { name: "Agree and continue" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
 
   // Account step
   const USER_NAME = `${(Math.random() + 1).toString(36).substring(7)}@psychomodels.org`;

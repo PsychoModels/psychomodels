@@ -10,7 +10,7 @@ test("Submission wizard - only required input", async ({ page }) => {
   await expect(
     page.locator('[data-testid="step-progress-indicator"]'),
   ).toHaveText("1 of 5 complete");
-  await page.getByRole("button", { name: "Agree and continue" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
 
   // Account step
   await expect(
@@ -137,7 +137,7 @@ test("Submission wizard - login", async ({ page }) => {
   await expect(
     page.locator('[data-testid="step-progress-indicator"]'),
   ).toHaveText("1 of 5 complete");
-  await page.getByRole("button", { name: "Agree and continue" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
 
   // Account step
   await expect(
@@ -268,7 +268,7 @@ test("Submission wizard - jump over account step if already logged in", async ({
   await expect(
     page.locator('[data-testid="step-progress-indicator"]'),
   ).toHaveText("1 of 5 complete");
-  await page.getByRole("button", { name: "Agree and continue" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
 
   // Account step :: expect to be skipped
 
