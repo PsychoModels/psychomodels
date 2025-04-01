@@ -56,36 +56,34 @@ export const SubmissionGuidelines = () => {
           </p>
 
           <p className="max-w-screen-md mb-4">
-            You need an account and be logged in to submit a model. Users can
-            log in with their Google or Github account.
+            To submit a model, you need an account and to be logged in. Users
+            can log in with their Google or Github accounts.
           </p>
 
           <p className="max-w-screen-md mb-4">
             The submission is a multi-staged process. Certain aspects are
-            mandatory ( title, summary, and model details) others are only
+            mandatory (title, summary, and model details), while others are only
             requested. Non-mandatory details can be submitted later.
           </p>
 
           <p className="max-w-screen-md mb-4">
-            The submitted model will not be publicly available from{" "}
-            <strong>Psycho</strong>
-            <em>Models</em> straightaway. It will first be reviewed by our
-            curators. To ensure a prompt processing of your model, please go
-            through the following checklist before submission.
+            A model can be saved as a draft at any time during the submission
+            process. Drafts can be found under your profile to edit and submit
+            later.
           </p>
+
+          <p className="max-w-screen-md mb-4">
+            To ensure a prompt processing of your model, please go through the
+            following checklist before submission.
+          </p>
+
           <ul className="max-w-screen-sm mb-12 list-disc pl-8 space-y-2">
             <li>
               Enter all relevant information in appropriate fields in the
               submission pipeline, which would be useful for processing your
-              models.
+              model
             </li>
-            <li>
-              If you created the model (or collaborated on its creation) but are
-              not an author of the associated publication, please add your
-              personal information (first and last name, organization, and email
-              address) in the model, so that your contribution can be
-              acknowledged.
-            </li>
+
             <li>
               Choose a short but meaningful name for your model. Please keep it
               under ten words. For inspiration, visit{" "}
@@ -98,7 +96,7 @@ export const SubmissionGuidelines = () => {
                 <NewWindowIcon />
               </a>
             </li>
-            <li>Please check if the urls you submit work.</li>
+            <li>Please check if the URLs you submit work.</li>
           </ul>
 
           <p className="max-w-screen-md mb-4 font-bold">
@@ -110,7 +108,7 @@ export const SubmissionGuidelines = () => {
 
       <div className="flex bg-gray-50 space-x-6 p-6 border-t md:justify-start justify-end">
         <Button type="submit" onClick={onSubmitHandler}>
-          Agree and continue <ArrowIcon />
+          Continue <ArrowIcon />
         </Button>
       </div>
     </>
