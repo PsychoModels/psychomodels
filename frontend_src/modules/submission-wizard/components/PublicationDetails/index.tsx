@@ -50,7 +50,6 @@ type ValidationSchema = z.infer<typeof formSchema>;
 export const PublicationDetails = () => {
   const navigate = useNavigate({ from: "/publication-details" });
   const { setCompletedStatus } = useStore((state) => state);
-
   const { publicationDetails, setPublicationDetails } = useStore(
     (state) => state,
   );
@@ -62,10 +61,30 @@ export const PublicationDetails = () => {
   const { control, handleSubmit, getValues, formState } = formMethods;
 
   const isValidRef = useRef(formState.isValid);
+  const isDirtyRef = useRef(false);
 
   useEffect(() => {
     isValidRef.current = formState.isValid;
   }, [formState.isValid]);
+
+  useEffect(() => {
+    isDirtyRef.current = formState.isDirty;
+  }, [formState.isDirty]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (isDirtyRef.current) {
+        e.preventDefault();
+        e.returnValue = "";
+        return "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   const onSubmit = (values: ValidationSchema) => {
     setPublicationDetails({ ...publicationDetails, ...values });
@@ -135,7 +154,13 @@ export const PublicationDetails = () => {
         </form>
       </div>
       <div className="md:hidden flex justify-end">
-        <SaveAsDraftButton asLink beforeSaveDraft={beforeSaveDraft} />
+        <SaveAsDraftButton
+          asLink
+          beforeSaveDraft={beforeSaveDraft}
+          onSaved={() => {
+            isDirtyRef.current = false;
+          }}
+        />
       </div>
       <div className="flex bg-gray-50 space-x-6 p-6 border-t md:justify-start justify-between">
         <Button type="button" color="gray" onClick={onNavigateBack}>
@@ -147,7 +172,12 @@ export const PublicationDetails = () => {
         </Button>
 
         <div className="!ml-auto hidden md:block">
-          <SaveAsDraftButton beforeSaveDraft={beforeSaveDraft} />
+          <SaveAsDraftButton
+            beforeSaveDraft={beforeSaveDraft}
+            onSaved={() => {
+              isDirtyRef.current = false;
+            }}
+          />
         </div>
       </div>
     </FormProvider>

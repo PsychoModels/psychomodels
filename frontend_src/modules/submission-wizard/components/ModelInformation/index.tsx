@@ -28,7 +28,6 @@ type ValidationSchema = z.infer<typeof formSchema>;
 export const ModelInformation = () => {
   const navigate = useNavigate({ from: "/model-summary" });
   const { setCompletedStatus } = useStore((state) => state);
-
   const { modelInformation, setModelInformation } = useStore((state) => state);
 
   const { control, handleSubmit, getValues, formState } =
@@ -38,14 +37,35 @@ export const ModelInformation = () => {
     });
 
   const isValidRef = useRef(formState.isValid);
+  const isDirtyRef = useRef(false);
 
   useEffect(() => {
     isValidRef.current = formState.isValid;
   }, [formState.isValid]);
 
+  useEffect(() => {
+    isDirtyRef.current = formState.isDirty;
+  }, [formState.isDirty]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (isDirtyRef.current) {
+        e.preventDefault();
+        e.returnValue = "";
+        return "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   const onSubmit = (values: ValidationSchema) => {
     setModelInformation({ ...modelInformation, ...values });
     setCompletedStatus("modelInformation", true);
+    isDirtyRef.current = false;
     navigate({ to: "/publication-details" });
   };
 
@@ -101,7 +121,13 @@ export const ModelInformation = () => {
         </form>
       </div>
       <div className="md:hidden flex justify-end">
-        <SaveAsDraftButton asLink beforeSaveDraft={beforeSaveDraft} />
+        <SaveAsDraftButton
+          asLink
+          beforeSaveDraft={beforeSaveDraft}
+          onSaved={() => {
+            isDirtyRef.current = false;
+          }}
+        />
       </div>
       <div className="flex bg-gray-50 space-x-6 p-6 border-t md:justify-start justify-between">
         <Button type="button" color="gray" onClick={onNavigateBack}>
@@ -113,7 +139,12 @@ export const ModelInformation = () => {
         </Button>
 
         <div className="!ml-auto hidden md:block">
-          <SaveAsDraftButton beforeSaveDraft={beforeSaveDraft} />
+          <SaveAsDraftButton
+            beforeSaveDraft={beforeSaveDraft}
+            onSaved={() => {
+              isDirtyRef.current = false;
+            }}
+          />
         </div>
       </div>
     </>

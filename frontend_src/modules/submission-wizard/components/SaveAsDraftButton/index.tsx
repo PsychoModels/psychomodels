@@ -6,9 +6,14 @@ import { DocumentArrowDownIcon } from "@heroicons/react/24/solid";
 interface Props {
   asLink?: boolean;
   beforeSaveDraft: () => void;
+  onSaved?: () => void;
 }
 
-export const SaveAsDraftButton = ({ asLink, beforeSaveDraft }: Props) => {
+export const SaveAsDraftButton = ({
+  asLink,
+  beforeSaveDraft,
+  onSaved,
+}: Props) => {
   const { save, isPending, isError, isSuccess } = useSaveAsDraft();
 
   const [errorModalIsOpen, setErrorModalIsOpen] = useState(false);
@@ -36,6 +41,7 @@ export const SaveAsDraftButton = ({ asLink, beforeSaveDraft }: Props) => {
   const performSave = () => {
     beforeSaveDraft();
     save();
+    onSaved?.();
   };
 
   return (
