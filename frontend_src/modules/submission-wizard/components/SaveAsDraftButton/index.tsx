@@ -1,6 +1,7 @@
 import { Alert, Button, Modal, Spinner } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { useSaveAsDraft } from "../../hooks/useSaveAsDraft";
+import { DocumentArrowDownIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   asLink?: boolean;
@@ -41,13 +42,15 @@ export const SaveAsDraftButton = ({ asLink, beforeSaveDraft }: Props) => {
     <>
       <Button
         type="button"
-        color="gray"
+        onClick={performSave}
+        disabled={isPending || isSaved}
+        color={asLink ? "gray" : undefined}
         className={
           asLink ? " border-transparent enabled:hover:bg-transparent" : ""
         }
-        onClick={performSave}
-        disabled={isPending || isSaved}
+        style={{ height: "46px" }}
       >
+        <DocumentArrowDownIcon className="mr-2 h-5 w-5" />
         {isPending && (
           <span className="pr-3">
             <Spinner size="sm" />
