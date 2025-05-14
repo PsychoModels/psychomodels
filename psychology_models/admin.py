@@ -56,7 +56,7 @@ def published_state(self, obj):
             '<span style="background-color: #c5fcd8; padding:0.125rem 0.5rem; border-radius:4px;">Published</span>'
         )
     else:
-        if obj.published_pending_moderation_at is not None:
+        if hasattr(obj, 'published_pending_moderation_at') and obj.published_pending_moderation_at is not None:
             return format_html(
                 '<span style="background-color: #FFB74D; padding:0.125rem 0.5rem; border-radius:4px;">Published Post-moderation</span>'
             )
