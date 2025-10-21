@@ -10,7 +10,7 @@ module.exports = {
     "./templates/**/*.html",
     flowbite.content(),
   ],
-  plugins: [require("flowbite/plugin"), require("@tailwindcss/forms")],
+  plugins: [require("flowbite/plugin"), require("@tailwindcss/forms"), require('@tailwindcss/typography')],
   theme: {
     extend: {
       colors: {

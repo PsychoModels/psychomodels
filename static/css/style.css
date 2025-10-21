@@ -238,3 +238,16 @@ body {
 .markdown-body code {
     font-family: 'Consolas', 'Monaco', monospace;
 }
+
+.markdown-body h1 { @apply text-2xl font-bold mt-6 mb-4; }
+.markdown-body h2 { @apply text-xl font-semibold mt-5 mb-3; }
+.markdown-body h3 { @apply text-lg font-semibold mt-4 mb-2; }
+.markdown-body p  { @apply mb-4; }
+.markdown-body table { @apply border border-blue-600 w-full text-left mb-4; }
+.markdown-body th { @apply bg-gray-100 font-semibold px-3 py-2 border border-gray-600; }
+.markdown-body td { @apply px-3 py-2 border border-gray-600;}
+
+.markdown-body ul,
+.markdown-body ol { @apply list-disc list-inside mb-4; }
+.markdown-body a  { @apply text-blue-600 hover:underline; }
+.markdown-body code { @apply bg-gray-100 px-1 rounded text-sm font-mono; }
