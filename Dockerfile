@@ -1,5 +1,6 @@
 FROM python:3.12-slim
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # Install Node.js
 RUN apt-get update && \
@@ -11,12 +12,12 @@ RUN apt-get update && \
 WORKDIR /home/django-docker
 
 # Copy Python and Node.js dependencies
-COPY requirements.txt .
+COPY pyproject.toml uv.lock .
 COPY package.json .
 COPY yarn.lock .
 
 # Install Python and Node.js dependencies
-RUN pip install -r requirements.txt
+RUN uv sync --frozen --no-dev
 RUN npm install --global yarn
 RUN yarn install --production=false
 

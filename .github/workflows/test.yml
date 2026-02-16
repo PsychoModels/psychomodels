@@ -28,14 +28,17 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
       - name: Install dependencies
-        run:  pip install -r requirements.txt
+        run: uv sync --frozen
 
       - name: Linting
-        run: python -m black .
+        run: uv run black .
 
       - name: Tests
-        run: python manage.py test --keepdb
+        run: uv run python manage.py test --keepdb
         env:
           DATABASE_NAME: postgres
           DATABASE_USER: postgres

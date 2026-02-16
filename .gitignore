@@ -5,6 +5,7 @@ logs/
 
 # Virtual environment
 venv/
+.venv/
 
 # Compiled Python files
 *.pyc

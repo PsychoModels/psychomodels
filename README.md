@@ -23,7 +23,7 @@ Make sure you have the following tools installed on your machine:
 - **Python 3.x**
 - **Node.js >= 20.x**
 - **yarn**
-- **pip**
+- **uv**
 
 ---
 
@@ -43,7 +43,7 @@ Tailwind css is used both in the Django templates and the React components. Note
 1. Install the python dependencies:
 
 ```bash
-$ pip install -r requirements.txt
+$ uv sync
 ```
 
 2. Copy the `.env.example` file to `.env`.
@@ -130,7 +130,7 @@ This project uses [Black]((https://github.com/psf/black)) for linting and format
 for formatting. To lint the project, run:
 
 ```bash
-$ python -m black .
+$ uv run black .
 ```
 
 Pre-commit hooks are configured to run black on the staged files for every commit. You can skip the pre-commit hooks by
