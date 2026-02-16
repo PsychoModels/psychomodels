@@ -33,3 +33,4 @@ node_modules/
 /coverage/*
 
 .claude/
+.yarn/install-state.gz

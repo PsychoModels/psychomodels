@@ -80,6 +80,10 @@
     "vitest": "^1"
   },
   "resolutions": {
-    "strip-ansi": "6.0.1"
+    "strip-ansi": "6.0.1",
+    "@types/react": "18.3.28"
+  },
+  "volta": {
+    "node": "20.20.0"
   }
 }
