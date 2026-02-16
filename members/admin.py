@@ -22,6 +22,7 @@ class SocialAccountInline(admin.TabularInline):
 
 class UserAdmin(admin.ModelAdmin):
     inlines = [EmailAddressInline, SocialAccountInline]
+    exclude = ("password",)
 
 
 admin.site.register(User, UserAdmin)
