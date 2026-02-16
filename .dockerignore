@@ -26,3 +26,5 @@ yarn-error.log*
 
 .hotfile
 django_debug.log
+
+.claude/
