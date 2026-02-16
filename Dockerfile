@@ -10,6 +10,7 @@ RUN apt-get update && \
 
 
 WORKDIR /home/django-docker
+ENV PATH="/home/django-docker/.venv/bin:$PATH"
 
 # Copy Python and Node.js dependencies
 COPY pyproject.toml uv.lock .
