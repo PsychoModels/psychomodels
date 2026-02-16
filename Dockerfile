@@ -13,7 +13,7 @@ WORKDIR /home/django-docker
 ENV PATH="/home/django-docker/.venv/bin:$PATH"
 
 # Copy Python and Node.js dependencies
-COPY pyproject.toml uv.lock .
+COPY pyproject.toml uv.lock ./
 COPY package.json .
 COPY yarn.lock .
 

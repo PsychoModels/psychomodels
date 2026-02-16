@@ -10,7 +10,7 @@ interface Props {
   name: string;
   placeholder?: string;
   type?: "text" | "email" | "password" | "number";
-  size?: keyof FlowbiteTextInputSizes;
+  size?: string & keyof FlowbiteTextInputSizes;
   required?: boolean;
   tooltipText?: string;
 }
