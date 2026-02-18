@@ -14,6 +14,7 @@ export default defineConfig({
         "./frontend_src/my_model_list.tsx",
       ],
       addAliases: false,
+      pyPath: ".venv/bin/python",
     }),
     react(),
   ],

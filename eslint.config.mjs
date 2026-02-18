@@ -13,6 +13,7 @@ export default [
 
   {
     ignores: [
+      ".venv/**",
       "collectedstatic/**",
       "node_modules/**",
       "static/dist/**",
