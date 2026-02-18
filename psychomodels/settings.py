@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "import_export",
     "contact",
     "highlighted",
+    "honeypot",
 ]
 
 MIDDLEWARE = [
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "psychomodels.honeypot_middleware.JsonHoneypotMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -312,6 +314,8 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
 }
+
+HONEYPOT_FIELD_NAME = "phone_number"
 
 # django-after-response does not work well when running tests
 if "test" in sys.argv:
