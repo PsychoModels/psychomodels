@@ -13,6 +13,7 @@ const formSchema = z.object({
   email: z.string().email(),
   subject: z.string().min(1, { message: "Subject is required" }),
   message: z.string().min(1, { message: "Message is required" }),
+  phone_number: z.string().optional(),
 });
 
 type ValidationSchema = z.infer<typeof formSchema>;
@@ -39,12 +40,13 @@ interface Props {
 export const ContactForm = ({ initialEmail }: Props) => {
   const [isDone, setIsDone] = React.useState(false);
 
-  const { control, handleSubmit } = useForm<ValidationSchema>({
+  const { control, handleSubmit, register } = useForm<ValidationSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: initialEmail || "",
       subject: "",
       message: "",
+      phone_number: "",
     },
   });
 
@@ -101,6 +103,14 @@ export const ContactForm = ({ initialEmail }: Props) => {
             <span className="font-medium">Error!</span> {error.message}
           </Alert>
         ))}
+        <input
+          type="text"
+          {...register("phone_number")}
+          tabIndex={-1}
+          autoComplete="off"
+          style={{ display: "none" }}
+          aria-hidden="true"
+        />
         <TextInputField
           control={control}
           label="E-mail"

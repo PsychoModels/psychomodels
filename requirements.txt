@@ -46,3 +46,4 @@ sqlparse==0.5.1; python_version >= '3.8'
 tablib==3.5.0; python_version >= '3.8'
 typing-extensions==4.12.2; python_version >= '3.8'
 urllib3==2.2.2; python_version >= '3.8'
+honeypot==0.1.1

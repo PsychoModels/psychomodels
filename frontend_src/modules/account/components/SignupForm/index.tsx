@@ -17,6 +17,7 @@ const formSchema = z
     repeatPassword: z
       .string()
       .min(8, { message: "The password must contain at least 8 characters" }),
+    phone_number: z.string().optional(),
   })
   .refine((data) => data.password === data.repeatPassword, {
     path: ["repeatPassword"], // This indicates which field the error message will be associated with
@@ -55,9 +56,10 @@ export const SignupForm = ({
       email: "",
       password: "",
       repeatPassword: "",
+      phone_number: "",
     },
   });
-  const { control, handleSubmit } = formMethods;
+  const { control, handleSubmit, register } = formMethods;
 
   const onSubmit = async (values: ValidationSchema) => {
     await mutation.mutate(values);
@@ -84,6 +86,14 @@ export const SignupForm = ({
             <span className="font-medium">Error!</span> {error.message}
           </Alert>
         ))}
+        <input
+          type="text"
+          {...register("phone_number")}
+          tabIndex={-1}
+          autoComplete="off"
+          style={{ display: "none" }}
+          aria-hidden="true"
+        />
         <TextInputField
           control={control}
           label="Email"
