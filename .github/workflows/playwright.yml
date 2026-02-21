@@ -19,6 +19,10 @@ jobs:
       with:
         node-version: lts/*
 
+    # Enable corepack for Yarn Berry
+    - name: Enable Corepack
+      run: corepack enable && corepack prepare yarn@4.12.0 --activate
+
     # Set up Docker Compose to bring up django app
     - name: Set up Docker Compose
       run: docker compose up -d
@@ -32,7 +36,7 @@ jobs:
 
     # Install dependencies
     - name: Install dependencies
-      run: npm install -g yarn && yarn
+      run: yarn install
 
     # Install Playwright Browsers
     - name: Install Playwright Browsers

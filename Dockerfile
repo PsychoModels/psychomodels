@@ -16,11 +16,12 @@ ENV PATH="/home/django-docker/.venv/bin:$PATH"
 COPY pyproject.toml uv.lock ./
 COPY package.json .
 COPY yarn.lock .
+COPY .yarnrc.yml .
 
 # Install Python and Node.js dependencies
 RUN uv sync --frozen --no-dev
-RUN npm install --global yarn
-RUN yarn install --production=false
+RUN corepack enable && corepack prepare yarn@4.12.0 --activate
+RUN yarn install
 
 
 # Copy the rest of the application code
