@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     container_name: django_app
     volumes:
-       - static-content:/home/django-docker/collectedstatic
+       - static-content:/workspace/collectedstatic
     ports:
       - "8000:8000"
     command: >
@@ -53,7 +53,7 @@ services:
       dockerfile: Dockerfile.serve-static
     container_name: static_server
     volumes:
-       - static-content:/home/django-docker/collectedstatic
+       - static-content:/workspace/collectedstatic
     ports:
       - "8001:80"
     depends_on:
