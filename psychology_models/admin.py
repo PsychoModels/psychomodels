@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from django_object_actions import (
     DjangoObjectActions,
     action,
@@ -52,16 +52,16 @@ def action_get_doi_citations(modeladmin, request, queryset, refetch=False):
 
 def published_state(self, obj):
     if obj.published_at is not None:
-        return format_html(
+        return mark_safe(
             '<span style="background-color: #c5fcd8; padding:0.125rem 0.5rem; border-radius:4px;">Published</span>'
         )
     else:
         if hasattr(obj, 'published_pending_moderation_at') and obj.published_pending_moderation_at is not None:
-            return format_html(
+            return mark_safe(
                 '<span style="background-color: #FFB74D; padding:0.125rem 0.5rem; border-radius:4px;">Published Post-moderation</span>'
             )
         else:
-            return format_html(
+            return mark_safe(
                 '<span style="background-color: #fef5e1; padding:0.125rem 0.5rem; border-radius:4px;">Not Published</span>'
             )
 

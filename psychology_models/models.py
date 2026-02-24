@@ -1,3 +1,6 @@
+import re
+
+from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
 from autoslug import AutoSlugField
@@ -40,7 +43,17 @@ class Framework(models.Model):
 
     explanation = MarkdownxField(null=True, blank=True)
 
-    publication_doi = models.CharField(null=True, blank=True)
+    publication_doi = models.CharField(
+        null=True,
+        blank=True,
+        validators=[
+            RegexValidator(
+                regex=r"^10.\d{4,9}/[-._;()/:A-Z0-9]+$",
+                message="Invalid publication DOI",
+                flags=re.IGNORECASE,
+            )
+        ],
+    )
     publication_csl_json = models.JSONField(null=True, blank=True)
     publication_csl_fetched_at = models.DateTimeField(null=True, blank=True)
     publication_citation = models.TextField(null=True, blank=True)
@@ -177,7 +190,17 @@ class PsychologyModel(models.Model):
     description = models.TextField(max_length=3000)
     explanation = MarkdownxField(null=True, blank=True)
 
-    publication_doi = models.CharField(null=True, blank=True)
+    publication_doi = models.CharField(
+        null=True,
+        blank=True,
+        validators=[
+            RegexValidator(
+                regex=r"^10.\d{4,9}/[-._;()/:A-Z0-9]+$",
+                message="Invalid publication DOI",
+                flags=re.IGNORECASE,
+            )
+        ],
+    )
     publication_csl_json = models.JSONField(null=True, blank=True)
     publication_csl_fetched_at = models.DateTimeField(null=True, blank=True)
     publication_citation = models.TextField(null=True, blank=True)

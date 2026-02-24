@@ -238,3 +238,9 @@ body {
 .markdown-body code {
     font-family: 'Consolas', 'Monaco', monospace;
 }
+
+/* Prevent long URLs from overflowing constrained containers (e.g. sidebar) */
+a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
