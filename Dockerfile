@@ -24,7 +24,13 @@ RUN yarn install
 # Copy the rest of the application code
 COPY . .
 
-# Build frontend
+# Build-time env vars (passed as --build-arg by DO App Platform)
+ARG VITE_ALGOLIA_APP_ID
+ARG VITE_ALGOLIA_PUBLIC_API_KEY
+
+# Build frontend (Vite embeds VITE_* vars into the JS bundle)
+ENV VITE_ALGOLIA_APP_ID=$VITE_ALGOLIA_APP_ID
+ENV VITE_ALGOLIA_PUBLIC_API_KEY=$VITE_ALGOLIA_PUBLIC_API_KEY
 RUN yarn run build
 
 # Django collect static
