@@ -61,7 +61,6 @@ INSTALLED_APPS = [
     "import_export",
     "contact",
     "highlighted",
-    "honeypot",
 ]
 
 MIDDLEWARE = [

@@ -52,7 +52,7 @@ export const ContactForm = ({ initialEmail }: Props) => {
 
   const mutation = useMutation({
     mutationFn: (data: ValidationSchema) => {
-      return axios.post("/api/contact/  ", data, {
+      return axios.post("/api/contact/", data, {
         headers: {
           "X-CSRFToken": getCSRFToken(),
         },

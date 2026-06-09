@@ -2,7 +2,6 @@ from django.urls import path, re_path
 
 from . import views
 
-
 urlpatterns = [
     path("models/", views.psychology_model_search, name="model_search"),
     path("models/submission/", views.psychology_model_create, name="model_create"),

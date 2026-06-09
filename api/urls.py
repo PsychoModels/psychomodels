@@ -19,7 +19,9 @@ urlpatterns = [
     ),
     path(
         "psychology_models/draft/<int:pk>/",
-        PsychologyModelDraftViewSet.as_view({"get": "get", "put": "update", "delete": "delete"}),
+        PsychologyModelDraftViewSet.as_view(
+            {"get": "get", "put": "update", "delete": "delete"}
+        ),
         name="psychology_models_draft_detail",
     ),
     path(

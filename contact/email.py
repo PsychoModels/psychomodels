@@ -7,7 +7,6 @@ from email.utils import formataddr
 
 from contact.models import ContactMessage
 
-
 from_email = formataddr(("PsychoModels", "no-reply@psychomodels.org"))
 
 

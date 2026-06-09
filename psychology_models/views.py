@@ -12,7 +12,8 @@ from psychology_models.models import (
     Framework,
     PsychologyDiscipline,
     Variable,
-    ProgrammingLanguage, PsychologyModelDraft,
+    ProgrammingLanguage,
+    PsychologyModelDraft,
 )
 
 
@@ -26,7 +27,7 @@ class ModelDetailView(UserPassesTestMixin, generic.DetailView):
         # Get the object
         obj = super().get_object(queryset=queryset)
 
-        print( obj.is_published())
+        print(obj.is_published())
         # Check if the object is published or if the user is an admin
         if (
             obj.is_published()
@@ -72,16 +73,18 @@ def psychology_model_create(request):
     )
     variables_json = json.dumps(list(variables.values("id", "name", "description")))
 
-    draft_id = request.GET.get('draft_id')
+    draft_id = request.GET.get("draft_id")
 
     page_title = "Submit a new psychology computational model"
     breadcrumb_title = "Submit new model"
 
     if draft_id:
-        existing_draft = get_object_or_404(PsychologyModelDraft, id=draft_id, created_by=request.user)
+        existing_draft = get_object_or_404(
+            PsychologyModelDraft, id=draft_id, created_by=request.user
+        )
         title = (
-                existing_draft.data.get("modelInformation", {}).get("title")
-                or f"Untitled #{existing_draft.id}"
+            existing_draft.data.get("modelInformation", {}).get("title")
+            or f"Untitled #{existing_draft.id}"
         )
         page_title = f"Continue submitting {title} (Draft)"
         breadcrumb_title = f"Continue submitting {title} (Draft)"
@@ -94,7 +97,9 @@ def psychology_model_create(request):
             "programming_languages": programming_languages_json,
             "psychology_disciplines": psychology_disciplines_json,
             "variables": variables_json,
-            "existing_draft": json.dumps(model_to_dict(existing_draft)) if draft_id else None,
+            "existing_draft": (
+                json.dumps(model_to_dict(existing_draft)) if draft_id else None
+            ),
             "page_title": page_title,
             "breadcrumb_title": breadcrumb_title,
         },
@@ -157,38 +162,53 @@ class MyModelListView(LoginRequiredMixin, generic.ListView):
 
     def get(self, request, *args, **kwargs):
 
-        models = PsychologyModel.objects.filter(created_by=request.user).order_by('-created_at')
-        drafts = PsychologyModelDraft.objects.filter(created_by=request.user).order_by('-created_at')
+        models = PsychologyModel.objects.filter(created_by=request.user).order_by(
+            "-created_at"
+        )
+        drafts = PsychologyModelDraft.objects.filter(created_by=request.user).order_by(
+            "-created_at"
+        )
 
-        models_data = list(models.values("id", "title", "published_at", "created_at", "updated_at", "slug"))
+        models_data = list(
+            models.values(
+                "id", "title", "published_at", "created_at", "updated_at", "slug"
+            )
+        )
 
         # Format the datetime fields
         for model in models_data:
-            model["published_at"] = model["published_at"].isoformat() if model["published_at"] else None
-            model["created_at"] = model["created_at"].isoformat() if model["created_at"] else None
-            model["updated_at"] = model["updated_at"].isoformat() if model["updated_at"] else None
+            model["published_at"] = (
+                model["published_at"].isoformat() if model["published_at"] else None
+            )
+            model["created_at"] = (
+                model["created_at"].isoformat() if model["created_at"] else None
+            )
+            model["updated_at"] = (
+                model["updated_at"].isoformat() if model["updated_at"] else None
+            )
 
         drafts_data = list(drafts.values("id", "data", "created_at", "updated_at"))
 
         for draft in drafts_data:
-            draft["created_at"] = draft["created_at"].isoformat() if draft["created_at"] else None
-            draft["updated_at"] = draft["updated_at"].isoformat() if draft["updated_at"] else None
+            draft["created_at"] = (
+                draft["created_at"].isoformat() if draft["created_at"] else None
+            )
+            draft["updated_at"] = (
+                draft["updated_at"].isoformat() if draft["updated_at"] else None
+            )
 
             try:
                 json_data = draft["data"] if isinstance(draft["data"], dict) else {}
-                draft["title"] = json_data.get("modelInformation", {}).get("title", None)
+                draft["title"] = json_data.get("modelInformation", {}).get(
+                    "title", None
+                )
             except Exception as e:
                 draft["title"] = None
 
             del draft["data"]
 
-
-        models_json = json.dumps(
-            list(models_data)
-        )
-        drafts_json = json.dumps(
-            list(drafts_data)
-        )
+        models_json = json.dumps(list(models_data))
+        drafts_json = json.dumps(list(drafts_data))
 
         context = {
             "models": models_json,

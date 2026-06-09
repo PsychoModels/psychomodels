@@ -23,6 +23,7 @@ from .utils.set_publish_state import (
 def action_publish_psychology_model(modeladmin, request, queryset):
     publish_psychology_model(queryset)
 
+
 @admin.action(description="Publish pending moderation selected psychology models")
 def action_publish_psychology_model_pending_moderation(modeladmin, request, queryset):
     publish_psychology_model_pending_moderation(queryset)
@@ -56,7 +57,10 @@ def published_state(self, obj):
             '<span style="background-color: #c5fcd8; padding:0.125rem 0.5rem; border-radius:4px;">Published</span>'
         )
     else:
-        if hasattr(obj, 'published_pending_moderation_at') and obj.published_pending_moderation_at is not None:
+        if (
+            hasattr(obj, "published_pending_moderation_at")
+            and obj.published_pending_moderation_at is not None
+        ):
             return mark_safe(
                 '<span style="background-color: #FFB74D; padding:0.125rem 0.5rem; border-radius:4px;">Published Post-moderation</span>'
             )
@@ -79,7 +83,10 @@ class PsychologyModelAdmin(DjangoObjectActions, AdminMixin):
     def publish_this(self, request, obj):
         action_publish_psychology_model(self, request, obj)
 
-    @action(label="Publish pending moderation", description="Publish this model pending moderation")
+    @action(
+        label="Publish pending moderation",
+        description="Publish this model pending moderation",
+    )
     @takes_instance_or_queryset
     def publish_this_pending_moderation(self, request, obj):
         action_publish_psychology_model_pending_moderation(self, request, obj)
