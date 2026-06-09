@@ -5,67 +5,42 @@ on:
 
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 30
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:20.10.16
-        options: --privileged
     steps:
     - uses: actions/checkout@v4
 
-    # Set up Node.js
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-
-    # Enable corepack for Yarn Berry
-    - name: Enable Corepack
-      run: corepack enable && corepack prepare yarn@4.12.0 --activate
-
-    # Set up Docker Compose to bring up django app
+    # Bring up postgres, django and the static-content server on the host.
+    # Their ports are published (8000, 8001), so the Playwright container can
+    # reach them via --network host.
     - name: Set up Docker Compose
       run: docker compose up -d
 
     - name: Wait for the service to be ready
       run: |
-        while ! curl -s http://localhost:8000 > /dev/null; do
+        timeout 180 bash -c 'while ! curl -s http://localhost:8000 > /dev/null; do
           echo "Waiting for the application to be ready..."
           sleep 5
-        done
+        done'
 
-    # Install dependencies
-    - name: Install dependencies
-      run: yarn install
-
-    # Resolve the installed Playwright version for cache keying
-    - name: Resolve Playwright version
-      id: playwright-version
-      run: echo "version=$(yarn info @playwright/test --name-only --json | head -n1 | jq -r '. | sub("@playwright/test@npm:"; "")')" >> "$GITHUB_OUTPUT"
-
-    # Cache Playwright browsers between runs (keyed on the resolved version)
-    - name: Cache Playwright browsers
-      id: playwright-cache
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache/ms-playwright
-        key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
-
-    # Install Playwright browser binaries (skip when cached); always install system deps
-    - name: Install Playwright Browsers
-      timeout-minutes: 15
-      run: |
-        if [ "${{ steps.playwright-cache.outputs.cache-hit }}" = "true" ]; then
-          yarn playwright install-deps chromium
-        else
-          yarn playwright install --with-deps chromium
-        fi
-
-    # Run Playwright tests
+    # Run Playwright inside the official image — browsers and system deps are
+    # already installed, so we skip the flaky `playwright install` download.
+    # HOME=/tmp gives corepack/yarn a writable cache when running as the
+    # runner UID instead of the image's default pwuser.
     - name: Run Playwright tests
-      run: yarn playwright test --trace on
+      timeout-minutes: 20
+      run: |
+        docker run --rm \
+          --network host \
+          --ipc=host \
+          -v "${{ github.workspace }}:/work" \
+          -w /work \
+          -e CI=true \
+          -e HOME=/tmp \
+          --user "$(id -u):$(id -g)" \
+          mcr.microsoft.com/playwright:v1.58.2-noble \
+          bash -c "corepack enable && yarn install --immutable && yarn playwright test --trace on"
 
-    # Upload Playwright report
     - uses: actions/upload-artifact@v4
       if: always()
       with:
@@ -73,7 +48,6 @@ jobs:
         path: playwright-report/
         retention-days: 30
 
-    # Upload test videos
     - uses: actions/upload-artifact@v4
       if: always()
       with:
@@ -81,7 +55,6 @@ jobs:
         path: test-results/**/*.webm
         retention-days: 30
 
-    # Capture backend logs
     - name: Dump Docker logs
       if: always()
       run: docker compose logs --no-color > docker-logs.txt 2>&1
