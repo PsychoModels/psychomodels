@@ -24,7 +24,7 @@ export const renderWithQueryClient = (children: React.ReactElement) => {
 export const queryClientWrapper = ({
   children,
 }: {
-  children: React.ReactElement;
+  children: React.ReactNode;
 }) => {
   const testQueryClient = createTestQueryClient();
   return (
