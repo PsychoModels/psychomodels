@@ -51,7 +51,7 @@
   "devDependencies": {
     "@eslint/compat": "^1.1.0",
     "@hookform/devtools": "^4.3.1",
-    "@playwright/test": "^1.58.2",
+    "@playwright/test": "^1.60.0",
     "@tanstack/router-devtools": "^1.45.4",
     "@tanstack/router-generator": "1.56.4",
     "@testing-library/dom": "^10.4.0",

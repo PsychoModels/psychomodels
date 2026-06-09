@@ -5,14 +5,18 @@ on:
 
 jobs:
   test:
-    timeout-minutes: 30
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
-    # Bring up postgres, django and the static-content server on the host.
-    # Their ports are published (8000, 8001), so the Playwright container can
-    # reach them via --network host.
+    - uses: actions/setup-node@v6
+      with:
+        node-version: lts/*
+
+    - name: Enable Corepack
+      run: corepack enable && corepack prepare yarn@4.12.0 --activate
+
     - name: Set up Docker Compose
       run: docker compose up -d
 
@@ -23,44 +27,35 @@ jobs:
           sleep 5
         done'
 
-    # Run Playwright inside the official image — browsers and system deps are
-    # already installed, so we skip the flaky `playwright install` download.
-    # HOME=/tmp gives corepack/yarn a writable cache when running as the
-    # runner UID instead of the image's default pwuser.
-    - name: Run Playwright tests
-      timeout-minutes: 20
-      run: |
-        docker run --rm \
-          --network host \
-          --ipc=host \
-          -v "${{ github.workspace }}:/work" \
-          -w /work \
-          -e CI=true \
-          -e HOME=/tmp \
-          --user "$(id -u):$(id -g)" \
-          mcr.microsoft.com/playwright:v1.58.2-noble \
-          bash -c "corepack enable && yarn install --immutable && yarn playwright test --trace on"
+    - name: Install dependencies
+      run: yarn install --immutable
 
-    - uses: actions/upload-artifact@v4
-      if: always()
+    - name: Install Playwright Browsers
+      run: yarn playwright install --with-deps
+
+    - name: Run Playwright tests
+      run: yarn playwright test
+
+    - uses: actions/upload-artifact@v7
+      if: ${{ !cancelled() }}
       with:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
 
-    - uses: actions/upload-artifact@v4
-      if: always()
+    - uses: actions/upload-artifact@v7
+      if: ${{ !cancelled() }}
       with:
         name: playwright-videos
         path: test-results/**/*.webm
         retention-days: 30
 
     - name: Dump Docker logs
-      if: always()
+      if: ${{ !cancelled() }}
       run: docker compose logs --no-color > docker-logs.txt 2>&1
 
-    - uses: actions/upload-artifact@v4
-      if: always()
+    - uses: actions/upload-artifact@v7
+      if: ${{ !cancelled() }}
       with:
         name: docker-logs
         path: docker-logs.txt
