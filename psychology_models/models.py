@@ -250,7 +250,10 @@ class PsychologyModel(models.Model):
         return self.programming_language.name if self.programming_language else None
 
     def is_published(self):
-        return self.published_at is not None or self.published_pending_moderation_at is not None
+        return (
+            self.published_at is not None
+            or self.published_pending_moderation_at is not None
+        )
 
     def framework_names(self):
         return [framework.name for framework in self.framework.all()]

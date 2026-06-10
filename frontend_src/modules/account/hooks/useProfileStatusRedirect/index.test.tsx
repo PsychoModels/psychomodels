@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { useNavigate } from "@tanstack/react-router";
 import { vi, describe, it, beforeEach, expect } from "vitest";
 import { server } from "../../../../setup-vitest.ts";

@@ -16,15 +16,12 @@ def publish_psychology_model(queryset):
 
             publish_reletated_entities(pm_instance)
 
-            
 
 def publish_reletated_entities(pm_instance):
     now = timezone.now()
     if pm_instance.programming_language:
         pm_instance.programming_language.published_at = now
-        pm_instance.programming_language.published_by = (
-            get_current_authenticated_user()
-        )
+        pm_instance.programming_language.published_by = get_current_authenticated_user()
         pm_instance.programming_language.save()
 
     related_models = [
@@ -59,7 +56,10 @@ def publish_psychology_model_pending_moderation(queryset):
 def unpublish_psychology_model(queryset):
 
     for pm_instance in queryset:
-        if pm_instance.published_at is not None or pm_instance.published_pending_moderation_at is not None:
+        if (
+            pm_instance.published_at is not None
+            or pm_instance.published_pending_moderation_at is not None
+        ):
             pm_instance.published_at = None
             pm_instance.published_pending_moderation_at = None
             pm_instance.published_by = None

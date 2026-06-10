@@ -7,68 +7,55 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:20.10.16
-        options: --privileged
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
-    # Set up Node.js
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v6
       with:
         node-version: lts/*
 
-    # Enable corepack for Yarn Berry
     - name: Enable Corepack
       run: corepack enable && corepack prepare yarn@4.12.0 --activate
 
-    # Set up Docker Compose to bring up django app
     - name: Set up Docker Compose
       run: docker compose up -d
 
     - name: Wait for the service to be ready
       run: |
-        while ! curl -s http://localhost:8000 > /dev/null; do
+        timeout 180 bash -c 'while ! curl -s http://localhost:8000 > /dev/null; do
           echo "Waiting for the application to be ready..."
           sleep 5
-        done
+        done'
 
-    # Install dependencies
     - name: Install dependencies
-      run: yarn install
+      run: yarn install --immutable
 
-    # Install Playwright Browsers
     - name: Install Playwright Browsers
       run: yarn playwright install --with-deps
 
-    # Run Playwright tests
     - name: Run Playwright tests
-      run: yarn playwright test --trace on
+      run: yarn playwright test
 
-    # Upload Playwright report
-    - uses: actions/upload-artifact@v4
-      if: always()
+    - uses: actions/upload-artifact@v7
+      if: ${{ !cancelled() }}
       with:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
 
-    # Upload test videos
-    - uses: actions/upload-artifact@v4
-      if: always()
+    - uses: actions/upload-artifact@v7
+      if: ${{ !cancelled() }}
       with:
         name: playwright-videos
         path: test-results/**/*.webm
         retention-days: 30
 
-    # Capture backend logs
     - name: Dump Docker logs
-      if: always()
+      if: ${{ !cancelled() }}
       run: docker compose logs --no-color > docker-logs.txt 2>&1
 
-    - uses: actions/upload-artifact@v4
-      if: always()
+    - uses: actions/upload-artifact@v7
+      if: ${{ !cancelled() }}
       with:
         name: docker-logs
         path: docker-logs.txt

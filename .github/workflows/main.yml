@@ -2,7 +2,6 @@ name: Main
 
 on:
   push:
-    branches: [main, develop]
 
 jobs:
   lint-and-test:
@@ -15,6 +14,7 @@ jobs:
 
   release:
     name: Release 🚀
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
     needs:
       - lint-and-test
       - playwright

@@ -30,18 +30,17 @@ class PsychologyModelViewSet(viewsets.ViewSet):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
 
-             # set the published_pending_moderation_at if the user is verified
+            # set the published_pending_moderation_at if the user is verified
             if request.user.verified is True:
-                serializer.validated_data["published_pending_moderation_at"] = timezone.now()
-                
+                serializer.validated_data["published_pending_moderation_at"] = (
+                    timezone.now()
+                )
 
             instance = serializer.save()
 
             # publish all the related entities if pushing pending moderation
             if request.user.verified is True:
                 publish_reletated_entities(instance)
-
-
 
             # fetch all the doi publication meta data for the psychology model and newly created frameworks
             queryset = PsychologyModel.objects.filter(pk=instance.pk)
