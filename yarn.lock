@@ -1460,6 +1460,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@marsidev/react-turnstile@npm:^1.5.3":
+  version: 1.5.3
+  resolution: "@marsidev/react-turnstile@npm:1.5.3"
+  peerDependencies:
+    react: ^17.0.2 || ^18.0.0 || ^19.0
+    react-dom: ^17.0.2 || ^18.0.0 || ^19.0
+  checksum: 10c0/da2cab77922ab9d051bd387cea21059fc654d9478515e1e9645bd45b87feb1c36b29f079b623b87f92ac305f17cf543bcd63ac2cd3f77ea3526f48eb30d12b4b
+  languageName: node
+  linkType: hard
+
 "@mswjs/interceptors@npm:^0.35.0":
   version: 0.35.0
   resolution: "@mswjs/interceptors@npm:0.35.0"
@@ -4856,6 +4866,7 @@ __metadata:
     "@heroicons/react": "npm:^2.1.4"
     "@hookform/devtools": "npm:^4.3.1"
     "@hookform/resolvers": "npm:^3.6.0"
+    "@marsidev/react-turnstile": "npm:^1.5.3"
     "@playwright/test": "npm:^1.60.0"
     "@tailwindcss/forms": "npm:^0.5.7"
     "@tanstack/react-query": "npm:^5.49.2"

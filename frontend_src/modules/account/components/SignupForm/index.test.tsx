@@ -2,6 +2,11 @@ import React from "react";
 import { screen, fireEvent, waitFor } from "@testing-library/react";
 import { vi } from "vitest";
 
+vi.mock(
+  "@marsidev/react-turnstile",
+  () => import("../../../../test-utils/turnstileMock.tsx"),
+);
+
 import { server } from "../../../../setup-vitest.ts";
 import { http, HttpResponse } from "msw";
 import "@testing-library/jest-dom";

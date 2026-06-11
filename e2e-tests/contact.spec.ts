@@ -6,7 +6,9 @@ test("Successfully submit contact form", async ({ page }) => {
   await page.locator('input[name="email"]').fill("vincent@verbrugh.nl");
   await page.locator('input[name="subject"]').fill("Test subject");
   await page.locator('textarea[name="message"]').fill("Test message");
-  await page.getByRole("button", { name: "Send message" }).press("Enter");
+  // click (unlike press) auto-waits for the button to enable, which happens
+  // once the Turnstile test widget produces its token.
+  await page.getByRole("button", { name: "Send message" }).click();
   await expect(page.getByTestId("success-message")).toBeVisible();
 });
 
@@ -34,6 +36,8 @@ test("When logged in the e-mail should already be filled in", async ({
 
   await page.locator('input[name="subject"]').fill("Test subject");
   await page.locator('textarea[name="message"]').fill("Test message");
-  await page.getByRole("button", { name: "Send message" }).press("Enter");
+  // click (unlike press) auto-waits for the button to enable, which happens
+  // once the Turnstile test widget produces its token.
+  await page.getByRole("button", { name: "Send message" }).click();
   await expect(page.getByTestId("success-message")).toBeVisible();
 });

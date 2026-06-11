@@ -27,10 +27,12 @@ COPY . .
 # Build-time env vars (passed as --build-arg by DO App Platform)
 ARG VITE_ALGOLIA_APP_ID
 ARG VITE_ALGOLIA_PUBLIC_API_KEY
+ARG VITE_TURNSTILE_SITE_KEY
 
 # Build frontend (Vite embeds VITE_* vars into the JS bundle)
 ENV VITE_ALGOLIA_APP_ID=$VITE_ALGOLIA_APP_ID
 ENV VITE_ALGOLIA_PUBLIC_API_KEY=$VITE_ALGOLIA_PUBLIC_API_KEY
+ENV VITE_TURNSTILE_SITE_KEY=$VITE_TURNSTILE_SITE_KEY
 RUN yarn run build
 
 # Django collect static

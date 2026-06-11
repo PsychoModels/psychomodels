@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        VITE_TURNSTILE_SITE_KEY: 1x00000000000000000000AA
     container_name: django_app
     volumes:
        - static-content:/workspace/collectedstatic
@@ -26,6 +28,7 @@ services:
       STATIC_URL: http://localhost:8001/
       DISABLE_ACCOUNT_RATE_LIMITS: True
       ALGOLIA_AUTO_INDEXING: True
+      TURNSTILE_SECRET_KEY: 1x0000000000000000000000000000000AA
     depends_on:
       db:
         condition: service_healthy

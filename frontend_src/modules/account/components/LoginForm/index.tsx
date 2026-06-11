@@ -3,6 +3,8 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TextInputField } from "../../../shared/components/Form/TextInputField.tsx";
+import { TurnstileWidget } from "../../../shared/components/Form/TurnstileWidget.tsx";
+import type { TurnstileInstance } from "@marsidev/react-turnstile";
 import { Alert, Button } from "flowbite-react";
 import { SocialLoginButtons } from "../SocialLoginButtons";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -13,6 +15,9 @@ const formSchema = z.object({
   password: z
     .string()
     .min(8, { message: "The password must contain at least 8 characters" }),
+  cf_turnstile_response: z
+    .string()
+    .min(1, { message: "Please complete the anti-spam check" }),
 });
 
 type ValidationSchema = z.infer<typeof formSchema>;
@@ -30,6 +35,9 @@ export const LoginForm = ({
 }: Props) => {
   const queryClient = useQueryClient();
 
+  const [turnstileToken, setTurnstileToken] = React.useState("");
+  const turnstileRef = React.useRef<TurnstileInstance>(null);
+
   const mutation = useMutation({
     mutationFn: (loginData: ValidationSchema) => {
       return login(loginData);
@@ -44,6 +52,11 @@ export const LoginForm = ({
 
       window.scrollTo(0, 0);
     },
+    onError: () => {
+      turnstileRef.current?.reset();
+      setValue("cf_turnstile_response", "");
+      setTurnstileToken("");
+    },
   });
 
   const formMethods = useForm<ValidationSchema>({
@@ -51,12 +64,13 @@ export const LoginForm = ({
     defaultValues: {
       email: "",
       password: "",
+      cf_turnstile_response: "",
     },
   });
-  const { control, handleSubmit } = formMethods;
+  const { control, handleSubmit, setValue } = formMethods;
 
   const onSubmit = (values: ValidationSchema) => {
-    mutation.mutate(values, { onSuccess: onLoginSuccess });
+    mutation.mutate(values);
   };
 
   const errors = mutation.isError
@@ -100,10 +114,17 @@ export const LoginForm = ({
             size="md"
           />
         </div>
+        <TurnstileWidget
+          ref={turnstileRef}
+          onTokenChange={(token) => {
+            setValue("cf_turnstile_response", token, { shouldValidate: true });
+            setTurnstileToken(token);
+          }}
+        />
         <Button
           type="submit"
           onClick={handleSubmit(onSubmit)}
-          disabled={mutation.isPending}
+          disabled={mutation.isPending || !turnstileToken}
           isProcessing={mutation.isPending}
         >
           Login

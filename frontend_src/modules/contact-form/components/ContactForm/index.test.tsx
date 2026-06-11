@@ -7,6 +7,11 @@ import { describe, vi } from "vitest";
 import { server } from "../../../../setup-vitest.ts";
 import { http, HttpResponse } from "msw";
 
+vi.mock(
+  "@marsidev/react-turnstile",
+  () => import("../../../../test-utils/turnstileMock.tsx"),
+);
+
 // Mock window.scrollTo globally
 // @ts-ignore
 window.scrollTo = vi.fn();

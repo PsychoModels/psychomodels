@@ -38,7 +38,9 @@ test("Contact form rejects submission when honeypot is filled", async ({
       resp.url().includes("/api/contact/") &&
       resp.request().method() === "POST",
   );
-  await page.getByRole("button", { name: "Send message" }).press("Enter");
+  // click (unlike press) auto-waits for the button to enable, which happens
+  // once the Turnstile test widget produces its token.
+  await page.getByRole("button", { name: "Send message" }).click();
 
   const response = await responsePromise;
   expect(response.status()).toBe(400);

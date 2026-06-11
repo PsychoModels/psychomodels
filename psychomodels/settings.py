@@ -70,6 +70,7 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "psychomodels.honeypot_middleware.JsonHoneypotMiddleware",
+    "psychomodels.turnstile_middleware.TurnstileMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -319,6 +320,21 @@ REST_FRAMEWORK = {
 
 HONEYPOT_FIELD_NAME = "phone_number"
 
-# django-after-response does not work well when running tests
+# Cloudflare Turnstile (anti-spam). Inert when TURNSTILE_SECRET_KEY is unset.
+TURNSTILE_SECRET_KEY = os.getenv("TURNSTILE_SECRET_KEY", "")
+TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify"
+TURNSTILE_PROTECTED_PATHS = [
+    "/api/contact/",
+    "/_allauth/browser/v1/auth/signup",
+    "/_allauth/browser/v1/auth/login",
+    "/_allauth/browser/v1/auth/password/request",
+]
+
+# Test-mode overrides ("test" in sys.argv only matches `manage.py test`; revisit
+# if the test runner ever changes):
+# - local .env carries Turnstile dev keys; keep unit tests deterministic by
+#   disabling verification — tests that exercise it use override_settings
+# - django-after-response does not work well when running tests
 if "test" in sys.argv:
+    TURNSTILE_SECRET_KEY = ""
     AFTER_RESPONSE_RUN_ASYNC = False

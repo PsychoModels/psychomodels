@@ -48,7 +48,6 @@ $ uv sync
 
 2. Copy the `.env.example` file to `.env`.
 
-
 3. Run migrations for the project to build your local database:
 
 ```bash
@@ -71,6 +70,27 @@ Run the Django development server:
 ```bash
 $ python manage.py runserver
 ```
+
+### Cloudflare Turnstile (anti-spam)
+
+The contact, signup, login and password-reset endpoints require a Cloudflare
+Turnstile token. Two environment variables control it:
+
+- `TURNSTILE_SECRET_KEY` — backend secret key, used server-side to verify
+  tokens. When unset, verification is disabled.
+- `VITE_TURNSTILE_SITE_KEY` — frontend site key, embedded into the JS bundle
+  at build time.
+
+For local development use Cloudflare's official test keys (always pass) in
+your `.env`:
+
+    TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+    VITE_TURNSTILE_SITE_KEY=1x00000000000000000000AA
+
+For production, create a widget at <https://dash.cloudflare.com> → Turnstile
+(mode: **Managed**, hostname: the production domain) and set both keys in the
+deployment environment. The site key must be present when the frontend is
+built; the secret key is read at runtime.
 
 ## Docker
 

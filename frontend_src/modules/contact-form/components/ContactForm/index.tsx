@@ -1,6 +1,8 @@
 import React from "react";
 import { TextInputField } from "../../../shared/components/Form/TextInputField.tsx";
 import { TextAreaField } from "../../../shared/components/Form/TextAreaField.tsx";
+import { TurnstileWidget } from "../../../shared/components/Form/TurnstileWidget.tsx";
+import type { TurnstileInstance } from "@marsidev/react-turnstile";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -14,6 +16,9 @@ const formSchema = z.object({
   subject: z.string().min(1, { message: "Subject is required" }),
   message: z.string().min(1, { message: "Message is required" }),
   phone_number: z.string().optional(),
+  cf_turnstile_response: z
+    .string()
+    .min(1, { message: "Please complete the anti-spam check" }),
 });
 
 type ValidationSchema = z.infer<typeof formSchema>;
@@ -39,16 +44,21 @@ interface Props {
 
 export const ContactForm = ({ initialEmail }: Props) => {
   const [isDone, setIsDone] = React.useState(false);
+  const [turnstileToken, setTurnstileToken] = React.useState("");
 
-  const { control, handleSubmit, register } = useForm<ValidationSchema>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: initialEmail || "",
-      subject: "",
-      message: "",
-      phone_number: "",
-    },
-  });
+  const turnstileRef = React.useRef<TurnstileInstance>(null);
+
+  const { control, handleSubmit, register, setValue } =
+    useForm<ValidationSchema>({
+      resolver: zodResolver(formSchema),
+      defaultValues: {
+        email: initialEmail || "",
+        subject: "",
+        message: "",
+        phone_number: "",
+        cf_turnstile_response: "",
+      },
+    });
 
   const mutation = useMutation({
     mutationFn: (data: ValidationSchema) => {
@@ -61,6 +71,11 @@ export const ContactForm = ({ initialEmail }: Props) => {
     onSuccess: () => {
       setIsDone(true);
       window.scrollTo(0, 0);
+    },
+    onError: () => {
+      turnstileRef.current?.reset();
+      setValue("cf_turnstile_response", "");
+      setTurnstileToken("");
     },
   });
 
@@ -132,11 +147,19 @@ export const ContactForm = ({ initialEmail }: Props) => {
           required={true}
         />
 
+        <TurnstileWidget
+          ref={turnstileRef}
+          onTokenChange={(token) => {
+            setValue("cf_turnstile_response", token, { shouldValidate: true });
+            setTurnstileToken(token);
+          }}
+        />
+
         <Button
           type="submit"
           onClick={handleSubmit(onSubmit)}
           isProcessing={mutation.isPending}
-          disabled={mutation.isPending}
+          disabled={mutation.isPending || !turnstileToken}
           className="w-full md:max-w-md"
         >
           Send message

@@ -1,8 +1,9 @@
-import json
 import logging
 
 from django.conf import settings
-from django.http import JsonResponse, QueryDict
+from django.http import JsonResponse
+
+from psychomodels.body_parsing import extract_body
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +37,7 @@ class JsonHoneypotMiddleware:
         if request.method == "POST" and any(
             request.path.startswith(path) for path in HONEYPOT_PATHS
         ):
-            body = self._extract_body(request)
+            body = extract_body(request)
             if body is None:
                 return self._reject(request, "unparseable")
             if self.field_name not in body:
@@ -45,21 +46,6 @@ class JsonHoneypotMiddleware:
                 return self._reject(request, "filled")
 
         return self.get_response(request)
-
-    def _extract_body(self, request):
-        content_type = (request.content_type or "").lower()
-        if "application/json" in content_type:
-            try:
-                parsed = json.loads(request.body or b"{}")
-            except (json.JSONDecodeError, ValueError):
-                return None
-            return parsed if isinstance(parsed, dict) else None
-        if (
-            "application/x-www-form-urlencoded" in content_type
-            or "multipart/form-data" in content_type
-        ):
-            return request.POST
-        return None
 
     def _reject(self, request, reason):
         logger.warning(
