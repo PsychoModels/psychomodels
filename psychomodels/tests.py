@@ -190,17 +190,3 @@ class TurnstileIntegrationTests(SimpleTestCase):
             {"email": "bot@example.com", "password": "x", "phone_number": ""},
         )
         self.assert_spam_rejection(response)
-
-    def test_login_without_token_rejected(self):
-        response = self.post_json(
-            "/_allauth/browser/v1/auth/login",
-            {"email": "bot@example.com", "password": "x"},
-        )
-        self.assert_spam_rejection(response)
-
-    def test_password_reset_request_without_token_rejected(self):
-        response = self.post_json(
-            "/_allauth/browser/v1/auth/password/request",
-            {"email": "bot@example.com"},
-        )
-        self.assert_spam_rejection(response)

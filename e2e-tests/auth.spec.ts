@@ -55,9 +55,7 @@ test("Successful signup and login flow", async ({ page }) => {
 test("Password forgotten", async ({ page }) => {
   await page.goto("/account/password/reset/");
   await page.getByPlaceholder("Email address").fill("user@psychomodels.org");
-  // click (unlike press) auto-waits for the button to enable, which happens
-  // once the Turnstile test widget produces its token.
-  await page.getByRole("button", { name: "Request password reset" }).click();
+  await page.getByPlaceholder("Email address").press("Enter");
   await expect(page.getByText("A password reset link should")).toBeVisible();
 });
 

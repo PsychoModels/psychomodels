@@ -39,31 +39,6 @@ test("Signup endpoint rejects direct POST without Turnstile token", async ({
   expect(await response.json()).toMatchObject({ errors: [{ code: "spam" }] });
 });
 
-test("Login endpoint rejects direct POST without Turnstile token", async ({
-  request,
-}) => {
-  const response = await request.post("/_allauth/browser/v1/auth/login", {
-    data: { email: "bot@example.com", password: "whatever123" },
-  });
-
-  expect(response.status()).toBe(400);
-  expect(await response.json()).toMatchObject({ errors: [{ code: "spam" }] });
-});
-
-test("Password reset endpoint rejects direct POST without Turnstile token", async ({
-  request,
-}) => {
-  const response = await request.post(
-    "/_allauth/browser/v1/auth/password/request",
-    {
-      data: { email: "bot@example.com" },
-    },
-  );
-
-  expect(response.status()).toBe(400);
-  expect(await response.json()).toMatchObject({ errors: [{ code: "spam" }] });
-});
-
 test("Contact form completes the Turnstile challenge and submits", async ({
   page,
 }) => {

@@ -326,8 +326,6 @@ TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverif
 TURNSTILE_PROTECTED_PATHS = [
     "/api/contact/",
     "/_allauth/browser/v1/auth/signup",
-    "/_allauth/browser/v1/auth/login",
-    "/_allauth/browser/v1/auth/password/request",
 ]
 
 # Test-mode overrides ("test" in sys.argv only matches `manage.py test`; revisit
