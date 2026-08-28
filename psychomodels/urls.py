@@ -11,6 +11,7 @@ urlpatterns = [
     path("doi/", include("doi_lookup.urls")),
     path("api/", include("api.urls")),
     path("markdownx/", include("markdownx.urls")),
+    path("theories/", include("theories.urls"), name="theories"),
     path("_allauth/", include("allauth.headless.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
 ]

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "django_object_actions",
     "reversion",
     "psychology_models",
+    "theories",
     "members",
     "doi_lookup",
     "rest_framework",

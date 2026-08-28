@@ -22,8 +22,13 @@ body {
     background-color: #f2f2f2;
 }
 
+
 #main-header, #header-bg-effect, #nav-list {
     background-color: #244657;
+}
+
+#theories-header, #theories-header-bg-effect, #theories-nav-list {
+    background-color: #b04818;
 }
 
 #main-nav #nav-list li {
@@ -158,7 +163,6 @@ body {
     position: relative;
 
 }
-
 
 .main-header .center {
     margin: auto;
