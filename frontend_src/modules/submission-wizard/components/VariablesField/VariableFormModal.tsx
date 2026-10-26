@@ -96,11 +96,10 @@ export const VariableFormModal = ({
 
   const onSubmit = (
     values: BaseValidationSchema &
-      VariableIdValidationSchema &
-      CustomValidationSchema,
+      (VariableIdValidationSchema | CustomValidationSchema),
   ) => {
     let variable: Variable;
-    if (createCustomVariable) {
+    if ("variableName" in values) {
       variable = {
         name: values.variableName,
         description: values.variableDescription,

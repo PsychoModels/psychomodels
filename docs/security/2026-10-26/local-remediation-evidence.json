@@ -1,0 +1,444 @@
+{
+  "created_at": "2026-10-26T22:52:04.998018+00:00",
+  "branch": "NNNvD-patch-1",
+  "base_head": "ee1d953c41aae89e2cfc32b29d9099ca008ed50f",
+  "uncommitted": true,
+  "github_open_snapshot": {
+    "total": 256,
+    "critical": 8,
+    "high": 114,
+    "medium": 112,
+    "low": 22,
+    "registered_ids_match_live_hc_set": true
+  },
+  "local_range_comparison": {
+    "rows": 122,
+    "outside_affected_ranges": 121,
+    "critical_covered": 8,
+    "high_covered": 113,
+    "remaining_ids": [
+      308
+    ],
+    "method": "All locked copies; Python packaging.SpecifierSet and npm semver.satisfies against original registered ranges"
+  },
+  "validation": {
+    "django": {
+      "passed": 67,
+      "auto_indexing": false,
+      "database": "disposable SQLite"
+    },
+    "vitest": {
+      "files_passed": 33,
+      "tests_passed": 129
+    },
+    "lint": "passed",
+    "typescript": "passed",
+    "black_files_unchanged": 107,
+    "frozen_dev_install": "passed",
+    "frozen_no_dev_install": "passed",
+    "yarn_immutable": "passed",
+    "vite_tailwind_build": "passed with temporary Windows pyPath config; removed",
+    "migration_check": "pre-existing DOI drift reproduced under original Django 6.0.6 lock",
+    "playwright": "not run; browsers and Docker unavailable",
+    "linux_mac_install": "not run; Linux Python 3.12 wheel metadata checked",
+    "live_oauth": "not run"
+  },
+  "additional_patches": {
+    "certifi": {
+      "from": "2026.1.4",
+      "to": "2026.10.23",
+      "advisory": "GHSA-6q48-6c7w-9gw2",
+      "severity": "critical"
+    },
+    "path-to-regexp": {
+      "from": "6.2.2",
+      "to": "6.3.0",
+      "advisory": "GHSA-9wv6-86v2-598j",
+      "severity": "high"
+    }
+  },
+  "final_yarn_audit_counts": {
+    "moderate": 20,
+    "low": 5,
+    "high": 1
+  },
+  "final_yarn_advisories": [
+    {
+      "package": "@babel/runtime",
+      "advisory_url": "https://github.com/advisories/GHSA-968p-4wvh-cqc8",
+      "advisory_id": 1104000,
+      "issue": "Babel has inefficient RegExp complexity in generated code with .replace when transpiling named capturing groups",
+      "severity": "moderate",
+      "versions": [
+        "7.25.6"
+      ]
+    },
+    {
+      "package": "@eslint/plugin-kit",
+      "advisory_url": "https://github.com/advisories/GHSA-7q7g-4xm8-89cq",
+      "advisory_id": 1100564,
+      "issue": "Regular Expression Denial of Service (ReDoS) in @eslint/plugin-kit",
+      "severity": "low",
+      "versions": [
+        "0.1.0"
+      ]
+    },
+    {
+      "package": "@eslint/plugin-kit",
+      "advisory_url": "https://github.com/advisories/GHSA-xffm-g5w8-qvg7",
+      "advisory_id": 1106734,
+      "issue": "@eslint/plugin-kit is vulnerable to Regular Expression Denial of Service attacks through ConfigCommentParser",
+      "severity": "low",
+      "versions": [
+        "0.1.0"
+      ]
+    },
+    {
+      "package": "@ungap/structured-clone",
+      "advisory_url": null,
+      "advisory_id": "@ungap/structured-clone (deprecation)",
+      "issue": "Potential CWE-502 - Update to 1.3.1 or higher",
+      "severity": "moderate",
+      "versions": [
+        "1.2.0"
+      ]
+    },
+    {
+      "package": "@vitest/mocker",
+      "advisory_url": "https://github.com/advisories/GHSA-82fw-gwwq-j7x9",
+      "advisory_id": 1193684,
+      "issue": "Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redirect Mock",
+      "severity": "moderate",
+      "versions": [
+        "4.1.2"
+      ]
+    },
+    {
+      "package": "@vitest/mocker",
+      "advisory_url": "https://github.com/advisories/GHSA-qxg6-89mg-rqv8",
+      "advisory_id": 1242767,
+      "issue": "Vitest: Code injection via unauthenticated manual mock registration",
+      "severity": "moderate",
+      "versions": [
+        "4.1.2"
+      ]
+    },
+    {
+      "package": "ajv",
+      "advisory_url": "https://github.com/advisories/GHSA-2g4f-4pwh-qvx6",
+      "advisory_id": 1113714,
+      "issue": "ajv has ReDoS when using `$data` option",
+      "severity": "moderate",
+      "versions": [
+        "6.12.6"
+      ]
+    },
+    {
+      "package": "cookie",
+      "advisory_url": "https://github.com/advisories/GHSA-pxg6-pf52-xh8x",
+      "advisory_id": 1103907,
+      "issue": "cookie accepts cookie name, path, and domain with out of bounds characters",
+      "severity": "low",
+      "versions": [
+        "0.5.0"
+      ]
+    },
+    {
+      "package": "eslint",
+      "advisory_url": null,
+      "advisory_id": "eslint (deprecation)",
+      "issue": "This version is no longer supported. Please see https://eslint.org/version-support for other options.",
+      "severity": "moderate",
+      "versions": [
+        "9.10.0"
+      ]
+    },
+    {
+      "package": "fflate",
+      "advisory_url": "https://github.com/advisories/GHSA-px8p-9vwx-vf98",
+      "advisory_id": 1164782,
+      "issue": "fflate unzipSync can enter an infinite loop when parsing malformed ZIP64 archives",
+      "severity": "moderate",
+      "versions": [
+        "0.8.2"
+      ]
+    },
+    {
+      "package": "glob",
+      "advisory_url": null,
+      "advisory_id": "glob (deprecation)",
+      "issue": "Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me",
+      "severity": "moderate",
+      "versions": [
+        "10.5.0"
+      ]
+    },
+    {
+      "package": "http-cache-semantics",
+      "advisory_url": "https://github.com/advisories/GHSA-ch52-4w7c-c8xp",
+      "advisory_id": 1240991,
+      "issue": "http-cache-semantics max-stale handling can disclose cross-user cached responses",
+      "severity": "high",
+      "versions": [
+        "4.2.0"
+      ]
+    },
+    {
+      "package": "lodash",
+      "advisory_url": null,
+      "advisory_id": "lodash (deprecation)",
+      "issue": "Bad release. Please use lodash@4.17.21 instead.",
+      "severity": "moderate",
+      "versions": [
+        "4.18.0"
+      ]
+    },
+    {
+      "package": "mathjax-full",
+      "advisory_url": null,
+      "advisory_id": "mathjax-full (deprecation)",
+      "issue": "Version 4 replaces this package with the scoped package @mathjax/src",
+      "severity": "moderate",
+      "versions": [
+        "3.2.2"
+      ]
+    },
+    {
+      "package": "mdast-util-to-hast",
+      "advisory_url": "https://github.com/advisories/GHSA-4fh9-h7wg-q85m",
+      "advisory_id": 1113048,
+      "issue": "mdast-util-to-hast has unsanitized class attribute",
+      "severity": "moderate",
+      "versions": [
+        "13.2.0"
+      ]
+    },
+    {
+      "package": "mkdirp",
+      "advisory_url": null,
+      "advisory_id": "mkdirp (deprecation)",
+      "issue": "Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)",
+      "severity": "moderate",
+      "versions": [
+        "0.3.0"
+      ]
+    },
+    {
+      "package": "postcss-selector-parser",
+      "advisory_url": "https://github.com/advisories/GHSA-w9m9-85wc-3x92",
+      "advisory_id": 1153170,
+      "issue": "postcss-selector-parser allows denial of service through uncontrolled AST recursion",
+      "severity": "low",
+      "versions": [
+        "6.1.2"
+      ]
+    },
+    {
+      "package": "postcss-selector-parser",
+      "advisory_url": "https://github.com/advisories/GHSA-rj75-hqrm-r3gf",
+      "advisory_id": 1243379,
+      "issue": "PostCSS: Quadratic complexity in flat selector parsing allows CPU exhaustion",
+      "severity": "moderate",
+      "versions": [
+        "6.1.2"
+      ]
+    },
+    {
+      "package": "qs",
+      "advisory_url": "https://github.com/advisories/GHSA-w7fw-mjwx-w883",
+      "advisory_id": 1113161,
+      "issue": "qs's arrayLimit bypass in comma parsing allows denial of service",
+      "severity": "low",
+      "versions": [
+        "6.9.7"
+      ]
+    },
+    {
+      "package": "qs",
+      "advisory_url": "https://github.com/advisories/GHSA-6rw7-vpxm-498p",
+      "advisory_id": 1113719,
+      "issue": "qs's arrayLimit bypass in its bracket notation allows DoS via memory exhaustion",
+      "severity": "moderate",
+      "versions": [
+        "6.9.7"
+      ]
+    },
+    {
+      "package": "qs",
+      "advisory_url": "https://github.com/advisories/GHSA-4mjr-xmp4-gh2g",
+      "advisory_id": 1158507,
+      "issue": "qs: Denial of Service via Attacker Controlled isBuffer",
+      "severity": "moderate",
+      "versions": [
+        "6.9.7"
+      ]
+    },
+    {
+      "package": "uuid",
+      "advisory_url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+      "advisory_id": 1119441,
+      "issue": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+      "severity": "moderate",
+      "versions": [
+        "8.3.2"
+      ]
+    },
+    {
+      "package": "vitest",
+      "advisory_url": "https://github.com/advisories/GHSA-82fw-gwwq-j7x9",
+      "advisory_id": 1193683,
+      "issue": "Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redirect Mock",
+      "severity": "moderate",
+      "versions": [
+        "4.1.2"
+      ]
+    },
+    {
+      "package": "whatwg-encoding",
+      "advisory_url": null,
+      "advisory_id": "whatwg-encoding (deprecation)",
+      "issue": "Use @exodus/bytes instead for a more spec-conformant and faster implementation",
+      "severity": "moderate",
+      "versions": [
+        "3.1.1"
+      ]
+    },
+    {
+      "package": "yaml",
+      "advisory_url": "https://github.com/advisories/GHSA-48c2-rrv3-qjmp",
+      "advisory_id": 1115555,
+      "issue": "yaml is vulnerable to Stack Overflow via deeply nested YAML collections",
+      "severity": "moderate",
+      "versions": [
+        "1.10.2"
+      ]
+    },
+    {
+      "package": "yaml",
+      "advisory_url": "https://github.com/advisories/GHSA-48c2-rrv3-qjmp",
+      "advisory_id": 1115556,
+      "issue": "yaml is vulnerable to Stack Overflow via deeply nested YAML collections",
+      "severity": "moderate",
+      "versions": [
+        "2.5.1"
+      ]
+    }
+  ],
+  "final_python_audit": [
+    {
+      "package": "idna",
+      "version": "3.11",
+      "advisories": [
+        {
+          "advisory": "GHSA-65pc-fj4g-8rjx",
+          "severity": "medium",
+          "fix_versions": [
+            "3.15"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "multidict",
+      "version": "6.7.1",
+      "advisories": [
+        {
+          "advisory": "GHSA-54p9-h82j-f925",
+          "severity": "medium",
+          "fix_versions": [
+            "6.9.1"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "oauthlib",
+      "version": "3.3.1",
+      "advisories": [
+        {
+          "advisory": "GHSA-xpv3-w29h-x7cv",
+          "severity": "medium",
+          "fix_versions": [
+            "4.0.0"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "python-dotenv",
+      "version": "1.2.1",
+      "advisories": [
+        {
+          "advisory": "GHSA-mf9w-mj56-hr94",
+          "severity": "medium",
+          "fix_versions": [
+            "1.2.2"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "requests",
+      "version": "2.32.5",
+      "advisories": [
+        {
+          "advisory": "GHSA-gc5v-m9x4-r6x2",
+          "severity": "medium",
+          "fix_versions": [
+            "2.33.0"
+          ]
+        }
+      ]
+    },
+    {
+      "package": "tablib",
+      "version": "3.9.0",
+      "advisories": [
+        {
+          "advisory": "GHSA-gqgw-jghv-mxwx",
+          "severity": "medium",
+          "fix_versions": [
+            "3.10.0"
+          ]
+        }
+      ]
+    }
+  ],
+  "http_cache_semantics_source_hashes": {
+    "4.2.0": {
+      "published_index_sha256": "01b7d66c854b2fe53ac05c98feb6e0d64722ab8898a778e2d2426a8b468d178f",
+      "evaluateRequest(req)": "66e30d5406fa8d94036a32271d20cea04e19a7a1bb6e3b7f89ff421494d43ea9",
+      "maxAge()": "e6e7be6ce4ffd7b42bfff75713992cf1541de6a77c0532d0df07c1a1dc43efea"
+    },
+    "4.3.0": {
+      "published_index_sha256": "ede1cc404a492fa348eb9d97a3007a0d72aa717bd22cd86a56bd0824c19729ca",
+      "evaluateRequest(req)": "66e30d5406fa8d94036a32271d20cea04e19a7a1bb6e3b7f89ff421494d43ea9",
+      "maxAge()": "e6e7be6ce4ffd7b42bfff75713992cf1541de6a77c0532d0df07c1a1dc43efea"
+    }
+  },
+  "file_sha256": {
+    "pyproject.toml": "24ff77ea79010a153954acc80f53c621130260b09db4daf08f947188c1586963",
+    "uv.lock": "d87dedfa118bc1387992b3f46a2ad2d4ca15eb5fbac932d684261c700a7327de",
+    "package.json": "8b1ce8851fd49723ab22c9cdbba7c794470306bbb043f363106652677a06d39a",
+    "yarn.lock": "86d790562ab638c7afb999bc9d4460c0a5750ce163d679003db69ff9dda91b0e",
+    ".yarnrc.yml": "f0f8311caf6fc4715066f7c5ee9675f0b92aed5680945eb35eb480dc3510f36c",
+    ".pre-commit-config.yaml": "aec9a1ec30cd9b7f82afb711c1924e0955bf2cae9bbef203e443ab0b16216a18",
+    "psychomodels/test_dependency_security.py": "01f28ac5bcaeb6da680acad9862774e94f8277e5cab9b119f76161bef0758619",
+    "frontend_src/test-utils/zodSecurity.test.ts": "55bd76468fb9550afd4b912b45a03df3c6a9c15937e3713b5220f7c302ddcb20",
+    "frontend_src/modules/submission-wizard/components/VariablesField/VariableFormModal.tsx": "0e670bdcc4e44007c3fd79768fbb148ad98b8f97ff7d04c0d1c4ad13a0df3ccd",
+    "frontend_src/modules/submission-wizard/components/VariablesField/VariableFormModal.test.tsx": "aa40af108324f112ab740ac4343a295c7414075852c892f2731daca1feaeff6f",
+    "frontend_src/modules/account/components/LoginForm/index.tsx": "7a7e34fd463278e4951decb71f58d03602b627d1debdb0fbfcadcc318e03e84c",
+    "frontend_src/modules/account/components/ForgotPasswordForm/index.tsx": "4b38d3cc36c2799a906caa1e942520b06b8cc6edfd254e821c9dd2f7db473bb0",
+    "frontend_src/modules/account/components/SignupForm/index.tsx": "bbc230e9df3bc9d219a22189298d3146fc46300c594d6a3f9161a77173644670",
+    "docs/security/2026-10-26/local-remediation.md": "64837a8768d3b5c0eefa840b536fa01e40e775c8c50657bbad60a782901f49f6",
+    "docs/security/2026-10-26/critical-high-alert-register.csv": "c3b1643828d6f3671fc2152f408c229d49e933e215b17bee7cee843c50add1f5"
+  },
+  "policy": {
+    "commits_created": 0,
+    "pushes": 0,
+    "pull_requests_created": 0,
+    "merges": 0,
+    "deployments": 0,
+    "alert_dispositions": 0
+  }
+}

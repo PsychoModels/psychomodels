@@ -9,7 +9,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { login } from "../../lib/allauth.ts";
 
 const formSchema = z.object({
-  email: z.string().email(),
+  email: z.string().email({ error: "Invalid email" }),
   password: z
     .string()
     .min(8, { message: "The password must contain at least 8 characters" }),

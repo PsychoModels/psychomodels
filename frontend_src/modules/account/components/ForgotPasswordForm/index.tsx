@@ -8,7 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { requestPasswordReset } from "../../lib/allauth.ts";
 
 const formSchema = z.object({
-  email: z.string().email(),
+  email: z.string().email({ error: "Invalid email" }),
 });
 
 type ValidationSchema = z.infer<typeof formSchema>;
