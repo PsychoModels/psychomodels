@@ -3,7 +3,10 @@ from unittest import mock
 
 import urllib3
 from django.http import JsonResponse
-from django.test import RequestFactory, SimpleTestCase, override_settings
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.test import RequestFactory, SimpleTestCase, TestCase, override_settings
+from django.urls import reverse
 
 from psychomodels.body_parsing import extract_body
 from psychomodels.turnstile_middleware import TurnstileMiddleware
@@ -190,3 +193,47 @@ class TurnstileIntegrationTests(SimpleTestCase):
             {"email": "bot@example.com", "password": "x", "phone_number": ""},
         )
         self.assert_spam_rejection(response)
+
+
+class MarkdownxAuthTests(TestCase):
+    """The markdownx upload and preview endpoints must not be reachable
+    anonymously: the upload view hands attacker-controlled files to Pillow."""
+
+    def setUp(self):
+        self.upload_url = reverse("markdownx_upload")
+        self.markdownify_url = reverse("markdownx_markdownify")
+
+    def test_anonymous_upload_is_redirected_to_login(self):
+        response = self.client.post(self.upload_url, {})
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(settings.LOGIN_URL, response["Location"])
+
+    def test_anonymous_markdownify_is_redirected_to_login(self):
+        response = self.client.post(self.markdownify_url, {"content": "# hi"})
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(settings.LOGIN_URL, response["Location"])
+
+    def test_authenticated_markdownify_still_renders(self):
+        user = get_user_model().objects.create_user(
+            username="markdownx-user",
+            email="markdownx@example.com",
+            password="correct-horse-battery",
+        )
+        self.client.force_login(user)
+        response = self.client.post(self.markdownify_url, {"content": "# hi"})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b"<h1>hi</h1>", response.content)
+
+    def test_authenticated_upload_reaches_the_view(self):
+        user = get_user_model().objects.create_user(
+            username="markdownx-user-2",
+            email="markdownx2@example.com",
+            password="correct-horse-battery",
+        )
+        self.client.force_login(user)
+        response = self.client.post(
+            self.upload_url, {}, headers={"x-requested-with": "XMLHttpRequest"}
+        )
+        # No file supplied: the view answers with a JSON form error, not a redirect.
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("image", response.json())

@@ -380,7 +380,7 @@ class PsychologyModelAPITest(APITestCase):
         # Assert that the software package fields match the payload
         self.assertEqual(model_variable.name, "X")
         self.assertEqual(model_variable.details, "Details")
-        self.assertEqual(model_variable.variable.id, self.existing_framework.id)
+        self.assertEqual(model_variable.variable.id, self.existing_variable.id)
 
     def test_create_psychology_model_with_new_variable(
         self,

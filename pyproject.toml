@@ -6,9 +6,9 @@ dependencies = [
     "algoliasearch>=3.0.0",
     "algoliasearch-django>=3.0.0",
     "dj-database-url>=2.2.0",
-    "django>=6.0.4",
+    "django>=6.0.9",
     "django-after-response>=0.2.2",
-    "django-allauth[socialaccount]>=64.2.1",
+    "django-allauth[socialaccount]>=65.21.1",
     "django-autoslug>=1.9.9",
     "django-browser-reload>=1.15.0",
     "django-cors-headers>=4.4.0",
@@ -20,19 +20,19 @@ dependencies = [
     "django-object-actions>=4.2.0",
     "django-reversion>=5.1.0",
     "django-vite-plugin>=3.0.4",
-    "djangorestframework>=3.15.2",
+    "djangorestframework>=3.18.2",
     "gunicorn>=23.0.0",
-    "pillow>=12.2.0",
+    "pillow>=13.0.0",
     "psycopg>=3.2.1",
     "psycopg2-binary>=2.9.9",
-    "pyjwt[crypto]>=2.9.0",
-    "python-dotenv>=1.0.1",
-    "urllib3>=2.7.0",
+    "pyjwt[crypto]>=2.15.0",
+    "python-dotenv>=1.2.2",
+    "urllib3>=2.8.0",
     "sentry-sdk[django]>=2.13.0",
 ]
 
 [dependency-groups]
 dev = [
-    "black>=24.8.0",
+    "black>=26.3.1",
     "pycodestyle>=2.12.1",
 ]
