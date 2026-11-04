@@ -3,10 +3,9 @@ from unittest import mock
 
 import urllib3
 from django.http import JsonResponse
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.test import RequestFactory, SimpleTestCase, TestCase, override_settings
-from django.urls import reverse
+from django.urls import resolve, reverse
 
 from psychomodels.body_parsing import extract_body
 from psychomodels.turnstile_middleware import TurnstileMiddleware
@@ -203,15 +202,24 @@ class MarkdownxAuthTests(TestCase):
         self.upload_url = reverse("markdownx_upload")
         self.markdownify_url = reverse("markdownx_markdownify")
 
+    def assert_redirects_to_existing_login_page(self, response, origin):
+        """The redirect must point at the members login page, not Django's
+        default /accounts/login/, and that page must actually be served."""
+        self.assertEqual(response.status_code, 302)
+        login_path, _, query = response["Location"].partition("?")
+        self.assertEqual(login_path, "/account/login/")
+        self.assertEqual(query, f"next={origin}")
+        # resolve() raises Resolver404 for Django's default /accounts/login/,
+        # which this project does not serve.
+        self.assertEqual(resolve(login_path).url_name, "members_login")
+
     def test_anonymous_upload_is_redirected_to_login(self):
         response = self.client.post(self.upload_url, {})
-        self.assertEqual(response.status_code, 302)
-        self.assertIn(settings.LOGIN_URL, response["Location"])
+        self.assert_redirects_to_existing_login_page(response, self.upload_url)
 
     def test_anonymous_markdownify_is_redirected_to_login(self):
         response = self.client.post(self.markdownify_url, {"content": "# hi"})
-        self.assertEqual(response.status_code, 302)
-        self.assertIn(settings.LOGIN_URL, response["Location"])
+        self.assert_redirects_to_existing_login_page(response, self.markdownify_url)
 
     def test_authenticated_markdownify_still_renders(self):
         user = get_user_model().objects.create_user(
