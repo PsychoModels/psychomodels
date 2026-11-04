@@ -106,7 +106,9 @@ class PsychologyModelTest(TestCase):
 
     def test_framework_names_method(self):
         framework_names = self.psychology_model.framework_names()
-        self.assertEqual(
+        # framework_names() reads an unordered many-to-many relation, so the
+        # database is free to return the rows in any order.
+        self.assertCountEqual(
             framework_names, ["Cusp-Catastrophe Models", "Drift-Diffusion Models"]
         )
 

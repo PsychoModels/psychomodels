@@ -224,6 +224,10 @@ SOCIALACCOUNT_PROVIDERS = {
     },
 }
 
+# The login page lives under members.urls, not at Django's default
+# /accounts/login/. login_required redirects here.
+LOGIN_URL = "/account/login/"
+
 LOGIN_REDIRECT_URL = "/account/"
 
 SOCIALACCOUNT_ENABLED = True

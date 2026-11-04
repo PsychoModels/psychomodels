@@ -3,7 +3,9 @@ from unittest import mock
 
 import urllib3
 from django.http import JsonResponse
-from django.test import RequestFactory, SimpleTestCase, override_settings
+from django.contrib.auth import get_user_model
+from django.test import RequestFactory, SimpleTestCase, TestCase, override_settings
+from django.urls import resolve, reverse
 
 from psychomodels.body_parsing import extract_body
 from psychomodels.turnstile_middleware import TurnstileMiddleware
@@ -190,3 +192,56 @@ class TurnstileIntegrationTests(SimpleTestCase):
             {"email": "bot@example.com", "password": "x", "phone_number": ""},
         )
         self.assert_spam_rejection(response)
+
+
+class MarkdownxAuthTests(TestCase):
+    """The markdownx upload and preview endpoints must not be reachable
+    anonymously: the upload view hands attacker-controlled files to Pillow."""
+
+    def setUp(self):
+        self.upload_url = reverse("markdownx_upload")
+        self.markdownify_url = reverse("markdownx_markdownify")
+
+    def assert_redirects_to_existing_login_page(self, response, origin):
+        """The redirect must point at the members login page, not Django's
+        default /accounts/login/, and that page must actually be served."""
+        self.assertEqual(response.status_code, 302)
+        login_path, _, query = response["Location"].partition("?")
+        self.assertEqual(login_path, "/account/login/")
+        self.assertEqual(query, f"next={origin}")
+        # resolve() raises Resolver404 for Django's default /accounts/login/,
+        # which this project does not serve.
+        self.assertEqual(resolve(login_path).url_name, "members_login")
+
+    def test_anonymous_upload_is_redirected_to_login(self):
+        response = self.client.post(self.upload_url, {})
+        self.assert_redirects_to_existing_login_page(response, self.upload_url)
+
+    def test_anonymous_markdownify_is_redirected_to_login(self):
+        response = self.client.post(self.markdownify_url, {"content": "# hi"})
+        self.assert_redirects_to_existing_login_page(response, self.markdownify_url)
+
+    def test_authenticated_markdownify_still_renders(self):
+        user = get_user_model().objects.create_user(
+            username="markdownx-user",
+            email="markdownx@example.com",
+            password="correct-horse-battery",
+        )
+        self.client.force_login(user)
+        response = self.client.post(self.markdownify_url, {"content": "# hi"})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b"<h1>hi</h1>", response.content)
+
+    def test_authenticated_upload_reaches_the_view(self):
+        user = get_user_model().objects.create_user(
+            username="markdownx-user-2",
+            email="markdownx2@example.com",
+            password="correct-horse-battery",
+        )
+        self.client.force_login(user)
+        response = self.client.post(
+            self.upload_url, {}, headers={"x-requested-with": "XMLHttpRequest"}
+        )
+        # No file supplied: the view answers with a JSON form error, not a redirect.
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("image", response.json())
